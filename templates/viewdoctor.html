@@ -1,0 +1,22 @@
+{%extends "index.html"%}
+{%block body%}
+    <h1>view doctor</h1>
+    <table class="table or container">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">department</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for r in data %}
+            <tr>
+              {% for c in r %}
+                <td>{{c}}</td>
+              {% endfor %}
+            </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+{%endblock%}

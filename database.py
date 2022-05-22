@@ -3,14 +3,17 @@ import mysql.connector
 mydb = mysql.connector.connect(
   host="localhost",
   user="root",
-  passwd="123",
+  passwd="85426Mm854267890",
   database="sbe2024"
 )
 
 mycursor = mydb.cursor()
- 
-mycursor.execute("CREATE TABLE Doctor ( id INT AUTO_INCREMENT,name VARCHAR(255),department VARCHAR(255),PRIMARY KEY (id))")
-mycursor.execute("SHOW TABLES")
 
-for x in mycursor:
-  print(x) 
+sql = "UPDATE DOCTOR SET id = %s WHERE id = %s"
+val = (5, 1)
+
+mycursor.execute(sql, val)
+
+mydb.commit()
+
+print(mycursor.rowcount, "record(s) affected") 

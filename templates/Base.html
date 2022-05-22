@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename='css/base_style.css')}}"
+    />
+    <link rel="icon" href=" {{url_for('static',filename='assets/hospital.png')}}" />
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NEW HOSPITAL</title>
+  </head>
+  <body>
+    <nav class="topnav">
+      <a class="loginButton" href="http://127.0.0.1:5000/signUp">Sign-Up</a>
+      <img src=" {{url_for('static',filename='assets/sign_up.png')}}" />
+      <a class="loginButton" href="http://127.0.0.1:5000/login">Login</a>
+      <img src="{{url_for('static',filename='assets/login.png')}}" />
+
+      <img src=" {{url_for('static',filename='assets/hospital.png')}}" class="titleicon" />
+      <label class="title">NEW<br />HOSPITAL</label>
+      <ul style="float: right">
+        <li class="li_items"><a class="navitems" href="#">Home</a></li>
+        <li class="li_items"><a class="navitems" href="#">Services</a></li>
+        <li class="li_items"><a class="navitems" href="#">doctors</a></li>
+        <li class="li_items"><a class="navitems" href="#">Patients</a></li>
+        <li class="li_items"><a class="navitems" href="#">About Us</a></li>
+        <li class="li_items"><a class="navitems" href="#">Book Now</a></li>
+      </ul>
+      <hr />
+    </nav>
+    <div class="content"></div>
+
+    <div class="bottomnav">
+      <div style="width: 550px; float: right">
+        <img src=" {{url_for('static',filename='assets/hospital.png')}}" class="bottomtitleicon" />
+        <h1 class="contacts" style="padding-bottom: 20px"><u>Contact Us</u></h1>
+        <h2 class="phonenum" style="padding-left: 20px; padding-bottom: 20px">
+          123456
+        </h2>
+        <img
+          src=" {{url_for('static',filename='assets/telephone.png')}}"
+          class="contacticon"
+          style="width: 40px"
+        />
+
+        <h2 class="phonenum" style="font-size: 25px">INFO@HOSPITAL.COM</h2>
+
+        <img src=" {{url_for('static',filename='assets/mail.png')}}" />
+        <a href="#"><img class="links" src=" {{url_for('static',filename='assets/twitter.png')}}" /></a>
+        <a href="#"><img class="links" src=" {{url_for('static',filename='assets/youtube.png')}}" /></a>
+        <a href="#"><img class="links" src= "{{url_for('static',filename='assets/instagram.png')}}" /></a>
+        <a href="#"><img class="links" src= "{{url_for('static',filename='assets/facebook.png')}}" /></a>
+      </div>
+      <br />
+      <br />
+      <br />
+      <div style="float: left">
+        <h2 style="color: white">
+          All Rights Reserved NEW HOSPITAL. Tax No: 123-456-789
+        </h2>
+      </div>
+    </div>
+  </body>
+</html>
