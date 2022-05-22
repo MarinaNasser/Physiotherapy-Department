@@ -1,114 +1,122 @@
- {% extends "base.html" %}
- {% block head %}
+{% extends "base.html" %}
+{% block head %}
 <form action="http://127.0.0.1:5000/addpatient" method="POST"></form>
+  <head>
+    <link rel="stylesheet" href="patient.css"> 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 
-<h1>New Reservation</h1>
+    <h1>New Reservation</h1>
+  </head>
 
-<!-- First Name -->
-  <div>
-    <div class="form-group">
-      <label for="PatientFName">First Name</label>
-      <input name="PatientFName" type="text" class="form-control" id="PatientFName" placeholder="Enter your First name">
+
+  <div class="form-group">
+    <!-- First Name -->
+    <div>
+    <label for="PatientFName">First Name</label>
+    <input name="PatientFName" type="text" class="form-control" id="PatientFName" placeholder="Enter your First name">
+    </div>  
+
+    <!-- Last Name -->
+    <div>   
+    <label for="PatientLName">Last Name</label>
+    <input name="PatientLName" type="text" class="form-control" id="PatientLName" placeholder="Enter your Last name">
+    </div>   
+
+    <!-- phone number -->
+    <div>
+    <label for="Phone number">Phone number</label>
+    <input name="Phone number" type="number" class="form-control" id="Phone number"
+    placeholder="Enter your Phone number">
+    </div>   
+
+    <!-- Address -->
+    <DIV>
+    <label for="inputAddress" class="form-label">Address</label>
+    <input name="Address" type="text" class="form-control" id="inputAddress" placeholder="Address">
+    </DIV>
+
+    <!-- city -->
+    <div>
+    <label for="validationCustom03" class="form-label">City</label>
+    <input name="City" type="text" class="form-control" id="validationCustom03" placeholder="e.g. Cairo" required>
+    <div class="invalid-feedback">
+    Please provide a valid city.
     </div>
 
-<!-- Last Name -->
-    <div class="form-group">
-      <label for="PatientLName">Last Name</label>
-      <input name="PatientLName" type="text" class="form-control" id="PatientLName" placeholder="Enter your Last name">
+    <!-- Age -->
+    <div>
+    <label for="Age">Age</label>
+    <input name="Age" type="number" class="form-control" id="Age." placeholder="Enter your Age">
     </div>
 
-<!-- phone number -->
-    <div class="form-group">
-      <label for="Phone number">Phone number</label>
-      <input name="Phone number" type="number" class="form-control" id="Phone number"
-        placeholder="Enter your Phone number">
+    <!-- Email -->
+    <div>
+    <label for="Email">Email address</label>
+    <input name="Email" type="email" class="form-control" id="Email." placeholder="Enter your Email address">
     </div>
 
-<!-- Address -->
-    <div class="form-group">
-      <label for="inputAddress" class="form-label">Address</label>
-      <input name="Address" type="text" class="form-control" id="inputAddress" placeholder="Address">
+    <!-- Doctor name -->
+    <div>
+    <label for="Doctor name ">Doctor Name</label>
+    <select class="form-select" aria-label="Default select example">
+      <option selected>Choose your Doctor </option>
+      <option value="1">One</option>
+      <option value="2">Two</option>
+      <option value="3">Three</option>
+    </select>
     </div>
 
-<!-- city -->
-    <div class="form-group">
-      <label for="validationCustom03" class="form-label">City</label>
-      <input name="City" type="text" class="form-control" id="validationCustom03" placeholder="e.g. Cairo" required>
-      <div class="invalid-feedback">
-        Please provide a valid city.
-      </div>
+    <!-- Appointment info -->
 
-<!-- Age -->
-      <div class="form-group">
-        <label for="Age">Age</label>
-        <input name="Age" type="number" class="form-control" id="Age." placeholder="Enter your Age">
-      </div>
+    <label for="  ">Appointment</label>
+    <div>
+      <select class="form-group" aria-label="Default select example">
+        <option selected>Choose your appointment day</option>
+        <option value="1">Sunday</option>
+        <option value="2">Monday</option>
+        <option value="3">Tuesday</option>
+        <option value="4">Wednesday</option>
+        <option value="5">Thursday</option>
+        <option value="6">Friday</option>
+      </select>
+    </div>
+    <div>
+      <select class="form-group" aria-label="Default select example">
+        <option selected>Choose your appointment time</option>
+        <option value="1">12 pm</option>
+        <option value="2">2 pm</option>
+        <option value="3">4 pm</option>
+        <option value="4">6 pm</option>
+        <option value="5">8 pm</option>
+        <option value="6">10 pm</option>
+      </select>
+    </div>
+    </div>
 
-<!-- Email -->
-      <div class="form-group">
-        <label for="Email">Email address</label>
-        <input name="Email" type="email" class="form-control" id="Email." placeholder="Enter your Email address">
-      </div>
+    <!-- Problems -->
+    <div>
+    <label for="exampleFormControlTextarea1" class="form-label">Describe What do you feel</label>
+    <textarea name="Problem" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
 
-<!-- Doctor name -->
-      <div class="form-group">
-        <label for="Doctor name ">Doctor Name</label>
-        <select class="form-select" aria-label="Default select example">
-          <option selected>Choose your Doctor </option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
-      </div>
+    <!-- Terms and conditions -->
 
-<!-- Appointment info -->
-      <div class="form-group">
-        <label for="  ">Appointment</label>
-        <div>
-          <select class="form-group" aria-label="Default select example">
-            <option selected>Choose your appointment day</option>
-            <option value="1">Sunday</option>
-            <option value="2">Monday</option>
-            <option value="3">Tuesday</option>
-            <option value="4">Wednesday</option>
-            <option value="5">Thursday</option>
-            <option value="6">Friday</option>
-          </select>
-        </div>
-        <div>
-          <select class="form-group" aria-label="Default select example">
-            <option selected>Choose your appointment time</option>
-            <option value="1">12 pm</option>
-            <option value="2">2 pm</option>
-            <option value="3">4 pm</option>
-            <option value="4">6 pm</option>
-            <option value="5">8 pm</option>
-            <option value="6">10 pm</option>
-          </select>
-        </div>
-      </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+      <label class="form-check-label" for="invalidCheck2">
+        Agree to terms and conditions
+      </label>
+    </div>
 
-<!-- Problems -->
-      <div class="form-group">
-        <label for="exampleFormControlTextarea1" class="form-label">Describe What problems you have and what do you
-          feel</label>
-        <textarea name="Problem" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-      </div>
 
-<!-- Terms and conditions -->
-      <div class="form-group">
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
-          <label class="form-check-label" for="invalidCheck2">
-            Agree to terms and conditions
-          </label>
-        </div>
-      </div>
+    <!-- submit -->
 
-<!-- submit -->
-      <div class="col-6">
-        <button class="btn btn-primary" type="submit">Submit form</button>
-      </div>
+    <button class="btn btn-primary" type="submit">Submit</button>
+
+
+  </div>
 
 </form>
 

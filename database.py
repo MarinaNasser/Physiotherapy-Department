@@ -10,7 +10,7 @@ mydb = mysql.connector.connect(
 )
 
 mycursor = mydb.cursor()
-mycursor.execute("CREATE TABLE patient (Fname VARCHAR(255),Lname VARCHAR(255), phone_number int, Age INT, Email varchar(200))")
+# mycursor.execute("CREATE TABLE patient (Fname VARCHAR(255),Lname VARCHAR(255), phone_number int, Age INT, Email varchar(200))")
 sql = "UPDATE DOCTOR SET id = %s WHERE id = %s"
 val = (5, 1)
 
