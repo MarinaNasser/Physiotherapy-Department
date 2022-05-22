@@ -9,7 +9,7 @@ import mysql.connector
 mydb = mysql.connector.connect(
   host="localhost",
   user="root",
-  passwd="root",
+  passwd="N#@98wrft45",
   database="sbe2024"
 )
 
@@ -55,7 +55,7 @@ def adddoctor():
         val = (name,dep)
         mycursor.execute(sql,val)
         mydb.commit()
-        return render_template('index.html')
+        return render_template('base.html')
     else:
         print('get')
         return render_template('adddoctor.html')
@@ -67,6 +67,34 @@ def viewdoctor():
    mycursor.execute(sql)
    result = mycursor.fetchall()
    return render_template('viewdoctor.html',data = result)
+
+@app.route('/addpatient',methods = ['POST', 'GET'])
+def addpatient():
+   if request.method == 'POST': ##check if there is post data
+      Fn = request.form['PatientFName']
+      Ln = request.form['PatientLName']
+      pn = request.form['Phone number']
+      ad = request.form['Address']
+      c =  request.form['City']
+      a = request.form['Age']
+      e = request.form['Email']
+      dr =request.form['Doctor name']
+      p= request.form['Problem']
+      # print(n,d)
+      sql = "INSERT INTO Patient (Fname,Lname, phone number, Age, Email) VALUES (%s, %s, %s , %s, %s)"
+      val = (Fn,Ln,pn,ad,c,a,e,dr,p)
+      mycursor.execute(sql, val)
+      mydb.commit()
+      return render_template('base.html')
+   else:
+      return render_template('addpatient.html')
+
+@app.route('/viewpatient')
+def viewpatient():
+    mycursor.execute("SELECT * FROM Patient")
+    myresult = mycursor.fetchall()
+
+    return render_template('viewpatient.html', data=myresult)
 
 if __name__ == '__main__':
     app.run(debug = True)

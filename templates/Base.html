@@ -14,24 +14,31 @@
   </head>
   <body>
     <nav class="topnav">
-      <a class="loginButton" href="http://127.0.0.1:5000/signUp">Sign-Up</a>
+      <a class="loginButton" href="http://127.0.0.1:5000/signUp">Sign Up</a>
       <img src=" {{url_for('static',filename='assets/sign_up.png')}}" />
       <a class="loginButton" href="http://127.0.0.1:5000/login">Login</a>
       <img src="{{url_for('static',filename='assets/login.png')}}" />
 
+      
       <img src=" {{url_for('static',filename='assets/hospital.png')}}" class="titleicon" />
       <label class="title">NEW<br />HOSPITAL</label>
       <ul style="float: right">
         <li class="li_items"><a class="navitems" href="#">Home</a></li>
         <li class="li_items"><a class="navitems" href="#">Services</a></li>
-        <li class="li_items"><a class="navitems" href="#">doctors</a></li>
-        <li class="li_items"><a class="navitems" href="#">Patients</a></li>
+        <li class="li_items"><a class="navitems" href="#">Doctors</a></li>
+        <li class="li_items"><a class="navitems" href="http://127.0.0.1:5000/viewpatient">Patients</a></li>
+        <li class="li_items"><a class="navitems" href="http://127.0.0.1:5000/addpatient">Book Now</a></li>
         <li class="li_items"><a class="navitems" href="#">About Us</a></li>
-        <li class="li_items"><a class="navitems" href="#">Book Now</a></li>
+        
       </ul>
       <hr />
     </nav>
-    <div class="content"></div>
+
+    <div class="container">
+      {% block head %}
+         <h1>Home Page!</h1>
+      {% endblock %}
+    </div>
 
     <div class="bottomnav">
       <div style="width: 550px; float: right">
