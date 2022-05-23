@@ -96,5 +96,11 @@ def viewpatient():
 
     return render_template('viewpatient.html', data=myresult)
 
+
+@app.route('/contact_us')
+def contact():
+    return render_template('contact_us.html')
+
+
 if __name__ == '__main__':
     app.run(debug = True)
