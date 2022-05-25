@@ -7,18 +7,18 @@ app = Flask(__name__)
 import mysql.connector
 
 mydb = mysql.connector.connect(
-  host="localhost",
-  user="root",
-  passwd="N#@98wrft45",
-  database="sbe2024"
+    host="localhost",
+    user="root",
+    passwd="magdynasr",
+    database="sherif"
 )
 
 mycursor = mydb.cursor()
 
 @app.route('/')
 def base():
-   print('base')
-   return render_template('Base.html')
+    print('base')
+    return render_template('Base.html')
 
 @app.route('/login',methods=["GET","POST"])
 def login():
@@ -63,37 +63,41 @@ def adddoctor():
 
 @app.route('/viewdoctor')
 def viewdoctor():
-   sql = "SELECT * FROM DOCTOR"
-   mycursor.execute(sql)
-   result = mycursor.fetchall()
-   return render_template('viewdoctor.html',data = result)
+    sql = "SELECT * FROM DOCTOR"
+    mycursor.execute(sql)
+    result = mycursor.fetchall()
+    return render_template('viewdoctor.html',data = result)
 
 @app.route('/addpatient',methods = ['POST', 'GET'])
 def addpatient():
-   if request.method == 'POST': ##check if there is post data
-      Fn = request.form['PatientFName']
-      Ln = request.form['PatientLName']
-      pn = request.form['Phone number']
-      ad = request.form['Address']
-      c =  request.form['City']
-      a = request.form['Age']
-      e = request.form['Email']
-      dr =request.form['Doctor name']
-      p= request.form['Problem']
-      # print(n,d)
-      sql = "INSERT INTO Patient (Fname,Lname, phone number, Age, Email) VALUES (%s, %s, %s , %s, %s)"
-      val = (Fn,Ln,pn,ad,c,a,e,dr,p)
-      mycursor.execute(sql, val)
-      mydb.commit()
-      return render_template('base.html')
-   else:
-      return render_template('addpatient.html')
+    if request.method == 'POST': ##check if there is post data
+        id = request.form['id']
+        name = request.form['name']
+        ssn = request.form['ssn']
+        sex = request.form['sex']
+        email = request.form['email']
+        userName =  request.form['userName']
+        password = request.form['password']
+        address = request.form['address']
+        birthDate = request.form['birthDate']
+        creditCard = request.form['creditCard']
+        insuranceNumber = request.form['insuranceNumber']
+        maritalStatus = request.form['maritalStatus']
+        job = request.form['job']
+        age = request.form['Age']
+
+        sql = """INSERT INTO Patient (id, name, ssn, sex, email, userName, password, address, birthDate, creditCard, insuranceNumber, maritalStatus, job, age) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+        val = (id,name,ssn,sex,email,userName,password,address, birthDate, creditCard, insuranceNumber, maritalStatus, job, age)
+        mycursor.execute(sql, val)
+        mydb.commit()
+        return render_template('base.html')
+    else:
+        return render_template('addpatient.html')
 
 @app.route('/viewpatient')
 def viewpatient():
     mycursor.execute("SELECT * FROM Patient")
     myresult = mycursor.fetchall()
-
     return render_template('viewpatient.html', data=myresult)
 
 
