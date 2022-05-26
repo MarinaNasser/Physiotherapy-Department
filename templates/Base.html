@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link
-      rel="stylesheet"
-      href="{{url_for('static',filename='css/base_style.css')}}"
-    />
+    <link rel="stylesheet" href="{{url_for('static',filename='css/base_style.css')}}"/>
     <link rel="icon" href=" {{url_for('static',filename='assets/hospital.png')}}" />
 
     <meta charset="UTF-8" />
@@ -12,61 +9,106 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NEW HOSPITAL</title>
   </head>
-  <body>
-    <nav class="topnav">
-      <a class="loginButton" href="http://127.0.0.1:5000/signUp">Sign Up</a>
-      <img src=" {{url_for('static',filename='assets/sign_up.png')}}" />
-      <a class="loginButton" href="http://127.0.0.1:5000/login">Login</a>
-      <img src="{{url_for('static',filename='assets/login.png')}}" />
-
-      
-      <img src=" {{url_for('static',filename='assets/hospital.png')}}" class="titleicon" />
-      <label class="title">NEW<br />HOSPITAL</label>
-      <ul style="float: right">
-        <li class="li_items"><a class="navitems" href="#">Home</a></li>
-        <li class="li_items"><a class="navitems" href="#">Services</a></li>
-        <li class="li_items"><a class="navitems" href="#">Doctors</a></li>
+  <body class="body">
+    <div>
+      <nav class="topnav">
+        {% if session['user'] %}
+        <a class="loginButton" href="http://127.0.0.1:5000/logout">Log Out</a>
+        <img src=" {{url_for('static',filename='assets/hospital.png')}}" class="titleicon" />
+        <label class="title">NEW<br />HOSPITAL</label>
+        <ul style="float: right">
+          <li class="li_items"> <a class="navitems" href="#">Home</a></li>
+          <li class="li_items"> <a class="navitems" href="http://127.0.0.1:5000/services">Services</a></li>
+          <li class="li_items"> <a class="navitems" href="http://127.0.0.1:5000/doctors">Doctors</a></li>
         <li class="li_items"><a class="navitems" href="http://127.0.0.1:5000/viewpatient">Patients</a></li>
         <li class="li_items"><a class="navitems" href="http://127.0.0.1:5000/addpatient">Book Now</a></li>
         <li class="li_items"><a class="navitems" href="#">About Us</a></li>
-        
+        </ul>
+        {%else%}
+        <a class="loginButton" href="http://127.0.0.1:5000/preSignUp?">Sign-Up</a>
+        <img src=" {{url_for('static',filename='assets/sign_up.png')}}" />
+        <a class="loginButton" href="http://127.0.0.1:5000/login">Login</a>
+        <img src="{{url_for('static',filename='assets/login.png')}}" />
+        <img src=" {{url_for('static',filename='assets/hospital.png')}}" class="titleicon" />
+      <label class="title">NEW<br />HOSPITAL</label>
+      <ul style="float: right">
+        <li class="li_items"> <a class="navitems" href="#">Home</a></li>
+        <li class="li_items"> <a class="navitems" href="http://127.0.0.1:5000/login">Services</a></li>
+        <li class="li_items"> <a class="navitems" href="http://127.0.0.1:5000/login">Doctors</a></li>
+        <li class="li_items"> <a class="navitems" href="http://127.0.0.1:5000/login">Patients</a></li>
+        <li class="li_items"> <a class="navitems" href="#">About Us</a></li>
+        <li class="li_items"> <a class="navitems" href="http://127.0.0.1:5000/login">Book Now</a></li>
       </ul>
+      {%endif%}
       <hr />
     </nav>
 
-    <div class="container">
-      {% block head %}
-         <h1>Home Page!</h1>
-      {% endblock %}
-    </div>
+  </div>
+  <div class="content">
+    {% block body %}
 
-    <div class="bottomnav">
-      <div style="width: 550px; float: right">
-        <img src=" {{url_for('static',filename='assets/hospital.png')}}" class="bottomtitleicon" />
-        <li class="li_items"></li><a class="contacts" style="padding-bottom: 20px" href="http://127.0.0.1:5000/contact_us">Contact us</a>
-        <h2 class="phonenum" style="padding-left: 20px; padding-bottom: 20px">123456</h2>
-        <img
-          src=" {{url_for('static',filename='assets/telephone.png')}}"
-          class="contacticon"
-          style="width: 40px"
-        />
+    {% endblock %}
+  </div>
 
-        <h2 class="phonenum" style="font-size: 25px">INFO@HOSPITAL.COM</h2>
 
-        <img src=" {{url_for('static',filename='assets/mail.png')}}" />
-        <a href="#"><img class="links" src=" {{url_for('static',filename='assets/twitter.png')}}" /></a>
-        <a href="#"><img class="links" src=" {{url_for('static',filename='assets/youtube.png')}}" /></a>
-        <a href="#"><img class="links" src= "{{url_for('static',filename='assets/instagram.png')}}" /></a>
-        <a href="#"><img class="links" src= "{{url_for('static',filename='assets/facebook.png')}}" /></a>
-      </div>
-      <br />
-      <br />
-      <br />
-      <div style="float: left">
-        <h2 style="color: white">
-          All Rights Reserved NEW HOSPITAL. Tax No: 123-456-789
-        </h2>
-      </div>
-    </div>
-  </body>
+  <div class="bottomnav">
+    <img src="/static/assets/hospital.png" class="bottomtitleicon" />
+    <table style="margin-right: 70px;">
+      <tr>
+        <th>
+        <td>
+          <h1 class="contacts">Contact Us</h1>
+        </td>
+        </th>
+      </tr>
+      <tr>
+        <td>
+          <img class="img" src="/static/assets/telephone.png" style="width: 40px" />
+        </td>
+        <td class="phonenum">123456</td>
+      </tr>
+      <tr>
+        <td>
+          <img class="img" src="/static/assets/mail.png" />
+        </td>
+        <td>
+          <h2 class="phonenum" style="font-size: 25px">INFO@HOSPITAL.COM</h2>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <img class="img" src="/static/assets/facebook.png" />
+        </td>
+        <td>
+          <h2 class="phonenum" style="font-size: 25px">facebook.com/NewHospital</h2>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <img class="img" src="/static/assets/twitter.png" />
+        </td>
+        <td>
+          <h2 class="phonenum" style="font-size: 25px">twitter.com/newhospital</h2>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <img class="img" src="/static/assets/youtube.png" />
+        </td>
+        <td>
+          <h2 class="phonenum" style="font-size: 25px">youtube.com/user/NewHospital</h2>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <img class="img" src="/static/assets/instagram.png" />
+        </td>
+        <td>
+          <h2 class="phonenum" style="font-size: 25px">instagram.com/NewHospital/</h2>
+        </td>
+      </tr>
+    </table>
+  </div>
+</body>
+
 </html>

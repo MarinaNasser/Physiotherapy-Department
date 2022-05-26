@@ -9,16 +9,24 @@ import mysql.connector
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="magdynasr",
-    database="sherif"
+    passwd="N#@98wrft45",
+    database="sbe2024"
 )
 
 mycursor = mydb.cursor()
 
 @app.route('/')
 def base():
-    print('base')
-    return render_template('Base.html')
+   print('')
+   return render_template('startPage.html')
+
+@app.route('/homePage')
+def homePage():
+   return render_template('homePage.html')
+
+@app.route('/preSignUp')
+def preSignUp():
+   return render_template('preSignUp.html')
 
 @app.route('/login',methods=["GET","POST"])
 def login():
@@ -29,45 +37,80 @@ def login():
         record = mycursor.fetchone()
         
         if record:
-            # session['user'] = userEmail
-            # session['loggedIn'] = True
-            return render_template('base.html')
+            session['user'] = userEmail
+            session['loggedIn'] = True
+            return redirect(url_for('homePage'))
         else:
             print(111111)
             return render_template('login.html',msg = True)
     else:
         print(0000000)
         return render_template('login.html',msg = False)
-
-
+  
 @app.route('/signUp')
 def signUp():
-    return render_template('signUp.html')
+    if request.method == 'GET':
+        return render_template('signUp.html')
+    else:
+        name = request.form['name']
+        password = request.form['password']
+        email = request.form['email']
+        
+        mycursor.execute("INSET INTO USERS (email,password) VALUES (%s,%s)",(email,password))
+        mydb.commit()
+        
+        session['name'] = name
+        session['email'] = email
+        return redirect(url_for('base'))
+
+@app.route("/logout")
+def logout():
+    session.pop('loggedin',None)
+    session.pop('user',None)
+    session.clear()
+    # return render_template('Base.html')
+    return redirect(url_for('base'))
 
 
 
 @app.route('/adddoctor',methods = ['POST','GET'])
 def adddoctor():
+    
     if request.method == 'POST':
+
         name = request.form['name1']
-        dep = request.form['dep1']
-        sql = "INSERT INTo DOCTOR (name,department) VALUES (%s,%s)"
-        val = (name,dep)
+        ssn=request.form['ssn']
+        sex = request.form['sex']
+        email = request.form['email']
+        password = request.form['password']
+        address = request.form['address']
+        birth_date = request.form['birth_date']
+        degree = request.form['degree']
+        Specialization= request.form['specialization']
+        salary = request.form['salary']
+        sql = """INSERT INTO doctor (name,ssn,sex,email,password,address,birth_date,degree,specialization,salary) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+        val = (name,ssn,sex,email,password,address,birth_date,degree,Specialization,salary)
         mycursor.execute(sql,val)
         mydb.commit()
-        return render_template('base.html')
+        return redirect(url_for('homePage'))
     else:
         print('get')
         return render_template('adddoctor.html')
 
-
 @app.route('/viewdoctor')
 def viewdoctor():
-    sql = "SELECT * FROM DOCTOR"
-    mycursor.execute(sql)
-    result = mycursor.fetchall()
-    return render_template('viewdoctor.html',data = result)
+   sql = "SELECT * FROM DOCTOR"
+   mycursor.execute(sql)
+   result = mycursor.fetchall()
+   return render_template('viewdoctor.html',data = result)
 
+@app.route('/services')
+def services():
+    return render_template('services.html')
+
+@app.route('/doctors')
+def doctors():
+    return render_template('doctor.html')
 @app.route('/addpatient',methods = ['POST', 'GET'])
 def addpatient():
     if request.method == 'POST': ##check if there is post data
