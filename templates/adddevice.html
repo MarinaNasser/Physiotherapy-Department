@@ -25,10 +25,20 @@
             <!-- device_model -->
             <div class="form-group">
                 <label for="device_model" class="form-label">Device Model</label>
-                <input type="text" class="form-control" id="device_model" name="device_model" minlength="2" maxlength="255" placeholder="ex: X-Ray Machine" required>
+                <input type="text" class="form-control" id="device_model" name="device_model" minlength="2" maxlength="255" placeholder="ex: X142001" required>
             </div>
 
-            <!-- ssn -->
+            <!-- technician_id -->
+            <div>
+                <label for="technician_id">Device ID</label>
+                    <input name="technician_id" type="number" class="form-control" id="technician_id" min="0" max="1000000000" placeholder="ex: 10" required>
+                <script>
+                    document.getElementById('id').validity.rangeOverflow;
+                    document.getElementById('id').validity.rangeUnderflow;
+                </script>
+            </div>
+
+            <!-- taffa -->
             <div class="form-group">
                 <label for="Department">SSN</label>
                 <input type="int" inputmode="numeric" maxlength="14" placeholder="xxxxxxxxxxxxxx" class="form-control" id="SSN" name="ssn" required>
