@@ -7,12 +7,12 @@
         <h1>Adding A New Device</h1>
     </head>
 
-        <form action="http://localhost:5000/adddoctor" method="POST">
+        <form action="/adddevice" method="POST" enctype="multipart/form-data">
 
             <!-- device_number -->
             <div class="form-group">
                 <label for="device_num">Device Number</label>
-                <input type="numeric" class="form-control" min="0"  placeholder="ex: 10" required id="device_num" name="device_num">
+                <input type="numeric" class="form-control" min="0" placeholder="ex: 10" required id="device_num" name="device_num">
             </div>
             
 
@@ -38,56 +38,27 @@
                 </script>
             </div>
 
-            <!-- taffa -->
+            <!-- file -->
             <div class="form-group">
-                <label for="Department">SSN</label>
-                <input type="int" inputmode="numeric" maxlength="14" placeholder="xxxxxxxxxxxxxx" class="form-control" id="SSN" name="ssn" required>
+                <label for="photo">Select Image</label>
+                <div class="custom">
+                    <input type="file" name="photo" id="photo" placeholder="Photo" class="custom-file-input">
+                    <label class = "custom-file-input" for="photo">Select image</label>
+                </div>
             </div>
 
-            <!-- sex -->
+            <!-- count -->
             <div>
-                <label for="sex">Sex</label>
-            <select class="form-select" aria-label="Default select example" id="sex" name="sex" required>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-            </select>
+                <label for="count">Count</label>
+                <input name="count" type="numeric" inputmode="numeric" maxlength="12" class="form-control" id="count" >  
+            </div> 
+
+            <!-- description -->
+            <div>
+                <label for="description" class="form-label">Description</label>
+                <textarea name="description" class="form-control" id="description" rows="3" placeholder="Write the Device Specifications" required></textarea>
             </div>
 
-            <!-- email -->
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="text" class="form-control" id="email" name="email" placeholder="ex: name22@gmail.com" required>
-            </div>
-
-            <!-- password -->
-            <div class="form-group">
-                <label for="Password">Password</label>
-                <input type="password" class="form-control" id="Password" name="password" required>
-            </div>
-
-            <!-- address -->
-            <div class="form-group">
-                <label for="address">Address</label>
-                <input type="text" class="form-control" id="address" name="address" placeholder="ex: 17 talaat harb street, Cairo" required>
-            </div>
-
-            <!-- birth date -->
-            <div class="form-group">
-                <label for="birth_date">Birth Date</label>
-                <input type="date" class="form-control" id="birth_date" name="birth_date" required>
-            </div>
-
-            <!-- degree -->
-            <div class="form-group">
-                <label for="Degree">Degree</label>
-                <input type="text" class="form-control" id="Degree" name="degree" required>
-            </div>
-
-            <!-- specialization -->
-            <div class="form-group">
-                <label for="Specialization">Specialization</label>
-                <input type="text" class="form-control" id="Specialization" name="specialization" required>
-            </div>
-
+            <!-- submit -->
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
