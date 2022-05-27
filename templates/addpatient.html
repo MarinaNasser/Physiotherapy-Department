@@ -32,11 +32,12 @@
     <!-- SSN -->
     <div>
       <label for="ssn">SSN</label>
-      <input name="ssn" inputmode="numeric" maxlength="14" pattern="[0-9]{14}" class="form-control" id="ssn" placeholder="xxxxxxxxxxxxxx" required>
+      <input name="ssn" inputmode="numeric" maxlength="14" class="form-control" id="ssn" placeholder="xxxxxxxxxxxxxx" required>
       <script>
         document.getElementById('ssn').validity.patternMismatch; 
       </script>
     </div> 
+    <!--  pattern="[0-9]{14}" -->
 
     <!-- Sex -->
     <div class="form-check">

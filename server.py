@@ -122,11 +122,11 @@ def adddoctor():
         elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
             return render_template('adddoctor.html', emailExisits = False , emailInvalid=True )        
         else:    
-         sql = """INSERT INTO doctor (name,ssn,sex,email,password,address,birth_date,degree,specialization,salary) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
-         val = (name,ssn,sex,email,password,address,birth_date,degree,Specialization,salary)
-         mycursor.execute(sql,val)
-         mydb.commit()
-         return redirect(url_for('homePage'))
+            sql = """INSERT INTO doctor (name,ssn,sex,email,password,address,birth_date,degree,specialization,salary) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+            val = (name,ssn,sex,email,password,address,birth_date,degree,Specialization,salary)
+            mycursor.execute(sql,val)
+            mydb.commit()
+            return redirect(url_for('homePage'))
     else:
         print('get')
         return render_template('adddoctor.html')
@@ -167,7 +167,7 @@ def addpatient():
         job = request.form['job']
         age = request.form['age']
 
-        sql = """INSERT INTO Patient (id, name, ssn, sex, email, userName, password, address, birthDate, creditCard, insuranceNumber, maritalStatus, job, age) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+        sql = """INSERT INTO Patient (id, name, ssn, sex, email, username, password, address, birth_date, credit_card, insurance_num, marital_status, job, age) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
         val = (id,name,ssn,sex,email,userName,password,address, birthDate, creditCard, insuranceNumber, maritalStatus, job, age)
         mycursor.execute(sql, val)
         mydb.commit()
