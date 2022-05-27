@@ -49,9 +49,18 @@ def login():
         record = mycursor.fetchone()
         
         if record:
-            session['user'] = userEmail
-            session['loggedIn'] = True
-            return redirect(url_for('homePage'))
+            if record[2] == 'patient':
+                session['user_patient'] = userEmail
+                session['loggedIn'] = True
+                return redirect(url_for('homePage'))
+            elif record[2] == 'doctor':
+                session['user_doctor'] = userEmail
+                session['loggedIn'] = True
+                return redirect(url_for('homePage')) 
+            else:
+                session['user_admin'] = userEmail
+                session['loggedIn'] = True
+                return redirect(url_for('homePage'))      
         else:
             print(111111)
             return render_template('login.html',msg = True)
@@ -191,11 +200,18 @@ def contact():
 def profile():
     if 'loggedIn' in session:
         cursor = mydb.cursor(buffered=True)
-        cursor.execute('SELECT * FROM USERS WHERE email = %s', (session['user'],))
+        cursor.execute('SELECT * FROM USERS WHERE email = %s', (session['user_patient'],))
         result = cursor.fetchall()
         
         return render_template('profile.html', data = result)
-    return redirect(url_for('homePage'))    
+    return redirect(url_for('homePage'))
+
+@app.route('/adminViewDoctor')
+def adminViewDoctor():
+    sql = "SELECT * FROM DOCTOR"
+    mycursor.execute(sql)
+    result = mycursor.fetchall()
+    return render_template('adminViewDoctor.html',result=result)        
 
 if __name__ == '__main__':
-    app.run(debug = True)
+    app.run(debug = True)    

@@ -12,7 +12,7 @@
   <body class="body">
     <div>
       <nav class="topnav">
-        {% if session['user'] %}
+        {% if session['user_admin'] or session['user_doctor'] or session['user_patient']  %}
         <a class="loginButton" href="http://127.0.0.1:5000/logout">Log Out</a>
         <img src=" {{url_for('static',filename='assets/hospital.png')}}" class="titleicon" />
         <label class="title">NEW<br />HOSPITAL</label>
