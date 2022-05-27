@@ -1,64 +1,99 @@
 {% if emailExisits %}
 <div class="alert alert-warning" role="alert">
-  the email you entered already exisits
+    the email you entered already exisits
 </div>
 {%endif%}
 {% if emailInvalid %}
 <div class="alert alert-warning" role="alert">
-  the email you entered is invalid
+    the email you entered is invalid
 </div>
 {%endif%}
 {% if ssnExisits %}
 <div class="alert alert-warning" role="alert">
-  the ssn you entered already exisits
+    the ssn you entered already exisits
 </div>
 {%endif%}
-    <h1>doctor Register</h1>
-    <div class = "container">
+    
+    <head>
+        <link rel="stylesheet" href="patient.css"> 
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <h1>doctor Register</h1>
+    </head>
+
         <form action="http://localhost:5000/adddoctor" method="POST">
+
+            <!-- name -->
             <div class="form-group">
                 <label for="Name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="Name" name="name1" required>
+                <input type="text" class="form-control" id="Name" name="name1" minlength="2" maxlength="255" placeholder="ex: Michael Hany Rofael" required>
             </div>
+
+            <!-- ssn -->
             <div class="form-group">
                 <label for="Department">SSN</label>
-                <input type="int" class="form-control" id="SSN" name="ssn" required>
+                <input type="int" inputmode="numeric" maxlength="14" placeholder="xxxxxxxxxxxxxx" class="form-control" id="SSN" name="ssn" required>
             </div>
+
+            <!-- sex -->
             <div>
                 <label for="sex">Sex</label>
-             <select class="form-select" aria-label="Default select example" id="sex" name="sex" required>
+            <select class="form-select" aria-label="Default select example" id="sex" name="sex" required>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
-             </select>
+            </select>
             </div>
+            <!-- Sex -->
+            <!-- <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="Male" id="sex" name="sex">
+                <label class="form-check-label" for="sex"> Male </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="Female" id="sex" name="sex">
+                <label class="form-check-label" for="sex"> Female </label>
+            </div> -->
+
+            <!-- email -->
             <div class="form-group">
-                <label for="Email">Email</label>
-                <input type="text" class="form-control" id="Email" name="email" required>
+                <label for="email">Email</label>
+                <input type="text" class="form-control" id="email" name="email" placeholder="ex: name22@gmail.com" required>
             </div>
+
+            <!-- password -->
             <div class="form-group">
                 <label for="Password">Password</label>
-                <input type="text" class="form-control" id="Password" name="password" required>
+                <input type="password" class="form-control" id="Password" name="password" required>
             </div>
+
+            <!-- address -->
             <div class="form-group">
-                <label for="Address">Address</label>
-                <input type="text" class="form-control" id="Address" name="address" required>
+                <label for="address">Address</label>
+                <input type="text" class="form-control" id="address" name="address" placeholder="ex: 17 talaat harb street, Cairo" required>
             </div>
+
+            <!-- birth date -->
             <div class="form-group">
-                <label for="Birth_Date">Birth Date</label>
-                <input type="date" class="form-control" id="Birth_Date" name="birth_date" required>
+                <label for="birth_date">Birth Date</label>
+                <input type="date" class="form-control" id="birth_date" name="birth_date" required>
             </div>
+
+            <!-- degree -->
             <div class="form-group">
                 <label for="Degree">Degree</label>
                 <input type="text" class="form-control" id="Degree" name="degree" required>
             </div>
+
+            <!-- specialization -->
             <div class="form-group">
                 <label for="Specialization">Specialization</label>
                 <input type="text" class="form-control" id="Specialization" name="specialization" required>
             </div>
+
+            <!-- salary -->
             <div class="form-group">
                 <label for="Salary">Salary</label>
-                <input type="int" class="form-control" id="Salary" name="salary">
+                <input type="int" class="form-control" min="0"  placeholder="ex: 10" required id="Salary" name="salary">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-    </div>

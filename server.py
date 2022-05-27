@@ -8,11 +8,6 @@ from flask_mysqldb import MySQL
 import mysql.connector
 import re
 
-# from flask_wtf import FlaskForms
-# #from wtforms.fields.html5 import DateField
-# from wtforms.validators import DateRequired
-# from wtforms import validators, SubmitField
-
 print('started')
 
 app = Flask(__name__)
@@ -103,7 +98,6 @@ def adddoctor():
         salary = request.form['salary']
 
         #setting a buffered cursor => to accept one value in the input
-
         emailCursor =mydb.cursor(buffered=True)
         emailCursor.execute(""" SELECT * FROM doctor WHERE email = %s """ , (email,))
         emailExist = emailCursor.fetchone()
