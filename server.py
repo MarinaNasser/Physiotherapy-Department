@@ -1,4 +1,8 @@
-from flask import Flask, render_template,request,session,url_for
+from flask import Flask, render_template, request, session, url_for, redirect
+# from flask_wtf import FlaskForms
+# #from wtforms.fields.html5 import DateField
+# from wtforms.validators import DateRequired
+# from wtforms import validators, SubmitField
 
 print('started')
 
@@ -9,24 +13,24 @@ import mysql.connector
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="N#@98wrft45",
-    database="sbe2024"
+    passwd="magdynasr",
+    database="sherif"
 )
 
 mycursor = mydb.cursor()
 
 @app.route('/')
 def base():
-   print('')
-   return render_template('startPage.html')
+    print('')
+    return render_template('startPage.html')
 
 @app.route('/homePage')
 def homePage():
-   return render_template('homePage.html')
+    return render_template('homePage.html')
 
 @app.route('/preSignUp')
 def preSignUp():
-   return render_template('preSignUp.html')
+    return render_template('preSignUp.html')
 
 @app.route('/login',methods=["GET","POST"])
 def login():
@@ -46,7 +50,7 @@ def login():
     else:
         print(0000000)
         return render_template('login.html',msg = False)
-  
+
 @app.route('/signUp')
 def signUp():
     if request.method == 'GET':
@@ -84,12 +88,12 @@ def adddoctor():
         email = request.form['email']
         password = request.form['password']
         address = request.form['address']
-        birth_date = request.form['birth_date']
+        birthDate = request.form['birthDate']
         degree = request.form['degree']
         Specialization= request.form['specialization']
         salary = request.form['salary']
-        sql = """INSERT INTO doctor (name,ssn,sex,email,password,address,birth_date,degree,specialization,salary) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
-        val = (name,ssn,sex,email,password,address,birth_date,degree,Specialization,salary)
+        sql = """INSERT INTO doctor (name,ssn,sex,email,password,address,birthDate,degree,specialization,salary) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+        val = (name,ssn,sex,email,password,address,birthDate,degree,Specialization,salary)
         mycursor.execute(sql,val)
         mydb.commit()
         return redirect(url_for('homePage'))
@@ -99,10 +103,10 @@ def adddoctor():
 
 @app.route('/viewdoctor')
 def viewdoctor():
-   sql = "SELECT * FROM DOCTOR"
-   mycursor.execute(sql)
-   result = mycursor.fetchall()
-   return render_template('viewdoctor.html',data = result)
+    sql = "SELECT * FROM DOCTOR"
+    mycursor.execute(sql)
+    result = mycursor.fetchall()
+    return render_template('viewdoctor.html',data = result)
 
 @app.route('/services')
 def services():
@@ -111,7 +115,10 @@ def services():
 @app.route('/doctors')
 def doctors():
     return render_template('doctor.html')
-@app.route('/addpatient',methods = ['POST', 'GET'])
+
+
+
+@app.route('/addpatient', methods = ['POST', 'GET'])
 def addpatient():
     if request.method == 'POST': ##check if there is post data
         id = request.form['id']
@@ -127,14 +134,15 @@ def addpatient():
         insuranceNumber = request.form['insuranceNumber']
         maritalStatus = request.form['maritalStatus']
         job = request.form['job']
-        age = request.form['Age']
+        age = request.form['age']
 
         sql = """INSERT INTO Patient (id, name, ssn, sex, email, userName, password, address, birthDate, creditCard, insuranceNumber, maritalStatus, job, age) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
         val = (id,name,ssn,sex,email,userName,password,address, birthDate, creditCard, insuranceNumber, maritalStatus, job, age)
         mycursor.execute(sql, val)
         mydb.commit()
-        return render_template('base.html')
+        return redirect(url_for('homePage'))
     else:
+        print('get')
         return render_template('addpatient.html')
 
 @app.route('/viewpatient')

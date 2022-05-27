@@ -1,0 +1,3 @@
+[console_scripts]
+django = django_shortcuts:main
+
