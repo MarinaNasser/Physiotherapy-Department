@@ -1,0 +1,22 @@
+
+
+<!-- {% block title %}Profile{% endblock %} -->
+
+<h1>my profile</h1>
+    <table class="table or container">
+        <thead>
+          <tr>
+            <th scope="col">email</th>
+            <th scope="col">password</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for r in data %}
+            <tr>
+              {% for c in r %}
+                <td>{{c}}</td>
+              {% endfor %}
+            </tr>
+          {% endfor %}
+        </tbody>
+    </table>
