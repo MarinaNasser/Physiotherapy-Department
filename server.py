@@ -133,9 +133,9 @@ def viewdoctor():
     result = mycursor.fetchall()
     return render_template('viewdoctor.html',data = result)
 
-@app.route('/services')
+@app.route('/adddevice')
 def services():
-    return render_template('services.html')
+    return render_template('adddevice.html')
 
 @app.route('/doctors')
 def doctors():
