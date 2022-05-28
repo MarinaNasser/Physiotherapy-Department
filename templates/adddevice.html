@@ -7,7 +7,7 @@
         <h1>Adding A New Device</h1>
     </head>
 
-        <form action="/adddevice" method="POST" enctype="multipart/form-data">
+        <form action="http://localhost:5000/adddevice" method="POST" enctype="multipart/form-data">
 
             <!-- device_number -->
             <div class="form-group">
@@ -42,7 +42,7 @@
             <div class="form-group">
                 <label for="photo">Select Image</label>
                 <div class="custom">
-                    <input type="file" name="photo" id="photo" placeholder="Photo" class="custom-file-input">
+                    <input type="file" name="photo" id="photo" placeholder="Photo" class="custom-file-input" required>
                     <label class = "custom-file-input" for="photo">Select image</label>
                 </div>
             </div>

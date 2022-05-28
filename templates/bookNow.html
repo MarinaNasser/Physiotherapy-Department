@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Page Title</title>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   </head>
+
+   <body>
+    <table class="table or container">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">name</th>
+            <th scope="col">start time</th>
+            <th scope="col">end time</th>
+            <th scope="col">date</th>
+        </tr>
+        </thead>
+        <tbody>
+          {% for r in data %}
+            <tr>
+              {% for c in r %}
+                <td>{{c}}</td>
+              {% endfor %}
+            <td>
+                <form action="{{url_for('viewAppointments')}}">
+                    <button type="submit" class="btn btn-primary">book now</button>
+                </form>
+            </td>
+              
+            </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+   </body>
+</html> 
