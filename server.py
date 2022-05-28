@@ -205,6 +205,7 @@ def addpatient():
         val = (id,name,ssn,sex,email,userName,password,address, birthDate, creditCard, insuranceNumber, maritalStatus, job, age)
         mycursor.execute(sql, val)
         mydb.commit()
+
         return redirect(url_for('homePage'))
     else:
         print('get')
@@ -240,20 +241,50 @@ def profile():
 
 @app.route('/adminViewDoctor', methods = ['POST','GET'])
 def adminViewDoctor():
-    if request.method == 'POST':
-        ssn = request.form['ssn']
+    if request.method == 'POST' :
+        name = request.form['name1']
+        ssn=request.form['ssn']
+        sex = request.form['sex']
+        email = request.form['email']
+        password = request.form['password']
+        address = request.form['address']
+        birth_date = request.form['birth_date']
+        degree = request.form['degree']
         Specialization= request.form['specialization']
-        cursor = mydb.cursor(buffered=True)
-        cursor.execute('SELECT * FROM doctorPreRequest WHERE ssn = %s', (ssn,))
-        values = cursor.fetchall()
+        salary = request.form['salary']
 
-        sql = """INSERT INTO test2 (ssn) VALUES (%s,%s)"""
-        val = (ssn,Specialization)
-        cursor.execute(sql,val)
+        
+        sql = """INSERT INTO doctor (name,ssn,sex,email,password,address,birth_date,degree,specialization,salary) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+        val = (name,ssn,sex,email,password,address,birth_date,degree,Specialization,salary)
+        mycursor.execute(sql,val)
+        mydb.commit()
+
+        cursor = mydb.cursor(buffered=True)
+        cursor.execute("""DELETE FROM doctorPreRequest WHERE ssn = %s """,(ssn,))
+        mydb.commit()  
+        return redirect(url_for('adminViewDoctor'))
+
+    elif request.method == 'get':
+        name = request.form.get['name1']
+        ssn=request.form.get['ssn']
+        # sex = request.form['sex']
+        # email = request.form['email']
+        # password = request.form['password']
+        # address = request.form['address']
+        # birth_date = request.form['birth_date']
+        # degree = request.form['degree']
+        # Specialization= request.form['specialization']
+        # salary = request.form['salary']
+
+        cursor = mydb.cursor(buffered=True)
+        cursor.execute("""DELETE FROM doctorPreRequest WHERE ssn = %s """,(ssn,))
+        mydb.commit()
         return redirect(url_for('adminViewDoctor'))
 
 
-    
+    else:
+        print('get')    
+          
     sql = "SELECT * FROM doctorPreRequest"
     mycursor.execute(sql)
     result = mycursor.fetchall()
