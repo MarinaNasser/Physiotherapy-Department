@@ -1,40 +1,48 @@
-<!-- <!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <!-- <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!DOCTYPE html>
+<html lang= "en-GB">
+<head>
+<title> Jordan's Profile </title>
+<link rel="stylesheet" href="profile.css">
+<meta charset="UTF-8">
+</head>
 
-    <!-- Bootstrap CSS -->
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<body>
+  <div class="main-nav">
+      <ul class="nav">
+        <li class="name">J-DON</li>
+        <li><a href="{{url_for(index)}}">Home</a></li>
+        <li><a href="{{url_for(hobbies)}}">Hobbies</a></li>
+      </ul>
+  </div>
 
-    <title>Clinic Application!</title>
-  </head>
-  <body> -->
+  <header>
+    <img src="images/jordans-avatar.jpg" alt="Jordans Avatar" class="profile-image">
+    <h1 class="tag name">Greetings, I’m Jordan.</h1>
+    <p class="tag location">Welcome to my domain!</p>
+  </header>
 
-   <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-   <a class="navbar-brand" href="#">Navbar</a>
-   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-   </button> -->
+  <main class="flex">
+    <div class="card">
+      <h2>Background</h2>
+      <p> I'm an aspiring front-end developer, a purveyor of the world wide web and a passionate student of coding.</p>
+      <p> My enthusiasm for programming comes from a nature to create things from scratch. I have always been caught in the allure of computers but my journey truly began when I learned how just a few lines of code could make a machine bend to my will.</p>
+      <p> This obsession has taken me through a series of different programming languages to broaden my skills as a developer. </p>
+    </div>
 
-   <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-         <li class="nav-item active"><a class="nav-link" href="http://127.0.0.1:5000/">Home <span class="sr-only">(current)</span></a></li>
-         <li class="nav-item"><a class="nav-link" href="http://127.0.0.1:5000/addpatient">Add New Patient</a></li>
-         <li class="nav-item"><a class="nav-link" href="http://127.0.0.1:5000/viewpatient">View Patients</a></li>
-   </div> -->
-   <!-- </nav>
-   <div class="container">
-    {% block head %}
-       <h1>Home Page!</h1>
-    {% endblock %}
-</div> -->
+    <div class="card">
+      <h2>Goals</h2>
+      <p> A great developer should always try to improve their craft and increase their knowledge. Hence, I continually try to perfect my process of building websites and add to my skills in:</p>
+      <ul class="skills">
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+      </ul>
+      <p>I’d like to work for a web design firm helping clients create an impressive online presence.</p>
+    </div>
+  </main>
+  <footer>
+    <p> &copy; 2018, Jordan Adedeji</p>
+  </footer>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
-</html>  -->
+</body>
+</html>

@@ -34,6 +34,14 @@ def homePage():
 def preSignUp():
     return render_template('preSignUp.html')
 
+@app.route('/index')
+def index():
+    return render_template('index.html')
+
+@app.route('/hobbies')
+def hobbies():
+    return render_template('hobbies.html')
+
 # ------------------------------------------------------------------------Login---------------------------------------------------------------------
 
 @app.route('/login',methods=["GET","POST"])
@@ -164,16 +172,14 @@ def adddevice():
             technician_id = request.form['technician_id']
             count = request.form['count']
             description = request.form['description']
-        if request.files:
             photo = request.files['photo']
             pic_path = save_picture(photo)
-            return redirect(request.url)
-
-        sql = """INSERT INTO device (device_num,device_name,device_model,technician_id,photo,count,description) VALUES (%s,%s,%s,%s,%s,%s,%s)"""
-        val = (device_number,device_name,device_model,technician_id,pic_path,count,description)
-        mycursor.execute(sql,val)
-        mydb.commit()
-        return redirect(url_for('homePage'))
+            
+            sql = """INSERT INTO device (device_num,device_name,device_model,technician_id,photo,count,description) VALUES (%s,%s,%s,%s,%s,%s,%s)"""
+            val = (device_number,device_name,device_model,technician_id,pic_path,count,description)
+            mycursor.execute(sql,val)
+            mydb.commit()
+            return redirect(url_for('homePage'))
     return render_template('adddevice.html')
         
 # ------------------------------------------------------------------------Doctors-------------------------------------------------------------------        
