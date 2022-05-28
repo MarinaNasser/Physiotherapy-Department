@@ -260,8 +260,9 @@ li {
 /*     Home     */
 /****************/
 .home {
-	background-image: url('static\assets\img\PhysiotherapyClinicHome.jpg');
-	background-color:#323137;
+	background-image: url('/static/assets/img/PhysiotherapyClinicHome.jpg');
+	background-blend-mode: darken;
+	background-color:#32313755;
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
