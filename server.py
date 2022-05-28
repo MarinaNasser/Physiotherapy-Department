@@ -7,24 +7,18 @@ from flask import Flask, redirect, render_template,request,session,url_for
 # from flask_mysqldb import MySQL
 import mysql.connector
 import re
-
-# from flask_wtf import FlaskForms
-# #from wtforms.fields.html5 import DateField
-# from wtforms.validators import DateRequired
-# from wtforms import validators, SubmitField
-
-print('started')
+import os
+import secrets
+import sqlalchemy
 
 app = Flask(__name__)
 app.secret_key = "very secret key"
-
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
     passwd="85426Mm854267890",
     database="hospital"
 )
-
 mycursor = mydb.cursor()
 
 @app.route('/')
@@ -40,6 +34,8 @@ def homePage():
 def preSignUp():
     return render_template('preSignUp.html')
 
+# ------------------------------------------------------------------------Login---------------------------------------------------------------------
+
 @app.route('/login',methods=["GET","POST"])
 def login():
     if request.method == 'POST':
@@ -49,14 +45,21 @@ def login():
         record = mycursor.fetchone()
         
         if record:
-            session['user'] = userEmail
-            session['loggedIn'] = True
-            return redirect(url_for('homePage'))
+            if record[2] == 'patient':
+                session['user_patient'] = userEmail
+                session['loggedIn'] = True
+                return redirect(url_for('homePage'))
+            elif record[2] == 'doctor':
+                session['user_doctor'] = userEmail
+                session['loggedIn'] = True
+                return redirect(url_for('homePage')) 
+            else:
+                session['user_admin'] = userEmail
+                session['loggedIn'] = True
+                return redirect(url_for('homePage'))      
         else:
-            print(111111)
             return render_template('login.html',msg = True)
     else:
-        print(0000000)
         return render_template('login.html',msg = False)
 
 @app.route('/signUp')
@@ -75,6 +78,8 @@ def signUp():
         session['email'] = email
         return redirect(url_for('base'))
 
+# ------------------------------------------------------------------------Log Out-------------------------------------------------------------------
+
 @app.route("/logout")
 def logout():
     session.pop('loggedin',None)
@@ -83,7 +88,7 @@ def logout():
     # return render_template('Base.html')
     return redirect(url_for('base'))
 
-
+# ------------------------------------------------------------------------Add Doctor----------------------------------------------------------------
 
 @app.route('/adddoctor',methods = ['POST','GET'])
 def adddoctor():
@@ -102,7 +107,6 @@ def adddoctor():
         salary = request.form['salary']
 
         #setting a buffered cursor => to accept one value in the input
-
         emailCursor =mydb.cursor(buffered=True)
         emailCursor.execute(""" SELECT * FROM doctor WHERE email = %s """ , (email,))
         emailExist = emailCursor.fetchone()
@@ -138,15 +142,46 @@ def viewdoctor():
     result = mycursor.fetchall()
     return render_template('viewdoctor.html',data = result)
 
-@app.route('/services')
-def services():
-    return render_template('services.html')
+# ------------------------------------------------------------------------Add Device----------------------------------------------------------------
+
+def save_picture(form_picture):
+    fname = secrets.token_hex(16) #new name
+    _, f_ext = os.path.splitext(form_picture.filename) #get rid of old name
+    picture_fn = fname + f_ext #combine extention "png for example" with new name
+    picture_path = os.path.join(os.path.dirname(__file__), 'static/imgs/uploads', picture_fn) #combine path with name
+    form_picture.save(picture_path)
+    return picture_path
+
+@app.route('/adddevice', methods = ['GET','POST'])
+
+def adddevice():
+    if request.method == 'POST':
+        if request.form:
+            device_number = request.form['device_num']
+            device_name = request.form['device_name']
+            device_model = request.form['device_model']
+            technician_id = request.form['technician_id']
+            count = request.form['count']
+            description = request.form['description']
+        if request.files:
+            photo = request.files['photo']
+            pic_path = save_picture(photo)
+            return redirect(request.url)
+
+        sql = """INSERT INTO device (device_num,device_name,device_model,technician_id,photo,count,description) VALUES (%s,%s,%s,%s,%s,%s,%s)"""
+        val = (device_number,device_name,device_model,technician_id,pic_path,count,description)
+        mycursor.execute(sql,val)
+        mydb.commit()
+        return redirect(url_for('homePage'))
+    return render_template('adddevice.html')
+        
+# ------------------------------------------------------------------------Doctors-------------------------------------------------------------------        
 
 @app.route('/doctors')
 def doctors():
     return render_template('doctor.html')
 
-
+# ------------------------------------------------------------------------Add Patient---------------------------------------------------------------
 
 @app.route('/addpatient', methods = ['POST', 'GET'])
 def addpatient():
@@ -175,26 +210,40 @@ def addpatient():
         print('get')
         return render_template('addpatient.html')
 
+# ------------------------------------------------------------------------View Patient---------------------------------------------------------------
+
 @app.route('/viewpatient')
 def viewpatient():
     mycursor.execute("SELECT * FROM Patient")
     myresult = mycursor.fetchall()
     return render_template('viewpatient.html', data = myresult)
 
+# ------------------------------------------------------------------------Contact Us-----------------------------------------------------------------
 
 @app.route('/contact_us')
 def contact():
     return render_template('contact_us.html')
 
+# ------------------------------------------------------------------------Home Page/ Profile---------------------------------------------------------
+
 @app.route('/homePage/profile')
 def profile():
     if 'loggedIn' in session:
         cursor = mydb.cursor(buffered=True)
-        cursor.execute('SELECT * FROM USERS WHERE email = %s', (session['user'],))
+        cursor.execute('SELECT * FROM USERS WHERE email = %s', (session['user_patient'],))
         result = cursor.fetchall()
         
         return render_template('profile.html', data = result)
-    return redirect(url_for('homePage'))    
+    return redirect(url_for('homePage'))
+
+# ------------------------------------------------------------------------Admin Veiw Doctor---------------------------------------------------------
+
+@app.route('/adminViewDoctor')
+def adminViewDoctor():
+    sql = "SELECT * FROM DOCTOR"
+    mycursor.execute(sql)
+    result = mycursor.fetchall()
+    return render_template('adminViewDoctor.html',result=result)        
 
 if __name__ == '__main__':
-    app.run(debug = True)
+    app.run(debug = True)    

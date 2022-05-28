@@ -1,0 +1,28 @@
+
+<table class="table table-hover table-dark">
+    <thead>
+        <tr>
+            <!-- Your Columns HERE -->
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">ssn</th>
+            <th scope="col">specialization</th>
+            <th scope="col">Options</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Your rows inside the table HERE: -->
+        {% for item in result %}
+        <tr>
+            <td>{{ item.0 }}</td>
+            <td>{{ item.1 }}</td>
+            <td>{{ item.2 }}</td>
+            <td>{{ item.9 }}</td>
+            <td>
+                <button class="btn btn-outline btn-info">accept</button>
+                <button class="btn btn-outline btn-success">Purchase this Item</button>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

@@ -12,13 +12,13 @@
   <body class="body">
     <div>
       <nav class="topnav">
-        {% if session['user'] %}
+        {% if session['user_admin'] or session['user_doctor'] or session['user_patient']  %}
         <a class="loginButton" href="http://127.0.0.1:5000/logout">Log Out</a>
         <img src=" {{url_for('static',filename='assets/hospital.png')}}" class="titleicon" />
         <label class="title">NEW<br />HOSPITAL</label>
         <ul style="float: right">
           <li class="li_items"> <a class="navitems" href="#">Home</a></li>
-          <li class="li_items"> <a class="navitems" href="http://127.0.0.1:5000/services">Services</a></li>
+          <li class="li_items"> <a class="navitems" href="http://127.0.0.1:5000/adddevice">Add Device</a></li>
           <li class="li_items"> <a class="navitems" href="http://127.0.0.1:5000/doctors">Doctors</a></li>
         <li class="li_items"><a class="navitems" href="http://127.0.0.1:5000/viewpatient">Patients</a></li>
         <li class="li_items"><a class="navitems" href="http://127.0.0.1:5000/addpatient">Book Now</a></li>
@@ -33,7 +33,7 @@
       <label class="title">NEW<br />HOSPITAL</label>
       <ul style="float: right">
         <li class="li_items"> <a class="navitems" href="#">Home</a></li>
-        <li class="li_items"> <a class="navitems" href="http://127.0.0.1:5000/login">Services</a></li>
+        <li class="li_items"> <a class="navitems" href="http://127.0.0.1:5000/login">Add Device</a></li>
         <li class="li_items"> <a class="navitems" href="http://127.0.0.1:5000/login">Doctors</a></li>
         <li class="li_items"> <a class="navitems" href="http://127.0.0.1:5000/login">Patients</a></li>
         <li class="li_items"> <a class="navitems" href="#">About Us</a></li>
