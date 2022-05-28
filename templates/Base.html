@@ -3,6 +3,8 @@
   <head>
     <link rel="stylesheet" href="{{url_for('static',filename='css/base_style.css')}}"/>
     <link rel="icon" href=" {{url_for('static',filename='assets/hospital.png')}}" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -12,7 +14,8 @@
   <body class="body">
     <div>
       <nav class="topnav">
-        {% if session['user_admin'] or session['user_doctor'] or session['user_patient']  %}
+        {% if session['user_admin'] or session['user_doctor'] %}
+
         <a class="loginButton" href="http://127.0.0.1:5000/logout">Log Out</a>
         <img src=" {{url_for('static',filename='assets/hospital.png')}}" class="titleicon" />
         <label class="title">NEW<br />HOSPITAL</label>
@@ -24,7 +27,11 @@
         <li class="li_items"><a class="navitems" href="{{url_for('addAppointment')}}">add appointment</a></li>
         <li class="li_items"><a class="navitems" href="#">About Us</a></li>
         </ul>
+        {% elif session['user_patient'] %}
+          <li class="li_items"><a class="navitems" href="{{url_for('bookNow')}}">book now</a></li>
+
         {%else%}
+        
         <a class="loginButton" href="http://127.0.0.1:5000/preSignUp?">Sign-Up</a>
         <img src=" {{url_for('static',filename='assets/sign_up.png')}}" />
         <a class="loginButton" href="http://127.0.0.1:5000/login">Login</a>

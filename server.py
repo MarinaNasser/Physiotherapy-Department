@@ -252,7 +252,7 @@ def adminViewDoctor():
     result = mycursor.fetchall()
     return render_template('adminViewDoctor.html',result=result)        
 
-# ------------------------------------------------------------------------book now----------------------------------------------------------------
+# ------------------------------------------------------------------------add/view appointment----------------------------------------------------------------
 @app.route('/addAppointment',methods=['GET','POST'])
 def addAppointment():
     print(session['user_doctor'])
@@ -279,7 +279,7 @@ def addAppointment():
         
     else:
         return render_template('addAppointment.html',added = False)
- 
+
 @app.route('/viewAppointments')   
 def viewAppointments():
     sql = "SELECT appNo,name,startT,endT,dt FROM appointment join doctor on doctorEmail = email"
@@ -287,5 +287,15 @@ def viewAppointments():
     result = mycursor.fetchall()
     return render_template('viewAppointments.html', data = result)
 
+# ------------------------------------------------------------------------book now----------------------------------------------------------------
+@app.route('/bookNow')
+def bookNow():
+    sql = "SELECT appNo,name,startT,endT,dt FROM appointment join doctor on doctorEmail = email"
+    mycursor.execute(sql)
+    result = mycursor.fetchall()
+    
+    return render_template('bookNow.html',data = result)
+
+
 if __name__ == '__main__':
-    app.run(debug = True)    
+    app.run(debug = True)
