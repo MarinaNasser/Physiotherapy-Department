@@ -34,13 +34,13 @@ def homePage():
 def preSignUp():
     return render_template('preSignUp.html')
 
-@app.route('/index')
-def index():
-    return render_template('index.html')
+@app.route('/profileh')
+def profileh():
+    return render_template('profileh.html')
 
-@app.route('/hobbies')
-def hobbies():
-    return render_template('hobbies.html')
+@app.route('/moreInfo')
+def moreInfo():
+    return render_template('moreInfo.html')
 
 # ------------------------------------------------------------------------Login---------------------------------------------------------------------
 
