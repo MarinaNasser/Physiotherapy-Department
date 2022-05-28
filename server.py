@@ -2,9 +2,9 @@ import email
 from genericpath import exists
 from unittest import result
 from flask import Flask, redirect, render_template,request,session,url_for
-from pymysql import NULL
-from sqlalchemy import false
-from flask_mysqldb import MySQL
+# from pymysql import NULL
+# from sqlalchemy import false
+# from flask_mysqldb import MySQL
 import mysql.connector
 import re
 
@@ -21,8 +21,8 @@ app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="magdynasr",
-    database="sherif"
+    passwd="85426Mm854267890",
+    database="hospital"
 )
 
 mycursor = mydb.cursor()
@@ -87,7 +87,6 @@ def logout():
 
 @app.route('/adddoctor',methods = ['POST','GET'])
 def adddoctor():
-
     if request.method == 'POST':
 
         #requesting data form
