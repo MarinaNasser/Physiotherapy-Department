@@ -17,8 +17,8 @@ app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="85426Mm854267890",
-    database="hospital"
+    passwd="magdynasr",
+    database="sherif"
 )
 mycursor = mydb.cursor()
 
@@ -57,15 +57,15 @@ def login():
             if record[2] == 'patient':
                 session['user_patient'] = userEmail
                 session['loggedIn'] = True
-                return redirect(url_for('homePage'))
+                return redirect(url_for('index'))
             elif record[2] == 'doctor':
                 session['user_doctor'] = userEmail
                 session['loggedIn'] = True
-                return redirect(url_for('homePage')) 
+                return redirect(url_for('index')) 
             else:
                 session['user_admin'] = userEmail
                 session['loggedIn'] = True
-                return redirect(url_for('homePage'))      
+                return redirect(url_for('index'))      
         else:
             return render_template('login.html',msg = True)
     else:
@@ -114,6 +114,8 @@ def adddoctor():
         degree = request.form['degree']
         Specialization= request.form['specialization']
         salary = request.form['salary']
+        photo = request.files['photo']
+        pic_path = save_picture(photo)
 
         #setting a buffered cursor => to accept one value in the input
         emailCursor =mydb.cursor(buffered=True)
@@ -134,11 +136,11 @@ def adddoctor():
         elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
             return render_template('adddoctor.html', emailExisits = False , emailInvalid=True )        
         else:    
-            sql = """INSERT INTO doctor (name,ssn,sex,email,password,address,birth_date,degree,specialization,salary) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
-            val = (name,ssn,sex,email,password,address,birth_date,degree,Specialization,salary)
+            sql = """INSERT INTO doctor (name,ssn,sex,email,password,address,birth_date,degree,specialization,salary,photo) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+            val = (name,ssn,sex,email,password,address,birth_date,degree,Specialization,salary,pic_path)
             mycursor.execute(sql,val)
             mydb.commit()
-            return redirect(url_for('homePage'))
+            return redirect(url_for('index'))
     else:
         print('get')
         return render_template('adddoctor.html')
@@ -179,7 +181,7 @@ def adddevice():
             val = (device_number,device_name,device_model,technician_id,pic_path,count,description)
             mycursor.execute(sql,val)
             mydb.commit()
-            return redirect(url_for('homePage'))
+            return redirect(url_for('index'))
     return render_template('adddevice.html')
         
 # ------------------------------------------------------------------------Doctors-------------------------------------------------------------------        
@@ -207,12 +209,14 @@ def addpatient():
         maritalStatus = request.form['maritalStatus']
         job = request.form['job']
         age = request.form['age']
+        photo = request.files['photo']
+        pic_path = save_picture(photo)
 
-        sql = """INSERT INTO Patient (id, name, ssn, sex, email, username, password, address, birth_date, credit_card, insurance_num, marital_status, job, age) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
-        val = (id,name,ssn,sex,email,userName,password,address, birthDate, creditCard, insuranceNumber, maritalStatus, job, age)
+        sql = """INSERT INTO Patient (id, name, ssn, sex, email, username, password, address, birth_date, credit_card, insurance_num, marital_status, job, age, photo) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+        val = (id,name,ssn,sex,email,userName,password,address, birthDate, creditCard, insuranceNumber, maritalStatus, job, age, pic_path)
         mycursor.execute(sql, val)
         mydb.commit()
-        return redirect(url_for('homePage'))
+        return redirect(url_for('index'))
     else:
         print('get')
         return render_template('addpatient.html')
@@ -233,7 +237,7 @@ def contact():
 
 # ------------------------------------------------------------------------Home Page/ Profile---------------------------------------------------------
 
-@app.route('/homePage/profile')
+@app.route('/index/profile')
 def profile():
     if 'loggedIn' in session:
         cursor = mydb.cursor(buffered=True)
@@ -241,7 +245,7 @@ def profile():
         result = cursor.fetchall()
         
         return render_template('profile.html', data = result)
-    return redirect(url_for('homePage'))
+    return redirect(url_for('index'))
 
 # ------------------------------------------------------------------------Admin Veiw Doctor---------------------------------------------------------
 
