@@ -3,14 +3,14 @@ from datetime import datetime
 from genericpath import exists
 from unittest import result
 from flask import Flask, redirect, render_template,request,session,url_for
-# from pymysql import NULL
-# from sqlalchemy import false
-# from flask_mysqldb import MySQL
+from pymysql import NULL
+from sqlalchemy import false
+from flask_mysqldb import MySQL
 import mysql.connector
 import re
 import os
 import secrets
-# import sqlalchemy
+import sqlalchemy
 
 app = Flask(__name__)
 app.secret_key = "very secret key"
@@ -23,17 +23,17 @@ mydb = mysql.connector.connect(
 mycursor = mydb.cursor()
 
 @app.route('/')
-def base():
-    print('')
-    return render_template('startPage.html')
-
-@app.route('/homePage')
-def homePage():
-    return render_template('homePage.html')
+@app.route('/home')
+def index():
+    return render_template("index.html")
 
 @app.route('/preSignUp')
 def preSignUp():
     return render_template('preSignUp.html')
+# ------------------------------------------------------------------------Login---------------------------------------------------------------------
+@app.route('/myTips')
+def myTips():
+    return render_template('myTips.html')
 
 @app.route('/profileh')
 def profileh():
