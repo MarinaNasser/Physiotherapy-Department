@@ -16,8 +16,8 @@ app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="magdynasr",
-    database="sherif"
+    passwd="Ahmed9112",
+    database="hospital"
 )
 mycursor = mydb.cursor()
 
@@ -126,7 +126,7 @@ def adddoctor():
         elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
             return render_template('adddoctor.html', emailExisits = False , emailInvalid=True )        
         else:    
-            sql = """INSERT INTO doctor (name,ssn,sex,email,password,address,birth_date,degree,specialization,salary) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+            sql = """INSERT INTO doctorPreRequest (name,ssn,sex,email,password,address,birth_date,degree,specialization,salary) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
             val = (name,ssn,sex,email,password,address,birth_date,degree,Specialization,salary)
             mycursor.execute(sql,val)
             mydb.commit()
@@ -163,18 +163,17 @@ def adddevice():
             device_model = request.form['device_model']
             technician_id = request.form['technician_id']
             count = request.form['count']
-            description = request.form['description']
-        if request.files:
+            description = request.form['description']            
             photo = request.files['photo']
             pic_path = save_picture(photo)
-            return redirect(request.url)
 
-        sql = """INSERT INTO device (device_num,device_name,device_model,technician_id,photo,count,description) VALUES (%s,%s,%s,%s,%s,%s,%s)"""
-        val = (device_number,device_name,device_model,technician_id,pic_path,count,description)
-        mycursor.execute(sql,val)
-        mydb.commit()
-        return redirect(url_for('homePage'))
-    return render_template('adddevice.html')
+            sql = """INSERT INTO device (device_num,device_name,device_model,technician_id,photo,count,description) VALUES (%s,%s,%s,%s,%s,%s,%s)"""
+            val = (device_number,device_name,device_model,technician_id,pic_path,count,description)
+            mycursor.execute(sql,val)
+            mydb.commit()
+            return redirect(url_for('homePage'))
+    else:        
+        return render_template('adddevice.html')
         
 # ------------------------------------------------------------------------Doctors-------------------------------------------------------------------        
 
@@ -239,9 +238,23 @@ def profile():
 
 # ------------------------------------------------------------------------Admin Veiw Doctor---------------------------------------------------------
 
-@app.route('/adminViewDoctor')
+@app.route('/adminViewDoctor', methods = ['POST','GET'])
 def adminViewDoctor():
-    sql = "SELECT * FROM DOCTOR"
+    if request.method == 'POST':
+        ssn = request.form['ssn']
+        Specialization= request.form['specialization']
+        cursor = mydb.cursor(buffered=True)
+        cursor.execute('SELECT * FROM doctorPreRequest WHERE ssn = %s', (ssn,))
+        values = cursor.fetchall()
+
+        sql = """INSERT INTO test2 (ssn) VALUES (%s,%s)"""
+        val = (ssn,Specialization)
+        cursor.execute(sql,val)
+        return redirect(url_for('adminViewDoctor'))
+
+
+    
+    sql = "SELECT * FROM doctorPreRequest"
     mycursor.execute(sql)
     result = mycursor.fetchall()
     return render_template('adminViewDoctor.html',result=result)        
