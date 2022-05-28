@@ -1,0 +1,24 @@
+{%extends 'addAppointment.html'%}
+
+{%block body%}
+<table class="table or container">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">name</th>
+        <th scope="col">start time</th>
+        <th scope="col">end time</th>
+        <th scope="col">date</th>
+    </tr>
+    </thead>
+    <tbody>
+      {% for r in data %}
+        <tr>
+          {% for c in r %}
+            <td>{{c}}</td>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </tbody>
+</table>
+{%endblock%}
