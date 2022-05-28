@@ -17,8 +17,8 @@ app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="magdynasr",
-    database="sherif"
+    passwd="Ahmed9112",
+    database="hospital"
 )
 mycursor = mydb.cursor()
 
@@ -101,6 +101,7 @@ def logout():
 
 @app.route('/adddoctor',methods = ['POST','GET'])
 def adddoctor():
+
     if request.method == 'POST':
 
         #requesting data form
@@ -114,8 +115,6 @@ def adddoctor():
         degree = request.form['degree']
         Specialization= request.form['specialization']
         salary = request.form['salary']
-        photo = request.files['photo']
-        pic_path = save_picture(photo)
 
         #setting a buffered cursor => to accept one value in the input
         emailCursor =mydb.cursor(buffered=True)
@@ -136,8 +135,8 @@ def adddoctor():
         elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
             return render_template('adddoctor.html', emailExisits = False , emailInvalid=True )        
         else:    
-            sql = """INSERT INTO doctor (name,ssn,sex,email,password,address,birth_date,degree,specialization,salary,photo) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
-            val = (name,ssn,sex,email,password,address,birth_date,degree,Specialization,salary,pic_path)
+            sql = """INSERT INTO doctorPreRequest (name,ssn,sex,email,password,address,birth_date,degree,specialization,salary) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+            val = (name,ssn,sex,email,password,address,birth_date,degree,Specialization,salary)
             mycursor.execute(sql,val)
             mydb.commit()
             return redirect(url_for('index'))
@@ -249,9 +248,63 @@ def profile():
 
 # ------------------------------------------------------------------------Admin Veiw Doctor---------------------------------------------------------
 
-@app.route('/adminViewDoctor')
+@app.route('/adminViewDoctor', methods = ['POST','GET'])
 def adminViewDoctor():
-    sql = "SELECT * FROM DOCTOR"
+    if request.method == 'POST'and "ssn" in request.form:
+        name = request.form['name1']
+        ssn=request.form['ssn']
+        sex = request.form['sex']
+        email = request.form['email']
+        password = request.form['password']
+        address = request.form['address']
+        birth_date = request.form['birth_date']
+        degree = request.form['degree']
+        Specialization= request.form['specialization']
+        salary = request.form['salary']
+
+        sql = """INSERT INTO doctor (name,ssn,sex,email,password,address,birth_date,degree,specialization,salary) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+        val = (name,ssn,sex,email,password,address,birth_date,degree,Specialization,salary)
+        mycursor.execute(sql,val)
+        mydb.commit()
+
+
+
+        cursor = mydb.cursor(buffered=True)
+        cursor.execute("""DELETE FROM doctorPreRequest WHERE ssn = %s """,(ssn,))
+        mydb.commit()  
+        return redirect(url_for('adminViewDoctor'))
+
+    if request.method == 'POST' and "ssnref" in request.form:
+
+        nameref = request.form['nameref']
+        ssnref=request.form['ssnref']
+        
+        # sql = """INSERT INTO test (name,ssn) values (%s,%s)"""
+        # val = (nameref,ssnref)
+        # cursor = mydb.cursor(buffered=True)
+        # cursor.execute(sql,val)
+        # mydb.commit()
+
+
+        # sex = request.form['sex']
+        # email = request.form['email']
+        # password = request.form['password']
+        # address = request.form['address']
+        # birth_date = request.form['birth_date']
+        # degree = request.form['degree']
+        # Specialization= request.form['specialization']
+        # salary = request.form['salary']
+
+        cursor = mydb.cursor(buffered=True)
+        cursor.execute(""" DELETE FROM doctorPreRequest WHERE ssn = %s """,(ssnref,))
+        mydb.commit()
+        return redirect(url_for('adminViewDoctor'))
+
+
+    else:
+        print('get')    
+          
+    sql = "SELECT * FROM doctorPreRequest"
     mycursor.execute(sql)
     result = mycursor.fetchall()
     return render_template('adminViewDoctor.html',result=result)        
