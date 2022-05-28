@@ -1,4 +1,5 @@
 import email
+from datetime import datetime
 from genericpath import exists
 from unittest import result
 from flask import Flask, redirect, render_template,request,session,url_for
@@ -9,7 +10,7 @@ import mysql.connector
 import re
 import os
 import secrets
-import sqlalchemy
+# import sqlalchemy
 
 app = Flask(__name__)
 app.secret_key = "very secret key"
@@ -244,6 +245,41 @@ def adminViewDoctor():
     mycursor.execute(sql)
     result = mycursor.fetchall()
     return render_template('adminViewDoctor.html',result=result)        
+
+# ------------------------------------------------------------------------book now----------------------------------------------------------------
+@app.route('/addAppointment',methods=['GET','POST'])
+def addAppointment():
+    print(session['user_doctor'])
+    sql = "SELECT * FROM appointment"
+    mycursor.execute(sql)
+    result = mycursor.fetchall()
+    
+    if request.method == 'POST':
+        #requesting data form
+        startT = request.form['startT']
+        endT  = request.form['endT']
+        date = request.form['date']
+        
+        # now = datetime.now()
+        # formatted_date = now.strftime('%Y-%m-%d %H:%M:%S')
+        # # Assuming you have a cursor named cursor you want to execute this query on:
+        # mycursor.execute('insert into table(id, date_created) values(%s, %s)', (id, formatted_date))
+        
+        sql = """INSERT INTO appointment (startT, endT, dt,doctorEmail) VALUES (%s, %s, %s,%s)"""
+        val = (startT,endT,date,session['user_doctor'])
+        mycursor.execute(sql, val)
+        mydb.commit()
+        return render_template('addAppointment.html', added =True)
+        
+    else:
+        return render_template('addAppointment.html',added = False)
+ 
+@app.route('/viewAppointments')   
+def viewAppointments():
+    sql = "SELECT appNo,name,startT,endT,dt FROM appointment join doctor on doctorEmail = email"
+    mycursor.execute(sql)
+    result = mycursor.fetchall()
+    return render_template('viewAppointments.html', data = result)
 
 if __name__ == '__main__':
     app.run(debug = True)    
