@@ -17,8 +17,8 @@ app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="magdynasr",
-    database="sherif"
+    passwd="sherif2001",
+    database="website"
 )
 mycursor = mydb.cursor()
 
@@ -47,7 +47,7 @@ def profileh():
         cursor.execute('SELECT * FROM doctor WHERE email = %s', (session['user_doctor'],))
         result = cursor.fetchall()
     else:
-        return redirect(url_for('index'))
+        return render_template('profileh.html')
 
     return render_template('profileh.html',data = result)
 
