@@ -17,8 +17,8 @@ app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="magdynasr",
-    database="sherif"
+    passwd="sherif2001",
+    database="a"
 )
 mycursor = mydb.cursor()
 
@@ -228,10 +228,17 @@ def addpatient():
         photo = request.files['photo']
         pic_path = save_picture(photo)
 
-        sql = """INSERT INTO Patient ( name, ssn, sex, email, username, password, address, birth_date, credit_card, insurance_num, marital_status, job, photo) VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+        sql = """INSERT INTO Patient (name, ssn, sex, email, username, password, address, birth_date, credit_card, insurance_num, marital_status, job, photo) VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
         val = (name,ssn,sex,email,userName,password,address, birthDate, creditCard, insuranceNumber, maritalStatus, job, pic_path)
         mycursor.execute(sql, val)
         mydb.commit()
+
+        sql1 = """INSERT INTO Patient (email, password, kind) VALUES (%s, %s, %s)"""
+        val1 = (email,password,'patient')
+        mycursor.execute(sql1, val1)
+        mydb.commit()
+
+
         return redirect(url_for('index'))
     else:
         print('get')
