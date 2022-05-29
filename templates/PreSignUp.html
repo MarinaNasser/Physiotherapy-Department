@@ -2,29 +2,36 @@
 <!-- Coding By CodingNepal - youtube.com/codingnepal -->
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>Login</title>
-    <link rel="stylesheet" href=" {{url_for('static',filename='css/login.css')}}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    <link
+      rel="stylesheet"
+      href=" {{url_for('static',filename='css/login.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
     <div class="center">
-        <div>
-            <h1>Sign up as a..</h1>
-        </div>
-        <span></span>
-        <form action="/addpatient">
-            <button class="preSignup">Patient</button>
-        </form>
-        <form action="/adddoctor" >
-            <button class="preSignup">Doctor</button>
-        </form>
-        <div class="signup_link">
-            Have an Account? <a href="{{url_for('login')}}">log In</a>
-            <br>
-            Back To Home? <a href="{{url_for('index')}}">Home</a>
-          </div>
-  </div>
+      <div>
+        <h1>Sign up as a..</h1>
+      </div>
+      <span></span>
+      <form action="/addpatient">
+        <button class="preSignup">Patient</button>
+      </form>
+      <form action="/adddoctor">
+        <button class="preSignup">Doctor</button>
+      </form>
+      <div class="signup_link">
+        Have an Account? <a href="{{url_for('login')}}">log In</a>
+        <br />
+        Back To Home? <a href="{{url_for('index')}}">Home</a>
+      </div>
+    </div>
   </body>
 </html>
