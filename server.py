@@ -1,4 +1,5 @@
 import email
+from datetime import datetime
 from genericpath import exists
 from unittest import result
 from flask import Flask, redirect, render_template,request,session,url_for
@@ -22,17 +23,25 @@ mydb = mysql.connector.connect(
 mycursor = mydb.cursor()
 
 @app.route('/')
-def base():
-    print('')
-    return render_template('startPage.html')
-
-@app.route('/homePage')
-def homePage():
-    return render_template('homePage.html')
+@app.route('/home')
+def index():
+    return render_template("index.html")
 
 @app.route('/preSignUp')
 def preSignUp():
     return render_template('preSignUp.html')
+# ------------------------------------------------------------------------Login---------------------------------------------------------------------
+@app.route('/myTips')
+def myTips():
+    return render_template('myTips.html')
+
+@app.route('/profileh')
+def profileh():
+    return render_template('profileh.html')
+
+@app.route('/moreInfo')
+def moreInfo():
+    return render_template('moreInfo.html')
 
 # ------------------------------------------------------------------------Login---------------------------------------------------------------------
 
@@ -163,10 +172,10 @@ def adddevice():
             device_model = request.form['device_model']
             technician_id = request.form['technician_id']
             count = request.form['count']
-            description = request.form['description']            
+            description = request.form['description']
             photo = request.files['photo']
             pic_path = save_picture(photo)
-
+            
             sql = """INSERT INTO device (device_num,device_name,device_model,technician_id,photo,count,description) VALUES (%s,%s,%s,%s,%s,%s,%s)"""
             val = (device_number,device_name,device_model,technician_id,pic_path,count,description)
             mycursor.execute(sql,val)
@@ -300,5 +309,50 @@ def adminViewDoctor():
     result = mycursor.fetchall()
     return render_template('adminViewDoctor.html',result=result)        
 
+# ------------------------------------------------------------------------add/view appointment----------------------------------------------------------------
+@app.route('/addAppointment',methods=['GET','POST'])
+def addAppointment():
+    print(session['user_doctor'])
+    sql = "SELECT * FROM appointment"
+    mycursor.execute(sql)
+    result = mycursor.fetchall()
+    
+    if request.method == 'POST':
+        #requesting data form
+        startT = request.form['startT']
+        endT  = request.form['endT']
+        date = request.form['date']
+        
+        # now = datetime.now()
+        # formatted_date = now.strftime('%Y-%m-%d %H:%M:%S')
+        # # Assuming you have a cursor named cursor you want to execute this query on:
+        # mycursor.execute('insert into table(id, date_created) values(%s, %s)', (id, formatted_date))
+        
+        sql = """INSERT INTO appointment (startT, endT, dt,doctorEmail) VALUES (%s, %s, %s,%s)"""
+        val = (startT,endT,date,session['user_doctor'])
+        mycursor.execute(sql, val)
+        mydb.commit()
+        return render_template('addAppointment.html', added =True)
+        
+    else:
+        return render_template('addAppointment.html',added = False)
+
+@app.route('/viewAppointments')   
+def viewAppointments():
+    sql = "SELECT appNo,name,startT,endT,dt FROM appointment join doctor on doctorEmail = email"
+    mycursor.execute(sql)
+    result = mycursor.fetchall()
+    return render_template('viewAppointments.html', data = result)
+
+# ------------------------------------------------------------------------book now----------------------------------------------------------------
+@app.route('/bookNow')
+def bookNow():
+    sql = "SELECT appNo,name,startT,endT,dt FROM appointment join doctor on doctorEmail = email"
+    mycursor.execute(sql)
+    result = mycursor.fetchall()
+    
+    return render_template('bookNow.html',data = result)
+
+
 if __name__ == '__main__':
-    app.run(debug = True)    
+    app.run(debug = True)
