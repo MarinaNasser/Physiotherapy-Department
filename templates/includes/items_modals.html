@@ -98,10 +98,7 @@
   </div>
 </div>
 
-<!-- ----------------------------------------------------------------------------------------------------------------------------------------------- -->
-
 <!-- Purchase Confirm -->
-
 <div class="modal fade" id="Modal-refuse-{{item.0}}"
      tabindex="-1"
      aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -119,25 +116,72 @@
       <div class="modal-body">
           Are you sure you want to refuse Dr.{{ item.1 }} ?
           with
-          <form action="/adminViewDoctor" method="post">
+          <form action="/adminViewDoctor" method="get">
             <!-- name -->
-          <div class="form-group">
+            <div class="form-group">
               <label for="Name" class="form-label">Name</label>
-              <input type="text" class="form-control" id="nameref" name="nameref" value="{{item.1}}">
+              <input type="text" class="form-control" id="Name" name="name1" value="{{item.1}}" readonly>
           </div>
   
           <!-- ssn -->
           <div class="form-group">
               <label for="ssn">SSN</label>
-              <input type="int" class="form-control" id="ssnref" name="ssnref" value="{{ item.2 }}" >
+              <input type="int" class="form-control" id="ssn" name="ssn" value="{{ item.2 }}" readonly>
           </div>
-
-          <button type="submit" class="btn btn-primary">refuse</button>
-
+  
+          <!-- sex -->
+          <div>
+              <label for="sex">Sex</label>
+              <input type="text" class="form-control" id="sex" name="sex" value="{{item.3}}" readonly>
+  
+          </select>
+          </div>
+          <!-- email -->
+          <div class="form-group">
+              <label for="email">Email</label>
+              <input type="text" class="form-control" id="email" name="email" value="{{item.4}}" readonly>
+          </div>
+  
+          <!-- password -->
+          <div class="form-group">
+              <input type="hidden" class="form-control" id="password" name="password" value="{{item.5}}" readonly>
+          </div>
+  
+          <!-- address -->
+          <div class="form-group">
+              <label for="address">Address</label>
+              <input type="text" class="form-control" id="address" name="address" value="{{item.6}}" readonly>
+          </div>
+  
+          <!-- birth date -->
+          <div class="form-group">
+              <label for="birth_date">Birth Date</label>
+              <input type="date" class="form-control" id="birth_date" name="birth_date" value="{{item.7}}" readonly>
+          </div>
+  
+          <!-- degree -->
+          <div class="form-group">
+              <label for="Degree">Degree</label>
+              <input type="text" class="form-control" id="Degree" name="degree" value="{{item.8}}" readonly>
+          </div>
+  
+          <!-- specialization -->
+          <div class="form-group">
+              <label for="specialization">Specialization</label>
+              <input type="int" inputmode="numeric" class="form-control" id="specialization" name="specialization" value="{{ item.9 }}" readonly>
+          </div>
+  
+          <!-- salary -->
+          <div class="form-group">
+              <label for="Salary">Salary</label>
+              <input type="int"  id="Salary" class="form-control" name="salary"  value="{{item.10}}">
+          </div>
+  
         </form>      
       </div>
       <div class="modal-footer">
- 
+        <button type="button" class="btn btn-secondary"
+        data-dismiss="modal">refuse        
 </button>
         <button type="button" class="btn btn-secondary"
                 data-dismiss="modal">Close
