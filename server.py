@@ -17,8 +17,8 @@ app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="Ahmed9112",
-    database="hospital"
+    passwd="magdynasr",
+    database="sherif"
 )
 mycursor = mydb.cursor()
 
@@ -30,14 +30,26 @@ def index():
 @app.route('/preSignUp')
 def preSignUp():
     return render_template('preSignUp.html')
-# ------------------------------------------------------------------------Login---------------------------------------------------------------------
+
 @app.route('/myTips')
 def myTips():
     return render_template('myTips.html')
 
+# ------------------------------------------------------------------------Profile and more info---------------------------------------------------------------------
 @app.route('/profileh')
 def profileh():
-    return render_template('profileh.html')
+    if 'loggedIn' in session and 'user_patient' in session :
+        cursor = mydb.cursor(buffered=True)
+        cursor.execute('SELECT * FROM patient WHERE email = %s', (session['user_patient'],))
+        result = cursor.fetchall()
+    elif 'loggedIn' in session and 'user_doctor' in session :
+        cursor = mydb.cursor(buffered=True)
+        cursor.execute('SELECT * FROM doctor WHERE email = %s', (session['user_doctor'],))
+        result = cursor.fetchall()
+    else:
+        return redirect(url_for('index'))
+
+    return render_template('profileh.html',data = result)
 
 @app.route('/moreInfo')
 def moreInfo():
@@ -115,6 +127,8 @@ def adddoctor():
         degree = request.form['degree']
         Specialization= request.form['specialization']
         salary = request.form['salary']
+        photo = request.files['photo']
+        pic_path = save_picture(photo)
 
         #setting a buffered cursor => to accept one value in the input
         emailCursor =mydb.cursor(buffered=True)
@@ -135,8 +149,8 @@ def adddoctor():
         elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
             return render_template('adddoctor.html', emailExisits = False , emailInvalid=True )        
         else:    
-            sql = """INSERT INTO doctorPreRequest (name,ssn,sex,email,password,address,birth_date,degree,specialization,salary) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
-            val = (name,ssn,sex,email,password,address,birth_date,degree,Specialization,salary)
+            sql = """INSERT INTO doctorPreRequest (name,ssn,sex,email,password,address,birth_date,degree,specialization,salary, photo) VALUES (%s, %s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+            val = (name,ssn,sex,email,password,address,birth_date,degree,Specialization,salary, pic_path)
             mycursor.execute(sql,val)
             mydb.commit()
             return redirect(url_for('index'))
@@ -158,7 +172,9 @@ def save_picture(form_picture):
     fname = secrets.token_hex(16) #new name
     _, f_ext = os.path.splitext(form_picture.filename) #get rid of old name
     picture_fn = fname + f_ext #combine extention "png for example" with new name
-    picture_path = os.path.join(os.path.dirname(__file__), 'static/imgs/uploads', picture_fn) #combine path with name
+    picture_path = os.path.join( 'static/imgs/uploads', picture_fn) #combine path with name
+    picture_path = picture_path.replace('\\','/')
+    # picture_path = picture_path.removesuffix('static/')
     form_picture.save(picture_path)
     return picture_path
 
@@ -303,7 +319,7 @@ def adminViewDoctor():
 
     else:
         print('get')    
-          
+        
     sql = "SELECT * FROM doctorPreRequest"
     mycursor.execute(sql)
     result = mycursor.fetchall()
