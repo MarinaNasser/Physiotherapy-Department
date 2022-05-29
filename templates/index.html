@@ -95,7 +95,7 @@
               <a class="nav-link" href="/">Book Now</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">My Profile</a>
+              <a class="nav-link" href="{{url_for('profileh')}}">My Profile</a>
             </li>
             <li class="nav-item dropdown">
               <a
@@ -148,7 +148,6 @@
     <!-- end of navbar -->
     <!-- end of navigation -->
 
-    {%block main%}
     <!-- Home -->
     <section class="home py-5 d-flex align-items-center" id="header">
       <div class="container text-light py-5" data-aos="fade-right">
@@ -735,7 +734,6 @@
     </section>
     <!-- end of location -->
 
-    {%endblock%}
     <!-- Footer -->
     <section class="footer text-light">
       <div class="container">
