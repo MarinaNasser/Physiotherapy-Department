@@ -4,21 +4,23 @@ from genericpath import exists
 from unittest import result
 from flask import Flask, redirect, render_template,request,session,url_for
 from pymysql import NULL
-from sqlalchemy import false
 from flask_mysqldb import MySQL
+# from pymysql import NULL
+# from sqlalchemy import false
+# from flask_mysqldb import MySQL
 import mysql.connector
 import re
 import os
 import secrets
-import sqlalchemy
+# import sqlalchemy
 
 app = Flask(__name__)
 app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="85426Mm854267890",
-    database="hospital"
+    passwd="A_0l1a2a3",
+    database="hosiptal"
 )
 mycursor = mydb.cursor()
 
