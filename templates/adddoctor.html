@@ -22,7 +22,7 @@
         <h1>doctor Register</h1>
     </head>
 
-        <form action="http://localhost:5000/adddoctor" method="POST">
+        <form action="http://localhost:5000/adddoctor" method="POST" enctype="multipart/form-data">
 
             <!-- name -->
             <div class="form-group">
@@ -95,5 +95,16 @@
                 <label for="Salary">Salary</label>
                 <input type="int" class="form-control" min="0"  placeholder="ex: 10" required id="Salary" name="salary">
             </div>
+
+            <!-- file -->
+            <div class="form-group">
+                <label for="photo">Select Image</label>
+                <div class="custom">
+                    <input type="file" name="photo" id="photo" placeholder="Photo" class="custom-file-input" >
+                    <label class = "custom-file-input" for="photo">Select image</label>
+                </div>
+            </div>
+
+            <!-- button -->
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
