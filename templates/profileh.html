@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang= "en-GB">
+<head>
+<title> Jordan's Profile </title>
+<link rel="stylesheet" href="{{url_for('static',filename='css/profile.css')}}"/>
+<meta charset="UTF-8">
+</head>
+
+<body>
+  <div class="main-nav">
+      <ul class="nav">
+        <li class="name">J-DON</li>
+        <li><a href="{{url_for('profileh')}}">Profile</a></li>
+        <li><a href="{{url_for('moreInfo')}}">More Info</a></li>
+      </ul>
+  </div>
+
+  <header>
+    <img src=" {{url_for('static',filename='imgs/uploads/11d424851dc2deaccef3b5a5991eb900.png')}}"  alt="Jordans Avatar" class="profile-image">
+    <h1 class="tag name">Greetings, I’m Jordan.</h1>
+    <p class="tag location">Welcome to my domain!</p>
+  </header>
+
+  <main class="flex">
+    <div class="card">
+      <div class="container">
+        <div class="main">
+          <div class="topbar">
+            <a href =""> logout </a>
+            <a href="">Support</a>
+            <a href="">Work</a>
+            <a href="">Home</a>
+          </div>
+          <div class="row">
+            <div class=""col-md-4 mt-1>
+              <div class="card text-center sidebar">
+                <div class="card-body">
+                  <img src="img.jpg" class="rounded-circle" width="150">
+                  <div class="mt-3">
+                    <h3>Burk Macklin</h3>
+                    <a href="">Home</a>
+                    <a href="">Work</a>
+                    <a href="">Support</a>
+                    <a href="">Setting</a>
+                    <a href="">Signout</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col md-8 mt-1">
+            <div class="card mb-3 content">
+              <h1 class="m-3 pt-3">About</h1>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-3">
+                    <h5>Full Name</h5>
+                  </div>
+                  <div class="col-md9 text-secondary">
+                    Burt Macklin
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-md-3">
+                    <h5>Email</h5>
+                  </div>
+                  <div class="col-m-9 text-secondary">
+                    abc@gmail.com
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-md-3">
+                    <h5>Photo</h5>
+                  </div>
+                  <div class="col-md-9 text-secondary">
+                    0092346745
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Goals</h2>
+      <p> A great developer should always try to improve their craft and increase their knowledge. Hence, I continually try to perfect my process of building websites and add to my skills in:</p>
+      <ul class="skills">
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+      </ul>
+      <p>I’d like to work for a web design firm helping clients create an impressive online presence.</p>
+    </div>
+  </main>
+  <footer>
+    <p> &copy; 2018, Jordan Adedeji</p>
+  </footer>
+
+</body>
+</html>

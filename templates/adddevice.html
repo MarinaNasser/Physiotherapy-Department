@@ -1,0 +1,64 @@
+    
+    <head>
+        <link rel="stylesheet" href="patient.css"> 
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <h1>Adding A New Device</h1>
+    </head>
+
+        <form action="http://localhost:5000/adddevice" method="POST" enctype="multipart/form-data">
+
+            <!-- device_number -->
+            <div class="form-group">
+                <label for="device_num">Device Number</label>
+                <input type="numeric" class="form-control" min="0" placeholder="ex: 10" required id="device_num" name="device_num">
+            </div>
+            
+
+            <!-- device_name -->
+            <div class="form-group">
+                <label for="device_name" class="form-label">Device Name</label>
+                <input type="text" class="form-control" id="device_name" name="device_name" minlength="2" maxlength="255" placeholder="ex: X-Ray Machine" required>
+            </div>
+
+            <!-- device_model -->
+            <div class="form-group">
+                <label for="device_model" class="form-label">Device Model</label>
+                <input type="text" class="form-control" id="device_model" name="device_model" minlength="2" maxlength="255" placeholder="ex: X142001" required>
+            </div>
+
+            <!-- technician_id -->
+            <div>
+                <label for="technician_id">Device ID</label>
+                    <input name="technician_id" type="number" class="form-control" id="technician_id" min="0" max="1000000000" placeholder="ex: 10" required>
+                <script>
+                    document.getElementById('id').validity.rangeOverflow;
+                    document.getElementById('id').validity.rangeUnderflow;
+                </script>
+            </div>
+
+            <!-- file -->
+            <div class="form-group">
+                <label for="photo">Select Image</label>
+                <div class="custom">
+                    <input type="file" name="photo" id="photo" placeholder="Photo" class="custom-file-input" >
+                    <label class = "custom-file-input" for="photo">Select image</label>
+                </div>
+            </div>
+
+            <!-- count -->
+            <div>
+                <label for="count">Count</label>
+                <input name="count" type="numeric" inputmode="numeric" maxlength="12" class="form-control" id="count" >  
+            </div> 
+
+            <!-- description -->
+            <div>
+                <label for="description" class="form-label">Description</label>
+                <textarea name="description" class="form-control" id="description" rows="3" placeholder="Write the Device Specifications" required></textarea>
+            </div>
+
+            <!-- submit -->
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang= "en-GB">
+<head>
+<title> Jordan's Profile </title>
+<link rel="stylesheet" href="{{url_for('static',filename='css/profile.css')}}"/>
+<meta charset="UTF-8">
+</head>
+
+<body>
+  <div class="main-nav">
+      <ul class="nav">
+        <li class="name">J-DON</li>
+        <li><a href="{{url_for('profileh')}}">Profile</a></li>
+        <li><a href="{{url_for('moreInfo')}}">More Info</a></li>
+      </ul>
+  </div>
+
+  <header>
+    <img src=" {{url_for('static',filename='images/code-ninja.jpg')}}"  alt="Ninja Coder" class="profile-image">
+  </header>
+
+  <main class="flex">
+    <div class="card">
+      <h2>Hobbies</h2>
+        <img src=" {{url_for('static',filename='images/code-design.png')}}"  alt="code design" class="code-design">
+        <p> Megzawy bywaddi agmad profile</p>
+        <p> michael agmad front end dev </p>
+    </div>
+  </main>
+  <footer>
+    <p> &copy; 2018, Jordan Adedeji</p>
+  </footer>
+</body>
+</html>

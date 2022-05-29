@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Page Title</title>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   </head>
+
+   <body>
+
+    <form action="{{url_for('addAppointment')}}" method="POST">
+            <!-- start time -->
+            <div class="form-group">
+                <label for="startT" class="form-label">Start time</label>
+                <input type="text" class="form-control" id="startT" name="startT" minlength="2" maxlength="255" placeholder="05:30" required>
+            </div>
+
+            <!-- end time -->
+            <div class="form-group">
+                <label for="endT" class="form-label">End time</label>
+                <input type="text" class="form-control" id="endT" name="endT" minlength="2" maxlength="255" placeholder="05:50" required>
+            </div>
+            
+            <!-- date -->
+            <div class="form-group">
+                <label for="date" class="form-label">Date</label>
+                <input type="text" class="form-control" id="date" name="date" minlength="2" maxlength="255" placeholder="25-10-2022" required>
+            </div>
+
+            
+            
+            
+            
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        
+        {% if added %}
+            you entered an appointment successfully
+        {% endif %}
+
+        
+        <form action="{{url_for('viewAppointments')}}">
+            <button type="submit" class="btn btn-primary">view</button>
+        </form>
+
+        {%block body%}
+        {% endblock %}
+
+   </body>
+</html> 

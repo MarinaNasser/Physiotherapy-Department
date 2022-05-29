@@ -5,8 +5,8 @@ from numpy import number
 mydb = mysql.connector.connect(
   host="localhost",
   user="root",
-  passwd="N#@98wrft45",
-  database="sbe2024"
+  passwd="magdynasr",
+  database="sherif"
 )
 
 mycursor = mydb.cursor()

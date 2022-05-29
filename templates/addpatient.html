@@ -1,4 +1,4 @@
-<form action="http://127.0.0.1:5000/addpatient" method="POST">
+<form action="http://127.0.0.1:5000/addpatient" method="POST" enctype="multipart/form-data">
 
   <head>
     <link rel="stylesheet" href="patient.css"> 
@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <h1> Enter Your Data </h1>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
   </head>
 
   <div class="form-group">
@@ -68,6 +69,9 @@
     <div>
       <label for="password">Password</label>
       <input name="password" type="password" class="form-control" id="password" required>
+      <!-- <span>
+
+      </span> -->
     </div>
 
     <!-- Address -->
@@ -113,96 +117,25 @@
       <input name="job" type="text" class="form-control" id="job" placeholder="ex: Lawer" required>
     </div>
 
-    <!-- Age -->
+    <!-- age -->
     <div>
       <label for="age">Age</label>
       <input name="age" type="number" class="form-control" id="age" placeholder="ex: 34" required>
     </div>
 
-    <!-- All the above are based on the data base columns names  -->
-
-    <!-- All next fields are not in the data base -->
-
-    <!-- First Name -->
-    <!-- <div>
-    <label for="PatientFName">First Name</label>
-    <input name="PatientFName" type="text" class="form-control" id="PatientFName" placeholder="Enter your First name" required>
-    </div>   -->
-
-    <!-- Last Name -->
-    <!-- <div>   
-    <label for="PatientLName">Last Name</label>
-    <input name="PatientLName" type="text" class="form-control" id="PatientLName" placeholder="Enter your Last name" required>
-    </div>    -->
-
-    <!-- Phone Number -->
-    <!-- <div>
-      <label for="Phone number">Phone number</label>
-      <input name="Phone number" type="tel" class="form-control"  id="Phone number"  placeholder="Enter your Phone number" required>
-    <div> -->
-
-    <!-- city -->
-    <!-- <div>
-      <label for="validationCustom03" class="form-label">City</label>
-      <input name="City" type="text" class="form-control" id="validationCustom03" placeholder="e.g. Cairo" required>
-    <div class="invalid-feedback">
-      Please provide a valid city.
-    </div> -->
-
-
-    <!-- Booking a doctor fields are commented as they'll be shifted to another separate page -->
-
-    <!-- Doctor name -->
-    <!-- <div>
-    <label for="doctorName ">Doctor Name</label>
-    <select class="form-select" aria-label="Default select example" required>
-      <option selected> Choose your Doctor </option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
-    </div> -->
-
-    <!-- Appointment info -->
-    <!-- <label for="  ">Appointment</label>
-    <div>
-      <select class="form-group" aria-label="Default select example" required>
-        <option selected>Choose your appointment day</option>
-        <option value="Sunday">Sunday</option>
-        <option value="Monday">Monday</option>
-        <option value="Tuesday">Tuesday</option>
-        <option value="Wednesday">Wednesday</option>
-        <option value="Thursday">Thursday</option>
-        <option value="Friday">Friday</option>
-      </select>
+    <!-- file -->
+    <div class="form-group">
+      <label for="photo">Select Image</label>
+      <div class="custom">
+          <input type="file" name="photo" id="photo" placeholder="Photo" class="custom-file-input" >
+          <label class = "custom-file-input" for="photo">Select image</label>
+      </div>
     </div>
 
-    <div>
-      <select class="form-group" aria-label="Default select example" required>
-        <option selected>Choose your appointment time</option>
-        <option value="1">12 pm</option>
-        <option value="2">2 pm</option>
-        <option value="3">4 pm</option>
-        <option value="4">6 pm</option>
-        <option value="5">8 pm</option>
-        <option value="6">10 pm</option>
-      </select>
-    </div>
-    </div> -->
-
-    <!-- Problems -->
-    <!-- <div>
-    <label for="exampleFormControlTextarea1" class="form-label">Describe What do you feel</label>
-    <textarea name="Problem" class="form-control" id="exampleFormControlTextarea1" rows="3" required></textarea>
-    </div> -->
-
-    <!-- Terms and conditions -->
-    <!-- <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
-      <label class="form-check-label" for="invalidCheck2">Agree to terms and conditions</label>
-    </div> -->
-
-    <!-- submit -->
+    <!-- bitton -->
     <button class="btn btn-primary" type="submit" value="Submit">Submit</button>
   </div>
+
+  
+  
 </form>
