@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
-  <head>
+   <head>
       <title>Page Title</title>
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  </head>
+   </head>
 
-  <body>
+   <body>
     <table class="table or container">
         <thead>
         <tr>
@@ -17,20 +17,24 @@
         </tr>
         </thead>
         <tbody>
-          {% for r in data %}
-            <tr>
-              {% for c in r %}
-                <td>{{c}}</td>
-              {% endfor %}
-            <td>
-                <form action="{{url_for('viewAppointments')}}">
-                    <button type="submit" class="btn btn-primary">book now</button>
-                </form>
-            </td>
-              
-            </tr>
+          {% for i in range(0, data.shape[0] ) %}
+            {% if (now - data[4][i].date()).days < 0%}
+                <tr>
+                    <td>{{data[0][i]}}</td>
+                    <td>{{data[1][i]}}</td>
+                    <td>{{data[2][i]}}</td>
+                    <td>{{data[3][i]}}</td>
+                    <td>{{data[4][i].date()}}</td>
+                    <td>
+                        <form action="{{url_for('viewAppointments')}}">
+                            <button type="submit" class="btn btn-primary">book now</button>
+                        </form>
+                    </td>    
+                </tr>
+            {% endif %}
           {% endfor %}
+        
         </tbody>
     </table>
-  </body>
+   </body>
 </html> 
