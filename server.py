@@ -174,7 +174,6 @@ def save_picture(form_picture):
     picture_fn = fname + f_ext #combine extention "png for example" with new name
     picture_path = os.path.join( 'static/imgs/uploads', picture_fn) #combine path with name
     picture_path = picture_path.replace('\\','/')
-    # picture_path = picture_path.removesuffix('static/')
     form_picture.save(picture_path)
     return picture_path
 
