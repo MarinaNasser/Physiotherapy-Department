@@ -1,141 +1,324 @@
-<form action="http://127.0.0.1:5000/addpatient" method="POST" enctype="multipart/form-data">
+<!DOCTYPE html>
 
+<html>
   <head>
-    <link rel="stylesheet" href="patient.css"> 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <h1> Enter Your Data </h1>
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <meta charset="utf-8" />
+    <title>SignUp - Patient</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="colorlib.com" />
+
+    <!-- MATERIAL DESIGN ICONIC FONT -->
+    <link
+      rel="stylesheet"
+      href="/static/addpatient/fonts/material-design-iconic-font/css/material-design-iconic-font.css"
+    />
+
+    <!-- DATE-PICKER -->
+    <link
+      rel="stylesheet"
+      href="/static/addpatient/vendor/date-picker/css/datepicker.min.css"
+    />
+
+    <!-- STYLE CSS -->
+    <link rel="stylesheet" href="/static/addpatient/css/addpatientstyle.css" />
   </head>
+  <link rel="icon" href="static\assets\img\favicon.png" />
 
-  <div class="form-group">
+  <body>
+    <div class="wrapper">
+      <form action="http://127.0.0.1:5000/addpatient" method="POST" id="wizard">
+        <!-- SECTION 1 -->
+        <h3 style="color: white; font-size: 40px">SignUp - Patient</h3>
 
-    <!-- ID -->
-    <div>
-      <label for="id">ID</label>
-      <input name="id" type="number" class="form-control" id="id" min="0" max="1000000000" placeholder="ex: 10" required>
-      <script>
-        document.getElementById('id').validity.rangeOverflow;
-        document.getElementById('id').validity.rangeUnderflow;
-    </script>
+        <h4></h4>
+        <section>
+          <div class="inner">
+            <!-- <div style="height: 80px"></div> -->
+            <!-- <a href="#" class="avartar">
+                <img src="/static/addpatient/images/avartar.png" alt="" />
+              </a> -->
+            <div class="form-row">
+              <div class="form-holder">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Full Name"
+                  id="name"
+                  minlength="2"
+                  maxlength="255"
+                  required
+                />
+                <script>
+                  document.getElementById("First Name").validity.valid;
+                </script>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-holder">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="SSN"
+                  inputmode="numeric"
+                  maxlength="14"
+                  id="ssn"
+                  required
+                />
+                <i class="zmdi zmdi-account-box-o small"></i>
+                <script>
+                  document.getElementById("ssn").validity.patternMismatch;
+                </script>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-holder">
+                <input
+                  type="email"
+                  class="form-control"
+                  placeholder="Email"
+                  id="email"
+                  required
+                />
+                <i class="zmdi zmdi-email small"></i>
+                <script>
+                  document.getElementById("email").validity.typeMismatch;
+                </script>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-holder">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Username"
+                  id="username"
+                  required
+                />
+                <i class="zmdi zmdi-email small"></i>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-holder">
+                <input
+                  type="password"
+                  class="form-control"
+                  placeholder="Password"
+                  id="password"
+                  required
+                />
+                <i class="zmdi zmdi-lock-open small"></i>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-holder">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Phone"
+                  id="phone"
+                />
+                <i class="zmdi zmdi-smartphone-android"></i>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 2 -->
+        <h4></h4>
+        <section>
+          <div class="inner">
+            <!-- <a href="#" class="avartar">
+                <img src="/static/addpatient/images/avartar.png" alt="" />
+              </a> -->
+            <div class="form-row">
+              <div class="form-holder">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Address"
+                  id="address"
+                  required
+                />
+                <i class="zmdi zmdi-map small"></i>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="select">
+                <div class="form-holder">
+                  <div class="select-control" id="sex">Sex</div>
+                  <i class="zmdi zmdi-caret-down small"></i>
+                </div>
+                <ul class="dropdown">
+                  <li rel="Male">Male</li>
+                  <li rel="Female">Female</li>
+                </ul>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-holder">
+                <input
+                  type="text"
+                  class="form-control datepicker-here"
+                  data-language="en"
+                  data-date-format="dd - mm - yyyy"
+                  id="birthDate"
+                  placeholder="Date of Birth"
+                />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="select">
+                <div class="form-holder">
+                  <div class="select-control" id="maritalStatus">
+                    Marital Status
+                  </div>
+                  <i class="zmdi zmdi-caret-down small"></i>
+                </div>
+                <ul class="dropdown">
+                  <li rel="Married">Married</li>
+                  <li rel="Single">Single</li>
+                  <li rel="Divorced">Divorced</li>
+                  <li rel="Widowed">Widowed</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-holder">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Job"
+                  id="job"
+                />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-holder">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Insurance Number"
+                  id="insuranceNumber"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 3 -->
+        <h4></h4>
+        <section class="section-3">
+          <div class="inner">
+            <!-- <a href="#" class="avartar">
+                <img src="/static/addpatient/images/avartar.png" alt="" />
+              </a> -->
+            <h6>Payment Methods</h6>
+            <div class="payment-block">
+              <div class="payment-item active">
+                <div class="payment-logo">
+                  <img src="/static/addpatient/images/visa.png" alt="" />
+                </div>
+                <div class="payment-content">
+                  <p>Visa ... 8314</p>
+                  <p>Express 06/21</p>
+                </div>
+              </div>
+              <div class="payment-item">
+                <div class="payment-logo">
+                  <img src="/static/addpatient/images/master-card.png" alt="" />
+                </div>
+                <div class="payment-content">
+                  <p>Visa ... 8314</p>
+                  <p>Express 06/21</p>
+                </div>
+              </div>
+              <div class="payment-item">
+                <div class="payment-logo">
+                  <img src="/static/addpatient/images/giropay.png" alt="" />
+                </div>
+                <div class="payment-content">
+                  <p>Visa ... 8314</p>
+                  <p>Express 06/21</p>
+                </div>
+              </div>
+              <div class="payment-item">
+                <div class="payment-logo">
+                  <img src="/static/addpatient/images/bleue.png" alt="" />
+                </div>
+                <div class="payment-content">
+                  <p>Visa ... 8314</p>
+                  <p>Express 06/21</p>
+                </div>
+              </div>
+              <div class="payment-item">
+                <div class="payment-logo">
+                  <img src="/static/addpatient/images/paypal.png" alt="" />
+                </div>
+                <div class="payment-content">
+                  <p>Visa ... 8314</p>
+                  <p>Express 06/21</p>
+                </div>
+              </div>
+              <div class="payment-item">
+                <div class="payment-logo">
+                  <img src="/static/addpatient/images/ideal.png" alt="" />
+                </div>
+                <div class="payment-content">
+                  <p>Visa ... 8314</p>
+                  <p>Express 06/21</p>
+                </div>
+              </div>
+              <div class="payment-item">
+                <div class="payment-logo">
+                  <img src="/static/addpatient/images/mister.png" alt="" />
+                </div>
+                <div class="payment-content">
+                  <p>Visa ... 8314</p>
+                  <p>Express 06/21</p>
+                </div>
+              </div>
+              <div class="payment-item">
+                <div class="payment-logo">
+                  <img src="/static/addpatient/images/maestro.png" alt="" />
+                </div>
+                <div class="payment-content">
+                  <p>Visa ... 8314</p>
+                  <p>Express 06/21</p>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-holder">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Credit Card"
+                  id="creditCard"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+      </form>
     </div>
 
-    <!-- Name -->
-    <div>
-      <label for="name">Name</label>
-      <input name="name" type="text" class="form-control" id="name" minlength="2" maxlength="255" placeholder="ex: Michael Hany Rofael" required>
-      <script>
-        document.getElementById('name').validity.valid;
-      </script>
-    </div>  
+    <script src="/static/addpatient/js/jquery-3.3.1.min.js"></script>
 
-    <!-- SSN -->
-    <div>
-      <label for="ssn">SSN</label>
-      <input name="ssn" inputmode="numeric" maxlength="14" class="form-control" id="ssn" placeholder="xxxxxxxxxxxxxx" required>
-      <script>
-        document.getElementById('ssn').validity.patternMismatch; 
-      </script>
-    </div> 
-    <!--  pattern="[0-9]{14}" -->
+    <!-- JQUERY STEP -->
+    <script src="/static/addpatient/js/jquery.steps.js"></script>
 
-    <!-- Sex -->
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="Male" id="sex" name="sex">
-      <label class="form-check-label" for="sex"> Male </label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="Female" id="sex" name="sex">
-      <label class="form-check-label" for="sex"> Female </label>
-    </div>
+    <!-- DATE-PICKER -->
+    <script src="/static/addpatient/vendor/date-picker/js/datepicker.js"></script>
+    <script src="/static/addpatient/vendor/date-picker/js/datepicker.en.js"></script>
 
-    <!-- Email -->
-    <div>
-      <label for="email">Email Address</label>
-      <input name="email" type="email" class="form-control" id="email" placeholder="ex: name22@gmail.com" required>
-      <script>
-        document.getElementById('email').validity.typeMismatch; 
-      </script>
-    </div>
+    <script src="/static/addpatient/js/main.js"></script>
 
-    <!-- User Name -->
-    <div>
-      <label for="userName">User Name</label>
-      <input name="userName" type="text" class="form-control" id="userName" placeholder="ex: John41" required>
-    </div>
-
-    <!-- Password -->
-    <div>
-      <label for="password">Password</label>
-      <input name="password" type="password" class="form-control" id="password" required>
-      <!-- <span>
-
-      </span> -->
-    </div>
-
-    <!-- Address -->
-    <div>
-      <label for="address" class="form-label">Address</label>
-      <input name="address" type="text" class="form-control" id="address" placeholder="ex: 17 talaat harb street, Cairo" required>
-    </div>
-
-    <!-- Bith Date -->
-    <div>
-      <label for="birthDate">Birth Date</label>
-      <input name="birthDate" type="date" class="form-control" id="birthDate" required>
-    </div> 
-
-    <!-- Cridet Card -->
-    <div>
-      <label for="creditCard">Cridet Card</label>
-      <input name="creditCard" type="tel" inputmode="numeric" maxlength="16" class="form-control" id="creditCard" placeholder="xxxx xxxx xxxx xxxx">
-    </div>
-
-    <!-- Insurance number -->
-    <div>
-      <label for="insuranceNumber">Insurance Number</label>
-      <input name="insuranceNumber" type="tel" inputmode="numeric" maxlength="12" class="form-control" id="insuranceNumber" placeholder="">  
-    </div> 
-    <!-- my fathers' number is 7 digits -->
-
-    <!-- Marital Status -->
-    <div>
-      <label for="maritalStatus">Marital Status</label>
-      <select class="form-select" aria-label="Default select example" id="maritalStatus" name="maritalStatus" required>
-        <option value=""> Please Choose a Value </option>
-        <option value="Married">Married</option>
-        <option value="Single">Single</option>
-        <option value="Divorced">Divorced</option>
-        <option value="Widowed">Widowed</option>
-      </select>
-    </div>
-
-    <!-- job -->
-    <div>
-      <label for="job">Job</label>
-      <input name="job" type="text" class="form-control" id="job" placeholder="ex: Lawer" required>
-    </div>
-
-    <!-- age -->
-    <div>
-      <label for="age">Age</label>
-      <input name="age" type="number" class="form-control" id="age" placeholder="ex: 34" required>
-    </div>
-
-    <!-- file -->
-    <div class="form-group">
-      <label for="photo">Select Image</label>
-      <div class="custom">
-          <input type="file" name="photo" id="photo" placeholder="Photo" class="custom-file-input" >
-          <label class = "custom-file-input" for="photo">Select image</label>
-      </div>
-    </div>
-
-    <!-- bitton -->
-    <button class="btn btn-primary" type="submit" value="Submit">Submit</button>
-  </div>
-
-  
-  
-</form>
+    <!-- Template created and distributed by Colorlib -->
+  </body>
+</html>
