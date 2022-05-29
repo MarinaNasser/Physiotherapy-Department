@@ -4,7 +4,7 @@ from unittest import result
 from flask import Flask, redirect, render_template,request,session,url_for
 from pymysql import NULL
 from sqlalchemy import false
-from flask_mysqldb import MySQL
+# from flask_mysqldb import MySQL
 import mysql.connector
 import re
 
@@ -21,8 +21,8 @@ app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="magdynasr",
-    database="sherif"
+    passwd="N#@98wrft45",
+    database="sbe2024"
 )
 
 mycursor = mydb.cursor()
