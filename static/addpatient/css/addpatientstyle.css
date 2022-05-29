@@ -200,7 +200,7 @@ img {
   font-weight: 600;
 }
 .form-control::-webkit-input-placeholder {
-  color: #333;
+  color: #888;
 }
 .form-control::-moz-placeholder {
   color: #333;

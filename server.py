@@ -209,7 +209,6 @@ def doctors():
 @app.route('/addpatient', methods = ['POST', 'GET'])
 def addpatient():
     if request.method == 'POST': ##check if there is post data
-        id = request.form['id']
         name = request.form['name']
         ssn = request.form['ssn']
         sex = request.form['sex']
@@ -226,8 +225,8 @@ def addpatient():
         photo = request.files['photo']
         pic_path = save_picture(photo)
 
-        sql = """INSERT INTO Patient (id, name, ssn, sex, email, username, password, address, birth_date, credit_card, insurance_num, marital_status, job, age, photo) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
-        val = (id,name,ssn,sex,email,userName,password,address, birthDate, creditCard, insuranceNumber, maritalStatus, job, age, pic_path)
+        sql = """INSERT INTO Patient ( name, ssn, sex, email, username, password, address, birth_date, credit_card, insurance_num, marital_status, job, age, photo) VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+        val = (name,ssn,sex,email,userName,password,address, birthDate, creditCard, insuranceNumber, maritalStatus, job, age, pic_path)
         mycursor.execute(sql, val)
         mydb.commit()
         return redirect(url_for('index'))
@@ -248,6 +247,7 @@ def viewpatient():
 @app.route('/contact_us')
 def contact():
     return render_template('contact_us.html')
+
 
 # ------------------------------------------------------------------------Home Page/ Profile---------------------------------------------------------
 
