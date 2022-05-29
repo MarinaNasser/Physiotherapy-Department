@@ -1,0 +1,406 @@
+@font-face {
+  font-family: "Poppins-Regular";
+  src: url("../fonts/poppins/Poppins-Regular.ttf");
+}
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins-Regular";
+  font-size: 13px;
+  margin: 0;
+  background: url("../images/form-wizard-bg.jpg") right bottom;
+  background-size: contain;
+  background-color: #1c262f;
+  background-repeat: no-repeat;
+}
+
+:focus {
+  outline: none;
+}
+
+textarea {
+  resize: none;
+}
+
+input,
+textarea,
+select,
+button {
+  font-family: "Poppins-Regular";
+  font-size: 13px;
+  color: #333;
+}
+
+select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+select option[value=""][disabled] {
+  display: none;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+textarea {
+  resize: none;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+.wrapper {
+  max-width: 1400px;
+  display: flex;
+  height: 100vh;
+  margin: auto;
+  align-items: center;
+}
+
+.wizard {
+  width: 700px;
+  position: relative;
+  height: 656px;
+  margin-left: 1%;
+}
+
+.steps .current-info,
+.steps .number {
+  display: none;
+}
+
+.avartar {
+  display: block;
+  text-align: center;
+  margin-bottom: 29px;
+}
+
+.steps {
+  height: 2px;
+  position: absolute;
+  background: #000;
+  width: 39.91%;
+  bottom: -52px;
+  left: 50%;
+  margin-bottom: 30px;
+  transform: translateX(-50%);
+}
+.steps ul {
+  height: 4px;
+  position: absolute;
+  background-color: #fff;
+  width: 33.33%;
+  bottom: 0;
+  left: 0;
+  transition: all 0.3s ease;
+}
+.steps:before {
+  position: absolute;
+  left: 0;
+  bottom: 3px;
+  font-size: 13px;
+  font-family: "Poppins-Regular";
+  transition: all 0.3s ease;
+}
+.steps:after {
+  position: absolute;
+  right: 0;
+  bottom: 3px;
+  font-size: 13px;
+  font-family: "Poppins-Regular";
+}
+.steps.step-2 ul {
+  width: 66.67%;
+  transition: all 0.3s ease;
+}
+.steps.step-2:before {
+  left: 63.67%;
+  transition: all 0.3s ease;
+}
+.steps.step-3 ul {
+  width: 100%;
+  transition: all 0.3s ease;
+}
+.steps.step-3:before {
+  left: 100%;
+  transition: all 0.1s ease;
+}
+
+.inner {
+  padding: 50px 58px;
+  border-radius: 40px;
+  height: 656px;
+}
+
+.form-row {
+  margin-bottom: 26px;
+}
+.form-row.form-group {
+  display: flex;
+}
+.form-row.form-group .form-holder {
+  width: 50%;
+  margin-right: 25px;
+}
+.form-row.form-group .form-holder:last-child {
+  margin-right: 0;
+}
+
+.form-holder {
+  position: relative;
+}
+.form-holder i {
+  position: absolute;
+  top: 5px;
+  right: 0;
+  font-size: 17px;
+  margin-right: 20px;
+  color: #333;
+}
+.form-holder i.small {
+  font-size: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.form-control {
+  height: 30px;
+  border: none;
+  font-size: 20px;
+  border-radius: 20px;
+  /* border-bottom: 1px solid #333; */
+  width: 100%;
+  background: white;
+  padding: 20px;
+  font-weight: 600;
+}
+.form-control::-webkit-input-placeholder {
+  color: #333;
+}
+.form-control::-moz-placeholder {
+  color: #333;
+}
+.form-control:-ms-input-placeholder {
+  color: #333;
+}
+.form-control:-moz-placeholder {
+  color: #333;
+}
+
+.select {
+  position: relative;
+}
+.select .select-control {
+  height: 30px;
+  border: none;
+  background: white;
+  padding: 20px;
+  border-radius: 20px;
+  width: 100%;
+  font-weight: 600;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.select .dropdown {
+  display: none;
+  position: absolute;
+  font-size: 20px;
+  top: 100%;
+  width: 100%;
+  border-radius: 20px;
+  background: #eee;
+  z-index: 9;
+  border: 1px solid #000;
+}
+.select .dropdown li {
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+.select .dropdown li:hover {
+  background: #777;
+  color: #fff;
+}
+.select .dropdown.active {
+  display: block;
+}
+
+.section-3 h6 {
+  font-size: 20px;
+  color: #fff;
+  padding-top: 5px;
+  margin-bottom: 14px;
+}
+
+.payment-block {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.payment-block .payment-item {
+  width: 47.76%;
+  color: white;
+}
+
+.payment-item {
+  border: 3px solid #e5e5e5;
+  height: 53px;
+  display: flex;
+  align-items: center;
+  padding-left: 8px;
+  padding-right: 11px;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+.payment-item .payment-logo {
+  width: 34.53%;
+}
+.payment-item .payment-content {
+  width: 65.47%;
+}
+.payment-item.active {
+  border: 1px solid #777;
+}
+
+.actions ul {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  bottom: 50px;
+  right: 58px;
+  left: 58px;
+}
+.actions li a {
+  border: white solid;
+  border-radius: 10px;
+  display: inline-flex;
+  height: 51px;
+  width: 118px;
+  align-items: center;
+  color: #fff;
+  cursor: pointer;
+  padding-left: 33px;
+  font-size: 16px;
+  position: relative;
+}
+.actions li a:before {
+  content: "\f2ee";
+  font-family: Material-Design-Iconic-Font;
+  position: absolute;
+  color: #fff;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 32px;
+}
+.actions li a:hover {
+  background: #ffffff22;
+}
+.actions li:first-child a {
+  padding-left: 50px;
+}
+.actions li:first-child a:before {
+  content: "\f2ea";
+  right: 77px;
+}
+.actions li:first-child a:hover {
+  background: #ffffff22;
+}
+.actions li:last-child a {
+  padding-left: 28px;
+}
+.actions li:last-child a:before {
+  right: 27px;
+}
+.actions li[aria-disabled="true"] a {
+  opacity: 0;
+  transition: all 1s;
+}
+
+@media (max-width: 1500px) {
+  .steps {
+    bottom: -40px;
+  }
+
+  .wizard {
+    margin-bottom: 25px;
+  }
+}
+@media (max-width: 1199px) {
+  .steps {
+    bottom: -52px;
+  }
+
+  .wizard {
+    margin-bottom: 0;
+  }
+}
+@media (max-width: 767px) {
+  body {
+    background: none;
+  }
+
+  .wrapper {
+    height: auto;
+    display: block;
+  }
+
+  .wizard {
+    width: auto;
+    height: auto;
+    margin-left: 0;
+    margin-bottom: 100px;
+  }
+
+  .inner {
+    padding: 30px 20px;
+    height: auto;
+  }
+
+  .actions ul {
+    position: static;
+    margin: 0 20px;
+  }
+
+  .payment-block {
+    display: block;
+  }
+  .payment-block .payment-item {
+    width: 100%;
+  }
+
+  .steps {
+    bottom: -60px;
+    left: 20px;
+    right: 20px;
+    width: auto;
+    transform: translateX(0);
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
