@@ -1,0 +1,178 @@
+body{
+	background-blend-mode: darken;
+	background-color: #252c38;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+  }
+.section {
+	position: relative;
+	height: 100vh;
+}
+
+.section .section-center {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	right: 0;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+#booking {
+	font-family: 'Poppins', sans-serif;
+	background-image: url("/static/assets/img/PhysiotherapyClinicHome.jpg");
+	background-size: cover;
+	background-position: center;
+}
+
+#booking::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+}
+
+.booking-form {
+	background: #252c38;
+	border-radius: 5px;
+
+}
+
+.booking-form>form .row.no-margin {
+	margin-right: 0px;
+	margin-left: 0px;
+}
+
+.booking-form>form .row.no-margin>[class*="col-"] {
+	padding-right: 0px;
+	padding-left: 0px;
+	
+}
+
+.booking-form .form-group {
+	position: relative;
+	padding: 25px;
+	margin-bottom: 0px;
+	
+}
+
+.booking-form .form-group:after {
+	content: '';
+	background: aquamarine;
+	position: absolute;
+	top: 25px;
+	bottom: 0;
+	right: 0px;
+    left: 0px;
+	width: 2px;
+	height: 75px;
+}
+
+.booking-form .form-control {
+	background-color: transparent;
+	border-radius: 0px;
+	border: none;
+	height: 50px;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	font-size: 20px;
+	color: #ffffff;
+	font-weight: 400;
+	padding: 0;
+}
+
+.booking-form .form-control::-webkit-input-placeholder {
+	color:rgba(255, 255, 255);
+}
+
+.booking-form .form-control:-ms-input-placeholder {
+	color:rgba(255, 255, 255);
+}
+
+.booking-form .form-control::placeholder {
+	color:rgba(255, 255, 255);
+}
+
+.booking-form input[type="date"].form-control:invalid {
+	color:rgba(255, 255, 255);
+}
+
+.booking-form select.form-control {
+	background-color:  #252c38;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	color:rgb(255, 255, 255);
+}
+
+.booking-form select.form-control+.select-arrow {
+	position: absolute;
+	right: 0px;
+	bottom: 30px;
+	width: 32px;
+	line-height: 32px;
+	height: 32px;
+	text-align: center;
+	pointer-events: none;
+	color:rgba(255, 255, 255);
+	font-size: 14px;
+}
+
+.booking-form select.form-control+.select-arrow:after {
+	content: '\279C';
+	display: block;
+	-webkit-transform: rotate(90deg);
+	transform: rotate(90deg);
+	color:rgba(255, 255, 255);
+}
+
+.booking-form .form-label {
+	color: #ffffff;
+	display: block;
+	font-weight: 400;
+	height: 25px;
+	line-height: 25px;
+	font-size: 14px;
+}
+
+.booking-form .form-btn {
+	padding: 25px;
+}
+
+
+.booking-form .submit-btn {
+	background: -webkit-gradient(
+		linear,
+		left top,
+		left bottom,
+		from(#0ee951),
+		to(#00dabf)
+	);
+	border: none;
+	text-transform: capitalize;
+	display: block;
+	border-radius: 2px;
+	width: 50%;
+	height: 50px;
+	font-size: 25px;
+	font-weight: 400;
+	color: rgb(255, 255, 255);
+	border-radius: 5px;
+}
+
+#viewbutton{
+	align-items: center;
+}
+.booking-form input[type="text"].form-control {
+	color:rgba(255, 255, 255);
+	border-style:inset;
+	border-width: 1px;
+	border-color: white;
+	border-radius: 5px;
+
+}
+

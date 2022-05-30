@@ -92,10 +92,10 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="/">Book Now</a>
+              <a class="nav-link" href="/home#bookNow">Book Now</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">My Profile</a>
+              <a class="nav-link" href="{{url_for('profileh')}}">My Profile</a>
             </li>
             <li class="nav-item dropdown">
               <a
@@ -149,6 +149,7 @@
     <!-- end of navigation -->
 
     {%block main%}
+
     <!-- Home -->
     <section class="home py-5 d-flex align-items-center" id="header">
       <div class="container text-light py-5" data-aos="fade-right">
@@ -171,7 +172,7 @@
           <p>Lorem ipsum dolor sit amet.</p>
         </div> -->
         <div class="my-3">
-          <a class="btn" href="{{url_for('bookNow')}}">Book Now</a>
+          <a class="btn" href="/home#bookNow">Book Now</a>
         </div>
       </div>
       <!-- end of container -->
@@ -436,7 +437,7 @@
     <!-- end of work -->
 
     <!-- Testimonials -->
-    <div class="slider-1 testimonial text-light d-flex align-items-center">
+    <div class="slider-1 testimonial text-light d-flex align-items-center" id="bookNow">
       <div class="container">
         <div class="row">
           <div class="text-center w-lg-75 m-auto pb-4">
@@ -475,7 +476,7 @@
                           />
                         </div>
                         <div class="ms-3 pt-2">
-                          <h6><a href="{{url_for('index')}}">Visconte</a></h6>
+                          <h6><a href="{{url_for('bookNow')}}">Alaa</a></h6>
                           <p>General Manager - Scouter</p>
                         </div>
                       </div>
@@ -501,7 +502,7 @@
                           />
                         </div>
                         <div class="ms-3 pt-2">
-                          <h6>John Spiker</h6>
+                          <h6><a href="{{url_for('bookNow')}}">Marina</a>r</h6>
                           <p>Team Leader - Vanquish</p>
                         </div>
                       </div>
@@ -527,7 +528,7 @@
                           />
                         </div>
                         <div class="ms-3 pt-2">
-                          <h6>Stella Virtuoso</h6>
+                          <h6><a href="{{url_for('bookNow')}}">Marina</a></h6>
                           <p>Design Chief - Upscale</p>
                         </div>
                       </div>
@@ -553,7 +554,7 @@
                           />
                         </div>
                         <div class="ms-3 pt-2">
-                          <p>Mike tim</p>
+                          <p><a href="{{url_for('bookNow')}}">Alaa</a></p>
                           <p>Investor - TechGroww</p>
                         </div>
                       </div>
@@ -734,7 +735,6 @@
       <!-- end of container -->
     </section>
     <!-- end of location -->
-
     {%endblock%}
     <!-- Footer -->
     <section class="footer text-light">
