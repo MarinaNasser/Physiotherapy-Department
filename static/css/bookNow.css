@@ -8160,10 +8160,11 @@
     color: #000; }
   
   .bg-primary {
-    background: #6807f9 !important; }
+    background: #004085!important; }
   
   .ftco-section {
-    padding: 7em 0; }
+    padding: 7em 0;
+   }
   
   .ftco-no-pt {
     padding-top: 0; }
