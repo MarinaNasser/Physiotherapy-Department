@@ -300,8 +300,6 @@ def adminViewDoctor():
         cursor.execute(""" DELETE FROM doctorPreRequest WHERE ssn = %s """,(ssnref,))
         mydb.commit()
         return redirect(url_for('adminViewDoctor'))
-
-
     else:
         print('get')    
           
@@ -324,13 +322,8 @@ def addAppointment():
         endT  = request.form['endT']
         date = request.form['date']
         
-        # now = datetime.now()
-        # formatted_date = now.strftime('%Y-%m-%d %H:%M:%S')
-        # # Assuming you have a cursor named cursor you want to execute this query on:
-        # mycursor.execute('insert into table(id, date_created) values(%s, %s)', (id, formatted_date))
-        
-        sql = """INSERT INTO appointment (startT, endT, dt,doctorEmail) VALUES (%s, %s, %s,%s)"""
-        val = (startT,endT,date,session['user_doctor'])
+        sql = """INSERT INTO appointment (startT, endT, dt,doctorEmail,booked) VALUES (%s, %s, %s,%s,%s)"""
+        val = (startT,endT,date,session['user_doctor'],0)
         mycursor.execute(sql, val)
         mydb.commit()
         return render_template('addAppointment.html', added =True)
@@ -346,9 +339,9 @@ def viewAppointments():
     return render_template('viewAppointments.html', data = result)
 
 # ------------------------------------------------------------------------book now----------------------------------------------------------------
-@app.route('/bookNow')
+@app.route('/bookNow',methods = ['GET','POST'])
 def bookNow():
-    sql = "SELECT appNo,name,startT,endT,dt FROM appointment join doctor on doctorEmail = email"
+    sql = "SELECT appNo,name,startT,endT,dt,booked FROM appointment join doctor on doctorEmail = email"
     mycursor.execute(sql)
     result = mycursor.fetchall()
     print(result)
@@ -356,8 +349,30 @@ def bookNow():
     list_of_tuples[4] = pd.to_datetime(list_of_tuples[4],format="%d-%m-%Y")
     # print((datetime.now() - list_of_tuples[4][0]).days)
     print(list_of_tuples)
+        
+    if request.method == 'POST':
+        appNo = request.form['appNo']
+        sql = """UPDATE appointment
+        SET patientEmail = %s,
+        booked = %s
+        WHERE appNo = %s"""
+        value = (session['user_patient'],1,appNo)
+        mycursor.execute(sql,value)
+        mydb.commit()
+        
+        sql = "SELECT appNo,name,startT,endT,dt,booked FROM appointment join doctor on doctorEmail = email"
+        mycursor.execute(sql)
+        result = mycursor.fetchall()
+        list_of_tuples = pd.DataFrame(result)
+        list_of_tuples[4] = pd.to_datetime(list_of_tuples[4],format="%d-%m-%Y")
+        
+        return render_template('bookNow.html',data = list_of_tuples,now = datetime.now().date(),booked = True)
+    else:
+        return render_template('bookNow.html',data = list_of_tuples,now = datetime.now().date(),booked = False)
+
+# @app.route('/confirmBooking',methods = ['GET','POST'])
+# def confirmBooking():
     
-    return render_template('bookNow.html',data = list_of_tuples,now = datetime.now().date())
 
 if __name__ == '__main__':
     app.run(debug = True)
