@@ -1,6 +1,5 @@
 import email
 import mysql.connector
-from numpy import number
 
 mydb = mysql.connector.connect(
   host="localhost",
