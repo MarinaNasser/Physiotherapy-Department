@@ -377,8 +377,9 @@ def bookNow():
     # join doctor on doctorEmail = email"
     #mycursor.execute(sql)
     #result = mycursor.fetchall()
-    
-    return render_template('bookNow.html',data = result)
+    return render_template('bookNow.html')
+
+    #return render_template('bookNow.html',data = result)
 
 
 if __name__ == '__main__':
