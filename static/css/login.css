@@ -7,10 +7,9 @@
 }
 body{
   margin: 0;
-  padding: 0;
+  padding:0;
   background: linear-gradient(0deg,#323137, #323137);
   height: 100vh;
-  overflow: hidden;
 }
 .center{
   position: absolute;
@@ -22,6 +21,27 @@ body{
   border-radius: 10px;
   box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
 }
+.centerSignUp{
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
+
+}
+.centerSignUp h1{
+  text-align: center;
+  padding: 20px 0;
+  border-bottom: 1px solid silver;
+}
+.centerSignUp form{
+  padding: 0 40px;
+  box-sizing: border-box;
+}
+
 .center h1{
   text-align: center;
   padding: 20px 0;

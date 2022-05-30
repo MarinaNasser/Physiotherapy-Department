@@ -1,0 +1,157 @@
+{% if emailExisits %}
+<div class="alert alert-warning" role="alert">
+  the email you entered already exisits
+</div>
+{%endif%} {% if emailInvalid %}
+<div class="alert alert-warning" role="alert">
+  the email you entered is invalid
+</div>
+{%endif%} {% if ssnExisits %}
+<div class="alert alert-warning" role="alert">
+  the ssn you entered already exisits
+</div>
+{%endif%}
+
+<head>
+  <meta charset="utf-8" />
+  <title>Login</title>
+  <link
+    rel="stylesheet"
+    href="patient.css"
+  />
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+    crossorigin="anonymous"
+  />
+  <link rel="icon" href="static\assets\img\favicon.png" />
+</head>
+<div class="center">
+  <h1>Doctor Register</h1>
+  <form
+    action="{{ url_for('adddoctor') }}"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    <!-- name -->
+    <div class="form-group">
+      <label for="Name" class="form-label">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="Name"
+        name="name1"
+        minlength="2"
+        maxlength="255"
+        placeholder="ex: Michael Hany Rofael"
+      />
+    </div>
+
+    <!-- ssn -->
+    <div class="form-group">
+      <label for="Department">SSN</label>
+      <input type="int" inputmode="numeric" maxlength="14"
+      placeholder="xxxxxxxxxxxxxx" class="form-control" id="SSN" name="ssn"
+    </div>
+    <!-- sex -->
+    <div>
+      <label for="sex">Sex</label>
+      <select
+        class="form-select"
+        aria-label="Default select example"
+        id="sex"
+        name="sex"
+      >
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+    </div>
+
+    <!-- email -->
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        type="text"
+        class="form-control"
+        id="email"
+        name="email"
+        placeholder="ex: name22@gmail.com"
+      />
+    </div>
+
+    <!-- password -->
+    <div class="form-group">
+      <label for="Password">Password</label>
+      <input type="password" class="form-control" id="Password" name="password" />
+    </div>
+
+    <!-- address -->
+    <div class="form-group">
+      <label for="address">Address</label>
+      <input
+        type="text"
+        class="form-control"
+        id="address"
+        name="address"
+        placeholder="ex: 17 talaat harb street, Cairo"
+      />
+    </div>
+
+    <!-- birth date -->
+    <div class="form-group">
+      <label for="birth_date">Birth Date</label>
+      <input type="date" class="form-control" id="birth_date" name="birth_date" />
+    </div>
+
+    <!-- degree -->
+    <div class="form-group">
+      <label for="Degree">Degree</label>
+      <input type="text" class="form-control" id="Degree" name="degree" />
+    </div>
+
+    <!-- specialization -->
+    <div class="form-group">
+      <label for="Specialization">Specialization</label>
+      <input
+        type="text"
+        class="form-control"
+        id="Specialization"
+        name="specialization"
+      />
+    </div>
+
+    <!-- salary -->
+    <div class="form-group">
+      <label for="Salary">Salary</label>
+      <input
+        type="int"
+        class="form-control"
+        min="0"
+        placeholder="ex: 10"
+        required
+        id="Salary"
+        name="salary"
+      />
+    </div>
+
+    <!-- file -->
+    <div class="form-group">
+      <label for="photo">Select Image</label>
+      <div class="custom">
+        <input
+          type="file"
+          name="photo"
+          id="photo"
+          placeholder="Photo"
+          class="custom-file-input"
+        />
+        <label class="custom-file-input" for="photo">Select image</label>
+      </div>
+    </div>
+
+    <!-- button -->
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
