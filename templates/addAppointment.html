@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+{%extends'index.html'%}
+{%block main%}
   <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -73,6 +73,10 @@
                   <div class="col-md-6">
                     <div class="form-btn">
                       <button class="submit-btn">Add</button>
+                      <br> 
+                    {%block viewbutton%}
+                      <button class="submit-btn" id="viewbutton"> <a id="viewbuttonlink" href="{{url_for('viewAppointments')}}" >View</a></button>
+                    {%endblock%}
                     </div>
                   </div>
                 </div>
@@ -82,15 +86,6 @@
         </div>
       </div>
     </div>
-    {%block viewbutton%}
-  <div class="booking-form">
-    <div class="col-md-6">
-      <div class="form-btn">
-        <button class="submit-btn" id="viewbutton"> <a href="{{url_for('viewAppointments')}}" >View Appointments</a></button>
-      </div>
-    </div>
-  </div>
-    {%endblock%}
     <!-- <form action="{{url_for('addAppointment')}}" method="POST"> -->
             <!-- start time -->
             <!-- <div class="form-group">
@@ -127,4 +122,4 @@
         {% endblock %}
 
    </body>
-</html> 
+   {% endblock %}

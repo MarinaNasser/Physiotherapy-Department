@@ -7,7 +7,9 @@ body{
 .table-bordered thead td, .table-bordered thead th {
     border-bottom-width: 2px;
 }
+
 .table thead th {
+    color: #fff;
     vertical-align: bottom;
     border-bottom: 2px solid #dee2e6;
 }

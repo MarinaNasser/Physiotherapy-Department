@@ -10,15 +10,17 @@ import mysql.connector
 import re
 import os
 import secrets
-import sqlalchemy
+# import sqlalchemy
 
 app = Flask(__name__)
 app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="N#@98wrft45",
-    database="sbe2024"
+    passwd="A_0l1a2a3",
+    database="hosiptal"
+
+)
 mycursor = mydb.cursor()
 
 @app.route('/')
@@ -337,9 +339,9 @@ def adminViewDoctor():
 @app.route('/addAppointment',methods=['GET','POST'])
 def addAppointment():
     # print(session['user_doctor'])
-    sql = "SELECT * FROM appointment"
-    mycursor.execute(sql)
-    result = mycursor.fetchall()
+    #sql = "SELECT * FROM appointment"
+    #mycursor.execute(sql)
+    # result = mycursor.fetchall()
     
     if request.method == 'POST':
         #requesting data form
@@ -371,10 +373,10 @@ def viewAppointments():
 # ------------------------------------------------------------------------book now----------------------------------------------------------------
 @app.route('/bookNow')
 def bookNow():
-    sql = "SELECT appNo,name,startT,endT,dt FROM appointment "
+    #sql = "SELECT appNo,name,startT,endT,dt FROM appointment "
     # join doctor on doctorEmail = email"
-    mycursor.execute(sql)
-    result = mycursor.fetchall()
+    #mycursor.execute(sql)
+    #result = mycursor.fetchall()
     
     return render_template('bookNow.html',data = result)
 
