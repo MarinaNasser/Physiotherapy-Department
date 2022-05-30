@@ -7,33 +7,38 @@ body {
   margin: 0;
   padding: 0;
   text-align: center;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   color: #222;
-  background: #f7f5f0;
+  background: #212d37;
+  background-image: url("/static/addpatient/images/form-wizard-bg2.jpg");
+  background-repeat: no-repeat;
+  background-color: #555;
+  background-blend-mode: darken;
+  background-size: cover;
 }
 /* Link Styles */
-
 a {
   text-decoration: none;
-  color: #9729aa;
+  color: #fff;
 }
+
 a:hover {
-  color: #9729aa;
+  color: #fff;
 }
 
 /* Section Styles */
 
 .main-nav {
   width: 100%;
-  background: black;
-  min-height: 30px;
-  padding: 10px;
+  background: #1c262f;
+  min-height: 20px;
+  padding-top: 10px;
   position: fixed;
   text-align: center;
 }
 .nav {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   font-weight: 700;
   list-style-type: none;
   margin: 0 auto;
@@ -41,23 +46,25 @@ a:hover {
 }
 
 .nav .name {
-    display: block;
-    margin-right: auto;
-    color: white;
+  display: block;
+  margin-right: auto;
+  color: white;
+  font-size: 25px;
 }
 .nav li {
   padding: 5px 10px 10px 10px;
 }
 .nav a {
-  transition: all .5s;
+  transition: all 0.5s;
+  font-size: 15px;
 }
 .nav a:hover {
-  color: white
+  color: white;
 }
 
 header {
   text-align: center;
-  background: url('images/retroland.jpg') no-repeat top center ;
+  background: url("images/retroland.jpg") no-repeat top center;
   background-size: cover;
   overflow: hidden;
   padding-top: 60px;
@@ -66,15 +73,13 @@ header {
   line-height: 1.5;
 }
 header .profile-image {
-  margin-top: 50px;
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
   border-radius: 60%;
-  border: 6px solid #9729aa;
-  transition: all .5s;
+  transition: all 0.5s;
 }
 header .profile-image:hover {
-  transform: scale(1.5) rotate(360deg);
+  transform: rotate(360deg);
 }
 .tag {
   background-color: #efefef;
@@ -85,28 +90,23 @@ header .profile-image:hover {
   margin: 10px auto;
 }
 
-
 .location {
   background-color: #222;
-  color: #9729aa;
 }
 .card {
-  margin: 30px;
-  padding: 20px 40px 40px;
+  margin-top: 30px;
+  padding: 20px 40px;
   max-width: 500px;
-  text-align: left;
+  text-align: center;
+  display: inline-block;
   background: #fff;
   border-bottom: 4px solid #ccc;
   border-radius: 6px;
-  transition: all .5s;
-
-}
-.card:hover {
-  border-color: #ff99ff;
+  transition: all 0.5s;
 }
 
 h2 {
-text-align: center;
+  text-align: center;
 }
 
 ul.skills {
@@ -122,27 +122,29 @@ ul.skills {
   padding: 10px;
   margin: 4px;
 }
- .card {
-position: relative;
+.card {
+  position: relative;
+  width: 350px;
+  z-index: -1;
+  display: flexbox;
 }
 
 .code-design {
-width: 60px;
-position: absolute;
-top: -25px;
-right: -25px;
+  width: 60px;
+  position: absolute;
+  top: -25px;
+  right: -25px;
 }
 
 /* Styles for larger screens */
 @media screen and (min-width: 720px) {
-
   .flex {
-      display: -ms-flexbox;      /* TWEENER - IE 10 */
-      display: flex;
-      max-width: 1200px;
-      -ms-flex-pack: distribute;
-      justify-content: space-around;
-      margin: 0 auto;
+    display: -ms-flexbox; /* TWEENER - IE 10 */
+    display: flex;
+    max-width: 1200px;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    margin: 0 auto;
   }
 
   header {
@@ -153,7 +155,6 @@ right: -25px;
     max-width: 1200px;
     padding: 0 30px;
   }
-
 
   main {
     padding-top: 20px;

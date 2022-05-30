@@ -21,6 +21,7 @@ mydb = mysql.connector.connect(
     user="root",
     passwd="A_0l1a2a3",
     database="hosiptal"
+
 )
 mycursor = mydb.cursor()
 
@@ -29,17 +30,31 @@ mycursor = mydb.cursor()
 def index():
     return render_template("index.html")
 
+# ------------------------------------------------------------------------Pre Sign Up---------------------------------------------------------------------
 @app.route('/preSignUp')
 def preSignUp():
     return render_template('preSignUp.html')
-# ------------------------------------------------------------------------Login---------------------------------------------------------------------
+
+# ------------------------------------------------------------------------My Tips---------------------------------------------------------------------
 @app.route('/myTips')
 def myTips():
     return render_template('myTips.html')
 
+# ------------------------------------------------------------------------Profile and more info---------------------------------------------------------------------
 @app.route('/profileh')
 def profileh():
-    return render_template('profileh.html')
+    if 'loggedIn' in session and 'user_patient' in session :
+        cursor = mydb.cursor(buffered=True)
+        cursor.execute('SELECT * FROM patient WHERE email = %s', (session['user_patient'],))
+        result = cursor.fetchall()
+    elif 'loggedIn' in session and 'user_doctor' in session :
+        cursor = mydb.cursor(buffered=True)
+        cursor.execute('SELECT * FROM doctor WHERE email = %s', (session['user_doctor'],))
+        result = cursor.fetchall()
+    else:
+        return render_template('profileh.html')
+
+    return render_template('profileh.html',data = result)
 
 @app.route('/moreInfo')
 def moreInfo():
@@ -59,15 +74,15 @@ def login():
             if record[2] == 'patient':
                 session['user_patient'] = userEmail
                 session['loggedIn'] = True
-                return redirect(url_for('homePage'))
+                return redirect(url_for('index'))
             elif record[2] == 'doctor':
                 session['user_doctor'] = userEmail
                 session['loggedIn'] = True
-                return redirect(url_for('homePage')) 
+                return redirect(url_for('index')) 
             else:
                 session['user_admin'] = userEmail
                 session['loggedIn'] = True
-                return redirect(url_for('homePage'))      
+                return redirect(url_for('index'))      
         else:
             return render_template('login.html',msg = True)
     else:
@@ -103,6 +118,7 @@ def logout():
 
 @app.route('/adddoctor',methods = ['POST','GET'])
 def adddoctor():
+
     if request.method == 'POST':
 
         #requesting data form
@@ -116,6 +132,8 @@ def adddoctor():
         degree = request.form['degree']
         Specialization= request.form['specialization']
         salary = request.form['salary']
+        photo = request.files['photo']
+        pic_path = save_picture(photo)
 
         #setting a buffered cursor => to accept one value in the input
         emailCursor =mydb.cursor(buffered=True)
@@ -136,15 +154,17 @@ def adddoctor():
         elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
             return render_template('adddoctor.html', emailExisits = False , emailInvalid=True )        
         else:    
-            sql = """INSERT INTO doctor (name,ssn,sex,email,password,address,birth_date,degree,specialization,salary) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
-            val = (name,ssn,sex,email,password,address,birth_date,degree,Specialization,salary)
+            sql = """INSERT INTO doctorPreRequest (name,ssn,sex,email,password,address,birth_date,degree,specialization,salary, photo) VALUES (%s, %s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+            val = (name,ssn,sex,email,password,address,birth_date,degree,Specialization,salary, pic_path)
             mycursor.execute(sql,val)
             mydb.commit()
-            return redirect(url_for('homePage'))
+            return redirect(url_for('index'))
     else:
         print('get')
         return render_template('adddoctor.html')
         mycursor.close()
+
+# ------------------------------------------------------------------------View Doctor---------------------------------------------------------------------
 
 @app.route('/viewdoctor')
 def viewdoctor():
@@ -159,7 +179,8 @@ def save_picture(form_picture):
     fname = secrets.token_hex(16) #new name
     _, f_ext = os.path.splitext(form_picture.filename) #get rid of old name
     picture_fn = fname + f_ext #combine extention "png for example" with new name
-    picture_path = os.path.join(os.path.dirname(__file__), 'static/imgs/uploads', picture_fn) #combine path with name
+    picture_path = os.path.join( 'static/imgs/uploads', picture_fn) #combine path with name
+    picture_path = picture_path.replace('\\','/')
     form_picture.save(picture_path)
     return picture_path
 
@@ -181,7 +202,7 @@ def adddevice():
             val = (device_number,device_name,device_model,technician_id,pic_path,count,description)
             mycursor.execute(sql,val)
             mydb.commit()
-            return redirect(url_for('homePage'))
+            return redirect(url_for('index'))
     return render_template('adddevice.html')
         
 # ------------------------------------------------------------------------Doctors-------------------------------------------------------------------        
@@ -195,7 +216,6 @@ def doctors():
 @app.route('/addpatient', methods = ['POST', 'GET'])
 def addpatient():
     if request.method == 'POST': ##check if there is post data
-        id = request.form['id']
         name = request.form['name']
         ssn = request.form['ssn']
         sex = request.form['sex']
@@ -208,13 +228,21 @@ def addpatient():
         insuranceNumber = request.form['insuranceNumber']
         maritalStatus = request.form['maritalStatus']
         job = request.form['job']
-        age = request.form['age']
+        photo = request.files['photo']
+        pic_path = save_picture(photo)
 
-        sql = """INSERT INTO Patient (id, name, ssn, sex, email, username, password, address, birth_date, credit_card, insurance_num, marital_status, job, age) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
-        val = (id,name,ssn,sex,email,userName,password,address, birthDate, creditCard, insuranceNumber, maritalStatus, job, age)
+        sql = """INSERT INTO Patient (name, ssn, sex, email, username, password, address, birth_date, credit_card, insurance_num, marital_status, job, photo) VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+        val = (name,ssn,sex,email,userName,password,address, birthDate, creditCard, insuranceNumber, maritalStatus, job, pic_path)
         mycursor.execute(sql, val)
         mydb.commit()
-        return redirect(url_for('homePage'))
+
+        sql1 = """INSERT INTO Patient (email, password, kind) VALUES (%s, %s, %s)"""
+        val1 = (email,password,'patient')
+        mycursor.execute(sql1, val1)
+        mydb.commit()
+
+
+        return redirect(url_for('index'))
     else:
         print('get')
         return render_template('addpatient.html')
@@ -233,9 +261,10 @@ def viewpatient():
 def contact():
     return render_template('contact_us.html')
 
+
 # ------------------------------------------------------------------------Home Page/ Profile---------------------------------------------------------
 
-@app.route('/homePage/profile')
+@app.route('/index/profile')
 def profile():
     if 'loggedIn' in session:
         cursor = mydb.cursor(buffered=True)
@@ -243,13 +272,67 @@ def profile():
         result = cursor.fetchall()
         
         return render_template('profile.html', data = result)
-    return redirect(url_for('homePage'))
+    return redirect(url_for('index'))
 
 # ------------------------------------------------------------------------Admin Veiw Doctor---------------------------------------------------------
 
-@app.route('/adminViewDoctor')
+@app.route('/adminViewDoctor', methods = ['POST','GET'])
 def adminViewDoctor():
-    sql = "SELECT * FROM DOCTOR"
+    if request.method == 'POST'and "ssn" in request.form:
+        name = request.form['name1']
+        ssn=request.form['ssn']
+        sex = request.form['sex']
+        email = request.form['email']
+        password = request.form['password']
+        address = request.form['address']
+        birth_date = request.form['birth_date']
+        degree = request.form['degree']
+        Specialization= request.form['specialization']
+        salary = request.form['salary']
+
+        sql = """INSERT INTO doctor (name,ssn,sex,email,password,address,birth_date,degree,specialization,salary) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+        val = (name,ssn,sex,email,password,address,birth_date,degree,Specialization,salary)
+        mycursor.execute(sql,val)
+        mydb.commit()
+
+
+
+        cursor = mydb.cursor(buffered=True)
+        cursor.execute("""DELETE FROM doctorPreRequest WHERE ssn = %s """,(ssn,))
+        mydb.commit()  
+        return redirect(url_for('adminViewDoctor'))
+
+    if request.method == 'POST' and "ssnref" in request.form:
+
+        nameref = request.form['nameref']
+        ssnref=request.form['ssnref']
+        
+        # sql = """INSERT INTO test (name,ssn) values (%s,%s)"""
+        # val = (nameref,ssnref)
+        # cursor = mydb.cursor(buffered=True)
+        # cursor.execute(sql,val)
+        # mydb.commit()
+
+
+        # sex = request.form['sex']
+        # email = request.form['email']
+        # password = request.form['password']
+        # address = request.form['address']
+        # birth_date = request.form['birth_date']
+        # degree = request.form['degree']
+        # Specialization= request.form['specialization']
+        # salary = request.form['salary']
+
+        cursor = mydb.cursor(buffered=True)
+        cursor.execute(""" DELETE FROM doctorPreRequest WHERE ssn = %s """,(ssnref,))
+        mydb.commit()
+        return redirect(url_for('adminViewDoctor'))
+
+
+    else:
+        print('get')    
+        
+    sql = "SELECT * FROM doctorPreRequest"
     mycursor.execute(sql)
     result = mycursor.fetchall()
     return render_template('adminViewDoctor.html',result=result)        

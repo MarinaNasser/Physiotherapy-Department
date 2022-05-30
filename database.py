@@ -1,12 +1,11 @@
 import email
 import mysql.connector
-from numpy import number
 
 mydb = mysql.connector.connect(
   host="localhost",
   user="root",
-  passwd="A_0l1a2a3",
-  database="hosiptal"
+  passwd="magdynasr",
+  database="sherif"
 )
 
 mycursor = mydb.cursor()
