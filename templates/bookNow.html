@@ -1,17 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
+{%extends'index.html'%}
+{%block main%}
   <head>
     <title>Table 03</title>
     <link rel="stylesheet" href="bookNow.css"> 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  
-  <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
-
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
+    <br><br><br>
+    <div id="bookNowIcon" class="testimonial-card p-4">
+      <p></p>
+      <div class="d-flex pt-4">
+        <div>
+          <img
+            class="avatar"
+            src="static\assets\img\testimonial-4.jpg"
+            alt="testimonial"
+          />
+        </div>
+        <div class="ms-3 pt-2">
+          <p>Dr. Magdy Nasr</p>
+          <p>msh batal</p>
+        </div>
+      </div>
+    </div>
+    
   <section class="ftco-section">
     <div class="container">
       <div class="row justify-content-center">
@@ -21,67 +32,71 @@
       </div>
       <div class="row">
         <div class="col-md-12">
-          <h4 class="text-center mb-4">Book Your Appointment</h4>
+          <h4 class="text-center mb-4"><br>Book Your Appointment</h4>
           <div class="table-wrap">
             <table class="table">
               <thead class="thead-primary">
                 <tr>
-                  <th>TLD</th>
-                  <th>Duration</th>
-                  <th>Registration</th>
-                  <th>Renewal</th>
-                  <th>Transfer</th>
-                  <th>Register</th>
+                  <th>Day</th>
+                  <th>hour</th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <th scope="row" class="scope" >.com</th>
+                  <th scope="row" class="scope" >Saturday</th>
                   <td>1 Year</td>
                   <td>$70.00</td>
                   <td>$5.00</td>
                   <td>$5.00</td>
-                  <td><a href="#" class="btn btn-primary">Book Appointment</a></td>
                 </tr>
                 <tr>
-                  <th scope="row" class="scope" >.net</th>
+                  <th scope="row" class="scope" >Sunday</th>
                   <td>1 Year</td>
                   <td>$75.00</td>
                   <td>$5.00</td>
                   <td>$5.00</td>
-                  <td><a href="#" class="btn btn-primary">Book Appointment</a></td>
                 </tr>
                 <tr>
-                  <th scope="row" class="scope" >.org</th>
+                  <th scope="row" class="scope" >Monday</th>
                   <td>1 Year</td>
                   <td>$65.00</td>
                   <td>$5.00</td>
                   <td>$5.00</td>
-                  <td><a href="#" class="btn btn-primary">Book Appointment</a></td>
                 </tr>
                 <tr>
-                  <th scope="row" class="scope" >.biz</th>
+                  <th scope="row" class="scope" >Teusday</th>
                   <td>1 Year</td>
                   <td>$60.00</td>
                   <td>$5.00</td>
                   <td>$5.00</td>
-                  <td><a href="#" class="btn btn-primary">Book Appointment</a></td>
                 </tr>
                 <tr>
-                  <th scope="row" class="scope" >.info</th>
+                  <th scope="row" class="scope" >Wednsday</th>
                   <td>1 Year</td>
                   <td>$50.00</td>
                   <td>$5.00</td>
                   <td>$5.00</td>
-                  <td><a href="#" class="btn btn-primary">Book Appointment</a></td>
                 </tr>
                 <tr>
-                  <th scope="row" class="scope border-bottom-0">.me</th>
+                  <th scope="row" class="scope border-bottom-0">Thursday</th>
                   <td class="border-bottom-0">1 Year</td>
                   <td class="border-bottom-0">$45.00</td>
                   <td class="border-bottom-0">$5.00</td>
                   <td class="border-bottom-0">$5.00</td>
-                  <td class="border-bottom-0"><a href="#" class="btn btn-primary">Book Appointment</a></td>
+                </tr>
+                <tr>
+                  <th scope="row" class="scope border-bottom-0">Friday</th>
+                  <td class="border-bottom-0">1 Year</td>
+                  <td class="border-bottom-0">$45.00</td>
+                  <td class="border-bottom-0">$5.00</td>
+                  <td class="border-bottom-0">$5.00</td>
+                </tr>
+                <tr>
+                <tr>
+                  <td><a href="#" class="btn btn-primary">Book Appointment</a></td>
                 </tr>
               </tbody>
             </table>
@@ -97,7 +112,7 @@
   <script src="static/js/main.js"></script>
 
   </body>
-
+{%endblock%}
   
               
 
@@ -129,4 +144,4 @@
       </tbody>
   <!-- </table>  -->
 <!-- </body> -->
-</html> 
+</html>

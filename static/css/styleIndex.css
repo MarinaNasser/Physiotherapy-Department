@@ -1,6 +1,6 @@
 /* Description: Master CSS file */
 
-/*****************************************
+/***************
 Table Of Contents:
 - General Styles
 - Navigation
@@ -14,11 +14,11 @@ Table Of Contents:
 - Back To Top Button
 - Extra Pages
 - Media Queries
-******************************************/
+**************/
 
-/**************************/
+/**********/
 /*     General Styles     */
-/**************************/
+/**********/
 :root {
   --primary: #1c262f;
   --primary-light: #212d37;
@@ -124,9 +124,9 @@ li {
   -webkit-text-fill-color: transparent;
 }
 
-/**********************/
+/********/
 /*     Navigation     */
-/**********************/
+/********/
 .navbar {
   font-weight: 500;
   font-size: 0.875rem;
@@ -253,9 +253,9 @@ li {
   font-size: 1.25rem;
 }
 
-/****************/
+/******/
 /*     Home     */
-/****************/
+/******/
 .home {
   background-image: url("/static/assets/img/PhysiotherapyClinicHome.jpg");
   background-blend-mode: darken;
@@ -274,9 +274,9 @@ li {
   opacity: 0.8;
 }
 
-/***********************/
+/*********/
 /*     Information     */
-/***********************/
+/*********/
 .information .container-fluid .row div:first-child {
   background-color: var(--primary);
 }
@@ -289,9 +289,9 @@ li {
   background-color: var(--primary-light);
 }
 
-/******************/
+/******/
 /*     Button     */
-/******************/
+/******/
 .btn {
   color: white;
   border-radius: 0;
@@ -350,9 +350,9 @@ li {
   transform: translate(5px, 5px);
 }
 
-/********************/
+/********/
 /*     Services     */
-/********************/
+/********/
 .services .card {
   padding: 20px;
   border-radius: 0;
@@ -368,17 +368,17 @@ li {
   box-shadow: 5px 5px 0px 0px #0ee951;
 }
 
-/*****************/
+/*******/
 /*     Plans     */
-/*****************/
+/*******/
 .plans .card {
   padding: 20px;
   border: 2px solid white;
 }
 
-/************************/
+/********/
 /*     Testimonials     */
-/************************/
+/********/
 .slider-1 {
   padding-top: 8.25rem;
   padding-bottom: 8.5rem;
@@ -491,9 +491,9 @@ li {
   }
 }
 
-/**********************/
+/********/
 /*     Newsletter     */
-/**********************/
+/********/
 .form-control-input,
 .form-control-textarea {
   width: 100%;
@@ -506,9 +506,9 @@ li {
   padding-bottom: 0.775rem;
 }
 
-/******************************/
+/**********/
 /*     Back To Top Button     */
-/******************************/
+/**********/
 #myBtn {
   z-index: 99;
   right: 20px;
@@ -534,9 +534,9 @@ li {
   margin-bottom: 0.25rem;
 }
 
-/***********************/
+/*********/
 /*     Extra Pages     */
-/***********************/
+/*********/
 .ex-header {
   padding-top: 8.5rem;
   padding-bottom: 4rem;
@@ -591,9 +591,9 @@ li {
   margin-bottom: 0.5rem;
 }
 
-/*************************/
+/*********/
 /*     Media Queries     */
-/*************************/
+/*********/
 @media only screen and (max-width: 1024px) {
   .services,
   .work,
@@ -708,4 +708,16 @@ li {
     width: 22px;
     background-size: 22px 34px;
   }
+}
+
+#bookNowIcon{
+  background-image: url("/static/assets/img/PhysiotherapyClinicHome.jpg");
+  background-blend-mode: darken;
+  background-color: #323137bb;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-size: x-large;
+  color: #fff;
 }
