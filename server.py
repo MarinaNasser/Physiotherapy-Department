@@ -19,7 +19,7 @@ app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="sherif2001",
+    passwd="Ahmed9112",
     database="hospital"
 )
 mycursor = mydb.cursor()
@@ -463,11 +463,7 @@ def inbox():
         mydb.commit()
         return redirect(url_for('inbox'))
 
-    sql = """Select * from messages where emailTo = %s"""
-    val = (session['user_patient'],)
-    mycursor.execute(sql,val)
-    result = mycursor.fetchall()
-    return render_template('inbox.html',result=result)
+
 
 # ------------------------------------------------------------------------test----------------------------------------------------------------
 
