@@ -11,7 +11,7 @@
     <!-- MATERIAL DESIGN ICONIC FONT -->
     <link
       rel="stylesheet"
-      href="/static/addpatient/fonts/material-design-iconic-font/css/material-design-iconic-font.css"
+      href="static/addpatient/fonts/material-design-iconic-font/css/material-design-iconic-font.css"
     />
 
     <!-- DATE-PICKER -->
@@ -26,18 +26,19 @@
 
   <body>
     <div class="wrapper" id="inside">
-      <form action="http://127.0.0.1:5000/addpatient" method="POST" id="wizard">
+      <form action="http://127.0.0.1:5000/addpatient" method="POST" id="wizard" , enctype="multipart/form-data">
         <!-- SECTION 1 -->
         <h3 style="color: white; font-size: 40px">SignUp</h3>
         <h4></h4>
         <section>
+
           <!-- Photo-->
           <div class="inner">
             <input
               type="file"
               accept="image/*"
-              name="image"
-              id="file"
+              name="photo"
+              id="photo"
               onchange="loadFile(event)"
               style="display: none"
             />
@@ -54,7 +55,7 @@
                 "
                 src="/static/addpatient/images/user.png"
             /></label>
-
+            
             <script>
               var loadFile = function (photo) {
                 var image = document.getElementById("photo");
@@ -79,6 +80,7 @@
                 </script>
               </div>
             </div>
+
             <!-- SSN -->
             <div class="form-row">
               <div class="form-holder">
@@ -97,6 +99,7 @@
                 </script>
               </div>
             </div>
+
             <!-- phone -->
             <div class="form-row">
               <div class="form-holder">
@@ -109,6 +112,7 @@
                 <i class="zmdi zmdi-smartphone-android"></i>
               </div>
             </div>
+
             <!-- Address -->
             <div class="form-row">
               <div class="form-holder">
@@ -129,6 +133,7 @@
         <h4></h4>
         <section>
           <div class="inner">
+
             <!-- Email -->
             <div class="form-row" style="margin-top: 50px">
               <div class="form-holder">
@@ -145,6 +150,7 @@
                 </script>
               </div>
             </div>
+
             <!-- Password -->
             <div class="form-row">
               <div class="form-holder">
@@ -158,6 +164,7 @@
                 <i class="zmdi zmdi-lock-open small"></i>
               </div>
             </div>
+
             <!-- Gender -->
             <div class="form-row">
               <div class="select">
@@ -171,6 +178,7 @@
                 </ul>
               </div>
             </div>
+
             <!-- Birth Date -->
             <div class="form-row">
               <div class="form-holder">
@@ -184,6 +192,7 @@
                 />
               </div>
             </div>
+
             <!-- Marital Status -->
             <div class="form-row">
               <div class="select">
@@ -207,6 +216,7 @@
         <!-- SECTION 3 -->
         <h4></h4>
         <section class="section-3">
+
           <!-- Job -->
           <div class="inner" style="margin-top: 50px">
             <div class="form-row">
@@ -219,6 +229,7 @@
                 />
               </div>
             </div>
+
             <!-- Insurance number -->
             <div class="form-row">
               <div class="form-holder">
@@ -230,6 +241,7 @@
                 />
               </div>
             </div>
+
             <!-- Credit Card -->
             <div class="form-row">
               <div class="form-holder">
@@ -252,7 +264,7 @@
         Would you like to submit this information?
       </h1>
       <form action="home">
-        <button class="button" onclick="">Submit</button>
+        <button class="button" type="submit" value="Submit">Submit</button>
       </form>
       <button class="button" onclick="go()" style="margin-top: 20px">
         Not yet
