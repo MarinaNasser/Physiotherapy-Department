@@ -46,23 +46,20 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row" class="scope border-bottom-0">Thursday</th>
-                  <td class="border-bottom-0">1 Year</td>
-                  <td class="border-bottom-0">$45.00</td>
-                  <td class="border-bottom-0">$5.00</td>
-                  <td class="border-bottom-0">$5.00</td>
-                  <td>  <button type="submit" class="btn btn-primary" > <a href="#" >Book Appointment</a></button></a></td>
-                </tr>
-                <tr>
-                  <th scope="row" class="scope border-bottom-0">Friday</th>
-                  <td class="border-bottom-0">1 Year</td>
-                  <td class="border-bottom-0">$45.00</td>
-                  <td class="border-bottom-0">$5.00</td>
-                  <td class="border-bottom-0">$5.00</td>
-                  <td>  <button type="submit" class="btn btn-primary" > <a href="#" >Book Appointment</a></button></a></td>
-                </tr>
-                <tr>
+                {% for i in range(0, data.shape[0] ) %}
+                  {% if (now - data[4][i].date()).days < 0 and not data[5][i]%}
+                    {% include 'includes/items_modals_appointment.html' %}
+                    <tr>
+                      <th scope="row" class="scope border-bottom-0">Thursday</th>
+                      <td class="border-bottom-0">{{data[0][i]}}</td>
+                      <td class="border-bottom-0">{{data[1][i]}}</td>
+                      <td class="border-bottom-0">{{data[2][i]}}</td>
+                      <td class="border-bottom-0">{{data[3][i]}}</td>
+                      <td class="border-bottom-0">{{data[4][i].date()}}</td>
+                      <td>  <button type="submit" class="btn btn-primary" > <a href="#" >Book Appointment</a></button></a></td>
+                    </tr>
+                  {% endif %}
+                {% endfor %}
               </tbody>
             </table>
           </div>
@@ -93,21 +90,7 @@
         </tr>
         </thead>
         <tbody>
-          {% for i in range(0, data.shape[0] ) %}
-            {% if (now - data[4][i].date()).days < 0 and not data[5][i]%}
-            {% include 'includes/items_modals_appointment.html' %}
-                <tr>
-                    <td>{{data[0][i]}}</td>
-                    <td>{{data[1][i]}}</td>
-                    <td>{{data[2][i]}}</td>
-                    <td>{{data[3][i]}}</td>
-                    <td>{{data[4][i].date()}}</td>
-                    <td>
-                        <button class="btn btn-outline btn-info" data-toggle="modal" data-target="#Modal-appointment-{{data[0][i]}}">bookNow</button>
-                    </td>    
-                </tr>
-            {% endif %}
-          {% endfor %}
+          
         
         </tbody>
     </table>
