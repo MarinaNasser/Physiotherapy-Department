@@ -18,8 +18,8 @@ app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="N#@98wrft45",
-    database="sbe2024"
+    passwd="85426Mm854267890",
+    database="hospital"
     )
 
 
