@@ -148,9 +148,17 @@ def adddoctor():
         ssnCursor.execute(""" SELECT * FROM doctor WHERE ssn = %s """ , (ssn,))
         ssnExist = ssnCursor.fetchone()
 
-        if emailExist and ssnExist :
-            return render_template('adddoctor.html', emailExisits = True , ssnExisits=True)
-        elif emailExist or ssnExist :
+        reqemailCursor =mydb.cursor(buffered=True)
+        reqemailCursor.execute(""" SELECT * FROM doctorprerequest WHERE emailref = %s """ , (email,))
+        reqemailExist = reqemailCursor.fetchone()
+
+        reqssnCursor =mydb.cursor(buffered=True)
+        reqssnCursor.execute(""" SELECT * FROM doctorprerequest WHERE ssnref = %s """ , (ssn,))
+        reqssnExist = reqssnCursor.fetchone()
+
+        if emailExist and ssnExist and reqssnExist and reqemailExist  :
+            return render_template('adddoctor.html', emailExisits = True , ssnExisits=True , reqemailExist=True , reqssnExist=True)
+        elif emailExist or ssnExist or reqemailExist :
             if emailExist :
                 return render_template('adddoctor.html', emailExisits = True , ssnExisits=False)
             else:
