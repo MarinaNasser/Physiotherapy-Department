@@ -18,13 +18,14 @@ app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="Ahmed9112",
-    database="hospital"
+    passwd="A_0l1a2a3",
+    database="hosiptal"
 )
 mycursor = mydb.cursor()
 
 @app.route('/')
 @app.route('/home')
+
 def index():
     sql = "SELECT name,id FROM DOCTOR"
     mycursor.execute(sql)
@@ -113,7 +114,7 @@ def logout():
     session.pop('user',None)
     session.clear()
     # return render_template('Base.html')
-    return redirect(url_for('base'))
+    return redirect(url_for('index'))
 
 # ------------------------------------------------------------------------Add Doctor----------------------------------------------------------------
 
@@ -214,7 +215,6 @@ def doctors():
     return render_template('doctor.html')
 
 # ------------------------------------------------------------------------Add Patient---------------------------------------------------------------
-
 @app.route('/addpatient', methods = ['POST', 'GET'])
 def addpatient():
     if request.method == 'POST': ##check if there is post data

@@ -69,7 +69,7 @@
           name="name"
           minlength="2"
           maxlength="255"
-          placeholder="ex: Michael Hany Rofael"/>
+          required/>
           <span></span>
           <label for="Name">Name</label>
         </div>
@@ -77,22 +77,21 @@
       <!-- ssn -->
       <div class="txt_field">
         <input 
-        type="int" inputmode="numeric" maxlength="14"
-        placeholder="xxxxxxxxxxxxxx"
-        id="ssn"
-         name="ssn" />
+          type="int" inputmode="numeric"
+          maxlength="9"
+          id="ssn"
+          name="ssn" 
+          required />
         <span></span>
         <label for="Department">SSN</label>
       </div>
-
-      phone number
-
+      
       <div class="txt_field">
         <input 
         type="tel"  maxlength="11"
-        placeholder="xxxxxxxxxxx"
          name="phone"
-         id="phone" />
+         id="phone"
+         required />
         <span></span>
         <label for="Department">Phone Number</label>
       </div>
@@ -103,7 +102,7 @@
       <select
         class="txt_field"
         aria-label="Default select example"
-        name="sex">
+        name="sex" required>
         <option value="Male">Male</option>
         <option value="Female">Female</option>
       </select>
@@ -111,7 +110,7 @@
     
     <!-- birth date -->
     <div class="txt_field">
-      <input type="date" name="birth_date" />
+      <input type="date" name="birth_date" required/>
       <span></span>
       <label for="birth_date">Birth Date</label>
     </div>
@@ -119,9 +118,9 @@
     <!-- address -->
         <div class="txt_field">
           <input 
-          type="text" name="address"
-          placeholder="ex: 17 talaat harb street, Cairo" />
-          <span></span>
+            type="text" name="address"
+            required />
+            <span></span>
           <label for="address">Address</label>
         </div>
 
@@ -146,7 +145,6 @@
           <input
             type="file"
             name="photo"
-            placeholder="Photo"
           />
           <span></span>
           <label for="photo">Select image</label>
@@ -156,20 +154,20 @@
       <!-- email -->
       <div class="txt_field">
         <input 
-        type="text" name="email"
-        placeholder="ex: name22@gmail.com" />
-        <span></span>
+          type="text" name="email"
+          required/>
+          <span></span>
         <label for="email">Email</label>
       </div>
 
         <!-- password -->
         <div class="txt_field">
-          <input type="password"  name="password" />
+          <input type="password"  name="password" required />
           <span></span>
           <label for="Password">Password</label>
         </div>
 
-        <input type="submit" value="Sign Up" />
+        <input type="submit" value="Sign Up" required/>
         <div class="signup_link">
           <br />
           Back To Home? <a href="{{url_for('index')}}">Home</a>
