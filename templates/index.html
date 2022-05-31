@@ -85,15 +85,24 @@
               {% endif %}
             </li>
             <li class="nav-item">
-              {% if session['user_admin'] or session['user_patient'] %}
+              {% if session['user_admin'] %}
+              <a class="nav-link" href="/adminViewDoctor">Accept Doctors</a>
+              {% endif %}
+            </li>
+            <li class="nav-item">
+              {% if session['user_doctor']%}
+              <a class="nav-link" href="/addApointment">Add Appointment</a>
+              {%endif%}
+            </li>
+            <li class="nav-item">
+              {% if session['user_admin'] or session['user_patient'] or session['user_doctor'] %}
               <a class="nav-link" href="{{url_for('myTips')}}">Tips</a>
               {%else%}
               <a class="nav-link" href="{{url_for('preSignUp')}}">Tips</a>
               {%endif%}
             </li>
-            
             <li class="nav-item">
-              {% if session['user_admin'] or session['user_patient'] %}
+              {% if session['user_patient'] %}
               <a class="nav-link" href="/home#bookNow">Book Now</a>
               {%endif%}
             </li>
@@ -108,11 +117,7 @@
               <a class="nav-link" href="/home#contact">Contact</a>
               {% endif %}
             </li>
-            <li class="nav-item">
-              {% if session['user_admin'] or session['user_admin']%}
-              <a class="nav-link" href="/addApointment">Add Appointment</a>
-              {%endif%}
-            </li>
+            
             <li class="nav-item">
               {% if session['users_technician'] or session['user_admin'] %}
               <a class="nav-link" href="/adddevice">Add Device</a>
@@ -194,7 +199,9 @@
           <p>Lorem ipsum dolor sit amet.</p>
         </div> -->
         <div class="my-3">
+          {% if not (session['user_admin'] or session['user_doctor']) %}
           <a class="btn" href="/home#bookNow">Book Now</a>
+          {% endif %}
         </div>
       </div>
       <!-- end of container -->
@@ -248,7 +255,9 @@
             </p>
 
             <div class="my-3">
+              {% if not (session['user_admin'] or session['user_doctor']) %}
               <a class="btn" href="{{url_for('bookNow')}}">Book Now</a>
+              {% endif %}
             </div>
           </div>
           <div class="col-lg-5 text-center py-4 py-sm-0" data-aos="fade-down">
@@ -490,7 +499,9 @@
                         <div class="ms-3 pt-2">
                           <h6><a href="{{url_for('bookNow')}}">{{r[0]}}</a></h6>
                           <p>ashtar dr f masr</p>
+                          {% if not (session['user_admin'] or session['user_doctor']) %}
                           <td>  <button type="submit" class="btn btn-primary" > <a href="#" >Book Appointment</a></button></a></td>
+                          {% endif %}
                         </div>
                       </div>
                     </div>
@@ -516,7 +527,9 @@
         <!-- end of row -->
         
     <div class="my-3">
+      {% if not (session['user_admin'] or session['user_doctor']) %}
       <a class="btn" href="/home#bookNow">Book Now</a>
+      {% endif %}
     </div>
       </div>
       <!-- end of container -->
