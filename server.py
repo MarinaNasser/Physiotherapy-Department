@@ -70,7 +70,7 @@ def login():
     if request.method == 'POST':
         userEmail = request.form['email']
         password = request.form['password']
-        mycursor.execute("SELECT * FROM USERS WHERE email = %s AND password = %s",(userEmail,password))
+        mycursor.execute("SELECT * FROM users WHERE email = %s AND password = %s",(userEmail,password))
         record = mycursor.fetchone()
         
         if record:
