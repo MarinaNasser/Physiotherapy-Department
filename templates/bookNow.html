@@ -1,36 +1,147 @@
-<!DOCTYPE html>
-<html>
+{%extends'index.html'%}
+{%block main%}
   <head>
-      <title>Page Title</title>
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Table 03</title>
+    <link rel="stylesheet" href="bookNow.css"> 
   </head>
-
   <body>
-    <table class="table or container">
-        <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">name</th>
-            <th scope="col">start time</th>
-            <th scope="col">end time</th>
-            <th scope="col">date</th>
-        </tr>
-        </thead>
-        <tbody>
-          {% for r in data %}
-            <tr>
-              {% for c in r %}
-                <td>{{c}}</td>
-              {% endfor %}
-            <td>
-                <form action="{{url_for('viewAppointments')}}">
-                    <button type="submit" class="btn btn-primary">book now</button>
-                </form>
-            </td>
-              
-            </tr>
-          {% endfor %}
-        </tbody>
-    </table>
+    <br><br><br>
+    <div id="bookNowIcon" class="testimonial-card p-4">
+      <p></p>
+      <div class="d-flex pt-4">
+        <div>
+          <img
+            class="avatar"
+            src="static\assets\img\testimonial-4.jpg"
+            alt="testimonial"
+          />
+        </div>
+        <div class="ms-3 pt-2">
+          <p>Dr. Magdy Nasr</p>
+          <p>msh batal</p>
+        </div>
+      </div>
+    </div>
+    
+  <section class="ftco-section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6 text-center mb-5">
+          <h2 class="heading-section"></h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h4 class="text-center mb-4"><br>Book Your Appointment</h4>
+          <div class="table-wrap">
+            <table class="table">
+              <thead class="thead-primary">
+                <tr>
+                  <th>Day</th>
+                  <th>hour</th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row" class="scope" >Saturday</th>
+                  <td>1 Year</td>
+                  <td>$70.00</td>
+                  <td>$5.00</td>
+                  <td>$5.00</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="scope" >Sunday</th>
+                  <td>1 Year</td>
+                  <td>$75.00</td>
+                  <td>$5.00</td>
+                  <td>$5.00</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="scope" >Monday</th>
+                  <td>1 Year</td>
+                  <td>$65.00</td>
+                  <td>$5.00</td>
+                  <td>$5.00</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="scope" >Teusday</th>
+                  <td>1 Year</td>
+                  <td>$60.00</td>
+                  <td>$5.00</td>
+                  <td>$5.00</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="scope" >Wednsday</th>
+                  <td>1 Year</td>
+                  <td>$50.00</td>
+                  <td>$5.00</td>
+                  <td>$5.00</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="scope border-bottom-0">Thursday</th>
+                  <td class="border-bottom-0">1 Year</td>
+                  <td class="border-bottom-0">$45.00</td>
+                  <td class="border-bottom-0">$5.00</td>
+                  <td class="border-bottom-0">$5.00</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="scope border-bottom-0">Friday</th>
+                  <td class="border-bottom-0">1 Year</td>
+                  <td class="border-bottom-0">$45.00</td>
+                  <td class="border-bottom-0">$5.00</td>
+                  <td class="border-bottom-0">$5.00</td>
+                </tr>
+                <tr>
+                <tr>
+                  <td><a href="#" class="btn btn-primary">Book Appointment</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="static/js/jquery.min.js"></script>
+  <script src="static/js/popper.js"></script>
+  <script src="statics/js/bootstrap.min.js"></script>
+  <script src="static/js/main.js"></script>
+
   </body>
-</html> 
+{%endblock%}
+  
+              
+
+
+  <!-- <table class="table or container">
+      <thead>
+      <tr>
+          <th scope="col">#</th>
+          <th scope="col">name</th>
+          <th scope="col">start time</th>
+          <th scope="col">end time</th>
+          <th scope="col">date</th>
+      </tr>
+      </thead> -->
+      <tbody>
+          {% for r in data %}
+          <tr>
+            {% for c in r %}
+              <td>{{c}}</td>
+            {% endfor %}
+          <td>
+              <form action="{{url_for('viewAppointments')}}">
+                  <button type="submit" class="btn btn-primary">book now</button>
+              </form>
+          </td>
+            
+          </tr>
+        {% endfor %}
+      </tbody>
+  <!-- </table>  -->
+<!-- </body> -->
+</html>

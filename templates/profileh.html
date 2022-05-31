@@ -1,6 +1,6 @@
-<!DOCTYPE html>
-<<html lang="en-GB">
-  <head>
+{%extends'index.html'%}
+   {%block main%}
+   <head>
     <title>Profile</title>
     <link
       rel="stylesheet"
@@ -11,19 +11,7 @@
     <meta charset="UTF-8" />
   </head>
   <body>
-    <div class="main-nav">
-      <ul class="nav">
-        <li class="name">Muscle carers</li>
-        <li><a href="{{url_for('index')}}">Home</a></li>
-        <li><a href="{{url_for('myTips')}}">My Tips</a></li>
-        <li><a href="{{url_for('bookNow')}}">Book Now</a></li>
-        <li><a href="{{url_for('profileh')}}">My Profile</a></li>
-        <li><a href="{{url_for('contact')}}">Contact</a></li>
-      </ul>
-    </div>
-    <!-- <img src="/static/addpatient/images/form-wizard-bg.jpg" class="back" /> -->
-
-    <header>
+   <header>
       <div class="card mb-3 content">
         <div>
           <img src= "static/imgs/uploads/b0c2141f2ecfb2c7f70cbfbfff2b4905.png"  alt="Jordans Avatar" class="profile-image">
@@ -97,3 +85,4 @@
       </div>
     </header>
   </body>
+  {%endblock%}

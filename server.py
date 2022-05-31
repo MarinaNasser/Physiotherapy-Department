@@ -5,7 +5,7 @@ from unittest import result
 from flask import Flask, redirect, render_template,request,session,url_for
 from pymysql import NULL
 from sqlalchemy import false
-from flask_mysqldb import MySQL
+# from flask_mysqldb import MySQL
 import mysql.connector
 import re
 import os
@@ -337,26 +337,26 @@ def adminViewDoctor():
 # ------------------------------------------------------------------------add/view appointment----------------------------------------------------------------
 @app.route('/addAppointment',methods=['GET','POST'])
 def addAppointment():
-    print(session['user_doctor'])
-    sql = "SELECT * FROM appointment"
+    # print(session['user_doctor'])
+    """ sql = "SELECT * FROM appointment"
     mycursor.execute(sql)
-    result = mycursor.fetchall()
+    result = mycursor.fetchall() """
     
     if request.method == 'POST':
         #requesting data form
-        startT = request.form['startT']
-        endT  = request.form['endT']
-        date = request.form['date']
+        # startT = request.form['startT']
+        # endT  = request.form['endT']
+        # date = request.form['date']
         
         # now = datetime.now()
         # formatted_date = now.strftime('%Y-%m-%d %H:%M:%S')
         # # Assuming you have a cursor named cursor you want to execute this query on:
         # mycursor.execute('insert into table(id, date_created) values(%s, %s)', (id, formatted_date))
         
-        sql = """INSERT INTO appointment (startT, endT, dt,doctorEmail) VALUES (%s, %s, %s,%s)"""
-        val = (startT,endT,date,session['user_doctor'])
-        mycursor.execute(sql, val)
-        mydb.commit()
+        # sql = """INSERT INTO appointment (startT, endT, dt,doctorEmail) VALUES (%s, %s, %s,%s)"""
+        # val = (startT,endT,date,session['user_doctor'])
+        # mycursor.execute(sql, val)
+        # mydb.commit()
         return render_template('addAppointment.html', added =True)
         
     else:
@@ -364,19 +364,21 @@ def addAppointment():
 
 @app.route('/viewAppointments')   
 def viewAppointments():
-    sql = "SELECT appNo,name,startT,endT,dt FROM appointment join doctor on doctorEmail = email"
-    mycursor.execute(sql)
-    result = mycursor.fetchall()
+    # sql = "SELECT appNo,name,startT,endT,dt FROM appointment join doctor on doctorEmail = email"
+    # mycursor.execute(sql)
+    # result = mycursor.fetchall()
     return render_template('viewAppointments.html', data = result)
 
 # ------------------------------------------------------------------------book now----------------------------------------------------------------
 @app.route('/bookNow')
 def bookNow():
-    sql = "SELECT appNo,name,startT,endT,dt FROM appointment join doctor on doctorEmail = email"
-    mycursor.execute(sql)
-    result = mycursor.fetchall()
-    
-    return render_template('bookNow.html',data = result)
+    sql = "SELECT appNo,name,startT,endT,dt FROM appointment "
+    # join doctor on doctorEmail = email"
+    #mycursor.execute(sql)
+    #result = mycursor.fetchall()
+    return render_template('bookNow.html')
+
+    #return render_template('bookNow.html',data = result)
 
 
 if __name__ == '__main__':
