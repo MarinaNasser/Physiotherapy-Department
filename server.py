@@ -76,6 +76,10 @@ def login():
                 session['user_doctor'] = userEmail
                 session['loggedIn'] = True
                 return redirect(url_for('index')) 
+            elif record[2] == 'technician':
+                session['user_technician'] = userEmail
+                session['loggedIn'] = True
+                return redirect(url_for('index')) 
             else:
                 session['user_admin'] = userEmail
                 session['loggedIn'] = True
