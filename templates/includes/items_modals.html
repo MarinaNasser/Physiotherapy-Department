@@ -25,11 +25,11 @@
         Are you sure you want to add ?
       </div>
 
-      <form action="/adminViewDoctor" method="post">
+      <form action="/adminViewDoctor" method="post" enctype="multipart/form-data">
           <!-- name -->
           <div class="form-group">
             <label for="Name" class="form-label">Name</label>
-            <input type="text" class="form-control" id="Name" name="name1" value="{{item.1}}" readonly>
+            <input type="text" class="form-control" id="Name" name="name" value="{{item.1}}" readonly>
         </div>
 
         <!-- ssn -->
@@ -77,14 +77,22 @@
         <!-- specialization -->
         <div class="form-group">
             <label for="specialization">Specialization</label>
-            <input type="int" inputmode="numeric" class="form-control" id="specialization" name="specialization" value="{{ item.9 }}" readonly>
+            <input type="text"  class="form-control" id="specialization" name="specialization" value="{{ item.9 }}" readonly>
         </div>
+        <!-- photopath -->
+      <div class="form-group">
+        <label for="photo">photopath</label>
+        <input type="text"  class="form-control" id="photo" name="photo" value="{{ item.10 }}" readonly>
+    </div>
 
-        <!-- salary -->
+        <!-- phone -->
         <div class="form-group">
-            <label for="Salary">Salary</label>
-            <input type="int"  id="Salary" class="form-control" name="salary"  value="{{item.10}}">
-        </div>
+          <label for="phone">phone</label>
+          <input type="int"  class="form-control" id="phone" name="phone" value="{{ item.11 }}" readonly>
+      </div>
+        
+
+
 
         <button type="submit" class="btn btn-primary">accept</button>
 
