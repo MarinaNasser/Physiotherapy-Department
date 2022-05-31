@@ -19,8 +19,8 @@ app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="sherif2001",
-    database="hospital"
+    passwd="magdynasr",
+    database="sherif"
 )
 mycursor = mydb.cursor()
 
@@ -70,7 +70,7 @@ def login():
     if request.method == 'POST':
         userEmail = request.form['email']
         password = request.form['password']
-        mycursor.execute("SELECT * FROM USERS WHERE email = %s AND password = %s",(userEmail,password))
+        mycursor.execute("SELECT * FROM users WHERE email = %s AND password = %s",(userEmail,password))
         record = mycursor.fetchone()
         
         if record:
