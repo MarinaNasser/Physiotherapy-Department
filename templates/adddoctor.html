@@ -23,6 +23,7 @@
     <!-- STYLE CSS -->
     <link rel="stylesheet" href="/static/adddoctor/css/adddoctorstyle.css" />
   </head>
+
   {% if emailExisits %}
   <div class="alert alert-warning" role="alert">
     the email you entered already exisits
@@ -47,7 +48,7 @@
 
   <body>
     <div class="wrapper" id="inside">
-      <form action="http://127.0.0.1:5000/adddoctor" method="POST" id="wizard">
+      <form action="http://127.0.0.1:5000/adddoctor" method="POST" enctype="multipart/form-data" id="wizard">
         <!-- SECTION 1 -->
         <h3 style="color: white; font-size: 40px">SignUp - Doctor</h3>
         <h4></h4>
@@ -58,7 +59,7 @@
               type="file"
               accept="image/*"
               name="photo"
-              id="file"
+              id="photo"
               onchange="loadFile(event)"
               style="display: none"
             />
@@ -84,6 +85,7 @@
             </script>
 
             <!-- name -->
+
             <div class="form-row">
               <div class="form-holder">
                 <input
@@ -102,6 +104,7 @@
               </div>
             </div>
             <!-- SSN -->
+
             <div class="form-row">
               <div class="form-holder">
                 <input
@@ -120,6 +123,7 @@
                 </script>
               </div>
             </div>
+
             <!-- phone -->
             <div class="form-row">
               <div class="form-holder">
@@ -133,6 +137,7 @@
                 <i class="zmdi zmdi-smartphone-android"></i>
               </div>
             </div>
+
             <!-- Address -->
             <div class="form-row">
               <div class="form-holder">
@@ -187,15 +192,16 @@
             </div>
             <!-- Gender -->
             <div class="form-row">
-              <div class="select">
-                <div class="form-holder">
-                  <div class="select-control" id="sex" name="sex">Gender</div>
-                  <i class="zmdi zmdi-caret-down small"></i>
-                </div>
-                <ul class="dropdown">
-                  <li rel="Male">Male</li>
-                  <li rel="Female">Female</li>
-                </ul>
+              <!-- sex -->
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="Male" id="sex" name="sex">
+      <label class="form-check-label" for="sex"> Male </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="Female" id="sex" name="sex">
+      <label class="form-check-label" for="sex"> Female </label>
+    </div>
               </div>
             </div>
             <!-- Birth Date -->
@@ -243,10 +249,12 @@
                   name="degree"
                 />
               </div>
+              <button type="submit" class="btn btn-primary">submit</button>
             </div>
         </div>
         </section>
       </form>
+
     </div>
 
     <!-- Submit button -->
@@ -254,9 +262,6 @@
       <h1 style="text-align: center; margin-top: 50px; color: #fff">
         Would you like to submit this information?
       </h1>
-      <form action="home">
-        <button class="button" onclick="">Submit</button>
-      </form>
       <button class="button" onclick="go()" style="margin-top: 20px">
         Not yet
       </button>

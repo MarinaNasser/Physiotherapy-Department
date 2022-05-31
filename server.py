@@ -19,7 +19,7 @@ app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="sherif2001",
+    passwd="Ahmed9112",
     database="hospital"
 )
 mycursor = mydb.cursor()
@@ -169,9 +169,9 @@ def adddoctor():
                 return render_template('adddoctor.html', emailExisits = False , ssnExisits=False, reqemailExist=False , reqssnExist=True)
 
         elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
-            return render_template('adddoctor.html', emailExisits = False , emailInvalid=True ,reqemailExist=True , reqssnExist=True)        
+            return render_template('adddoctor.html', emailExisits = False , emailInvalid=True ,reqemailExist=False , reqssnExist=False)        
         else:    
-            sql = """INSERT INTO doctorPreRequest (name,ssn,sex,email,password,address,birth_date,degree,specialization,phone,photo) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+            sql = """INSERT INTO doctorprerequest (name,ssn,sex,email,password,address,birth_date,degree,specialization,phone,photo) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
             val = (name,ssn,sex,email,password,address,birth_date,degree,Specialization,phone,pic_path)
             mycursor.execute(sql,val)
             mydb.commit()
@@ -308,8 +308,6 @@ def adminViewDoctor():
         phone = request.form['phone']
         photo = request.form['photo']
 
-
-
         sql = """INSERT INTO doctor (name,ssn,sex,email,password,address,birth_date,degree,specialization,phone,photo) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
         val = (name,ssn,sex,email,password,address,birth_date,degree,Specialization,phone,photo)
         mycursor.execute(sql,val)
@@ -355,7 +353,7 @@ def adminViewDoctor():
     else:
         print('get')    
         
-    sql = "SELECT * FROM doctorPreRequest"
+    sql = "SELECT * FROM doctorprerequest"
     mycursor.execute(sql)
     result = mycursor.fetchall()
     return render_template('adminViewDoctor.html',result=result)        
