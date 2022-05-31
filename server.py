@@ -431,7 +431,17 @@ def messages():
         mydb.commit()
 
     return render_template('messages.html')
-    
+
+# ------------------------------------------------------------------------test----------------------------------------------------------------
+@app.route('/inbox', methods = ['POST','GET'])
+def inbox():
+    sql = """Select * from messages where emailTo = %s"""
+    val = (session['user_patient'],)
+    mycursor.execute(sql,val)
+    result = mycursor.fetchall()
+    return render_template('inbox.html',result=result)
+
+# ------------------------------------------------------------------------test----------------------------------------------------------------
 
 if __name__ == '__main__':
     app.run(debug = True)
