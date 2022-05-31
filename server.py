@@ -417,7 +417,7 @@ def bookNow():
 
 # ------------------------------------------------------------------------test----------------------------------------------------------------
 
-@app.route('/messages')
+@app.route('/messages', methods = ['GET','POST'])
 def messages():
     if request.method == 'POST':
         emailTo = request.form['emailTo']
