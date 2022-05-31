@@ -413,6 +413,13 @@ def bookNow():
 
 # @app.route('/confirmBooking',methods = ['GET','POST'])
 # def confirmBooking():
+
+
+# ------------------------------------------------------------------------test----------------------------------------------------------------
+
+@app.route('/messages')
+def messages():
+   return render_template('messages.html')
     
 
 if __name__ == '__main__':
