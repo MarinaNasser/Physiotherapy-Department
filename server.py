@@ -17,9 +17,15 @@ app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
+<<<<<<< HEAD
+    passwd="N#@98wrft45",
+    database="sbe2024"
+    )
+=======
     passwd="Ahmed9112",
     database="hospital"
 )
+>>>>>>> fb103e6117c6ee4897c1027f045637be08e75a54
 mycursor = mydb.cursor()
 
 @app.route('/')
@@ -74,6 +80,10 @@ def login():
                 return redirect(url_for('index'))
             elif record[2] == 'doctor':
                 session['user_doctor'] = userEmail
+                session['loggedIn'] = True
+                return redirect(url_for('index')) 
+            elif record[2] == 'technician':
+                session['user_technician'] = userEmail
                 session['loggedIn'] = True
                 return redirect(url_for('index')) 
             else:

@@ -74,16 +74,43 @@
           <label for="Name">Name</label>
         </div>
 
-      <!-- email -->
-        <div class="txt_field">
-          <input 
-          type="text" name="email"
-          placeholder="ex: name22@gmail.com" />
-          <span></span>
-          <label for="email">Email</label>
-        </div>
+      <!-- ssn -->
+      <div class="txt_field">
+        <input 
+        type="int" inputmode="numeric" maxlength="14"
+        placeholder="xxxxxxxxxxxxxx" name="ssn" />
+        <span></span>
+        <label for="Department">SSN</label>
+      </div>
+      <!-- phone number -->
+      <div class="txt_field">
+        <input 
+        type="tel" inputmode="numeric" maxlength="11"
+        placeholder="xxxxxxxxxxx" name="phone number" />
+        <span></span>
+        <label for="Department">Phone Number</label>
+      </div>
 
-      <!-- address -->
+    <!-- sex -->
+      <div>
+      <span></span>
+      <select
+        class="txt_field"
+        aria-label="Default select example"
+        name="sex">
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+    </div>
+    
+    <!-- birth date -->
+    <div class="txt_field">
+      <input type="date" name="birth_date" />
+      <span></span>
+      <label for="birth_date">Birth Date</label>
+    </div>
+
+    <!-- address -->
         <div class="txt_field">
           <input 
           type="text" name="address"
@@ -106,14 +133,35 @@
           <span></span>
           <label for="Specialization">Specialization</label>
         </div>
-        
+
+        <!-- file -->
+      <div class="txt_field">
+        <div class="custom">
+          <input
+            type="file"
+            name="photo"
+            placeholder="Photo"
+          />
+          <span></span>
+          <label for="photo">Select image</label>
+        </div>
+      </div>
+
+      <!-- email -->
+      <div class="txt_field">
+        <input 
+        type="text" name="email"
+        placeholder="ex: name22@gmail.com" />
+        <span></span>
+        <label for="email">Email</label>
+      </div>
+
         <!-- password -->
         <div class="txt_field">
           <input type="password"  name="password" />
           <span></span>
           <label for="Password">Password</label>
         </div>
-        <div class="pass">Forgot Password?</div>
 
         <input type="submit" value="Sign Up" />
         <div class="signup_link">
