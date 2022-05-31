@@ -2,6 +2,7 @@
 <div>
     <div class="form-group py-1">
       <input
+        name="emailTo"
         type="email"
         class="form-control form-control-input"
         id="exampleFormControlInput3"
@@ -13,7 +14,7 @@
           type="email"
           class="form-control form-control-input"
           id="exampleFormControlInput3"
-          placeholder="Email from"
+          value="{{session['user_patient']}}"
         />
       </div>
       <div class="form-group py-1">

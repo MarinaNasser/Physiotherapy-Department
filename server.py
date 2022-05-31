@@ -18,8 +18,8 @@ app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="magdynasr",
-    database="sherif"
+    passwd="Ahmed9112",
+    database="hospital"
 )
 mycursor = mydb.cursor()
 
@@ -419,7 +419,13 @@ def bookNow():
 
 @app.route('/messages')
 def messages():
-   return render_template('messages.html')
+    if request.method == 'POST':
+        emailTo = request.form['emailTo']
+        ssn=request.form['ssn']
+        sex = request.form['sex']
+        email = request.form['email']
+
+    return render_template('messages.html')
     
 
 if __name__ == '__main__':
