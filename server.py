@@ -18,8 +18,8 @@ app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="85426Mm854267890",
-    database="hospital"
+    passwd="magdynasr",
+    database="sherif"
 )
 mycursor = mydb.cursor()
 
@@ -103,7 +103,7 @@ def signUp():
         
         session['name'] = name
         session['email'] = email
-        return redirect(url_for('base'))
+        return redirect(url_for('index'))
 
 # ------------------------------------------------------------------------Log Out-------------------------------------------------------------------
 
@@ -113,7 +113,7 @@ def logout():
     session.pop('user',None)
     session.clear()
     # return render_template('Base.html')
-    return redirect(url_for('base'))
+    return redirect(url_for('index'))
 
 # ------------------------------------------------------------------------Add Doctor----------------------------------------------------------------
 
