@@ -425,6 +425,11 @@ def messages():
         title = request.form['title']
         message = request.form['message']
 
+        sql = """INSERT INTO messages (emailTo,emailFrom,title,message) VALUES (%s,%s,%s,%s)"""
+        val = (emailTo,emailFrom,title,message)
+        mycursor.execute(sql,val)
+        mydb.commit()
+
     return render_template('messages.html')
     
 
