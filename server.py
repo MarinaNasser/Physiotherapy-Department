@@ -18,8 +18,8 @@ app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="magdynasr",
-    database="sherif"
+    passwd="Ahmed9112",
+    database="hospital"
 )
 mycursor = mydb.cursor()
 
@@ -413,6 +413,24 @@ def bookNow():
 
 # @app.route('/confirmBooking',methods = ['GET','POST'])
 # def confirmBooking():
+
+
+# ------------------------------------------------------------------------test----------------------------------------------------------------
+
+@app.route('/messages', methods = ['GET','POST'])
+def messages():
+    if request.method == 'POST':
+        emailTo = request.form['emailTo']
+        emailFrom=request.form['emailFrom']
+        title = request.form['title']
+        message = request.form['message']
+
+        sql = """INSERT INTO messages (emailTo,emailFrom,title,message) VALUES (%s,%s,%s,%s)"""
+        val = (emailTo,emailFrom,title,message)
+        mycursor.execute(sql,val)
+        mydb.commit()
+
+    return render_template('messages.html')
     
 
 if __name__ == '__main__':
