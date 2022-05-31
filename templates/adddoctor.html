@@ -23,19 +23,37 @@
 
   <body>
     <br><br><br>
+    {% if emailCursorDoctorRequests %}
+    <div class="alert alert-warning" role="alert">
+      You have already sent a request stay tuned
+    </div>
+    {%endif%}
+
+    {% if ssnCursorDoctorRequests %}
+    <div class="alert alert-warning" role="alert">
+      You have already sent a request stay tuned
+    </div>
+    {%endif%}
+
+     {% if emailInvalid %}
+    <div class="alert alert-warning" role="alert">
+      the email you entered is invalid
+    </div>
+    {%endif%}
+
     {% if emailExisits %}
     <div class="alert alert-warning" role="alert">
       the email you entered already exisits
     </div>
-    {%endif%} {% if emailInvalid %}
-    <div class="alert alert-warning" role="alert">
-      the email you entered is invalid
-    </div>
-    {%endif%} {% if ssnExisits %}
+    {%endif%}
+    
+    {% if ssnExisits %}
     <div class="alert alert-warning" role="alert">
       the ssn you entered already exisits
     </div>
     {%endif%}
+
+
     <div class="centerSignUp">
       <h1>Doctor Register</h1>
       <form  
