@@ -1,34 +1,36 @@
 {%extends'index.html'%}
 {%block main%}
-
-<head>
-    <title>Table 03</title>
-    <link rel="stylesheet" href="bookNow.css"> 
-  </head>
-  <body>
-   <br><br><br>
-    <table class="table">
-      <thead class="thead-dark">
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">name</th>
-        <th scope="col">start time</th>
-        <th scope="col">end time</th>
-        <th scope="col">date</th>
-      </tr>
-      
-      <tbody>
+<br><br><br><br><br><br>
+  <body style="background-color: #333b48;" class='container'>
+    <table class="table table-hover table-dark">
+      <thead>
         <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-          <td> <button type="submit" class="btn btn-primary" > <a href="#" >Book Appointment</a></button></a></td>
+          <th scope="col">#</th>
+          <th scope="col">name</th>
+          <th scope="col">start time</th>
+          <th scope="col">end time</th>
+          <th scope="col">date</th>
+          <th scope="col"></th>
         </tr>
-        </thead>
-        
+      </thead>
+      <tbody>
+        {% for i in range(0, data.shape[0] ) %}
+        {% if (now - data[4][i].date()).days < 0 and not data[5][i]%}
+        {% include 'includes/items_modals_appointment.html' %}
+        <tr>
+          <td>{{data[0][i]}}</td>
+          <td>{{data[1][i]}}</td>
+          <td>{{data[2][i]}}</td>
+          <td>{{data[3][i]}}</td>
+          <td>{{data[4][i].date()}}</td>
+          <td><a class="btn" href="/home#bookNow">Book Now</a></td>
+          
+        </tr>
+        {% endif %}
+        {% endfor %}
       </tbody>
     </table>
+    
        
 <script src="static/js/jquery.min.js"></script>
 <script src="static/js/popper.js"></script>
@@ -36,6 +38,7 @@
 <script src="static/js/main.js"></script>
 
 </body>
+<br><br><br><br><br><br>
 {%endblock%}
   
               
