@@ -1,110 +1,185 @@
-{% if emailExisits %}
-<div class="alert alert-warning" role="alert">
-    the email you entered already exisits
-</div>
-{%endif%}
-{% if emailInvalid %}
-<div class="alert alert-warning" role="alert">
-    the email you entered is invalid
-</div>
-{%endif%}
-{% if ssnExisits %}
-<div class="alert alert-warning" role="alert">
-    the ssn you entered already exisits
-</div>
-{%endif%}
-    
-    <head>
-        <link rel="stylesheet" href="patient.css"> 
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-        <h1>doctor Register</h1>
-    </head>
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - youtube.com/codingnepal -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Login</title>
+    <link
+      rel="stylesheet"
+      href=" {{url_for('static',filename='css/login.css')}}"
+    />
+    <link
+    rel="stylesheet"
+    href="patient.css"
+  />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="icon" href="static\assets\img\favicon.png" />
+  </head>
 
-        <form action="http://localhost:5000/adddoctor" method="POST" enctype="multipart/form-data">
+  <body>
+    <br><br><br>
+    {% if emailExisits %}
+    <div class="alert alert-warning" role="alert">
+      the email you entered already exisits
+    </div>
+    {%endif%} {% if emailInvalid %}
+    <div class="alert alert-warning" role="alert">
+      the email you entered is invalid
+    </div>
+    {%endif%} {% if ssnExisits %}
+    <div class="alert alert-warning" role="alert">
+      the ssn you entered already exisits
+    </div>
+    {%endif%}
+    <div class="centerSignUp">
+      <h1>Doctor Register</h1>
+      <form  
+      action="{{ url_for('adddoctor') }}"
+      method="POST"
+      enctype="multipart/form-data">
+      <!-- name -->  
+      <div class="txt_field">
+          <input 
+          type="text" name="name1"
+          minlength="2"
+          maxlength="255"
+          placeholder="ex: Michael Hany Rofael"/>
+          <span></span>
+          <label for="Name">Name</label>
+        </div>
 
-            <!-- name -->
-            <div class="form-group">
-                <label for="Name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="Name" name="name1" minlength="2" maxlength="255" placeholder="ex: Michael Hany Rofael" required>
-            </div>
+      <!-- email -->
+        <div class="txt_field">
+          <input 
+          type="text" name="email"
+          placeholder="ex: name22@gmail.com" />
+          <span></span>
+          <label for="email">Email</label>
+        </div>
 
-            <!-- ssn -->
-            <div class="form-group">
-                <label for="Department">SSN</label>
-                <input type="int" inputmode="numeric" maxlength="14" placeholder="xxxxxxxxxxxxxx" class="form-control" id="SSN" name="ssn" required>
-            </div>
+      <!-- address -->
+        <div class="txt_field">
+          <input 
+          type="text" name="address"
+          placeholder="ex: 17 talaat harb street, Cairo" />
+          <span></span>
+          <label for="address">Address</label>
+        </div>
 
-            <!-- sex -->
-            <div>
-                <label for="sex">Sex</label>
-            <select class="form-select" aria-label="Default select example" id="sex" name="sex" required>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-            </select>
-            </div>
-            <!-- Sex -->
-            <!-- <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Male" id="sex" name="sex">
-                <label class="form-check-label" for="sex"> Male </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="Female" id="sex" name="sex">
-                <label class="form-check-label" for="sex"> Female </label>
-            </div> -->
+      <!-- degree -->
+        <div class="txt_field">
+          <input 
+          type="text" name="degree"/>
+          <span></span>
+          <label for="Degree">Degree</label>
+        </div>
 
-            <!-- email -->
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="text" class="form-control" id="email" name="email" placeholder="ex: name22@gmail.com" required>
-            </div>
+      <!-- specialization -->
+        <div class="txt_field">
+          <input type="text" name="specialization" />
+          <span></span>
+          <label for="Specialization">Specialization</label>
+        </div>
+        
+        <!-- password -->
+        <div class="txt_field">
+          <input type="password"  name="password" />
+          <span></span>
+          <label for="Password">Password</label>
+        </div>
+        <div class="pass">Forgot Password?</div>
 
-            <!-- password -->
-            <div class="form-group">
-                <label for="Password">Password</label>
-                <input type="password" class="form-control" id="Password" name="password" required>
-            </div>
+        <input type="submit" value="Sign Up" />
+        <div class="signup_link">
+          <br />
+          Back To Home? <a href="{{url_for('index')}}">Home</a>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
 
-            <!-- address -->
-            <div class="form-group">
-                <label for="address">Address</label>
-                <input type="text" class="form-control" id="address" name="address" placeholder="ex: 17 talaat harb street, Cairo" required>
-            </div>
-
-            <!-- birth date -->
-            <div class="form-group">
-                <label for="birth_date">Birth Date</label>
-                <input type="date" class="form-control" id="birth_date" name="birth_date" required>
-            </div>
-
-            <!-- degree -->
-            <div class="form-group">
-                <label for="Degree">Degree</label>
-                <input type="text" class="form-control" id="Degree" name="degree" required>
-            </div>
-
-            <!-- specialization -->
-            <div class="form-group">
-                <label for="Specialization">Specialization</label>
-                <input type="text" class="form-control" id="Specialization" name="specialization" required>
-            </div>
-
-            <!-- salary -->
-            <div class="form-group">
-                <label for="Salary">Salary</label>
-                <input type="int" class="form-control" min="0"  placeholder="ex: 10" required id="Salary" name="salary">
-            </div>
-
-            <!-- file -->
-            <div class="form-group">
-                <label for="photo">Select Image</label>
-                <div class="custom">
-                    <input type="file" name="photo" id="photo" placeholder="Photo" class="custom-file-input" >
-                    <label class = "custom-file-input" for="photo">Select image</label>
+    <!-- Contact -->
+    <!-- <section class="contact d-flex align-items-center py-5" id="contact">
+      <div class="container-fluid text-light">
+        <div class="row">
+          <div
+            class="col-lg-6 d-flex justify-content-center justify-content-lg-end align-items-center px-lg-5"
+            data-aos="fade-right"
+          >
+            <div style="width: 90%">
+              <div class="text-center text-lg-start py-4 pt-lg-0">
+                <p>CONTACT</p>
+                <h2 class="py-2">Send your query</h2>
+                <p class="para-light">
+                  Do you have any questions? Please do not hesitate to contact us directly. Our team will come back to you within
+        a matter of hours to help you.</p>
+              </div>
+              <div>
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group py-2">
+                      <input
+                        type="text"
+                        class="form-control form-control-input"
+                        id="exampleFormControlInput1"
+                        placeholder="Enter name"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group py-2">
+                      <input
+                        type="email"
+                        class="form-control form-control-input"
+                        id="exampleFormControlInput2"
+                        placeholder="Enter phone number"
+                      />
+                    </div>
+                  </div>
                 </div>
+                <div class="form-group py-1">
+                  <input
+                    type="email"
+                    class="form-control form-control-input"
+                    id="exampleFormControlInput3"
+                    placeholder="Enter email"
+                  />
+                </div>
+                <div class="form-group py-2">
+                  <textarea
+                    class="form-control form-control-input"
+                    id="exampleFormControlTextarea1"
+                    rows="6"
+                    placeholder="Message"
+                  ></textarea>
+                </div>
+              </div>
+              <div class="my-3">
+                <a class="btn form-control-submit-button" href="#your-link"
+                  >Submit</a
+                >
+              </div>
             </div>
-
-            <!-- button -->
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+     -->        <!-- end of div -->
+          <!-- </div>
+           --><!-- end of col -->
+      <!--     <div class="col-lg-6 d-flex align-items-center" data-aos="fade-down">
+            <img
+              class="img-fluid d-none d-lg-block"
+              src="static\assets\img\contact.jpg"
+              alt="contact"
+            />
+          </div>
+       -->    <!-- end of col -->
+ <!--        </div>
+  -->       <!-- end of row -->
+     <!--  </div>
+      --> <!-- end of container -->
+<!--     </section>
+ -->    <!-- end of contact -->

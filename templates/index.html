@@ -92,21 +92,17 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="{{url_for('bookNow')}}">Book Now</a>
+              <a class="nav-link" href="/home#bookNow">Book Now</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">My Profile</a>
+              <a class="nav-link" href="{{url_for('profileh')}}">My Profile</a>
             </li>
             <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                id="dropdown01"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-                href="#"
-                >Drop</a
-              >
-
+              <a class="nav-link dropdown-toggle"
+                 id="dropdown01"
+                 data-bs-toggle="dropdown"
+                 aria-expanded="false"
+                 href="#">Drop</a>
               <ul class="dropdown-menu" aria-labelledby="dropdown01">
                 <li><div class="dropdown-divider"></div></li>
                 <li>
@@ -149,6 +145,7 @@
     <!-- end of navigation -->
 
     {%block main%}
+
     <!-- Home -->
     <section class="home py-5 d-flex align-items-center" id="header">
       <div class="container text-light py-5" data-aos="fade-right">
@@ -171,7 +168,7 @@
           <p>Lorem ipsum dolor sit amet.</p>
         </div> -->
         <div class="my-3">
-          <a class="btn" href="{{url_for('bookNow')}}">Book Now</a>
+          <a class="btn" href="/home#bookNow">Book Now</a>
         </div>
       </div>
       <!-- end of container -->
@@ -241,7 +238,6 @@
       <!-- end of container -->
     </section>
     <!-- end of about -->
-
     <!-- Plans -->
     <section class="plans d-flex align-items-center py-5" id="plans">
       <div class="container text-light">
@@ -435,19 +431,14 @@
     </section>
     <!-- end of work -->
 
-    <!-- Testimonials -->
-    <div class="slider-1 testimonial text-light d-flex align-items-center">
+    <!-- Our Doctors-->
+    <div class="slider-1 testimonial text-light d-flex align-items-center" id="bookNow">
       <div class="container">
         <div class="row">
           <div class="text-center w-lg-75 m-auto pb-4">
-            <p>TESTIMONIALS</p>
-            <h2 class="py-2">What Our Clients Says</h2>
-            <p class="para-light">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci
-              esse facilis vel, neque ipsa mollitia impedit, commodi ab illo
-              dignissimos, voluptatum quae amet sed tenetur dolores
-              reprehenderit laudantium quo sint.
-            </p>
+            <!-- <p>TESTIMONIALS</p> -->
+            <h2 class="py-2">Our Doctors</h2>
+            <p class="para-light"></p>
           </div>
         </div>
         <!-- end of row -->
@@ -458,14 +449,10 @@
               <div class="swiper-container card-slider">
                 <div class="swiper-wrapper">
                   <!-- Slide -->
-                  <div class="swiper-slide">
+                  {%for r in data%}
+                    <div class="swiper-slide">
                     <div class="testimonial-card p-4">
-                      <p>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing
-                        elit. Laboriosam commodi officia laborum qui iste
-                        quidem!
-                      </p>
-
+                      <p></p>
                       <div class="d-flex pt-4">
                         <div>
                           <img
@@ -475,95 +462,18 @@
                           />
                         </div>
                         <div class="ms-3 pt-2">
-                          <h6><a href="{{url_for('index')}}">Visconte</a></h6>
-                          <p>General Manager - Scouter</p>
+                          <h6><a href="{{url_for('bookNow')}}">{{r[0]}}</a></h6>
+                          <p>ashtar dr f masr</p>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <!-- end of swiper-slide -->
-                  <!-- end of slide -->
-
-                  <!-- Slide -->
-                  <div class="swiper-slide">
-                    <div class="testimonial-card p-4">
-                      <p>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing
-                        elit. Laboriosam commodi officia laborum qui iste
-                        quidem!
-                      </p>
-                      <div class="d-flex pt-4">
-                        <div>
-                          <img
-                            class="avatar"
-                            src="static\assets\img\testimonial-2.jpg"
-                            alt="testimonial"
-                          />
-                        </div>
-                        <div class="ms-3 pt-2">
-                          <h6>John Spiker</h6>
-                          <p>Team Leader - Vanquish</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- end of swiper-slide -->
-                  <!-- end of slide -->
-
-                  <!-- Slide -->
-                  <div class="swiper-slide">
-                    <div class="testimonial-card p-4">
-                      <p>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing
-                        elit. Laboriosam commodi officia laborum qui iste
-                        quidem!
-                      </p>
-                      <div class="d-flex pt-4">
-                        <div>
-                          <img
-                            class="avatar"
-                            src="static\assets\img\testimonial-3.jpg"
-                            alt="testimonial"
-                          />
-                        </div>
-                        <div class="ms-3 pt-2">
-                          <h6>Stella Virtuoso</h6>
-                          <p>Design Chief - Upscale</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- end of swiper-slide -->
-                  <!-- end of slide -->
-
-                  <!-- Slide -->
-                  <div class="swiper-slide">
-                    <div class="testimonial-card p-4">
-                      <p>
-                        Lorem ipsum dolor, sit amet consectetur adipisicing
-                        elit. Laboriosam commodi officia laborum qui iste
-                        quidem!
-                      </p>
-                      <div class="d-flex pt-4">
-                        <div>
-                          <img
-                            class="avatar"
-                            src="static\assets\img\testimonial-4.jpg"
-                            alt="testimonial"
-                          />
-                        </div>
-                        <div class="ms-3 pt-2">
-                          <p>Mike tim</p>
-                          <p>Investor - TechGroww</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  {% endfor %}
+                  
                   <!-- end of swiper-slide -->
                   <!-- end of slide -->
                 </div>
                 <!-- end of swiper-wrapper -->
-
                 <!-- Add Arrows -->
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
@@ -582,38 +492,6 @@
     </div>
     <!-- end of testimonials -->
 
-    <!-- Newsletter -->
-    <section class="newsletter text-light py-5">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6 text-center text-lg-start" data-aos="fade-right">
-            <h4 class="py-1">Subscribe to our Newsletter</h4>
-            <p class="para-light">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolor
-              deleniti nobis amet accusamus debitis facilis quibusdam officia
-              laborum nesciunt. Nihil.
-            </p>
-          </div>
-          <div class="col-lg-6 d-flex align-items-center" data-aos="fade-down">
-            <div class="input-group my-3">
-              <input
-                type="text"
-                class="form-control p-2"
-                placeholder="Enter your email address"
-                aria-label="Recipient's email"
-              />
-              <button class="btn-secondary text-light" type="button">
-                Subscribe
-              </button>
-            </div>
-          </div>
-        </div>
-        <!-- end of row -->
-      </div>
-      <!-- end of container -->
-    </section>
-    <!-- end of newsletter -->
-
     <!-- Contact -->
     <section class="contact d-flex align-items-center py-5" id="contact">
       <div class="container-fluid text-light">
@@ -627,41 +505,22 @@
                 <p>CONTACT</p>
                 <h2 class="py-2">Send your query</h2>
                 <p class="para-light">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Dignissimos dicta mollitia totam explicabo obcaecati quia
-                  laudantium repudiandae.
-                </p>
+                  Do you have any questions? Please do not hesitate to contact us directly. Our team will come back to you within
+        a matter of hours to help you.
+</p>
               </div>
               <div>
                 <div class="row">
                   <div class="col-lg-6">
                     <div class="form-group py-2">
-                      <input
-                        type="text"
-                        class="form-control form-control-input"
-                        id="exampleFormControlInput1"
-                        placeholder="Enter name"
-                      />
                     </div>
                   </div>
                   <div class="col-lg-6">
                     <div class="form-group py-2">
-                      <input
-                        type="email"
-                        class="form-control form-control-input"
-                        id="exampleFormControlInput2"
-                        placeholder="Enter phone number"
-                      />
                     </div>
                   </div>
                 </div>
                 <div class="form-group py-1">
-                  <input
-                    type="email"
-                    class="form-control form-control-input"
-                    id="exampleFormControlInput3"
-                    placeholder="Enter email"
-                  />
                 </div>
                 <div class="form-group py-2">
                   <textarea
@@ -684,7 +543,7 @@
           <div class="col-lg-6 d-flex align-items-center" data-aos="fade-down">
             <img
               class="img-fluid d-none d-lg-block"
-              src="static\assets\img\contact.jpg"
+              src="https://th.bing.com/th/id/R.a9b4543de90135151f15b4d604c574ff?rik=cMyhVe1RRUBqTw&riu=http%3a%2f%2fnewcanadiandrain.com%2fwp-content%2fuploads%2f2011%2f11%2fContact-Us-2000x1039.jpg&ehk=zmtaSlD9kWZh1RW5SQtgisoqbALASsuHA6vLmFkJ6oo%3d&risl=&pid=ImgRaw&r=0"
               alt="contact"
             />
           </div>
@@ -725,7 +584,7 @@
             <div class="p-2"><i class="far fa-clock fa-3x"></i></div>
             <div class="ms-2">
               <h6>OPENING HOURS</h6>
-              <p>09:00 AM - 18:00 PM</p>
+              <p>06:00 PM - 10:00 PM</p>
             </div>
           </div>
         </div>
@@ -745,10 +604,7 @@
               <h4 class="">Muscle Carers</h4>
             </div>
             <p class="py-3 para-light">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus
-              animi repudiandae explicabo esse maxime, impedit rem voluptatibus
-              amet error quas.
-            </p>
+              With a team of qualified and experienced professionals that has been helping patients regain their health and wellness since 2000.</p>
             <div class="d-flex">
               <div class="me-3">
                 <a href="#your-link">
@@ -817,11 +673,10 @@
 
           <div class="col-lg-3 py-4 py-md-5">
             <div class="d-flex align-items-center">
-              <h4>Newsletter</h4>
+              <h4>Join Us</h4>
             </div>
             <p class="py-3 para-light">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Laboriosam, ab.
+            To join us, send your email and we will contact you..   
             </p>
             <div class="d-flex align-items-center">
               <div class="input-group mb-3">
