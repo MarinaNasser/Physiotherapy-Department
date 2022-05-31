@@ -282,6 +282,7 @@ function finishStep(wizard, state)
     if (wizard.triggerHandler("finishing", [state.currentIndex]))
     {
         currentStep.addClass("done").removeClass("error");
+        document.getElementById("outside").style.display = "block";
         wizard.triggerHandler("finished", [state.currentIndex]);
     }
     else
@@ -794,6 +795,7 @@ function paginationClickHandler(event)
             break;
 
         case "finish":
+
             finishStep(wizard, state);
             break;
 
