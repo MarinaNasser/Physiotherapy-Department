@@ -26,7 +26,7 @@
 
   <body>
     <div class="wrapper" id="inside">
-      <form action="http://127.0.0.1:5000/addpatient" method="POST" id="wizard" , enctype="multipart/form-data">
+      <form action="http://127.0.0.1:5000/addpatient" method="POST" id="wizard" enctype="multipart/form-data">
         <!-- SECTION 1 -->
         <h3 style="color: white; font-size: 40px">SignUp</h3>
         <h4></h4>
@@ -71,6 +71,7 @@
                   class="form-control"
                   placeholder="Full Name"
                   id="name"
+                  name="name"
                   minlength="2"
                   maxlength="255"
                   required
@@ -91,6 +92,7 @@
                   inputmode="numeric"
                   maxlength="14"
                   id="ssn"
+                  name="ssn"
                   required
                 />
                 <i class="zmdi zmdi-account-box-o small"></i>
@@ -108,6 +110,7 @@
                   class="form-control"
                   placeholder="Phone"
                   id="phone"
+                  name="phone"
                 />
                 <i class="zmdi zmdi-smartphone-android"></i>
               </div>
@@ -121,6 +124,7 @@
                   class="form-control"
                   placeholder="Address"
                   id="address"
+                  name="address"
                   required
                 />
                 <i class="zmdi zmdi-map small"></i>
@@ -142,6 +146,7 @@
                   class="form-control"
                   placeholder="Email"
                   id="email"
+                  name="email"
                   required
                 />
                 <i class="zmdi zmdi-email small"></i>
@@ -159,6 +164,7 @@
                   class="form-control"
                   placeholder="Password"
                   id="password"
+                  name="password"
                   required
                 />
                 <i class="zmdi zmdi-lock-open small"></i>
@@ -169,12 +175,12 @@
             <div class="form-row">
               <div class="select">
                 <div class="form-holder">
-                  <div class="select-control" id="sex">Gender</div>
+                  <div class="select-control" id="sex" name="sex">Gender</div>
                   <i class="zmdi zmdi-caret-down small"></i>
                 </div>
                 <ul class="dropdown">
-                  <li rel="Male">Male</li>
-                  <li rel="Female">Female</li>
+                  <li value="Male">Male</li>
+                  <li value="Female">Female</li>
                 </ul>
               </div>
             </div>
@@ -188,6 +194,7 @@
                   data-language="en"
                   data-date-format="dd - mm - yyyy"
                   id="birthDate"
+                  name="birthDate"
                   placeholder="Date of Birth"
                 />
               </div>
@@ -197,16 +204,16 @@
             <div class="form-row">
               <div class="select">
                 <div class="form-holder">
-                  <div class="select-control" id="maritalStatus">
+                  <div class="select-control" id="maritalStatus" name="maritalStatus">
                     Marital Status
                   </div>
                   <i class="zmdi zmdi-caret-down small"></i>
                 </div>
                 <ul class="dropdown">
-                  <li rel="Married">Married</li>
-                  <li rel="Single">Single</li>
-                  <li rel="Divorced">Divorced</li>
-                  <li rel="Widowed">Widowed</li>
+                  <li value="Married">Married</li>
+                  <li value="Single">Single</li>
+                  <li value="Divorced">Divorced</li>
+                  <li value="Widowed">Widowed</li>
                 </ul>
               </div>
             </div>
@@ -226,6 +233,7 @@
                   class="form-control"
                   placeholder="Job (OPTIONAL)"
                   id="job"
+                  name="job"
                 />
               </div>
             </div>
@@ -238,6 +246,7 @@
                   class="form-control"
                   placeholder="Insurance Number (OPTIONAL)"
                   id="insuranceNumber"
+                  name="insuranceNumber"
                 />
               </div>
             </div>
@@ -250,11 +259,13 @@
                   class="form-control"
                   placeholder="Credit Card (OPTIONAL)"
                   id="creditCard"
+                  name="creditCard"
                 />
               </div>
             </div>
           </div>
         </section>
+        <button class="button" type="submit" value="Submit">Submit</button>
       </form>
     </div>
 
