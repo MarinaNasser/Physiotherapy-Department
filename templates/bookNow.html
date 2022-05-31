@@ -1,121 +1,41 @@
 {%extends'index.html'%}
 {%block main%}
-
-<head>
-    <title>Table 03</title>
-    <link rel="stylesheet" href="bookNow.css"> 
-  </head>
   <body>
-    <br><br><br>
-    <div id="bookNowIcon" class="testimonial-card p-4">
-      <p></p>
-      <div class="d-flex pt-4">
-        <div>
-          <img
-            class="avatar"
-            src="static\assets\img\testimonial-4.jpg"
-            alt="testimonial"
-          />
-        </div>
-        <div class="ms-3 pt-2">
-          <p>Dr. Magdy Nasr</p>
-          <p>msh batal</p>
-        </div>
-      </div>
-    </div>
-    
-  <section class="ftco-section">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-md-6 text-center mb-5">
-          <h2 class="heading-section"></h2>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <h4 class="text-center mb-4"><br>Book Your Appointment</h4>
-          <div class="table-wrap">
-            <table class="table">
-              <thead class="thead-primary">
-                <tr>
-                  <th>Day</th>
-                  <th>hour</th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row" class="scope border-bottom-0">Thursday</th>
-                  <td class="border-bottom-0">1 Year</td>
-                  <td class="border-bottom-0">$45.00</td>
-                  <td class="border-bottom-0">$5.00</td>
-                  <td class="border-bottom-0">$5.00</td>
-                  <td>  <button type="submit" class="btn btn-primary" > <a href="#" >Book Appointment</a></button></a></td>
-                </tr>
-                <tr>
-                  <th scope="row" class="scope border-bottom-0">Friday</th>
-                  <td class="border-bottom-0">1 Year</td>
-                  <td class="border-bottom-0">$45.00</td>
-                  <td class="border-bottom-0">$5.00</td>
-                  <td class="border-bottom-0">$5.00</td>
-                  <td>  <button type="submit" class="btn btn-primary" > <a href="#" >Book Appointment</a></button></a></td>
-                </tr>
-                <tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    <table class="table table-hover table-dark">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+          <th scope="col">Handle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+      </tbody>
+    </table>
+       
+<script src="static/js/jquery.min.js"></script>
+<script src="static/js/popper.js"></script>
+<script src="statics/js/bootstrap.min.js"></script>
+<script src="static/js/main.js"></script>
 
-  <script src="static/js/jquery.min.js"></script>
-  <script src="static/js/popper.js"></script>
-  <script src="statics/js/bootstrap.min.js"></script>
-  <script src="static/js/main.js"></script>
-
-  </body>
+</body>
 {%endblock%}
   
               
 
 
-    <table class="table or container">
-        <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">name</th>
-            <th scope="col">start time</th>
-            <th scope="col">end time</th>
-            <th scope="col">date</th>
-        </tr>
-        </thead>
-        <tbody>
-          {% for i in range(0, data.shape[0] ) %}
-            {% if (now - data[4][i].date()).days < 0 and not data[5][i]%}
-            {% include 'includes/items_modals_appointment.html' %}
-                <tr>
-                    <td>{{data[0][i]}}</td>
-                    <td>{{data[1][i]}}</td>
-                    <td>{{data[2][i]}}</td>
-                    <td>{{data[3][i]}}</td>
-                    <td>{{data[4][i].date()}}</td>
-                    <td>
-                        <button class="btn btn-outline btn-info" data-toggle="modal" data-target="#Modal-appointment-{{data[0][i]}}">bookNow</button>
-                    </td>    
-                </tr>
-            {% endif %}
-          {% endfor %}
-        
-        </tbody>
-    </table>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-   {%if booked%}
-    <div> your appointment has been booked successfully</div>
-   {% endif %}
 
-<!-- </body> -->
-</html>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+{%if booked%}
+<div> your appointment has been booked successfully</div>
+{% endif %}
+
+

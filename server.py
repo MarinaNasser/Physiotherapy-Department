@@ -25,6 +25,7 @@ mycursor = mydb.cursor()
 
 @app.route('/')
 @app.route('/home')
+
 def index():
     sql = "SELECT name,id FROM DOCTOR"
     mycursor.execute(sql)
@@ -123,7 +124,8 @@ def adddoctor():
     if request.method == 'POST':
 
         #requesting data form
-        name = request.form['name1']
+
+        name = request.form['name']
         ssn=request.form['ssn']
         sex = request.form['sex']
         email = request.form['email']
@@ -132,7 +134,7 @@ def adddoctor():
         birth_date = request.form['birth_date']
         degree = request.form['degree']
         Specialization= request.form['specialization']
-        salary = request.form['salary']
+        phone = request.form['phone']
         photo = request.files['photo']
         pic_path = save_picture(photo)
 
@@ -155,8 +157,8 @@ def adddoctor():
         elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
             return render_template('adddoctor.html', emailExisits = False , emailInvalid=True )        
         else:    
-            sql = """INSERT INTO doctorPreRequest (name,ssn,sex,email,password,address,birth_date,degree,specialization,salary, photo) VALUES (%s, %s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
-            val = (name,ssn,sex,email,password,address,birth_date,degree,Specialization,salary, pic_path)
+            sql = """INSERT INTO doctorPreRequest (name,ssn,sex,email,password,address,birth_date,degree,specialization,phone,photo) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+            val = (name,ssn,sex,email,password,address,birth_date,degree,Specialization,phone,pic_path)
             mycursor.execute(sql,val)
             mydb.commit()
             return redirect(url_for('index'))
@@ -213,7 +215,6 @@ def doctors():
     return render_template('doctor.html')
 
 # ------------------------------------------------------------------------Add Patient---------------------------------------------------------------
-
 @app.route('/addpatient', methods = ['POST', 'GET'])
 def addpatient():
     if request.method == 'POST': ##check if there is post data
@@ -280,7 +281,8 @@ def profile():
 @app.route('/adminViewDoctor', methods = ['POST','GET'])
 def adminViewDoctor():
     if request.method == 'POST'and "ssn" in request.form:
-        name = request.form['name1']
+
+        name = request.form['name']
         ssn=request.form['ssn']
         sex = request.form['sex']
         email = request.form['email']
@@ -289,10 +291,18 @@ def adminViewDoctor():
         birth_date = request.form['birth_date']
         degree = request.form['degree']
         Specialization= request.form['specialization']
-        salary = request.form['salary']
+        phone = request.form['phone']
+        photo = request.form['photo']
 
-        sql = """INSERT INTO doctor (name,ssn,sex,email,password,address,birth_date,degree,specialization,salary) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
-        val = (name,ssn,sex,email,password,address,birth_date,degree,Specialization,salary)
+
+
+        sql = """INSERT INTO doctor (name,ssn,sex,email,password,address,birth_date,degree,specialization,phone,photo) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+        val = (name,ssn,sex,email,password,address,birth_date,degree,Specialization,phone,photo)
+        mycursor.execute(sql,val)
+        mydb.commit()
+        
+        sql = """INSERT INTO users (email,password,kind) VALUES (%s,%s,%s)"""
+        val = (email,password,'doctor')
         mycursor.execute(sql,val)
         mydb.commit()
 
