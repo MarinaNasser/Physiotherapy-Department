@@ -102,11 +102,14 @@ img {
 
 .button {
   margin-left: 300px;
-  margin-top: 80px;
+  margin-top: 60px;
   background-color: #fff;
   font-size: 30px;
   padding: 20px;
   border-radius: 20px;
+}
+.button:hover {
+  cursor: pointer;
 }
 
 .outside {
