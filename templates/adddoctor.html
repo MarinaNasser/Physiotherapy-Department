@@ -61,9 +61,12 @@
       method="POST"
       enctype="multipart/form-data">
       <!-- name -->  
+
       <div class="txt_field">
           <input 
-          type="text" name="name1"
+          type="text"
+          id="name" 
+          name="name"
           minlength="2"
           maxlength="255"
           placeholder="ex: Michael Hany Rofael"/>
@@ -75,15 +78,21 @@
       <div class="txt_field">
         <input 
         type="int" inputmode="numeric" maxlength="14"
-        placeholder="xxxxxxxxxxxxxx" name="ssn" />
+        placeholder="xxxxxxxxxxxxxx"
+        id="ssn"
+         name="ssn" />
         <span></span>
         <label for="Department">SSN</label>
       </div>
-      <!-- phone number -->
+
+      phone number
+
       <div class="txt_field">
         <input 
-        type="tel" inputmode="numeric" maxlength="11"
-        placeholder="xxxxxxxxxxx" name="phone number" />
+        type="tel"  maxlength="11"
+        placeholder="xxxxxxxxxxx"
+         name="phone"
+         id="phone" />
         <span></span>
         <label for="Department">Phone Number</label>
       </div>

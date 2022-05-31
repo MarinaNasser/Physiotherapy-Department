@@ -18,11 +18,9 @@ app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="N#@98wrft45",
-    database="sbe2024"
-    )
-
-
+    passwd="Ahmed9112",
+    database="hospital"
+)
 mycursor = mydb.cursor()
 
 @app.route('/')
@@ -125,7 +123,8 @@ def adddoctor():
     if request.method == 'POST':
 
         #requesting data form
-        name = request.form['name1']
+
+        name = request.form['name']
         ssn=request.form['ssn']
         sex = request.form['sex']
         email = request.form['email']
@@ -134,7 +133,7 @@ def adddoctor():
         birth_date = request.form['birth_date']
         degree = request.form['degree']
         Specialization= request.form['specialization']
-        salary = request.form['salary']
+        phone = request.form['phone']
         photo = request.files['photo']
         pic_path = save_picture(photo)
 
@@ -157,8 +156,8 @@ def adddoctor():
         elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
             return render_template('adddoctor.html', emailExisits = False , emailInvalid=True )        
         else:    
-            sql = """INSERT INTO doctorPreRequest (name,ssn,sex,email,password,address,birth_date,degree,specialization,salary, photo) VALUES (%s, %s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
-            val = (name,ssn,sex,email,password,address,birth_date,degree,Specialization,salary, pic_path)
+            sql = """INSERT INTO doctorPreRequest (name,ssn,sex,email,password,address,birth_date,degree,specialization,phone,photo) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+            val = (name,ssn,sex,email,password,address,birth_date,degree,Specialization,phone,pic_path)
             mycursor.execute(sql,val)
             mydb.commit()
             return redirect(url_for('index'))
@@ -282,7 +281,8 @@ def profile():
 @app.route('/adminViewDoctor', methods = ['POST','GET'])
 def adminViewDoctor():
     if request.method == 'POST'and "ssn" in request.form:
-        name = request.form['name1']
+
+        name = request.form['name']
         ssn=request.form['ssn']
         sex = request.form['sex']
         email = request.form['email']
@@ -291,10 +291,13 @@ def adminViewDoctor():
         birth_date = request.form['birth_date']
         degree = request.form['degree']
         Specialization= request.form['specialization']
-        salary = request.form['salary']
+        phone = request.form['phone']
+        photo = request.form['photo']
 
-        sql = """INSERT INTO doctor (name,ssn,sex,email,password,address,birth_date,degree,specialization,salary) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
-        val = (name,ssn,sex,email,password,address,birth_date,degree,Specialization,salary)
+
+
+        sql = """INSERT INTO doctor (name,ssn,sex,email,password,address,birth_date,degree,specialization,phone,photo) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+        val = (name,ssn,sex,email,password,address,birth_date,degree,Specialization,phone,photo)
         mycursor.execute(sql,val)
         mydb.commit()
 
