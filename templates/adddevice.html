@@ -9,13 +9,6 @@
 
         <form action="http://localhost:5000/adddevice" method="POST" enctype="multipart/form-data">
 
-            <!-- device_number -->
-            <div class="form-group">
-                <label for="device_num">Device Number</label>
-                <input type="numeric" class="form-control" min="0" placeholder="ex: 10" required id="device_num" name="device_num">
-            </div>
-            
-
             <!-- device_name -->
             <div class="form-group">
                 <label for="device_name" class="form-label">Device Name</label>
@@ -30,7 +23,7 @@
 
             <!-- technician_id -->
             <div>
-                <label for="technician_id">Device ID</label>
+                <label for="technician_id">Technicien ID</label>
                     <input name="technician_id" type="number" class="form-control" id="technician_id" min="0" max="1000000000" placeholder="ex: 10" required>
                 <script>
                     document.getElementById('id').validity.rangeOverflow;
@@ -38,9 +31,18 @@
                 </script>
             </div>
 
+            <!-- technnician_name-->
+            <div>
+                <label for="technnicianName">Technnician Name</label>
+                <input name="technnicianName" type="text" class="form-control" id="technnicianName" minlength="2" maxlength="255" placeholder="ex: Michael Hany Rofael" required>
+                <script>
+                    document.getElementById('name').validity.valid;
+                </script>
+            </div>  
+
             <!-- file -->
             <div class="form-group">
-                <label for="photo">Select Image</label>
+                <label for="photo">Select Device Image</label>
                 <div class="custom">
                     <input type="file" name="photo" id="photo" placeholder="Photo" class="custom-file-input" >
                     <label class = "custom-file-input" for="photo">Select image</label>

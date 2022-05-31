@@ -366,6 +366,7 @@ def viewAppointments():
     return render_template('viewAppointments.html', data = result)
 
 # ------------------------------------------------------------------------book now----------------------------------------------------------------
+
 @app.route('/bookNow',methods = ['GET','POST'])
 def bookNow():
     sql = "SELECT appNo,name,startT,endT,dt,booked FROM appointment join doctor on doctorEmail = email"
