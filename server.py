@@ -1,3 +1,4 @@
+from distutils.log import debug
 import email
 import pandas as pd
 from datetime import datetime
@@ -382,15 +383,23 @@ def bookNow():
     sql = "SELECT appNo,name,startT,endT,dt,booked FROM appointment join doctor on doctorEmail = email"
     mycursor.execute(sql)
     result = mycursor.fetchall()
-    print(result)
+    # print(result)
     
     list_of_tuples = pd.DataFrame(result)
     list_of_tuples[4] = pd.to_datetime(list_of_tuples[4],format="%d-%m-%Y")
     
     # print((datetime.now() - list_of_tuples[4][0]).days)
-    print(list_of_tuples)
+    # print(list_of_tuples)
     
-    if request.method == 'POST':
+    if request.method == 'POST' and "toFind" in request.form:
+        
+        toFind = request.form['toFind']
+        print(toFind)
+        print(toFind)
+        return render_template('bookNow.html',data = list_of_tuples,now = datetime.now().date(),booked = True,toFind = toFind)
+    elif request.method == 'POST':
+        print("JUSt POST")
+        print("JUSt POST")
         appNo = request.form['appNo']
         sql = """UPDATE appointment
         SET patientEmail = %s,
@@ -407,9 +416,20 @@ def bookNow():
         list_of_tuples = pd.DataFrame(result)
         list_of_tuples[4] = pd.to_datetime(list_of_tuples[4],format="%d-%m-%Y")
         
-        return render_template('bookNow.html',data = list_of_tuples,now = datetime.now().date(),booked = True)
+        return render_template('bookNow.html',data = list_of_tuples,now = datetime.now().date(),booked = True,toFind = "")
     else:
-        return render_template('bookNow.html',data = list_of_tuples,now = datetime.now().date(),booked = False)
+        print("GET")
+        print("GET")
+        return render_template('bookNow.html',data = list_of_tuples,now = datetime.now().date(),booked = False,toFind = "")
+
+# ------------------------------------------------------------------------search----------------------------------------------------------------
+# @app.route('/bookNow/search')
+# def search():
+#     if request.method == 'POST':
+#         toFind = request.form['toFind']
+#         # bookNow(toFind)
+#         return render_template('bookNow.html')
+
 
 # @app.route('/confirmBooking',methods = ['GET','POST'])
 # def confirmBooking():
