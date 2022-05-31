@@ -379,7 +379,7 @@ def bookNow():
     
     # print((datetime.now() - list_of_tuples[4][0]).days)
     print(list_of_tuples)
-        
+    
     if request.method == 'POST':
         appNo = request.form['appNo']
         sql = """UPDATE appointment
