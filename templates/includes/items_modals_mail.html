@@ -1,0 +1,101 @@
+<style>
+    .modal-content {
+      background-color: #212121
+    }
+  </style>
+
+
+<div class="modal fade" id="Modal-accept-{{item.0}}"
+     tabindex="-1"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLabel">
+
+          Adding doctor
+
+        </h5>
+        <button type="button" class="close"
+                data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to add ?
+      </div>
+
+      <form action="/adminViewDoctor" method="post">
+
+        <div class="form-group py-2">
+            <input
+              name="message"
+              class="form-control form-control-input"
+              id="exampleFormControlTextarea1"
+              rows="6"
+              value="{{ item.4 }}"
+              readonly
+            ></textarea>
+          </div>
+        
+        <button type="submit" class="btn btn-primary">accept</button>
+        
+      </form>      
+      
+      <button type="button" class="btn btn-secondary"
+      data-dismiss="modal">Close        
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ----------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!-- 
+Purchase Confirm -->
+
+<!-- <div class="modal fade" id="Modal-refuse-{{item.0}}"
+     tabindex="-1"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLabel">
+          Refusing doctor
+        </h5>
+        <button type="button" class="close"
+                data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          Are you sure you want to refuse Dr.{{ item.1 }} ?
+          with
+          <form action="/adminViewDoctor" method="post"> -->
+            <!-- name -->
+          <!-- <div class="form-group">
+              <label for="Name" class="form-label">Name</label>
+              <input type="text" class="form-control" id="nameref" name="nameref" value="{{item.1}}">
+          </div> -->
+  
+          <!-- ssn -->
+          <!-- <div class="form-group">
+              <label for="ssn">SSN</label>
+              <input type="int" class="form-control" id="ssnref" name="ssnref" value="{{ item.2 }}" >
+          </div>
+
+          <button type="submit" class="btn btn-primary">refuse</button>
+
+        </form>      
+      </div>
+      <div class="modal-footer">
+ 
+</button>
+        <button type="button" class="btn btn-secondary"
+                data-dismiss="modal">Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div> -->
+

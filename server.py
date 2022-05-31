@@ -106,7 +106,7 @@ def signUp():
         
         session['name'] = name
         session['email'] = email
-        return redirect(url_for('base'))
+        return redirect(url_for('index'))
 
 # ------------------------------------------------------------------------Log Out-------------------------------------------------------------------
 
@@ -302,6 +302,11 @@ def adminViewDoctor():
         val = (name,ssn,sex,email,password,address,birth_date,degree,Specialization,phone,photo)
         mycursor.execute(sql,val)
         mydb.commit()
+        
+        sql = """INSERT INTO users (email,password,kind) VALUES (%s,%s,%s)"""
+        val = (email,password,'doctor')
+        mycursor.execute(sql,val)
+        mydb.commit()
 
 
 
@@ -429,7 +434,35 @@ def bookNow():
 
 # @app.route('/confirmBooking',methods = ['GET','POST'])
 # def confirmBooking():
-    
+
+
+# ------------------------------------------------------------------------test----------------------------------------------------------------
+
+@app.route('/messages', methods = ['GET','POST'])
+def messages():
+    if request.method == 'POST':
+        emailTo = request.form['emailTo']
+        emailFrom=request.form['emailFrom']
+        title = request.form['title']
+        message = request.form['message']
+
+        sql = """INSERT INTO messages (emailTo,emailFrom,title,message) VALUES (%s,%s,%s,%s)"""
+        val = (emailTo,emailFrom,title,message)
+        mycursor.execute(sql,val)
+        mydb.commit()
+
+    return render_template('messages.html')
+
+# ------------------------------------------------------------------------test----------------------------------------------------------------
+@app.route('/inbox', methods = ['POST','GET'])
+def inbox():
+    sql = """Select * from messages where emailTo = %s"""
+    val = (session['user_patient'],)
+    mycursor.execute(sql,val)
+    result = mycursor.fetchall()
+    return render_template('inbox.html',result=result)
+
+# ------------------------------------------------------------------------test----------------------------------------------------------------
 
 if __name__ == '__main__':
     app.run(debug = True)
