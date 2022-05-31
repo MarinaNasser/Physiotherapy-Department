@@ -17,9 +17,9 @@ app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="A_0l1a2a3",
-    database="hosiptal"
-    )
+    passwd="Ahmed9112",
+    database="hospital"
+)
 mycursor = mydb.cursor()
 
 @app.route('/')
@@ -76,6 +76,10 @@ def login():
                 session['user_doctor'] = userEmail
                 session['loggedIn'] = True
                 return redirect(url_for('index')) 
+            elif record[2] == 'technician':
+                session['user_technician'] = userEmail
+                session['loggedIn'] = True
+                return redirect(url_for('index')) 
             else:
                 session['user_admin'] = userEmail
                 session['loggedIn'] = True
@@ -119,6 +123,7 @@ def adddoctor():
     if request.method == 'POST':
 
         #requesting data form
+
         name = request.form['name1']
         ssn=request.form['ssn']
         sex = request.form['sex']
@@ -133,26 +138,43 @@ def adddoctor():
         pic_path = save_picture(photo)
 
         #setting a buffered cursor => to accept one value in the input
-        emailCursor =mydb.cursor(buffered=True)
-        emailCursor.execute(""" SELECT * FROM doctor WHERE email = %s """ , (email,))
-        emailExist = emailCursor.fetchone()
+
+
+        emailCursorDoctor =mydb.cursor(buffered=True)
+        emailCursorDoctor.execute(""" SELECT * FROM doctor WHERE email = %s """ , (email,))
+        emailExistDoctor = emailCursorDoctor.fetchone()
 
         ssnCursor =mydb.cursor(buffered=True)
         ssnCursor.execute(""" SELECT * FROM doctor WHERE ssn = %s """ , (ssn,))
         ssnExist = ssnCursor.fetchone()
 
-        if emailExist and ssnExist :
-            return render_template('adddoctor.html', emailExisits = True , ssnExisits=True)
-        elif emailExist or ssnExist :
-            if emailExist :
-                return render_template('adddoctor.html', emailExisits = True , ssnExisits=False)
+        emailCursorDoctorRequests =mydb.cursor(buffered=True)
+        emailCursorDoctorRequests.execute(""" SELECT * FROM doctorprerequest WHERE email = %s """ , (email,))
+        emailCursorDoctorRequests = emailCursorDoctorRequests.fetchone()
+
+        ssnCursorDoctorRequests = mydb.cursor(buffered=True)
+        ssnCursorDoctorRequests.execute(""" SELECT * FROM doctorprerequest WHERE ssn = %s """ , (ssn,))
+        ssnCursorDoctorRequests = ssnCursorDoctorRequests.fetchone()
+
+        if emailExistDoctor and ssnExist and emailCursorDoctorRequests and ssnCursorDoctorRequests :
+            return render_template('adddoctor.html', emailExisits = True , ssnExisits=True , emailCursorDoctorRequests=True ,ssnCursorDoctorRequests=True )
+
+        elif emailExistDoctor or ssnExist or emailCursorDoctorRequests or ssnCursorDoctorRequests:
+            if emailExistDoctor :
+                return render_template('adddoctor.html', emailExisits = True , ssnExisits=False , emailCursorDoctorRequests=False ,ssnCursorDoctorRequests=False)
+            elif ssnExist:
+                return render_template('adddoctor.html', emailExisits = False , ssnExisits=True , emailCursorDoctorRequests=False, ssnCursorDoctorRequests= False) 
+            elif emailCursorDoctorRequests :
+                return render_template('adddoctor.html', emailExisits = False , ssnExisits=False , emailCursorDoctorRequests=True, ssnCursorDoctorRequests = False)
             else:
-                return render_template('adddoctor.html', emailExisits = False , ssnExisits=True)        
+                return render_template('adddoctor.html', emailExisits = False , ssnExisits=False , emailCursorDoctorRequests=False, ssnCursorDoctorRequests = True)
+
         elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
-            return render_template('adddoctor.html', emailExisits = False , emailInvalid=True )        
+            return render_template('adddoctor.html', emailExisits = False , emailInvalid=True )  
+
         else:    
-            sql = """INSERT INTO doctorPreRequest (name,ssn,sex,email,password,address,birth_date,degree,specialization,salary, photo) VALUES (%s, %s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
-            val = (name,ssn,sex,email,password,address,birth_date,degree,Specialization,salary, pic_path)
+            sql = """INSERT INTO doctorPreRequest (name,ssn,sex,email,password,address,birth_date,degree,specialization,salary,photo) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+            val = (name,ssn,sex,email,password,address,birth_date,degree,Specialization,salary,pic_path)
             mycursor.execute(sql,val)
             mydb.commit()
             return redirect(url_for('index'))
@@ -160,7 +182,6 @@ def adddoctor():
         print('get')
         return render_template('adddoctor.html')
         mycursor.close()
-
 # ------------------------------------------------------------------------View Doctor---------------------------------------------------------------------
 
 @app.route('/viewdoctor')
@@ -233,7 +254,7 @@ def addpatient():
         mycursor.execute(sql, val)
         mydb.commit()
 
-        sql1 = """INSERT INTO Patient (email, password, kind) VALUES (%s, %s, %s)"""
+        sql1 = """INSERT INTO users (email, password, kind) VALUES (%s, %s, %s)"""
         val1 = (email,password,'patient')
         mycursor.execute(sql1, val1)
         mydb.commit()
