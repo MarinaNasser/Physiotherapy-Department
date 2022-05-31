@@ -1,4 +1,4 @@
-<form action="http://127.0.0.1:5000/addpatient" method="POST">
+<form action="http://127.0.0.1:5000/addpatient" method="POST" enctype="multipart/form-data">
 
   <head>
     <link rel="stylesheet" href="patient.css"> 
@@ -10,7 +10,6 @@
   </head>
 
   <div class="form-group">
-
 
     <!-- Name -->
     <div>
@@ -107,11 +106,20 @@
       <input name="job" type="text" class="form-control" id="job" placeholder="ex: Lawer" required>
     </div>
 
-    <!-- Age -->
-    <div>
-      <label for="age">Age</label>
-      <input name="age" type="number" class="form-control" id="age" placeholder="ex: 34" required>
+    <!-- file -->
+  <div class="form-group">
+    <label for="photo">Select Image</label>
+    <div class="custom">
+      <input
+        type="file"
+        name="photo"
+        id="photo"
+        placeholder="Photo"
+        class="custom-file-input"
+      />
+      <label class="custom-file-input" for="photo">Select image</label>
     </div>
+  </div>
 
         <button class="btn btn-primary" type="submit" value="Submit">Submit</button>
   </div>

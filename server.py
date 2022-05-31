@@ -17,8 +17,8 @@ app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="sherif2001",
-    database="a"
+    passwd="magdynasr",
+    database="sherif"
 )
 mycursor = mydb.cursor()
 
@@ -128,8 +128,8 @@ def adddoctor():
         birth_date = request.form['birth_date']
         degree = request.form['degree']
         Specialization= request.form['specialization']
-        salary = request.form['salary']
         photo = request.files['photo']
+        number = request.files['phone_number']
         pic_path = save_picture(photo)
 
         #setting a buffered cursor => to accept one value in the input
@@ -151,8 +151,8 @@ def adddoctor():
         elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
             return render_template('adddoctor.html', emailExisits = False , emailInvalid=True )        
         else:    
-            sql = """INSERT INTO doctorPreRequest (name,ssn,sex,email,password,address,birth_date,degree,specialization,salary, photo) VALUES (%s, %s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
-            val = (name,ssn,sex,email,password,address,birth_date,degree,Specialization,salary, pic_path)
+            sql = """INSERT INTO doctorPreRequest (name,ssn,sex,email,password,address,birth_date,degree,specialization, photo, phone_number) VALUES (%s, %s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+            val = (name,ssn,sex,email,password,address,birth_date,degree,Specialization, pic_path, number)
             mycursor.execute(sql,val)
             mydb.commit()
             return redirect(url_for('index'))
@@ -233,7 +233,7 @@ def addpatient():
         mycursor.execute(sql, val)
         mydb.commit()
 
-        sql1 = """INSERT INTO Patient (email, password, kind) VALUES (%s, %s, %s)"""
+        sql1 = """INSERT INTO users (email, password, kind) VALUES (%s, %s, %s)"""
         val1 = (email,password,'patient')
         mycursor.execute(sql1, val1)
         mydb.commit()
