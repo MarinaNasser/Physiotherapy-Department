@@ -148,15 +148,28 @@ def adddoctor():
         ssnCursor.execute(""" SELECT * FROM doctor WHERE ssn = %s """ , (ssn,))
         ssnExist = ssnCursor.fetchone()
 
-        if emailExist and ssnExist :
-            return render_template('adddoctor.html', emailExisits = True , ssnExisits=True)
-        elif emailExist or ssnExist :
+        reqemailCursor =mydb.cursor(buffered=True)
+        reqemailCursor.execute(""" SELECT * FROM doctorprerequest WHERE emailref = %s """ , (email,))
+        reqemailExist = reqemailCursor.fetchone()
+
+        reqssnCursor =mydb.cursor(buffered=True)
+        reqssnCursor.execute(""" SELECT * FROM doctorprerequest WHERE ssnref = %s """ , (ssn,))
+        reqssnExist = reqssnCursor.fetchone()
+
+        if emailExist and ssnExist and reqssnExist and reqemailExist  :
+            return render_template('adddoctor.html', emailExisits = True , ssnExisits=True , reqemailExist=True , reqssnExist=True)
+        elif emailExist or ssnExist or reqemailExist or reqssnExist :
             if emailExist :
-                return render_template('adddoctor.html', emailExisits = True , ssnExisits=False)
-            else:
-                return render_template('adddoctor.html', emailExisits = False , ssnExisits=True)        
+                return render_template('adddoctor.html', emailExisits = True , ssnExisits=False , reqemailExist=False , reqssnExist=False)
+            elif ssnExist :
+                return render_template('adddoctor.html', emailExisits = False , ssnExisits=True, reqemailExist=False , reqssnExist=False)
+            elif reqssnExist:
+                return render_template('adddoctor.html', emailExisits = False , ssnExisits=False, reqemailExist=True , reqssnExist=False)
+            else:    
+                return render_template('adddoctor.html', emailExisits = False , ssnExisits=False, reqemailExist=False , reqssnExist=True)
+
         elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
-            return render_template('adddoctor.html', emailExisits = False , emailInvalid=True )        
+            return render_template('adddoctor.html', emailExisits = False , emailInvalid=True ,reqemailExist=True , reqssnExist=True)        
         else:    
             sql = """INSERT INTO doctorPreRequest (name,ssn,sex,email,password,address,birth_date,degree,specialization,phone,photo) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
             val = (name,ssn,sex,email,password,address,birth_date,degree,Specialization,phone,pic_path)
