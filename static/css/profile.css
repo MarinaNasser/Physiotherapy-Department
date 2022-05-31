@@ -15,6 +15,15 @@ body {
   background-color: #555;
   background-blend-mode: darken;
   background-size: cover;
+  
+}
+ .profile-image {
+  margin-top: 50px;
+  width: 150px;
+  height: 150px;
+  border-radius: 60%;
+  border: 6px solid #9729aa;
+  transition: all .5s;
 }
 /* Link Styles */
 a {
