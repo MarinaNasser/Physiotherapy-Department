@@ -28,7 +28,7 @@
     <!-- to have large image post format in Twitter -->
 
     <!-- Webpage Title -->
-    <title>Muscle carers - Physiotherapy Department</title>
+    <title>Muscle Care | Physiotherapy Department</title>
 
     <!-- Styles -->
     <link
@@ -57,7 +57,7 @@
 
         <!-- Text Logo - Use this if you don't have a graphic logo -->
         <a class="navbar-brand logo-text" href="{{ url_for('index') }}"
-          >Muscle carers</a
+          >Muscle Care</a
         >
 
         <button
@@ -80,33 +80,60 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/home#about">About</a>
+              {% if session['user_doctor'] or session['user_admin'] %}
+              <a class="nav-link" href="/viewdoctor">View Doctors</a>
+              {% endif %}
             </li>
             <li class="nav-item">
-              {% if session['user_admin'] or session['user_doctor'] or session['user_patient'] %}
-              <a class="nav-link" href="{{url_for('myTips')}}">My Tips</a>
+              {% if session['user_admin'] or session['user_patient'] %}
+              <a class="nav-link" href="{{url_for('myTips')}}">Tips</a>
               {%else%}
-              <a class="nav-link" href="{{url_for('login')}}">My Tips</a>
+              <a class="nav-link" href="{{url_for('preSignUp')}}">Tips</a>
               {%endif%}
             </li>
-
+            
             <li class="nav-item">
               {% if session['user_admin'] or session['user_patient'] %}
               <a class="nav-link" href="/home#bookNow">Book Now</a>
               {%endif%}
             </li>
             <li class="nav-item">
-              {% if session['loggedIn'] and (session['user_doctor'] or session['user_patient'] or session['user_admin']) %}
+              {% if session['loggedIn'] and (session['user_doctor'] or session['user_patient']) %}
               <a class="nav-link" href="{{url_for('profileh')}}">My Profile</a>
               {%endif%}
             </li>
-            {% if not session['loggedIn'] %}
+            
+            <li class="nav-item">
+              {% if not (session['user_admin'] or session['user_doctor']) %}
+              <a class="nav-link" href="/home#contact">Contact</a>
+              {% endif %}
+            </li>
+            <li class="nav-item">
+              {% if session['user_admin'] or session['user_admin']%}
+              <a class="nav-link" href="/addApointment">Add Appointment</a>
+              {%endif%}
+            </li>
+            <li class="nav-item">
+              {% if session['users_technician'] or session['user_admin'] %}
+              <a class="nav-link" href="/adddevice">Add Device</a>
+              {% endif %}
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/home#about">About</a>
+            </li>
+            <li class="nav-item">
+              {% if session['loggedIn']%}
+              <a class="nav-link" href="/logout">Log Out</a>
+              {% endif %}
+            </li>
+          </ul>
+          {% if not session['loggedIn'] %}
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle"
                   id="dropdown01"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
-                  href="#">Drop</a>
+                  href="#">LogIn | SignUp</a>
               <ul class="dropdown-menu" aria-labelledby="dropdown01">
                 <li><div class="dropdown-divider"></div></li>
                 <li>
@@ -121,15 +148,6 @@
               </ul>
             </li>
             {% endif %}
-            <li class="nav-item">
-              <a class="nav-link" href="/home#contact">Contact</a>
-            </li>
-            <li class="nav-item">
-              {% if session['loggedIn']%}
-              <a class="nav-link" href="/logout">Log Out</a>
-              {% endif %}
-            </li>
-          </ul>
           <span class="nav-item social-icons">
             <span class="fa-stack">
               <a href="#your-link">
@@ -519,8 +537,7 @@
                 <h2 class="py-2">Send your query</h2>
                 <p class="para-light">
                   Do you have any questions? Please do not hesitate to contact us directly. Our team will come back to you within
-        a matter of hours to help you.
-</p>
+                  a matter of hours to help you.</p>
               </div>
               <div>
                 <div class="form-group py-1">
