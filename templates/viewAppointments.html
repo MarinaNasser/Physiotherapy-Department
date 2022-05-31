@@ -22,14 +22,12 @@
                 <tr>
                     {% for c in r %}
                         <td><span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{{c}}</span></td>
-                        {% endfor %}
+                    {% endfor %}
                 <td>
-                    <form action="{{url_for('viewAppointments')}}">
-                        <button type="submit" class="btn btn-primary">book now</button>
-                    </form>
+                    <a  href="{{url_for('viewAppointments')}}">
                 </td>
                 </tr>
-                    {% endfor %}
+                {% endfor %}
             </tbody>
         </table>
     </div>
