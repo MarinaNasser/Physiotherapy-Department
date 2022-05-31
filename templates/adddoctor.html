@@ -208,7 +208,7 @@
                   data-date-format="dd - mm - yyyy"
                   id="birth_date"
                   name="birth_date"
-                  placeholder="Date of Birth"
+                  placeholder="Birth Date"
                 />
               </div>
             </div>
@@ -219,14 +219,13 @@
         <h4></h4>
         <section class="section-3">
           <div class="inner" style="margin-top: 50px">
-
             <!-- specialization  -->
             <div class="form-row">
               <div class="form-holder">
                 <input
                   type="text"
                   class="form-control"
-                  placeholder="specialization"
+                  placeholder="Specialization"
                   id="specialization"
                   name="specialization"
                 />
@@ -238,36 +237,32 @@
                 <input
                   type="text"
                   class="form-control"
-                  placeholder="degree"
+                  placeholder="Degree"
                   id="degree"
                   name="degree"
                 />
               </div>
             </div>
-        </div>
+          </div>
         </section>
+        <!-- Submit button -->
+        <div id="outside" class="outside">
+          <h1 style="text-align: center; margin-top: 50px; color: #fff">
+            Would you like to submit this information?
+          </h1>
+          <input type="submit" class="button" />
+          <button class="button" onclick="go()" style="margin-top: 20px">
+            Not yet
+          </button>
+          <script>
+            function go() {
+              var a = document.getElementById("outside");
+              a.style.display = "none";
+            }
+          </script>
+        </div>
       </form>
     </div>
-
-    <!-- Submit button -->
-    <div id="outside" class="outside">
-      <h1 style="text-align: center; margin-top: 50px; color: #fff">
-        Would you like to submit this information?
-      </h1>
-      <form action="home">
-        <button class="button" onclick="">Submit</button>
-      </form>
-      <button class="button" onclick="go()" style="margin-top: 20px">
-        Not yet
-      </button>
-      <script>
-        function go() {
-          var a = document.getElementById("outside");
-          a.style.display = "none";
-        }
-      </script>
-    </div>
-    <div style="background-color: white; z-index: 10000; position: absolute;width: 600px;height: 500px;"></div>
 
     <script src="/static/adddoctor/js/jquery-3.3.1.min.js"></script>
 
