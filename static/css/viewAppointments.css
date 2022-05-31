@@ -2,20 +2,24 @@ body{
     margin-top:20px;
 }
 .bg-light-gray {
-    background-color: #f7f7f7;
+    background-color: white;
+    color: white;
+}
+.text-uppercase{
+    color: white;
 }
 .table-bordered thead td, .table-bordered thead th {
     border-bottom-width: 2px;
 }
 .table thead th {
     vertical-align: bottom;
-    border-bottom: 2px solid #dee2e6;
+    border-bottom: 2px solid white;
 }
 .table-bordered td, .table-bordered th {
-    border: 1px solid #dee2e6;
+    border: 1px solid white;
 }
 
-
+/* 
 .bg-sky.box-shadow {
     box-shadow: 0px 5px 0px 0px #00a2a7
 }
@@ -43,7 +47,7 @@ body{
 .bg-lightred.box-shadow {
     box-shadow: 0px 5px 0px 0px #d84213
 }
-
+ */
 
 .bg-sky {
     background-color: #02c2c7
