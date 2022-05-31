@@ -23,7 +23,7 @@ body{
 }
 .centerSignUp{
   position: absolute;
-  top: 70%;
+  top: 100%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 800px;
@@ -160,4 +160,24 @@ input[type="submit"]:hover{
   font-weight: 700;
   cursor: pointer;
   outline: none;
+  }
+
+  select{
+    width: 50%;
+    height: 50px;
+    border: 1px solid;
+    background: -webkit-gradient(
+      linear,
+      left top,
+      left bottom,
+      from(#0ee951),
+      to(#00dabf)
+    );
+    border-radius: 25px;
+    font-size: 18px;
+    color: #e9f4fb;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+    text-align: center;  
   }
