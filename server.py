@@ -455,6 +455,14 @@ def messages():
 # ------------------------------------------------------------------------test----------------------------------------------------------------
 @app.route('/inbox', methods = ['POST','GET'])
 def inbox():
+    if request.method == 'POST'and "deleteMessage" in request.form:
+        deleteMessage = request.form['deleteMessage']
+
+        cursor = mydb.cursor(buffered=True)
+        cursor.execute(""" DELETE FROM messages WHERE id = %s """,(deleteMessage,))
+        mydb.commit()
+        return redirect(url_for('inbox'))
+
     sql = """Select * from messages where emailTo = %s"""
     val = (session['user_patient'],)
     mycursor.execute(sql,val)
