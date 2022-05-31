@@ -135,7 +135,7 @@ img {
   height: 4px;
   position: absolute;
   background-color: #fff;
-  width: 33.33%;
+  width: 50%;
   bottom: 0;
   left: 0;
   transition: all 0.3s ease;
@@ -156,11 +156,11 @@ img {
   font-family: "Poppins-Regular";
 }
 .steps.step-2 ul {
-  width: 66.67%;
+  width: 100%;
   transition: all 0.3s ease;
 }
 .steps.step-2:before {
-  left: 63.67%;
+  left: 100%;
   transition: all 0.3s ease;
 }
 .steps.step-3 ul {
