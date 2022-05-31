@@ -26,15 +26,52 @@
 
   <body>
     <div class="wrapper" id="inside">
-      <form action="http://127.0.0.1:5000/addpatient" method="POST" id="wizard" enctype="multipart/form-data">
+      <form
+        action="http://127.0.0.1:5000/addpatient"
+        method="POST"
+        id="wizard"
+        enctype="multipart/form-data"
+      >
         <!-- SECTION 1 -->
         <h3 style="color: white; font-size: 40px">SignUp</h3>
         <h4></h4>
         <section>
 
           <!-- Photo-->
-          <div class="inner">
+          <!-- <label for="photo">Select Image</label>
+          <div class="custom">
             <input
+              type="file"
+              name="photo"
+              id="photo"
+              placeholder="Photo"
+              class="custom-file-input"
+            />
+            <label class="custom-file-input" for="photo">Select image</label> -->
+
+          <div class="inner">
+            <p>
+              <input
+                type="file"
+                accept="image/*"
+                name="photo"
+                id="photo"
+                onchange="loadFile(event)"
+                style="display: none"
+              />
+            </p>
+            <p>
+              <label for="photo" style="cursor: pointer">Upload Image</label>
+            </p>
+            <p><img id="output" width="200" /></p>
+
+            <script>
+              var loadFile = function (event) {
+                var image = document.getElementById("output");
+                image.src = URL.createObjectURL(event.target.files[0]);
+              };
+            </script>
+            <!-- <input
               type="file"
               accept="image/*"
               name="photo"
@@ -42,9 +79,8 @@
               onchange="loadFile(event)"
               style="display: none"
             />
-            <label for="file" style="cursor: pointer"
+            <label for="photo" style="cursor: pointer"
               ><img
-                id="photo"
                 style="
                   margin-left: 200px;
                   margin-bottom: 30px;
@@ -57,11 +93,11 @@
             /></label>
             
             <script>
-              var loadFile = function (photo) {
+              var loadFile = function (event) {
                 var image = document.getElementById("photo");
                 image.src = URL.createObjectURL(event.target.files[0]);
               };
-            </script>
+            </script> -->
 
             <!-- name -->
             <div class="form-row">
@@ -171,20 +207,6 @@
               </div>
             </div>
 
-            <!-- Gender -->
-            <div class="form-row">
-              <div class="select">
-                <div class="form-holder">
-                  <div class="select-control" id="sex" name="sex">Gender</div>
-                  <i class="zmdi zmdi-caret-down small"></i>
-                </div>
-                <ul class="dropdown">
-                  <li value="Male">Male</li>
-                  <li value="Female">Female</li>
-                </ul>
-              </div>
-            </div>
-
             <!-- Birth Date -->
             <div class="form-row">
               <div class="form-holder">
@@ -193,15 +215,33 @@
                   class="form-control datepicker-here"
                   data-language="en"
                   data-date-format="dd - mm - yyyy"
-                  id="birthDate"
-                  name="birthDate"
-                  placeholder="Date of Birth"
+                  id="birth_date"
+                  name="birth_date"
+                  placeholder="Birth Date"
                 />
+              </div>
+            </div>
+            <!-- Gender -->
+            <div class="form-row">
+              <div class="select-control" style="color: #fff; font-size: 25px">
+                <fieldset
+                  id="group1"
+                  style="text-align: center; border-radius: 20px"
+                >
+                  <input type="radio" value="Male" id="sex" name="sex" />Male
+                  <input
+                    type="radio"
+                    value="Female"
+                    id="sex"
+                    name="sex"
+                    style="margin-left: 150px"
+                  />Female
+                </fieldset>
               </div>
             </div>
 
             <!-- Marital Status -->
-            <div class="form-row">
+            <!-- <div class="form-row">
               <div class="select">
                 <div class="form-holder">
                   <div class="select-control" id="maritalStatus" name="maritalStatus">
@@ -216,7 +256,7 @@
                   <li value="Widowed">Widowed</li>
                 </ul>
               </div>
-            </div>
+            </div> -->
           </div>
         </section>
 
@@ -245,8 +285,8 @@
                   type="text"
                   class="form-control"
                   placeholder="Insurance Number (OPTIONAL)"
-                  id="insuranceNumber"
-                  name="insuranceNumber"
+                  id="insurance_num"
+                  name="insurance_num"
                 />
               </div>
             </div>
@@ -258,36 +298,55 @@
                   type="text"
                   class="form-control"
                   placeholder="Credit Card (OPTIONAL)"
-                  id="creditCard"
-                  name="creditCard"
+                  id="credit_card"
+                  name="credit_card"
                 />
+              </div>
+            </div>
+            <!-- Marital Status -->
+            <div class="form-row">
+              <div class="select-control" style="color: #fff; font-size: 25px">
+                <fieldset
+                  id="group2"
+                  style="text-align: center; border-radius: 20px"
+                >
+                  <input
+                    type="radio"
+                    value="Single"
+                    id="marital_status"
+                    name="marital_status"
+                    style="margin-left: 10px"
+                  />Single
+                  <input
+                    type="radio"
+                    value="Married"
+                    id="marital_status"
+                    name="marital_status"
+                    style="margin-left: 100px"
+                  />Married
+                </fieldset>
               </div>
             </div>
           </div>
         </section>
-        <button class="button" type="submit" value="Submit">Submit</button>
+        <!-- Submit button -->
+        <div id="outside" class="outside">
+          <h1 style="text-align: center; margin-top: 50px; color: #fff">
+            Would you like to submit this information?
+          </h1>
+          <input type="submit" class="button" />
+          <button class="button" onclick="go()" style="margin-top: 20px">
+            Not yet
+          </button>
+          <script>
+            function go() {
+              var a = document.getElementById("outside");
+              a.style.display = "none";
+            }
+          </script>
+        </div>
       </form>
     </div>
-
-    <!-- Submit button -->
-    <div id="outside" class="outside">
-      <h1 style="text-align: center; margin-top: 50px; color: #fff">
-        Would you like to submit this information?
-      </h1>
-      <form action="home">
-        <button class="button" type="submit" value="Submit">Submit</button>
-      </form>
-      <button class="button" onclick="go()" style="margin-top: 20px">
-        Not yet
-      </button>
-      <script>
-        function go() {
-          var a = document.getElementById("outside");
-          a.style.display = "none";
-        }
-      </script>
-    </div>
-    <!-- <div style="background-color: white; z-index: 10000; position: absolute;width: 600px;height: 500px;"></div> -->
 
     <script src="/static/addpatient/js/jquery-3.3.1.min.js"></script>
 

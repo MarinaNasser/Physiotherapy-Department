@@ -69,7 +69,8 @@
                   type="text"
                   class="form-control"
                   placeholder="Device Name"
-                  id="name"
+                  id="device_name"
+                  name="device_name"
                   minlength="2"
                   maxlength="255"
                   required
@@ -86,7 +87,8 @@
                   type="text"
                   class="form-control"
                   placeholder="Device Model"
-                  id="model"
+                  id="device_model"
+                  name="device_model"
                   required
                 />
                 <script>
@@ -102,6 +104,7 @@
                   class="form-control"
                   placeholder="Number of Devices"
                   id="count"
+                  name="count"
                   required
                 />
               </div>
@@ -120,6 +123,7 @@
                   class="form-control"
                   placeholder="Write the Device Description"
                   id="description"
+                  name="description"
                   rows="5"
                   style="padding-bottom: 200px"
                 ></textarea>
@@ -133,6 +137,7 @@
                   class="form-control"
                   placeholder="Technician ID"
                   id="technician_id"
+                  name="technician_id"
                   required
                 />
               </div>
@@ -145,34 +150,32 @@
                   class="form-control"
                   placeholder="Technician Name"
                   id="technician_name"
+                  name="technician_name"
                   required
                 />
               </div>
             </div>
           </div>
         </section>
+        <!-- Submit button -->
+        <div id="outside" class="outside">
+          <h1 style="text-align: center; margin-top: 50px; color: #fff">
+            Would you like to submit this information?
+          </h1>
+          <input type="submit" class="button" />
+          <button class="button" onclick="go()" style="margin-top: 20px">
+            Not yet
+          </button>
+          <script>
+            function go() {
+              var a = document.getElementById("outside");
+              a.style.display = "none";
+            }
+          </script>
+        </div>
+        <!-- <div style="background-color: white; z-index: 10000; position: absolute;width: 600px;height: 500px;"></div> -->
       </form>
     </div>
-
-    <!-- Submit button -->
-    <div id="outside" class="outside">
-      <h1 style="text-align: center; margin-top: 50px; color: #fff">
-        Would you like to submit this information?
-      </h1>
-      <form action="home">
-        <button class="button" onclick="">Submit</button>
-      </form>
-      <button class="button" onclick="go()" style="margin-top: 20px">
-        Not yet
-      </button>
-      <script>
-        function go() {
-          var a = document.getElementById("outside");
-          a.style.display = "none";
-        }
-      </script>
-    </div>
-    <!-- <div style="background-color: white; z-index: 10000; position: absolute;width: 600px;height: 500px;"></div> -->
 
     <script src="/static/adddevice/js/jquery-3.3.1.min.js"></script>
 

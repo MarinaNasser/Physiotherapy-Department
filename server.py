@@ -5,14 +5,14 @@ from datetime import datetime
 from genericpath import exists
 from unittest import result
 from flask import Flask, redirect, render_template,request,session,url_for
-# from pymysql import NULL
-# from sqlalchemy import false
-# from flask_mysqldb import MySQL
+from pymysql import NULL
+from sqlalchemy import false
+from flask_mysqldb import MySQL
 import mysql.connector
 import re
 import os
 import secrets
-# import sqlalchemy
+import sqlalchemy
 
 app = Flask(__name__)
 app.secret_key = "very secret key"
@@ -134,7 +134,7 @@ def adddoctor():
         address = request.form['address']
         birth_date = request.form['birth_date']
         degree = request.form['degree']
-        Specialization= request.form['specialization']
+        specialization= request.form['specialization']
         phone = request.form['phone']
         photo = request.files['photo']
         pic_path = save_picture(photo)
@@ -172,7 +172,7 @@ def adddoctor():
             return render_template('adddoctor.html', emailExisits = False , emailInvalid=True ,reqemailExist=True , reqssnExist=True)        
         else:    
             sql = """INSERT INTO doctorPreRequest (name,ssn,sex,email,password,address,birth_date,degree,specialization,phone,photo) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
-            val = (name,ssn,sex,email,password,address,birth_date,degree,Specialization,phone,pic_path)
+            val = (name,ssn,sex,email,password,address,birth_date,degree,specialization,phone,pic_path)
             mycursor.execute(sql,val)
             mydb.commit()
             return redirect(url_for('index'))
@@ -236,20 +236,19 @@ def addpatient():
         ssn = request.form['ssn']
         sex = request.form['sex']
         email = request.form['email']
-        phone = request.form['phone']
         password = request.form['password']
         address = request.form['address']
-        birthDate = request.form['birthDate']
-        creditCard = request.form['creditCard']
-        insuranceNumber = request.form['insuranceNumber']
-        maritalStatus = request.form['maritalStatus']
+        birth_date = request.form['birth_date']
+        credit_card = request.form['credit_card']
+        insurance_num = request.form['insurance_num']
+        marital_status = request.form['marital_status']
         job = request.form['job']
         photo = request.files['photo']
+        phone = request.form['phone']
         pic_path = save_picture(photo)
 
-        sql = """INSERT INTO patient (name, ssn, sex, email, phone, password, address, birth_date, credit_card, insurance_num, marital_status, job, photo) VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
-        print("michael")
-        val = (name,ssn,sex,  email, phone, password,address, birthDate, creditCard, insuranceNumber, maritalStatus, job, pic_path)
+        sql = """INSERT INTO patient (name, ssn, address, email, password, sex, birth_date,marital_status,job,insurance_num, credit_card, phone, photo) VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+        val = (name,ssn,address,email,password, sex,birth_date,marital_status,job, insurance_num,credit_card, phone, pic_path)
         mycursor.execute(sql, val)
         mydb.commit()
 
