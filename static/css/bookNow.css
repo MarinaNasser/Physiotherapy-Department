@@ -41,6 +41,7 @@
     box-sizing: border-box; }
   
   html {
+    background-color: #002752;
     font-family: sans-serif;
     line-height: 1.15;
     -webkit-text-size-adjust: 100%;
@@ -55,7 +56,7 @@
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #212529;
+    color:white;
     text-align: left;
     background-color: #0f0f11; }
   
@@ -4625,7 +4626,7 @@
       background-color: #1b1e21;
       border-color: #1b1e21; }
   
-  .close {
+   .close {
     float: right;
     font-size: 1.5rem;
     font-weight: 700;
@@ -4639,7 +4640,7 @@
     .close:not(:disabled):not(.disabled):hover, .close:not(:disabled):not(.disabled):focus {
       opacity: .75; }
   
-  button.close {
+    button.close {
     padding: 0;
     background-color: transparent;
     border: 0;
@@ -4647,7 +4648,7 @@
     -moz-appearance: none;
     appearance: none; }
   
-  a.close.disabled {
+    a.close.disabled {
     pointer-events: none; }
   
   .toast {
@@ -8247,4 +8248,23 @@
         box-shadow: none; }
     .btn.btn-outline-primary {
       color: #fff; }
+      .submit-btn {
+        background: -webkit-gradient(
+          linear,
+          left top,
+          left bottom,
+          from(#0ee951),
+          to(#00dabf)
+        );
+        border: none;
+        text-transform: capitalize;
+        display: block;
+        border-radius: 2px;
+        width: 50%;
+        height: 50px;
+        font-size: 25px;
+        font-weight: 400;
+        color: rgb(255, 255, 255);
+        border-radius: 5px;
+      }
   

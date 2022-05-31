@@ -462,7 +462,8 @@
               <div class="swiper-container card-slider">
                 <div class="swiper-wrapper">
                   <!-- Slide -->
-                  <div class="swiper-slide">
+                  {%for r in data%}
+                    <div class="swiper-slide">
                     <div class="testimonial-card p-4">
                       <p></p>
                       <div class="d-flex pt-4">
@@ -474,82 +475,14 @@
                           />
                         </div>
                         <div class="ms-3 pt-2">
-                          <h6><a href="{{url_for('bookNow')}}">Dr. Alaa Yasser</a></h6>
+                          <h6><a href="{{url_for('bookNow')}}">{{r[0]}}</a></h6>
                           <p>ashtar dr f masr</p>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <!-- end of swiper-slide -->
-                  <!-- end of slide -->
-
-                  <!-- Slide -->
-                  <div class="swiper-slide">
-                    <div class="testimonial-card p-4">
-                      <p>
-                      
-                      </p>
-                      <div class="d-flex pt-4">
-                        <div>
-                          <img
-                            class="avatar"
-                            src="static\assets\img\testimonial-2.jpg"
-                            alt="testimonial"
-                          />
-                        </div>
-                        <div class="ms-3 pt-2">
-                          <h6><a href="{{url_for('bookNow')}}">Dr. Marina Nasser</a></h6>
-                          <p>ashtar dr fl 3alam</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- end of swiper-slide -->
-                  <!-- end of slide -->
-
-                  <!-- Slide -->
-                  <div class="swiper-slide">
-                    <div class="testimonial-card p-4">
-                      <p>
-                        
-                      </p>
-                      <div class="d-flex pt-4">
-                        <div>
-                          <img
-                            class="avatar"
-                            src="static\assets\img\testimonial-3.jpg"
-                            alt="testimonial"
-                          />
-                        </div>
-                        <div class="ms-3 pt-2">
-                          <h6><a href="{{url_for('bookNow')}}">Dr. Michael Hany</a></h6>
-                          <p>3ala addo</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- end of swiper-slide -->
-                  <!-- end of slide -->
-
-                  <!-- Slide -->
-                  <div class="swiper-slide">
-                    <div class="testimonial-card p-4">
-                      <p></p>
-                      <div class="d-flex pt-4">
-                        <div>
-                          <img
-                            class="avatar"
-                            src="static\assets\img\testimonial-4.jpg"
-                            alt="testimonial"
-                          />
-                        </div>
-                        <div class="ms-3 pt-2">
-                          <p><a href="{{url_for('bookNow')}}">Dr. Magdy Nasr</a></p>
-                          <p>msh batal</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  {% endfor %}
+                  
                   <!-- end of swiper-slide -->
                   <!-- end of slide -->
                 </div>
