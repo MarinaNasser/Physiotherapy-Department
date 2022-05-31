@@ -421,9 +421,9 @@ def bookNow():
 def messages():
     if request.method == 'POST':
         emailTo = request.form['emailTo']
-        ssn=request.form['ssn']
-        sex = request.form['sex']
-        email = request.form['email']
+        emailFrom=request.form['emailFrom']
+        title = request.form['title']
+        message = request.form['message']
 
     return render_template('messages.html')
     

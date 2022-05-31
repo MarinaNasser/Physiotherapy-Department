@@ -5,20 +5,23 @@
         name="emailTo"
         type="email"
         class="form-control form-control-input"
-        id="exampleFormControlInput3"
+        id="emailTo"
         placeholder="Email to"
       />
     </div>
     <div class="form-group py-1">
         <input
+          name="emailFrom"
           type="email"
           class="form-control form-control-input"
-          id="exampleFormControlInput3"
+          id="emailFrom"
           value="{{session['user_patient']}}"
+          readonly
         />
       </div>
       <div class="form-group py-1">
         <input
+          name="title"
           type="text"
           class="form-control form-control-input"
           id="exampleFormControlInput3"
@@ -39,6 +42,7 @@
     </div>
     <div class="form-group py-2">
       <textarea
+        name="message"
         class="form-control form-control-input"
         id="exampleFormControlTextarea1"
         rows="6"
