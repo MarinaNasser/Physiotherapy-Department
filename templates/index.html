@@ -83,8 +83,7 @@
               <a class="nav-link" href="/home#about">About</a>
             </li>
             <li class="nav-item">
-              {% if session['user_admin'] or session['user_doctor'] or
-              session['user_patient'] %}
+              {% if session['user_admin'] or session['user_doctor'] or session['user_patient'] %}
               <a class="nav-link" href="{{url_for('myTips')}}">My Tips</a>
               {%else%}
               <a class="nav-link" href="{{url_for('login')}}">My Tips</a>
@@ -92,17 +91,22 @@
             </li>
 
             <li class="nav-item">
+              {% if session['user_admin'] or session['user_patient'] %}
               <a class="nav-link" href="/home#bookNow">Book Now</a>
+              {%endif%}
             </li>
             <li class="nav-item">
+              {% if session['loggedIn'] and (session['user_doctor'] or session['user_patient'] or session['user_admin']) %}
               <a class="nav-link" href="{{url_for('profileh')}}">My Profile</a>
+              {%endif%}
             </li>
+            {% if not session['loggedIn'] %}
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle"
-                 id="dropdown01"
-                 data-bs-toggle="dropdown"
-                 aria-expanded="false"
-                 href="#">Drop</a>
+                  id="dropdown01"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  href="#">Drop</a>
               <ul class="dropdown-menu" aria-labelledby="dropdown01">
                 <li><div class="dropdown-divider"></div></li>
                 <li>
@@ -112,14 +116,18 @@
                 </li>
                 <li><div class="dropdown-divider"></div></li>
                 <li>
-                  <a class="dropdown-item" href="{{url_for('login')}}"
-                    >Log In</a
-                  >
+                  <a class="dropdown-item" href="{{url_for('login')}}">Log In</a>
                 </li>
               </ul>
             </li>
+            {% endif %}
             <li class="nav-item">
               <a class="nav-link" href="/home#contact">Contact</a>
+            </li>
+            <li class="nav-item">
+              {% if session['loggedIn']%}
+              <a class="nav-link" href="/logout">Log Out</a>
+              {% endif %}
             </li>
           </ul>
           <span class="nav-item social-icons">
