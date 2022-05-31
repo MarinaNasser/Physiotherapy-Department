@@ -18,8 +18,8 @@ app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="A_0l1a2a3",
-    database="hosiptal"
+    passwd="Ahmed9112",
+    database="hospital"
 )
 mycursor = mydb.cursor()
 
@@ -298,6 +298,11 @@ def adminViewDoctor():
 
         sql = """INSERT INTO doctor (name,ssn,sex,email,password,address,birth_date,degree,specialization,phone,photo) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
         val = (name,ssn,sex,email,password,address,birth_date,degree,Specialization,phone,photo)
+        mycursor.execute(sql,val)
+        mydb.commit()
+        
+        sql = """INSERT INTO users (email,password,kind) VALUES (%s,%s,%s)"""
+        val = (email,password,'doctor')
         mycursor.execute(sql,val)
         mydb.commit()
 
