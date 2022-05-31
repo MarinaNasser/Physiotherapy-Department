@@ -17,10 +17,16 @@ app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
+<<<<<<< HEAD
     passwd="N#@98wrft45",
     database="sbe2024"
     )
 
+=======
+    passwd="A_0l1a2a3",
+    database="hosiptal"
+)
+>>>>>>> 56b611b3516ed4603ad287818a0da1cc6e5378a2
 mycursor = mydb.cursor()
 
 @app.route('/')
@@ -114,7 +120,7 @@ def logout():
     session.pop('user',None)
     session.clear()
     # return render_template('Base.html')
-    return redirect(url_for('base'))
+    return redirect(url_for('index'))
 
 # ------------------------------------------------------------------------Add Doctor----------------------------------------------------------------
 
@@ -206,23 +212,29 @@ def save_picture(form_picture):
 @app.route('/adddevice', methods = ['GET','POST'])
 
 def adddevice():
-    if request.method == 'POST':
-        if request.form:
-            device_number = request.form['device_num']
-            device_name = request.form['device_name']
-            device_model = request.form['device_model']
-            technician_id = request.form['technician_id']
-            count = request.form['count']
-            description = request.form['description']
-            photo = request.files['photo']
-            pic_path = save_picture(photo)
+    if 'user_technician' in session :
+        if request.method == 'POST':
+            if request.form:
+                device_number = request.form['device_num']
+                device_name = request.form['device_name']
+                device_model = request.form['device_model']
+                technician_id = request.form['technician_id']
+                count = request.form['count']
+                description = request.form['description']
+                photo = request.files['photo']
+                pic_path = save_picture(photo)
             
-            sql = """INSERT INTO device (device_num,device_name,device_model,technician_id,photo,count,description) VALUES (%s,%s,%s,%s,%s,%s,%s)"""
-            val = (device_number,device_name,device_model,technician_id,pic_path,count,description)
-            mycursor.execute(sql,val)
-            mydb.commit()
-            return redirect(url_for('index'))
-    return render_template('adddevice.html')
+                sql = """INSERT INTO device (device_num,device_name,device_model,technician_id,photo,count,description) VALUES (%s,%s,%s,%s,%s,%s,%s)"""
+                val = (device_number,device_name,device_model,technician_id,pic_path,count,description)
+                mycursor.execute(sql,val)
+                mydb.commit()
+                return redirect(url_for('index'))
+    else:
+        return render_template('index.html')
+
+        # return render_template('profileh.html',data = result)
+
+        
         
 # ------------------------------------------------------------------------Doctors-------------------------------------------------------------------        
 

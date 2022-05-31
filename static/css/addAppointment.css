@@ -164,17 +164,7 @@ body{
 	border-radius: 5px;
 }
 
-/* #viewbutton{
-	position: absolute;
-	top: 50%;
-	left: 70%;
-	right: 0;
-	-webkit-transform: translateY(-50%);
-	transform: translateY(-50%);
-} */
-#viewbuttonlink{
-	color:rgba(255, 255, 255);
-}
+
 .booking-form input[type="text"].form-control {
 	color:rgba(255, 255, 255);
 	border-style:inset;
@@ -184,3 +174,15 @@ body{
 
 }
 
+/* 
+#viewbutton{
+	position: absolute;
+	top: 50%;
+	left: 70%;
+	right: 0;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+} */ 
+#viewbuttonlink{
+	color:rgba(255, 255, 255);
+}
