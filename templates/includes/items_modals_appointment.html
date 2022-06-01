@@ -21,7 +21,7 @@
         are you sure you want to reserve that appointment?
       </div>
       
-      
+<div style="margin-bottom:15px ;" class="container">      
       <form action="{{url_for('bookNow')}}" method="post">
         <div class="form-group">
           <label for="appNo" class="form-label">app no</label>
@@ -50,13 +50,12 @@
             <label for="date">date</label>
             <input type="text" class="form-control" id="date" name="date" value="{{data[4][i].date()}}" readonly>
         </div>
-        
-        <button type="submit" class="btn btn-primary">book</button>
+        <button style="margin-right:15px ;" type="submit" class="btn btn-primary">book</button>
       </form>      
-      
-      <button type="button" class="btn btn-secondary"
+      <button style="background-color :#212121 ;" type="button" class="btn btn-secondary"
       data-dismiss="modal">Close        
         </button>
+      </div>
       </div>
     </div>
   </div>
