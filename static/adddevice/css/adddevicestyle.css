@@ -126,6 +126,19 @@ img {
   background-color: #000000dd;
   border-radius: 20px;
 }
+
+.choose {
+  border-radius: 20px;
+  padding: 15px;
+  margin: 50px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.choose:hover {
+  background-color: #0e9;
+}
+
 .steps {
   height: 2px;
   position: absolute;

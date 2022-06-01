@@ -36,19 +36,8 @@
         <h3 style="color: white; font-size: 40px">SignUp</h3>
         <h4></h4>
         <section>
-          <!-- Photo-->
-          <!-- <label for="photo">Select Image</label>
-          <div class="custom">
-            <input
-              type="file"
-              name="photo"
-              id="photo"
-              placeholder="Photo"
-              class="custom-file-input"
-            />
-            <label class="custom-file-input" for="photo">Select image</label> -->
-
           <div class="inner">
+            <!-- Photo -->
             <p>
               <input
                 type="file"
@@ -60,44 +49,27 @@
               />
             </p>
             <p>
-              <label for="photo" style="cursor: pointer">Upload Image</label>
+              <label for="photo" style="cursor: pointer"
+                ><img
+                  id="photouploaded"
+                  style="
+                    margin-left: 200px;
+                    margin-bottom: 30px;
+                    object-fit: cover;
+                    border-radius: 100%;
+                    width: 150px;
+                    height: 150px;
+                  "
+                  src="/static/addpatient/images/user.png"
+              /></label>
             </p>
-            <p><img id="output" width="200" /></p>
 
             <script>
               var loadFile = function (event) {
-                var image = document.getElementById("output");
+                var image = document.getElementById("photouploaded");
                 image.src = URL.createObjectURL(event.target.files[0]);
               };
             </script>
-            <!-- <input
-              type="file"
-              accept="image/*"
-              name="photo"
-              id="photo"
-              onchange="loadFile(event)"
-              style="display: none"
-            />
-            <label for="photo" style="cursor: pointer"
-              ><img
-                style="
-                  margin-left: 200px;
-                  margin-bottom: 30px;
-                  object-fit: cover;
-                  border-radius: 100%;
-                  width: 150px;
-                  height: 150px;
-                "
-                src="/static/addpatient/images/user.png"
-            /></label>
-
-            <script>
-              var loadFile = function (event) {
-                var image = document.getElementById("photo");
-                image.src = URL.createObjectURL(event.target.files[0]);
-              };
-            </script> -->
-
             <!-- name -->
             <div class="form-row">
               <div class="form-holder">
@@ -217,40 +189,42 @@
             </div>
             <!-- Gender -->
             <div class="form-row">
-              <div class="select-control" style="color: #fff; font-size: 25px">
+              <div class="select-control" style="font-size: 25px">
                 <fieldset
                   id="group1"
-                  style="text-align: center; border-radius: 20px"
+                  style="
+                    padding-top: 20px;
+                    padding-bottom: 20px;
+                    text-align: center;
+                    border-radius: 20px;
+                    background-color: #bbbbbb22;
+                  "
                 >
-                  <input type="radio" value="Male" id="sex" name="sex" />Male
-                  <input
-                    type="radio"
-                    value="Female"
-                    id="sex"
-                    name="sex"
-                    style="margin-left: 150px"
-                  />Female
+                  <label
+                    class="choose"
+                    id="choose1"
+                    style="padding-left: 30px; padding-right: 30px"
+                    onclick="clicked1()"
+                    ><input
+                      style="display: none"
+                      type="radio"
+                      value="Male"
+                      id="sex"
+                      name="sex"
+                    />Male</label
+                  >
+                  <label class="choose" id="choose2" onclick="clicked2()">
+                    <input
+                      style="display: none"
+                      type="radio"
+                      value="Female"
+                      id="sex"
+                      name="sex"
+                    />Female</label
+                  >
                 </fieldset>
               </div>
             </div>
-
-            <!-- Marital Status -->
-            <!-- <div class="form-row">
-              <div class="select">
-                <div class="form-holder">
-                  <div class="select-control" id="maritalStatus">
-                    Marital Status
-                  </div>
-                  <i class="zmdi zmdi-caret-down small"></i>
-                </div>
-                <ul class="dropdown">
-                  <li rel="Married">Married</li>
-                  <li rel="Single">Single</li>
-                  <li rel="Divorced">Divorced</li>
-                  <li rel="Widowed">Widowed</li>
-                </ul>
-              </div>
-            </div> -->
           </div>
         </section>
 
@@ -296,25 +270,39 @@
             </div>
             <!-- Marital Status -->
             <div class="form-row">
-              <div class="select-control" style="color: #fff; font-size: 25px">
+              <div class="select-control" style="font-size: 25px">
                 <fieldset
                   id="group2"
-                  style="text-align: center; border-radius: 20px"
+                  style="
+                    padding-top: 20px;
+                    padding-bottom: 20px;
+                    text-align: center;
+                    border-radius: 20px;
+                    background-color: #bbbbbb22;
+                  "
                 >
-                  <input
-                    type="radio"
-                    value="Single"
-                    id="marital_status"
-                    name="marital_status"
-                    style="margin-left: 10px"
-                  />Single
-                  <input
-                    type="radio"
-                    value="Married"
-                    id="marital_status"
-                    name="marital_status"
-                    style="margin-left: 100px"
-                  />Married
+                  <label
+                    class="choose"
+                    id="choose3"
+                    style="padding-left: 30px; padding-right: 30px"
+                    onclick="clicked3()"
+                    ><input
+                      style="display: none"
+                      type="radio"
+                      value="Single"
+                      id="marital_status"
+                      name="marital_status"
+                    />Single</label
+                  >
+                  <label class="choose" id="choose4" onclick="clicked4()">
+                    <input
+                      style="display: none"
+                      type="radio"
+                      value="Married"
+                      id="marital_status"
+                      name="marital_status"
+                    />Married</label
+                  >
                 </fieldset>
               </div>
             </div>
@@ -338,6 +326,41 @@
         </div>
       </form>
     </div>
+
+    <script>
+      function clicked1() {
+        var a = document.getElementById("choose1");
+        var b = document.getElementById("choose2");
+        b.style.backgroundColor = "";
+        b.style.color = "";
+        a.style.backgroundColor += "#0e9";
+        a.style.color += "#fff";
+      }
+      function clicked2() {
+        var a = document.getElementById("choose1");
+        var b = document.getElementById("choose2");
+        a.style.backgroundColor = "";
+        a.style.color = "";
+        b.style.backgroundColor += "#0e9";
+        b.style.color += "#fff";
+      }
+      function clicked3() {
+        var c = document.getElementById("choose3");
+        var d = document.getElementById("choose4");
+        d.style.backgroundColor = "";
+        d.style.color = "";
+        c.style.backgroundColor += "#0e9";
+        c.style.color += "#fff";
+      }
+      function clicked4() {
+        var c = document.getElementById("choose3");
+        var d = document.getElementById("choose4");
+        c.style.backgroundColor = "";
+        c.style.color = "";
+        d.style.backgroundColor += "#0e9";
+        d.style.color += "#fff";
+      }
+    </script>
 
     <script src="/static/addpatient/js/jquery-3.3.1.min.js"></script>
 
