@@ -63,21 +63,101 @@ def profileh():
         return render_template('profileh.html')
 
 # ---------------------------------------------------------------------editProfile---------------------------------------------------------------------
-@app.route('/editProfile')
+@app.route('/editProfile' ,methods=["GET" , "POST"])
 def editProfile():
-    if 'loggedIn' in session and 'user_patient' in session :
-        cursor = mydb.cursor(buffered=True)
-        cursor.execute('SELECT * FROM patient WHERE email = %s', (session['user_patient'],))
-        result = cursor.fetchall()
-    elif 'loggedIn' in session and 'user_doctor' in session :
-        cursor = mydb.cursor(buffered=True)
-        cursor.execute('SELECT * FROM doctor WHERE email = %s', (session['user_doctor'],))
-        result = cursor.fetchall()
+    if request.method == 'POST' and 'user_patient' in session: ##check if there is post data
+        name = request.form['name']
+        ssn = request.form['ssn']
+        sex = request.form['sex']
+        email = request.form['email']
+        password = request.form['password']
+        address = request.form['address']
+        birth_date = request.form['birth_date']
+        credit_card = request.form['credit_card']
+        insurance_num = request.form['insurance_num']
+        marital_status = request.form['marital_status']
+        job = request.form['job']
+        photo = request.files['photo']
+        phone = request.form['phone']
+        pic_path = save_picture(photo)
+# UPDATE table_name
+# SET column1 = value1, column2 = value2, ...
+# WHERE condition;
+        sql = """UPDATE patient (name, ssn, address, email, password, sex, birth_date,marital_status,job,insurance_num, credit_card, phone, photo) VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) WHERE email = %s""" 
+        val = (name,ssn,address,email,password, sex,birth_date,marital_status,job, insurance_num,credit_card, phone, pic_path, email)
+        mycursor.execute(sql, val)
+        mydb.commit()
+
+        sql1 = """INSERT INTO users (email, password, type) VALUES (%s, %s, %s)"""
+        val1 = (email,password,'patient')
+        mycursor.execute(sql1, val1)
+        mydb.commit()
+        return redirect(url_for('index'))
+
+    elif request.method == 'POST' and 'user_doctor' in session:
+        #requesting data form
+        name = request.form['name']
+        ssn=request.form['ssn']
+        sex = request.form['sex']
+        email = request.form['email']
+        password = request.form['password']
+        address = request.form['address']
+        birth_date = request.form['birth_date']
+        specialization= request.form['specialization']
+        phone = request.form['phone']
+        photo = request.files['photo']
+        pic_path = save_picture(photo)
+
+        #setting a buffered cursor => to accept one value in the input
+        emailCursor =mydb.cursor(buffered=True)
+        emailCursor.execute(""" SELECT * FROM doctor WHERE email = %s """ , (email,))
+        emailExist = emailCursor.fetchone()
+
+        ssnCursor =mydb.cursor(buffered=True)
+        ssnCursor.execute(""" SELECT * FROM doctor WHERE ssn = %s """ , (ssn,))
+        ssnExist = ssnCursor.fetchone()
+
+        reqemailCursor =mydb.cursor(buffered=True)
+        reqemailCursor.execute(""" SELECT * FROM doctorprerequest WHERE email = %s """ , (email,))
+        reqemailExist = reqemailCursor.fetchone()
+
+        reqssnCursor =mydb.cursor(buffered=True)
+        reqssnCursor.execute(""" SELECT * FROM doctorprerequest WHERE ssn = %s """ , (ssn,))
+        reqssnExist = reqssnCursor.fetchone()
+
+        if emailExist and ssnExist and reqssnExist and reqemailExist  :
+            return render_template('adddoctor.html', emailExisits = True , ssnExisits=True , reqemailExist=True , reqssnExist=True)
+        elif emailExist or ssnExist or reqemailExist or reqssnExist :
+            if emailExist :
+                return render_template('adddoctor.html', emailExisits = True , ssnExisits=False , reqemailExist=False , reqssnExist=False)
+            elif ssnExist :
+                return render_template('adddoctor.html', emailExisits = False , ssnExisits=True, reqemailExist=False , reqssnExist=False)
+            elif reqssnExist:
+                return render_template('adddoctor.html', emailExisits = False , ssnExisits=False, reqemailExist=True , reqssnExist=False)
+            else:    
+                return render_template('adddoctor.html', emailExisits = False , ssnExisits=False, reqemailExist=False , reqssnExist=True)
+
+        elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
+            return render_template('adddoctor.html', emailExisits = False , emailInvalid=True ,reqemailExist=False , reqssnExist=False)        
+        else:    
+            sql = """INSERT INTO doctorPreRequest (name, ssn, sex, email, password, address, birth_date,  specialization, phone, photo) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+            val = (name, ssn, sex, email, password, address, birth_date,  specialization, phone, pic_path)
+            mycursor.execute(sql,val)
+            mydb.commit()
+            return redirect(url_for('index'))
     else:
-        return render_template('editProfile.html')
+        print('get')
+        return render_template('adddoctor.html')
 
-    return render_template('editProfile.html',data = result)
 
+    #     return render_template('editProfile.html')
+
+    # return render_template('editProfile.html',data = result)
+
+    
+    
+        
+        
 # ------------------------------------------------------------------------Login---------------------------------------------------------------------
 
 @app.route('/login',methods=["GET","POST"])
@@ -119,9 +199,7 @@ def logout():
 
 @app.route('/adddoctor',methods = ['POST','GET'])
 def adddoctor():
-
     if request.method == 'POST':
-
         #requesting data form
         name = request.form['name']
         ssn=request.form['ssn']
