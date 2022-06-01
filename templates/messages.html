@@ -1,49 +1,52 @@
-<form  
-action="{{ url_for('messages') }}"
-method="POST">
+{%extends'index.html'%} {%block main%}
+<form action="{{ url_for('messages') }}" method="POST">
+  <link
+    rel="stylesheet"
+    href="{{url_for('static',filename='css/message.css')}}"
+  />
 
-<div>
-    <div class="form-group py-1">
+  <div
+    style="
+      margin: 150px;
+      width: 80%;
+      background-color: #1c262f;
+      border-radius: 20px;
+      padding: 20px;
+    "
+  >
+    <div class="form-group py-1" style="display: inline-flexbox">
+      <h3 style="color: #fff">Email To</h3>
       <input
         name="emailTo"
         type="email"
-        class="form-control form-control-input"
         id="emailTo"
+        class="form-control form-control-input"
         placeholder="Email to"
       />
     </div>
-    <div class="form-group py-1">
-        <input
-          name="emailFrom"
-          type="email"
-          class="form-control form-control-input"
-          id="emailFrom"
-          value="{{session['user_patient']}}"
-          readonly
-        />
-      </div>
-      <div class="form-group py-1">
-        <input
-          name="title"
-          type="text"
-          class="form-control form-control-input"
-          id="exampleFormControlInput3"
-          placeholder="Title"
-        />
-      </div>
-    <div class="row">
-      <div class="col-lg-6">
-        <div class="form-group py-2">
-        </div>
-      </div>
-      <div class="col-lg-6">
-        <div class="form-group py-2">
-        </div>
-      </div>
+    <div class="form-group py-1" style="margin-top: 50px">
+      <h3 style="color: #fff">Email From</h3>
+      <input
+        name="emailFrom"
+        type="email"
+        class="form-control form-control-input"
+        id="emailFrom"
+        value="{{session['user_patient']}}"
+        readonly
+      />
     </div>
-    <div class="form-group py-1">
+    <div class="form-group py-1" style="margin-top: 50px">
+      <h3 style="color: #fff">Title</h3>
+      <input
+        name="title"
+        type="text"
+        class="form-control form-control-input"
+        id="exampleFormControlInput3"
+        placeholder="Title"
+      />
     </div>
-    <div class="form-group py-2">
+    <div class="form-group py-2" style="margin-top: 50px">
+      <h3 style="color: #fff">Message</h3>
       <textarea
         name="message"
         class="form-control form-control-input"
@@ -52,12 +55,10 @@ method="POST">
         placeholder="Message"
       ></textarea>
     </div>
+    <div class="my-3">
+      <input type="submit" class="submit" value="Send" required />
+    </div>
   </div>
-  <div class="my-3">
-    <input type="submit" value="send" required/>
-
 </form>
-  </div>
-</div>
 <!-- end of div -->
-</div>
+{%endblock%}

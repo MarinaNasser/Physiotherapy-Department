@@ -1,0 +1,20 @@
+body {
+  background-image: url("/static/addpatient/images/form-wizard-bg2.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.submit {
+  background-color: #fff;
+  border-radius: 20px;
+  font-size: 30px;
+  padding: 20px;
+  padding-left: 50px;
+  padding-right: 50px;
+  margin-left: 500px;
+}
+
+.submit:hover {
+  background-color: #0e9;
+  color: white;
+}
