@@ -15,17 +15,10 @@
     <form action="/profileh" method="get" enctype="multipart/form-data">
       {% for item in data %}
 
-      <!-- image -->
       <div class="card mb-3 content" style="margin-top: 50px; width: 800px">
+        <!-- image -->
+
         <img src="{{item.13}}" class="profile-image" />
-
-        <!-- ID -->
-        <!-- <div class="row" style="margin-top: 50px">
-        <h5>ID</h5>
-        <div class="col-md9 text-secondary" >{{item.0}}</div>
-      </div>
-      <hr /> -->
-
         <!-- Name -->
         <div class="row" style="margin-top: 50px">
           <h5>Full Name</h5>
@@ -167,6 +160,11 @@
       {% endfor %}
     </form>
     {% endif %}
+    <!-- Edit Button -->
+    <div class="row">
+      <a class="button" href="/editProfile"> Edit Profile </a>
+    </div>
+    <hr />
   </header>
 </body>
 {%endblock%}
