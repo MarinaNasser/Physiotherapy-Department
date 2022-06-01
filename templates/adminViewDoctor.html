@@ -16,8 +16,8 @@
                 <!-- Your Columns HERE -->
                 <th scope="col">ID</th>
                 <th scope="col">Name</th>
-                <th scope="col">ssn</th>
-                <th scope="col">specialization</th>
+                <th scope="col">SSN</th>
+                <th scope="col">Specialization</th>
                 <th scope="col">Options</th>
             </tr>
         </thead>
@@ -32,6 +32,7 @@
                 <td>{{ item.8 }}</td>
                 <td>
                     <button class="btn btn-outline btn-info" data-toggle="modal" data-target="#Modal-accept-{{item.0}}">accept</button>
+                    <div class="space"></div>
                     <button class="btn btn-outline btn-success" data-toggle="modal" data-target="#Modal-refuse-{{item.0}}">refuse</button>
                 </td>
             </tr>
