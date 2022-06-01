@@ -24,28 +24,6 @@
     <link rel="stylesheet" href="/static/adddoctor/css/adddoctorstyle.css" />
   </head>
 
-  {% if emailExisits %}
-  <div class="alert alert-warning" role="alert">
-    the email you entered already exisits
-  </div>
-  {%endif%} {% if emailInvalid %}
-  <div class="alert alert-warning" role="alert">
-    the email you entered is invalid
-  </div>
-  {%endif%} {% if ssnExisits %}
-  <div class="alert alert-warning" role="alert">
-    the ssn you entered already exisits
-  </div>
-  {%endif%}{% if reqemailExist %}
-  <div class="alert alert-warning" role="alert">
-    you have already sent a request stay tuned
-  </div>
-  {%endif%}{% if reqssnExist %}
-  <div class="alert alert-warning" role="alert">
-    you have already sent a request stay tuned
-  </div>
-  {%endif%}
-
   <body>
     <div class="wrapper" id="inside">
       <form
@@ -283,7 +261,6 @@
           </script>
         </div>
       </form>
-
     </div>
 
     <script>
@@ -316,6 +293,26 @@
 
     <script src="/static/adddoctor/js/main.js"></script>
 
-    <!-- Template created and distributed by Colorlib -->
+    {% if emailExisits %}
+    <script>
+      window.alert("The used email already exists");
+    </script>
+    {%endif%} {% if emailInvalid %}
+    <script>
+      window.alert("The entered email is invalid");
+    </script>
+    {%endif%} {% if ssnExisits %}
+    <script>
+      window.alert("The entered ssn already exists");
+    </script>
+    {%endif%}{% if reqemailExist %}
+    <script>
+      window.alert("You have already sent a request. Please stay tuned");
+    </script>
+    {%endif%}{% if reqssnExist %}
+    <script>
+      window.alert("You have already sent a request. Please stay tuned");
+    </script>
+    {%endif%}
   </body>
 </html>
