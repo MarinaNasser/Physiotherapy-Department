@@ -12,19 +12,28 @@
 <body>
   <header>
     {% if session['user_patient'] %}
-    <form action="/profileh" method="get" enctype="multipart/form-data">
+    <form action="/profileh" method="post" enctype="multipart/form-data">
       {% for item in data %}
 
       <!-- image -->
       <div class="card mb-3 content" style="margin-top: 50px; width: 800px">
         <img src="{{item.13}}" class="profile-image" />
-        
+
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            name="name"
+            value="{{ item.1 }}"
+          />
+        </div>
+
         <!-- Name -->
         <div class="row" style="margin-top: 50px">
           <h5>Full Name</h5>
-          <label>
-            <div class="col-md9 text-secondary">{{item.1}}</div>
-          </label>
+          <div class="col-md9 text-secondary">{{item.1}}</div>
         </div>
         <hr />
 
