@@ -352,7 +352,7 @@ def adminViewDoctor():
 # ------------------------------------------------------------------------add/view appointment----------------------------------------------------------------
 @app.route('/addAppointment',methods=['GET','POST'])
 def addAppointment():
-    
+   if 'user_patient' in session or 'user_doctor' in session :  
     # to get name
     sql = """SELECT name from doctor 
     where email = %s"""
@@ -387,6 +387,8 @@ def addAppointment():
         return render_template('addAppointment.html', added =True,name = name)
     else:
         return render_template('addAppointment.html',added = False,name = name)
+   else:
+       return redirect(url_for('index'))       
 
 @app.route('/viewAppointments')   
 def viewAppointments():
@@ -476,6 +478,7 @@ def deleteAppointment():
 
 @app.route('/messages', methods = ['GET','POST'])
 def messages():
+ if 'user_patient' in session or 'user_doctor' in session : 
     if request.method == 'POST':
         emailTo = request.form['emailTo']
         emailFrom=request.form['emailFrom']
@@ -488,10 +491,13 @@ def messages():
         mydb.commit()
 
     return render_template('messages.html')
+ else:
+    return redirect(url_for('index'))  
 
 # ------------------------------------------------------------------------inbox----------------------------------------------------------------
 @app.route('/inbox', methods = ['POST','GET'])
 def inbox():
+ if 'user_patient' in session or 'user_doctor' in session :
 
     if request.method == 'POST'and "deleteMessage" in request.form:
         deleteMessage = request.form['deleteMessage']
@@ -510,6 +516,8 @@ def inbox():
     result = mycursor.fetchall()
 
     return render_template('inbox.html',result=result)
+ else:
+    return redirect(url_for('index'))   
 
 # ------------------------------------------------------------------------test----------------------------------------------------------------
 
