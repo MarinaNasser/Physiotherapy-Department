@@ -1,6 +1,9 @@
 import email
+from time import strptime
+from time import mktime
 import pandas as pd
 from datetime import datetime
+from datetime import timedelta
 from genericpath import exists
 from unittest import result
 from flask import Flask, redirect, render_template,request,session,url_for
@@ -23,7 +26,7 @@ mydb = mysql.connector.connect(
     )
 
 
-mycursor = mydb.cursor()
+mycursor = mydb.cursor(buffered=True)
 
 @app.route('/')
 @app.route('/home')
@@ -351,31 +354,60 @@ def adminViewDoctor():
 # ------------------------------------------------------------------------add/view appointment----------------------------------------------------------------
 @app.route('/addAppointment',methods=['GET','POST'])
 def addAppointment():
-    # print(session['user_doctor'])
-    sql = "SELECT * FROM appointment"
-    mycursor.execute(sql)
-    result = mycursor.fetchall()
+    
+    # to get name
+    sql = """SELECT name from doctor 
+    where email = %s"""
+    val = (session['user_doctor'],)
+    mycursor.execute(sql,val)
+    
+    name = mycursor.fetchone()
+    name = name[0]
     
     if request.method == 'POST':
         #requesting data form
         startT = request.form['startT']
-        endT  = request.form['endT']
         date = request.form['date']
+
+        td = timedelta(hours=1)
+        startTime = datetime.strptime(startT,"%H")
+        # startTime = datetime.fromtimestamp(mktime(startTime))
+        print(type(startTime))
+        print(type(td))
+        
+        
+        endT = (startTime + td).hour
+        
         
         sql = """INSERT INTO appointment (startT, endT, dt,doctorEmail,booked) VALUES (%s, %s, %s,%s,%s)"""
         val = (startT,endT,date,session['user_doctor'],0)
         mycursor.execute(sql, val)
         mydb.commit()
-        return render_template('addAppointment.html', added =True)
+        
+       
+        
+        return render_template('addAppointment.html', added =True,name = name)
     else:
-        return render_template('addAppointment.html',added = False)
+        return render_template('addAppointment.html',added = False,name = name)
 
 @app.route('/viewAppointments')   
 def viewAppointments():
-    sql = "SELECT appNo,name,startT,endT,dt FROM appointment join doctor on doctorEmail = email"
+    # to get name
+    sql = """SELECT name FROM appointment join doctor on doctorEmail = email 
+    where doctorEmail = %s"""
+    val = (session['user_doctor'],)
+    mycursor.execute(sql,val)
+    name = mycursor.fetchone()
+    if name :
+        name = name[0]
+    else:
+        name = ""
+    
+    
+    sql = "SELECT appNo,name,startT,endT,dt,booked FROM appointment join doctor on doctorEmail = email"
     mycursor.execute(sql)
     result = mycursor.fetchall()
-    return render_template('viewAppointments.html', data = result)
+    return render_template('viewAppointments.html', data = result,name = name)
 
 # ------------------------------------------------------------------------book now----------------------------------------------------------------
 
@@ -384,20 +416,20 @@ def bookNow():
     sql = "SELECT appNo,name,startT,endT,dt,booked FROM appointment join doctor on doctorEmail = email"
     mycursor.execute(sql)
     result = mycursor.fetchall()
-    # print(result)
-    
-    list_of_tuples = pd.DataFrame(result)
-    list_of_tuples[4] = pd.to_datetime(list_of_tuples[4],format="%d-%m-%Y")
+    print(result)
+    if result:
+        print('notEmpty')
+        result = pd.DataFrame(result)
+        result[4] = pd.to_datetime(result[4],format="%Y-%m-%d")
     
     # print((datetime.now() - list_of_tuples[4][0]).days)
     # print(list_of_tuples)
     
     if request.method == 'POST' and "toFind" in request.form:
-        
         toFind = request.form['toFind']
         print(toFind)
         print(toFind)
-        return render_template('bookNow.html',data = list_of_tuples,now = datetime.now().date(),booked = True,toFind = toFind)
+        return render_template('bookNow.html',data = result,now = datetime.now().date(),booked = True,toFind = toFind)
     elif request.method == 'POST':
         print("JUSt POST")
         print("JUSt POST")
@@ -414,27 +446,29 @@ def bookNow():
         sql = "SELECT appNo,name,startT,endT,dt,booked FROM appointment join doctor on doctorEmail = email"
         mycursor.execute(sql)
         result = mycursor.fetchall()
-        list_of_tuples = pd.DataFrame(result)
-        list_of_tuples[4] = pd.to_datetime(list_of_tuples[4],format="%d-%m-%Y")
-        
-        return render_template('bookNow.html',data = list_of_tuples,now = datetime.now().date(),booked = True,toFind = "")
+        if result:    
+            result = pd.DataFrame(result)
+            result[4] = pd.to_datetime(result[4],format="%Y-%m-%d")
+        return render_template('bookNow.html',data = result,now = datetime.now().date(),booked = True,toFind = "")
     else:
         print("GET")
         print("GET")
-        return render_template('bookNow.html',data = list_of_tuples,now = datetime.now().date(),booked = False,toFind = "")
+        return render_template('bookNow.html',data = result,now = datetime.now().date(),booked = False,toFind = "")
 
-# ------------------------------------------------------------------------search----------------------------------------------------------------
-# @app.route('/bookNow/search')
-# def search():
-#     if request.method == 'POST':
-#         toFind = request.form['toFind']
-#         # bookNow(toFind)
-#         return render_template('bookNow.html')
-
-
-# @app.route('/confirmBooking',methods = ['GET','POST'])
-# def confirmBooking():
-
+# ------------------------------------------------------------------------ delete appointment ----------------------------------------------------------------
+@app.route('/viewAppointments/deleteAppointment', methods=['GET','POST'])
+def deleteAppointment():
+    if request.method == 'POST':    
+        print('delete')
+        print('delete')
+        print('delete')
+        sql = "DELETE FROM appointment where appNo = %s"
+        val = request.form['appNo']
+        val = int(val)
+        val = (val,)
+        mycursor.execute(sql,val)
+        mydb.commit()
+        return redirect(url_for('viewAppointments'))
 
 # ------------------------------------------------------------------------test----------------------------------------------------------------
 

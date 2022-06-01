@@ -23,12 +23,13 @@
         <div class="container">
           <div class="row no-margin">
             <div class="booking-form">
-              <form>
+              
+              <form action = "{{url_for('addAppointment')}}" method="POST" >
                 <div class="row">
                   <div class="col-md-5">
                     <div class="form-group">
                       <span class="form-label">Name</span>
-                      <input class="form-control" type="text" >
+                      <input class="form-control" type="text" value="{{name}}" readonly>
                     </div>
                   </div>
                   <div class="col-md-7">
@@ -36,7 +37,7 @@
                       <div class="col-md-">
                         <div class="form-group">
                           <span class="form-label">Day</span>
-                          <input class="form-control" type="date" required>
+                          <input name="date" class="form-control" type="date" required >
                         </div>
                       </div> 
                       <!-- <div class="col-md-0"> -->
@@ -48,11 +49,11 @@
                       <div class="col-md-3">
                         <div class="form-group">
                           <span class="form-label">Time</span>
-                          <select class="form-control">
-                            <option>6 pm</option>
-                            <option>7 pm</option>
-                            <option>8 pm</option>
-                            <option>9 pm</option>
+                          <select class="form-control" name="startT">
+                            <option value = "6" >6 pm</option>
+                            <option value = "7" >7 pm</option>
+                            <option value = "8" >8 pm</option>
+                            <option value = "9" >9 pm</option>
                           </select>
                           <span class="select-arrow"></span>
                         </div>
@@ -61,15 +62,18 @@
                   </div>
                   <div class="col-md-6">
                     <div class="form-btn">
-                      <button class="submit-btn">Add</button>
+                      <button type='submit' class="submit-btn">Add</button>
+
                       <br> 
-                    {%block viewbutton%}
-                      <button class="submit-btn" id="viewbutton"> <a id="viewbuttonlink" href="{{url_for('viewAppointments')}}" >View</a></button>
-                    {%endblock%}
+                    
+
                     </div>
                   </div>
                 </div>
               </form>
+              {%block viewbutton%}
+                      <button class="submit-btn" id="viewbutton"> <a id="viewbuttonlink" href="{{url_for('viewAppointments')}}" >View</a></button>
+                    {%endblock%}
             </div>
           </div>
         </div>
