@@ -100,6 +100,45 @@ img {
   margin-bottom: 29px;
 }
 
+.button {
+  margin-left: 130px;
+  margin-top: 40px;
+  background-color: #fff;
+  font-size: 30px;
+  padding: 20px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.button:hover {
+  background-color: #0e9;
+  color: white;
+  transform: translateY(20px);
+}
+
+.outside {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 50%;
+  background-color: #000000dd;
+  border-radius: 20px;
+}
+
+.choose {
+  border-radius: 20px;
+  padding: 15px;
+  margin: 50px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.choose:hover {
+  background-color: #0e9;
+}
+
 .steps {
   height: 2px;
   position: absolute;
@@ -258,36 +297,6 @@ img {
   margin-bottom: 14px;
 }
 
-.payment-block {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-.payment-block .payment-item {
-  width: 47.76%;
-  color: white;
-}
-
-.payment-item {
-  border: 3px solid #e5e5e5;
-  height: 53px;
-  display: flex;
-  align-items: center;
-  padding-left: 8px;
-  padding-right: 11px;
-  margin-bottom: 15px;
-  cursor: pointer;
-}
-.payment-item .payment-logo {
-  width: 34.53%;
-}
-.payment-item .payment-content {
-  width: 65.47%;
-}
-.payment-item.active {
-  border: 1px solid #777;
-}
-
 .actions ul {
   display: flex;
   justify-content: space-between;
@@ -352,6 +361,10 @@ img {
   }
 }
 @media (max-width: 1199px) {
+  body {
+    background: none;
+    background-color: #1c262f;
+  }
   .steps {
     bottom: -52px;
   }
@@ -402,5 +415,3 @@ img {
     transform: translateX(0);
   }
 }
-
-/*# sourceMappingURL=style.css.map */

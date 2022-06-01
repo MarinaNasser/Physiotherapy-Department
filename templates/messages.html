@@ -1,0 +1,63 @@
+<form  
+action="{{ url_for('messages') }}"
+method="POST">
+
+<div>
+    <div class="form-group py-1">
+      <input
+        name="emailTo"
+        type="email"
+        class="form-control form-control-input"
+        id="emailTo"
+        placeholder="Email to"
+      />
+    </div>
+    <div class="form-group py-1">
+        <input
+          name="emailFrom"
+          type="email"
+          class="form-control form-control-input"
+          id="emailFrom"
+          value="{{session['user_patient']}}"
+          readonly
+        />
+      </div>
+      <div class="form-group py-1">
+        <input
+          name="title"
+          type="text"
+          class="form-control form-control-input"
+          id="exampleFormControlInput3"
+          placeholder="Title"
+        />
+      </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="form-group py-2">
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group py-2">
+        </div>
+      </div>
+    </div>
+    <div class="form-group py-1">
+    </div>
+    <div class="form-group py-2">
+      <textarea
+        name="message"
+        class="form-control form-control-input"
+        id="exampleFormControlTextarea1"
+        rows="6"
+        placeholder="Message"
+      ></textarea>
+    </div>
+  </div>
+  <div class="my-3">
+    <input type="submit" value="send" required/>
+
+</form>
+  </div>
+</div>
+<!-- end of div -->
+</div>
