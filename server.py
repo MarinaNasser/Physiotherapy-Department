@@ -32,16 +32,19 @@ mycursor = mydb.cursor(buffered=True)
 @app.route('/home')
 
 def index():
-    sql1 = "SELECT name,email,id,photo FROM doctor"
+    sql1 = "SELECT name,email,id,photo,specialization, COUNT(name) FROM doctor"
     mycursor.execute(sql1)
     resultDoctor = mycursor.fetchall()
-    sql2 = "SELECT id FROM patient"
+    sql2 = "SELECT COUNT(id) FROM patient"
     mycursor.execute(sql2)
     resultPatient = mycursor.fetchall()
-    sql3 = "SELECT count FROM device"
+    sql3 = "SELECT SUM(count) FROM device"
     mycursor.execute(sql3)
     resultDevice = mycursor.fetchall()
-    return render_template("index.html",dataDoctor = resultDoctor, dataPatient = resultPatient, dataDevice = resultDevice)
+    sql4 = "SELECT COUNT(appNo) FROM appointment"
+    mycursor.execute(sql4)
+    result4 = mycursor.fetchall()
+    return render_template("index.html",dataDoctor = resultDoctor, dataPatient = resultPatient, dataDevice = resultDevice, data4 = result4)
 
 # ------------------------------------------------------------------------Pre Sign Up---------------------------------------------------------------------
 @app.route('/preSignUp')

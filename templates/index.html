@@ -115,7 +115,7 @@
             </li>
             <li class="nav-item">
               {% if session['user_patient'] %}
-              <a class="nav-link" href="/addAppointments">Book Now</a>
+              <a class="nav-link" href="{{url_for('bookNow')}}">Book Now</a>
               {%endif%}
             </li>
             <li class="nav-item">
@@ -221,7 +221,7 @@
         </div> -->
         <div class="my-3">
           {% if not (session['user_admin'] or session['user_doctor']) %}
-          <a class="btn" href="/{{url_for('bookNow')}}">Book Now</a>
+          <a class="btn" href="{{url_for('bookNow')}}">Book Now</a>
           {% endif %}
         </div>
       </div>
@@ -404,54 +404,62 @@
               </div>
               <div class="container" data-aos="fade-up">
                 <div class="row g-5">
+                  {% for item in dataDevice %}
                   <div class="col-6 text-start">
                     <i class="fas fa-briefcase fa-2x text-start"></i>
                     <h2
                       class="purecounter"
                       data-purecounter-start="0"
-                      data-purecounter-end="1258"
-                      data-purecounter-duration="3"
+                      data-purecounter-end="{{item[0]}}"
+                      data-purecounter-duration="1000000"
                     >
                       1
                     </h2>
                     <p>DEVICES</p>
                   </div>
+                  {% endfor %}
+                  {% for item in dataDoctor %}
                   <div class="col-6">
                     <i class="fas fa-award fa-2x"></i>
                     <h2
                       class="purecounter"
                       data-purecounter-start="0"
-                      data-purecounter-end="150"
-                      data-purecounter-duration="3"
+                      data-purecounter-end="{{item[5]}}"
+                      data-purecounter-duration="1000000"
                     >
                       1
                     </h2>
                     <p>DOCTORS</p>
                   </div>
+                  {% endfor %}
+                  {% for item in dataPatient %}
                   <div class="col-6">
                     <i class="fas fa-users fa-2x"></i>
                     <h2
                       class="purecounter"
                       data-purecounter-start="0"
-                      data-purecounter-end="1255"
-                      data-purecounter-duration="3"
+                      data-purecounter-end="{{item[0]}}"
+                      data-purecounter-duration="1000000"
                     >
-                      1
+                      
                     </h2>
                     <p>PATIENTS</p>
                   </div>
+                  {% endfor %}
+                  {% for item in data4 %}
                   <div class="col-6">
                     <i class="fas fa-clock fa-2x"></i>
                     <h2
                       class="purecounter"
                       data-purecounter-start="0"
-                      data-purecounter-end="1157"
-                      data-purecounter-duration="3"
+                      data-purecounter-end="{{item[0]}}"
+                      data-purecounter-duration="1000000"
                     >
                       1
                     </h2>
-                    <p>GOOD REVIEWS</p>
+                    <p>APPOINTMENTS</p>
                   </div>
+                  {% endfor %}
                 </div>
               </div>
               <!-- end of container -->
@@ -499,10 +507,7 @@
                         </div>
                         <div class="ms-3 pt-2">
                           <h6><a href="{{url_for('bookNow')}}">{{item[0]}}</a></h6>
-                          <p>{{item[1]}}</p>
-                          {% if session['user_patient'] %}
-                          <td>  <button type="submit" class="btn btn-primary" style="margin: 15px"> <a href="{{url_for('addAppointment')}}" >Book Appointment</a></button></a></td>
-                          {% endif %}
+                          <p>{{item[4]}}</p>
                         </div>
                       </div>
                     </div>
@@ -529,7 +534,7 @@
         
     <div class="my-3">
       {% if not (session['user_admin'] or session['user_doctor']) %}
-      <a class="btn" href="/{{url_for('bookNow')}}">Book Now</a>
+      <a class="btn" href="{{url_for('bookNow')}}">Book Now</a>
       {% endif %}
     </div>
       </div>
