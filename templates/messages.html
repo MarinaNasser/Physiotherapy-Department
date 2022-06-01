@@ -26,6 +26,7 @@
     </div>
     <div class="form-group py-1" style="margin-top: 50px">
       <h3 style="color: #fff">Email From</h3>
+      {% if session['user_patient'] %}
       <input
         name="emailFrom"
         type="email"
@@ -35,6 +36,18 @@
         readonly
       />
     </div>
+    {% endif %}
+    {% if session['user_doctor'] %}
+      <input
+        name="emailFrom"
+        type="email"
+        class="form-control form-control-input"
+        id="emailFrom"
+        value="{{session['user_doctor']}}"
+        readonly
+      />
+    </div>
+    {% endif %}
     <div class="form-group py-1" style="margin-top: 50px">
       <h3 style="color: #fff">Title</h3>
       <input
