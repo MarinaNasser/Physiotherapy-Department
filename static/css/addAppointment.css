@@ -174,15 +174,26 @@ body{
 
 }
 
-/* 
+
 #viewbutton{
-	position: absolute;
-	top: 50%;
-	left: 70%;
-	right: 0;
-	-webkit-transform: translateY(-50%);
-	transform: translateY(-50%);
-} */ 
+	background: -webkit-gradient(
+		linear,
+		left top,
+		left bottom,
+		from(#0ee951),
+		to(#00dabf)
+	);
+	border: none;
+	text-transform: capitalize;
+	display: block;
+	border-radius: 2px;
+	width: 23.5%;
+	height: 51px;
+	font-size: 25px;
+	font-weight: 400;
+	color: rgb(255, 255, 255);
+	border-radius: 5px;
+} 
 #viewbuttonlink{
 	color:rgba(255, 255, 255);
 }

@@ -21,10 +21,10 @@ app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="N#@98wrft45",
+    passwd="Ahmed9112",
     database="felcode"
 )
-mycursor = mydb.cursor()
+mycursor = mydb.cursor(buffered=True)
 
 @app.route('/')
 @app.route('/home')
@@ -521,6 +521,16 @@ def inbox():
     return redirect(url_for('index'))   
 
 # ------------------------------------------------------------------------test----------------------------------------------------------------
+def count():
+    cursor = mydb.cursor(buffered=True)
+    if 'user_patient' in session:
+        cursor.execute('SELECT COUNT(*) FROM messages WHERE emailTo = %s', (session['user_patient'],))
+    else:
+        cursor.execute('SELECT COUNT(*) FROM messages WHERE emailTo = %s', (session['user_doctor'],))
+    result = cursor.fetchone()[0]
+    return (result)
+
+app.jinja_env.globals.update(count=count)
 
 if __name__ == '__main__':
     app.run(debug = True)

@@ -24,28 +24,6 @@
     <link rel="stylesheet" href="/static/adddoctor/css/adddoctorstyle.css" />
   </head>
 
-  {% if emailExisits %}
-  <div class="alert alert-warning" role="alert">
-    the email you entered already exisits
-  </div>
-  {%endif%} {% if emailInvalid %}
-  <div class="alert alert-warning" role="alert">
-    the email you entered is invalid
-  </div>
-  {%endif%} {% if ssnExisits %}
-  <div class="alert alert-warning" role="alert">
-    the ssn you entered already exisits
-  </div>
-  {%endif%}{% if reqemailExist %}
-  <div class="alert alert-warning" role="alert">
-    you have already sent a request stay tuned
-  </div>
-  {%endif%}{% if reqssnExist %}
-  <div class="alert alert-warning" role="alert">
-    you have already sent a request stay tuned
-  </div>
-  {%endif%}
-
   <body>
     <div class="wrapper" id="inside">
       <form
@@ -267,26 +245,6 @@
           </div>
         </section>
 
-        <!-- SECTION 3 -->
-        <!-- <h4></h4>
-        <section class="section-3">
-          <div class="inner" style="margin-top: 50px"> 
-             degree 
-             <div class="form-row">
-              <div class="form-holder">
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Degree"
-                  id="degree"
-                  name="degree"
-                />
-              </div>
-              <button type="submit" class="btn btn-primary">submit</button>
-            </div>
-           </div>
-        </section> -->
-        <!-- Submit button -->
         <div id="outside" class="outside">
           <h1 style="text-align: center; margin-top: 50px; color: #fff">
             Would you like to submit this information?
@@ -303,7 +261,27 @@
           </script>
         </div>
       </form>
-
+      {% if emailExisits %}
+      <script>
+        window.alert("The used email already exists");
+      </script>
+      {%endif%} {% if emailInvalid %}
+      <script>
+        window.alert("The entered email is invalid");
+      </script>
+      {%endif%} {% if ssnExisits %}
+      <script>
+        window.alert("The entered ssn already exists");
+      </script>
+      {%endif%}{% if reqemailExist %}
+      <script>
+        window.alert("You have already sent a request. Please stay tuned");
+      </script>
+      {%endif%}{% if reqssnExist %}
+      <script>
+        window.alert("You have already sent a request. Please stay tuned");
+      </script>
+      {%endif%}
     </div>
 
     <script>
@@ -335,7 +313,5 @@
     <script src="/static/adddoctor/vendor/date-picker/js/datepicker.en.js"></script>
 
     <script src="/static/adddoctor/js/main.js"></script>
-
-    <!-- Template created and distributed by Colorlib -->
   </body>
 </html>
