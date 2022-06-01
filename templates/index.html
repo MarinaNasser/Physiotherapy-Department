@@ -75,7 +75,7 @@
         >
           <ul class="navbar-nav ms-auto navbar-nav-scroll">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/home"
+              <a class="nav-link active" aria-current="page" href="{{ url_for('index') }}"
                 >Home</a
               >
             </li>
@@ -209,7 +209,7 @@
         </div> -->
         <div class="my-3">
           {% if not (session['user_admin'] or session['user_doctor']) %}
-          <a class="btn" href="/home#bookNow">Book Now</a>
+          <a class="btn" href="/{{url_for('bookNow')}}">Book Now</a>
           {% endif %}
         </div>
       </div>
@@ -475,7 +475,7 @@
               <div class="swiper-container card-slider">
                 <div class="swiper-wrapper">
                   <!-- Slide -->
-                  {%for r in data%}
+                  {%for item in dataDoctor%}
                     <div class="swiper-slide">
                     <div class="testimonial-card p-4">
                       <p></p>
@@ -483,15 +483,16 @@
                         <div>
                           <img
                             class="avatar"
-                            src="static\assets\img\testimonial-1.jpg"
+                            src="{{item[3]}}"
                             alt="testimonial"
+                            style="object-fit: cover;"
                           />
                         </div>
                         <div class="ms-3 pt-2">
-                          <h6><a href="{{url_for('bookNow')}}">{{r[0]}}</a></h6>
-                          <p>ashtar dr f masr</p>
-                          {% if not (session['user_admin'] or session['user_doctor']) %}
-                          <td>  <button type="submit" class="btn btn-primary" > <a href="#" >Book Appointment</a></button></a></td>
+                          <h6><a href="{{url_for('bookNow')}}">{{item[0]}}</a></h6>
+                          <p>{{item[1]}}</p>
+                          {% if session['user_patient'] %}
+                          <td>  <button type="submit" class="btn btn-primary" style="margin: 15px"> <a href="{{url_for('addAppointment')}}" >Book Appointment</a></button></a></td>
                           {% endif %}
                         </div>
                       </div>
@@ -519,7 +520,7 @@
         
     <div class="my-3">
       {% if not (session['user_admin'] or session['user_doctor']) %}
-      <a class="btn" href="/home#bookNow">Book Now</a>
+      <a class="btn" href="/{{url_for('bookNow')}}">Book Now</a>
       {% endif %}
     </div>
       </div>
@@ -672,7 +673,7 @@
               <h4 class="py-2">Quick Links</h4>
               <div class="d-flex align-items-center py-2">
                 <i class="fas fa-caret-right"></i>
-                <a href="/home"><p class="ms-3">Home</p></a>
+                <a href="{{ url_for('index') }}"><p class="ms-3">Home</p></a>
               </div>
               <div class="d-flex align-items-center py-2">
                 <i class="fas fa-caret-right"></i>
