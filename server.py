@@ -24,6 +24,7 @@ mydb = mysql.connector.connect(
     host="localhost",
     user="root",
     passwd="magdynasr",
+    database='felcode'
 )
 mycursor = mydb.cursor(buffered=True)
 
@@ -63,7 +64,7 @@ def profileh():
         cursor.execute('SELECT * FROM patient WHERE email = %s', (session['user_patient'],))
         result = cursor.fetchall()
         sql = """SELECT appNo,doctor.name,startT,endT,dt FROM appointment join patient on patientEmail = patient.email join doctor on doctorEmail= doctor.email
-           where patientEmail =  %s """
+            where patientEmail =  %s """
         val =(session["user_patient"],)
         cursor.execute(sql , val)
         appointment = cursor.fetchall()
