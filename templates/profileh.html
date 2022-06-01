@@ -11,63 +11,170 @@
 </head>
 <body>
   <header>
+    {% if session['user_patient'] %}
+    <form action="/profileh" method="get" enctype="multipart/form-data">
+      {% for item in data %}
+
+    <!-- image -->
     <div class="card mb-3 content" style="margin-top: 50px; width: 800px">
       <img
-        src="static/imgs/uploads/b0c2141f2ecfb2c7f70cbfbfff2b4905.png"
+        src="{{item.13}}"
         class="profile-image"
       />
+
+      <!-- ID -->
+      <!-- <div class="row" style="margin-top: 50px">
+        <h5>ID</h5>
+        <div class="col-md9 text-secondary" >{{item.0}}</div>
+      </div>
+      <hr /> -->
+
+      <!-- Name -->
       <div class="row" style="margin-top: 50px">
         <h5>Full Name</h5>
-        <div class="col-md9 text-secondary">Magdy</div>
-      </div>
-      <hr />
-      <div class="row">
-        <h5>Email</h5>
-        <div class="col-md9 text-secondary">abc@gmail.com</div>
-      </div>
-      <hr />
-      <div class="row">
-        <h5>Phone</h5>
-        <div class="col-md9 text-secondary">0123456789</div>
-      </div>
-      <hr />
-      <div class="row">
-        <h5>Address</h5>
-        <div class="col-md9 text-secondary">42 talaat harb St.</div>
+        <div class="col-md9 text-secondary">{{item.1}}</div>
       </div>
       <hr />
 
+      <!-- ssn -->
+      <div class="row">
+        <h5>SSN</h5>
+        <div class="col-md9 text-secondary">{{item.2}}</div>
+      </div>
+      <hr />
+      <!-- Email -->
+      <div class="row">
+        <h5>Email</h5>
+        <div class="col-md9 text-secondary">{{item.5}}</div>
+      </div>
+      <hr />
+      <!-- phone -->
+      <div class="row">
+        <h5>Phone</h5>
+        <div class="col-md9 text-secondary">{{item.3}}</div>
+      </div>
+      <hr />
+      <!-- address -->
+      <div class="row">
+        <h5>Address</h5>
+        <div class="col-md9 text-secondary">{{item.4}}</div>
+      </div>
+      <hr />
+      <!-- sex -->
       <div class="row">
         <h5>Gender</h5>
-        <div class="col-md9 text-secondary">Male</div>
+        <div class="col-md9 text-secondary">{{item.7}}</div>
       </div>
       <hr />
+      <!-- birthdate -->
       <div class="row">
         <h5>Date of birth</h5>
-        <div class="col-md9 text-secondary">14/6/2001</div>
+        <div class="col-md9 text-secondary">{{item.8}}</div>
       </div>
       <hr />
+      <!-- marital status -->
       <div class="row">
         <h5>Marital Status</h5>
-        <div class="col-md9 text-secondary">Single</div>
+        <div class="col-md9 text-secondary">{{item.9}}</div>
       </div>
       <hr />
+      <!-- Job -->
       <div class="row">
         <h5>Job</h5>
-        <div class="col-md9 text-secondary">Engineer</div>
+        <div class="col-md9 text-secondary">{{item.10}}</div>
       </div>
       <hr />
+      <!-- insurance number -->
       <div class="row">
         <h5>Insurance Number</h5>
-        <div class="col-md9 text-secondary">123456789</div>
+        <div class="col-md9 text-secondary">{{item.11}}</div>
       </div>
       <hr />
+      <!-- credit card -->
       <div class="row">
         <h5>Credit Card</h5>
-        <div class="col-md9 text-secondary">XXXX</div>
+        <div class="col-md9 text-secondary">{{item.12}}</div>
       </div>
       <hr />
     </div>
+    {% endfor %}
+  </form>
+  {% endif %}
+
+<!-- ------------------------------------------------------------------------------------------------------------------------------------- -->
+  
+  {% if session['user_doctor'] %}
+  <form action="/profileh" method="get" enctype="multipart/form-data">
+    {% for item in data %}
+
+      <!-- image -->
+    <div class="card mb-3 content" style="margin-top: 50px; width: 800px">
+      <img
+        src="{{item.10}}"
+        class="profile-image"
+      />
+
+      <!-- name -->
+      <div class="row" style="margin-top: 50px">
+        <h5>Full Name</h5>
+        <div class="col-md9 text-secondary">{{item.1}}</div>
+      </div>
+      <hr />
+      
+      
+      <!-- ssn -->
+      <div class="row">
+      <h5>SSN</h5>
+      <div class="col-md9 text-secondary">{{item.2}}</div>
+      </div>
+      <hr />
+      
+      <!-- email -->
+      <div class="row">
+      <h5>Email</h5>
+      <div class="col-md9 text-secondary">{{item.4}}</div>
+      </div>
+      <hr />
+
+      <!-- phone -->
+      <div class="row">
+        <h5>Phone</h5>
+        <div class="col-md9 text-secondary">{{item.5}}</div>
+      </div>
+      <hr />
+
+      <!-- address -->
+      <div class="row">
+        <h5>Address</h5>
+        <div class="col-md9 text-secondary">{{item.7}}</div>
+      </div>
+      <hr />
+
+      <!-- sex -->
+      <div class="row">
+        <h5>Gender</h5>
+        <div class="col-md9 text-secondary">{{item.3}}</div>
+      </div>
+      <hr />
+
+      <!-- birthdate -->
+      <div class="row">
+        <h5>Date of birth</h5>
+        <div class="col-md9 text-secondary">{{item.8}}</div>
+      </div>
+      <hr />
+
+      <!-- specialization -->
+      <div class="row">
+        <h5>Specialization</h5>
+        <div class="col-md9 text-secondary">{{item.9}}</div>
+      </div>
+      <hr />
+    </div>
+    {% endfor %}
+  </form>
+{% endif %}
+
   </header>
 </body>
 {%endblock%}
