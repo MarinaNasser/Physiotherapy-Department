@@ -32,31 +32,23 @@ mycursor = mydb.cursor(buffered=True)
 
 # -----------------------------------------------------------------------------index-----------------------------------------------------------
 @app.route('/')
-@app.route('/home', methods=["POST", "GET"])
-def index():
-    if methods.request == "POST":
-        userEmail = request.form['email']
-        message = request.form['message']
+@app.route('/home',methods=["GET","POST"])
 
-        sql = """INSERT INTO contact_us (userEmail, message) VALUES (%s,%s)"""
-        val = (userEmail, message)
+def index():
+    if request.method == "POST":
+        email = request.form['email']
+        message = request.form['message']
+        sql = """INSERT INTO contact_us (email, message) VALUES (%s,%s)"""
+        val = (email, message)
         mycursor.execute(sql,val)
         mydb.commit()
-        return render_template('contactUs.html')
-    sql1 = "SELECT name,email,id,photo,specialization, COUNT(name) FROM doctor"
-    mycursor.execute(sql1)
-    resultDoctor = mycursor.fetchall()
-    sql2 = "SELECT COUNT(id) FROM patient"
-    mycursor.execute(sql2)
-    resultPatient = mycursor.fetchall()
-    sql3 = "SELECT SUM(count) FROM device"
-    mycursor.execute(sql3)
-    resultDevice = mycursor.fetchall()
-    sql4 = "SELECT COUNT(appNo) FROM appointment"
-    mycursor.execute(sql4)
-    result4 = mycursor.fetchall()
-    return render_template("index.html",dataDoctor = resultDoctor, dataPatient = resultPatient, dataDevice = resultDevice, data4 = result4)
-    
+        return redirect(url_for('index'))
+
+    sql = "SELECT name,id FROM DOCTOR"
+    mycursor.execute(sql)
+    result = mycursor.fetchall()
+    return render_template("index.html",data = result)
+
 
 # ------------------------------------------------------------------------Pre Sign Up---------------------------------------------------------------------
 @app.route('/preSignUp')
