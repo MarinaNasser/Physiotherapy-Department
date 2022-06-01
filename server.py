@@ -21,7 +21,7 @@ app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="magdynasr",
+    passwd="N#@98wrft45",
     database="felcode"
 )
 mycursor = mydb.cursor()

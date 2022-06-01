@@ -15,15 +15,6 @@ body {
   background-color: #555;
   background-blend-mode: darken;
   background-size: cover;
-  
-}
- .profile-image {
-  margin-top: 50px;
-  width: 150px;
-  height: 150px;
-  border-radius: 60%;
-  border: 6px solid #9729aa;
-  transition: all .5s;
 }
 /* Link Styles */
 a {
@@ -86,6 +77,9 @@ header .profile-image {
   height: 200px;
   border-radius: 60%;
   transition: all 0.5s;
+  margin-top: 50px;
+  object-fit: cover;
+  border: 6px solid #0e9;
 }
 header .profile-image:hover {
   transform: rotate(360deg);
