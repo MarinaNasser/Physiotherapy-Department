@@ -12,7 +12,6 @@ import mysql.connector
 import re
 import os
 import secrets
-import sqlalchemy
 
 app = Flask(__name__)
 app.secret_key = "very secret key"
@@ -20,7 +19,7 @@ mydb = mysql.connector.connect(
     host="localhost",
     user="root",
     passwd="Ahmed9112",
-    database="hospital"
+    database="felcode"
 )
 mycursor = mydb.cursor()
 
@@ -455,6 +454,7 @@ def messages():
 # ------------------------------------------------------------------------inbox----------------------------------------------------------------
 @app.route('/inbox', methods = ['POST','GET'])
 def inbox():
+
     if request.method == 'POST'and "deleteMessage" in request.form:
         deleteMessage = request.form['deleteMessage']
 
@@ -463,16 +463,13 @@ def inbox():
         mydb.commit()
         return redirect(url_for('inbox'))
 
-    if session['user_doctor']:
-        sql = """Select * from messages where emailTo = %s"""
-        val = (session['user_doctor'],)
-        mycursor.execute(sql,val)
-        result = mycursor.fetchall()
-    else:
-        sql = """Select * from messages where emailTo = %s"""
+    sql = """Select * from messages where emailTo = %s"""
+    if 'user_patient' in session:
         val = (session['user_patient'],)
-        mycursor.execute(sql,val)
-        result = mycursor.fetchall()
+    else:
+        val = (session['user_doctor'],) 
+    mycursor.execute(sql,val)
+    result = mycursor.fetchall()
 
     return render_template('inbox.html',result=result)
 
