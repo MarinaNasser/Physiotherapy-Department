@@ -21,7 +21,11 @@ app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
+<<<<<<< HEAD
     passwd="A_0l1a2a3",
+=======
+    passwd="sherif2001",
+>>>>>>> b8c1e9c90b9feed2425bcdcc5700844f30dc8a3d
     database="felcode"
 )
 mycursor = mydb.cursor()
@@ -52,14 +56,15 @@ def profileh():
         cursor = mydb.cursor(buffered=True)
         cursor.execute('SELECT * FROM patient WHERE email = %s', (session['user_patient'],))
         result = cursor.fetchall()
+        return render_template('profileh.html',data = result)
+        
     elif 'loggedIn' in session and 'user_doctor' in session :
         cursor = mydb.cursor(buffered=True)
         cursor.execute('SELECT * FROM doctor WHERE email = %s', (session['user_doctor'],))
         result = cursor.fetchall()
+        return render_template('profileh.html',data = result)
     else:
         return render_template('profileh.html')
-
-    return render_template('profileh.html',data = result)
 
 # ---------------------------------------------------------------------editProfile---------------------------------------------------------------------
 @app.route('/editProfile')
@@ -382,7 +387,7 @@ def addAppointment():
         mycursor.execute(sql, val)
         mydb.commit()
         
-       
+    
         
         return render_template('addAppointment.html', added =True,name = name)
     else:
