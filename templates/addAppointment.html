@@ -29,7 +29,7 @@
                   <div class="col-md-5">
                     <div class="form-group">
                       <span class="form-label">Name</span>
-                      <input class="form-control" type="text" value="{{name}}" readonly>
+                      <input class="form-control" type="text" value=" {{name}}" readonly>
                     </div>
                   </div>
                   <div class="col-md-7">
@@ -72,8 +72,10 @@
                 </div>
               </form>
               {%block viewbutton%}
-                      <button class="submit-btn" id="viewbutton"> <a id="viewbuttonlink" href="{{url_for('viewAppointments')}}" >View</a></button>
-                    {%endblock%}
+              <div class="container">
+                      <button class="submit-btn" id="viewbutton"> <a id="viewbuttonlink" href="{{url_for('viewAppointments')}}" >View Appointments</a></button>
+              </div><br><br>
+              {%endblock%}
             </div>
           </div>
         </div>

@@ -5,13 +5,13 @@ body {
 }
 
 .submit {
+  position: relative;
   background-color: #fff;
   border-radius: 20px;
   font-size: 30px;
-  padding: 20px;
-  padding-left: 50px;
-  padding-right: 50px;
-  margin-left: 500px;
+  padding: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .submit:hover {
