@@ -261,6 +261,27 @@
           </script>
         </div>
       </form>
+      {% if emailExisits %}
+      <script>
+        window.alert("The used email already exists");
+      </script>
+      {%endif%} {% if emailInvalid %}
+      <script>
+        window.alert("The entered email is invalid");
+      </script>
+      {%endif%} {% if ssnExisits %}
+      <script>
+        window.alert("The entered ssn already exists");
+      </script>
+      {%endif%}{% if reqemailExist %}
+      <script>
+        window.alert("You have already sent a request. Please stay tuned");
+      </script>
+      {%endif%}{% if reqssnExist %}
+      <script>
+        window.alert("You have already sent a request. Please stay tuned");
+      </script>
+      {%endif%}
     </div>
 
     <script>
@@ -292,27 +313,5 @@
     <script src="/static/adddoctor/vendor/date-picker/js/datepicker.en.js"></script>
 
     <script src="/static/adddoctor/js/main.js"></script>
-
-    {% if emailExisits %}
-    <script>
-      window.alert("The used email already exists");
-    </script>
-    {%endif%} {% if emailInvalid %}
-    <script>
-      window.alert("The entered email is invalid");
-    </script>
-    {%endif%} {% if ssnExisits %}
-    <script>
-      window.alert("The entered ssn already exists");
-    </script>
-    {%endif%}{% if reqemailExist %}
-    <script>
-      window.alert("You have already sent a request. Please stay tuned");
-    </script>
-    {%endif%}{% if reqssnExist %}
-    <script>
-      window.alert("You have already sent a request. Please stay tuned");
-    </script>
-    {%endif%}
   </body>
 </html>
