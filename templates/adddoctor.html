@@ -1,178 +1,334 @@
 <!DOCTYPE html>
-<!-- Coding By CodingNepal - youtube.com/codingnepal -->
-<html lang="en" dir="ltr">
+
+<html>
   <head>
     <meta charset="utf-8" />
-    <title>Login</title>
-    <link
-      rel="stylesheet"
-      href=" {{url_for('static',filename='css/login.css')}}"
-    />
-    <link
-    rel="stylesheet"
-    href="patient.css"
-  />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
+    <title>SignUp - Doctor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="colorlib.com" />
     <link rel="icon" href="static\assets\img\favicon.png" />
+
+    <!-- MATERIAL DESIGN ICONIC FONT -->
+    <link
+      rel="stylesheet"
+      href="/static/adddoctor/fonts/material-design-iconic-font/css/material-design-iconic-font.css"
+    />
+
+    <!-- DATE-PICKER -->
+    <link
+      rel="stylesheet"
+      href="/static/adddoctor/vendor/date-picker/css/datepicker.min.css"
+    />
+
+    <!-- STYLE CSS -->
+    <link rel="stylesheet" href="/static/adddoctor/css/adddoctorstyle.css" />
   </head>
+  {% if emailExisits %}
+  <div class="alert alert-warning" role="alert">
+    the email you entered already exisits
+  </div>
+  {%endif%} {% if emailInvalid %}
+  <div class="alert alert-warning" role="alert">
+    the email you entered is invalid
+  </div>
+  {%endif%} {% if ssnExisits %}
+  <div class="alert alert-warning" role="alert">
+    the ssn you entered already exisits
+  </div>
+  {%endif%}{% if reqemailExist %}
+  <div class="alert alert-warning" role="alert">
+    you have already sent a request stay tuned
+  </div>
+  {%endif%}{% if reqssnExist %}
+  <div class="alert alert-warning" role="alert">
+    you have already sent a request stay tuned
+  </div>
+  {%endif%}
 
   <body>
-    <br><br><br>
-    {% if emailCursorDoctorRequests %}
-    <div class="alert alert-warning" role="alert">
-      You have already sent a request stay tuned
-    </div>
-    {%endif%}
+    <div class="wrapper" id="inside">
+      <form
+        action="http://127.0.0.1:5000/adddoctor"
+        method="POST"
+        id="wizard"
+        enctype="multipart/form-data"
+      >
+        <!-- SECTION 1 -->
+        <h3 style="color: white; font-size: 40px">SignUp - Doctor</h3>
+        <h4></h4>
+        <section>
+          <!-- Photo-->
+          <div class="inner">
+            <p>
+              <input
+                type="file"
+                accept="image/*"
+                name="photo"
+                id="photo"
+                onchange="loadFile(event)"
+                style="display: none"
+              />
+            </p>
+            <p>
+              <label for="photo" style="cursor: pointer"
+                ><img
+                  id="photouploaded"
+                  style="
+                    margin-left: 200px;
+                    margin-bottom: 30px;
+                    object-fit: cover;
+                    border-radius: 100%;
+                    width: 150px;
+                    height: 150px;
+                  "
+                  src="/static/adddevice/images/user.png"
+              /></label>
+            </p>
 
-    {% if ssnCursorDoctorRequests %}
-    <div class="alert alert-warning" role="alert">
-      You have already sent a request stay tuned
-    </div>
-    {%endif%}
+            <script>
+              var loadFile = function (event) {
+                var image = document.getElementById("photouploaded");
+                image.src = URL.createObjectURL(event.target.files[0]);
+              };
+            </script>
 
-    {% if emailInvalid %}
-    <div class="alert alert-warning" role="alert">
-      the email you entered is invalid
-    </div>
-    {%endif%}
+            <!-- name -->
+            <div class="form-row">
+              <div class="form-holder">
+                <input
+                  name="name"
+                  type="text"
+                  class="form-control"
+                  placeholder="Full Name"
+                  id="name"
+                  minlength="2"
+                  maxlength="255"
+                  required
+                />
+                <script>
+                  document.getElementById("name").validity.valid;
+                </script>
+              </div>
+            </div>
+            <!-- SSN -->
+            <div class="form-row">
+              <div class="form-holder">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="SSN"
+                  inputmode="numeric"
+                  maxlength="14"
+                  id="ssn"
+                  name="ssn"
+                  required
+                />
+                <i class="zmdi zmdi-account-box-o small"></i>
+                <script>
+                  document.getElementById("ssn").validity.patternMismatch;
+                </script>
+              </div>
+            </div>
+            <!-- phone -->
+            <div class="form-row">
+              <div class="form-holder">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Phone"
+                  id="phone"
+                  name="phone"
+                />
+                <i class="zmdi zmdi-smartphone-android"></i>
+              </div>
+            </div>
+            <!-- Address -->
+            <div class="form-row">
+              <div class="form-holder">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Address"
+                  id="address"
+                  name="address"
+                  required
+                />
+                <i class="zmdi zmdi-map small"></i>
+              </div>
+            </div>
+          </div>
+        </section>
 
-    {% if emailExisits %}
-    <div class="alert alert-warning" role="alert">
-      the email you entered already exisits
-    </div>
-    {%endif%}
-    
-    {% if ssnExisits %}
-    <div class="alert alert-warning" role="alert">
-      the ssn you entered already exisits
-    </div>
-    {%endif%}
+        <!-- SECTION 2 -->
+        <h4></h4>
+        <section>
+          <div class="inner">
+            <!-- Email -->
+            <div class="form-row" style="margin-top: 50px">
+              <div class="form-holder">
+                <input
+                  type="email"
+                  class="form-control"
+                  placeholder="Email"
+                  id="email"
+                  name="email"
+                  required
+                />
+                <i class="zmdi zmdi-email small"></i>
+                <script>
+                  document.getElementById("email").validity.typeMismatch;
+                </script>
+              </div>
+            </div>
+            <!-- Password -->
+            <div class="form-row">
+              <div class="form-holder">
+                <input
+                  type="password"
+                  class="form-control"
+                  placeholder="Password"
+                  id="password"
+                  name="password"
+                  required
+                />
+                <i class="zmdi zmdi-lock-open small"></i>
+              </div>
+            </div>
+            <!-- Birth Date -->
+            <div class="form-row">
+              <div class="form-holder">
+                <input
+                  type="date"
+                  class="form-control datepicker-here"
+                  data-language="en"
+                  data-date-format="dd - mm - yyyy"
+                  id="birth_date"
+                  name="birth_date"
+                  placeholder="Birth Date"
+                />
+              </div>
+            </div>
+            <!-- specialization  -->
+            <div class="form-row">
+              <div class="form-holder">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Specialization"
+                  id="specialization"
+                  name="specialization"
+                />
+              </div>
+            </div>
 
+            <!-- Gender -->
+            <div class="form-row">
+              <div class="select-control" style="font-size: 25px">
+                <fieldset
+                  id="group1"
+                  style="
+                    padding-top: 20px;
+                    padding-bottom: 20px;
+                    text-align: center;
+                    border-radius: 20px;
+                    background-color: #bbbbbb22;
+                  "
+                >
+                  <label
+                    class="choose"
+                    id="choose1"
+                    style="padding-left: 30px; padding-right: 30px"
+                    onclick="clicked1()"
+                    ><input
+                      style="display: none"
+                      type="radio"
+                      value="Male"
+                      id="sex"
+                      name="sex"
+                    />Male</label
+                  >
+                  <label class="choose" id="choose2" onclick="clicked2()">
+                    <input
+                      style="display: none"
+                      type="radio"
+                      value="Female"
+                      id="sex"
+                      name="sex"
+                    />Female</label
+                  >
+                </fieldset>
+              </div>
+            </div>
+          </div>
+        </section>
 
-    <div class="centerSignUp">
-      <h1>Doctor Register</h1>
-      <form  
-      action="{{ url_for('adddoctor') }}"
-      method="POST"
-      enctype="multipart/form-data">
-      <!-- name -->  
-
-      <div class="txt_field">
-          <input 
-          type="text"
-          id="name" 
-          name="name"
-          minlength="2"
-          maxlength="255"
-          required/>
-          <span></span>
-          <label for="Name">Name</label>
-        </div>
-
-      <!-- ssn -->
-      <div class="txt_field">
-        <input 
-          type="int" inputmode="numeric"
-          maxlength="9"
-          id="ssn"
-          name="ssn" 
-          required />
-        <span></span>
-        <label for="Department">SSN</label>
-      </div>
-      
-      <div class="txt_field">
-        <input 
-        type="tel"  maxlength="11"
-         name="phone"
-         id="phone"
-         required />
-        <span></span>
-        <label for="Department">Phone Number</label>
-      </div>
-
-    <!-- sex -->
-      <div>
-      <span></span>
-      <select
-        class="txt_field"
-        aria-label="Default select example"
-        name="sex" required>
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-      </select>
-    </div>
-    
-    <!-- birth date -->
-    <div class="txt_field">
-      <input type="date" name="birth_date" required/>
-      <span></span>
-      <label for="birth_date">Birth Date</label>
-    </div>
-
-    <!-- address -->
-        <div class="txt_field">
-          <input 
-            type="text" name="address"
-            required />
-            <span></span>
-          <label for="address">Address</label>
-        </div>
-
-      <!-- degree -->
-        <div class="txt_field">
-          <input 
-          type="text" name="degree"/>
-          <span></span>
-          <label for="Degree">Degree</label>
-        </div>
-
-      <!-- specialization -->
-        <div class="txt_field">
-          <input type="text" name="specialization" />
-          <span></span>
-          <label for="Specialization">Specialization</label>
-        </div>
-
-        <!-- file -->
-      <div class="txt_field">
-        <div class="custom">
-          <input
-            type="file"
-            name="photo"
-          />
-          <span></span>
-          <label for="photo">Select image</label>
-        </div>
-      </div>
-
-      <!-- email -->
-      <div class="txt_field">
-        <input 
-          type="text" name="email"
-          required/>
-          <span></span>
-        <label for="email">Email</label>
-      </div>
-
-        <!-- password -->
-        <div class="txt_field">
-          <input type="password"  name="password" required />
-          <span></span>
-          <label for="Password">Password</label>
-        </div>
-
-        <input type="submit" value="Sign Up" required/>
-        <div class="signup_link">
-          <br />
-          Back To Home? <a href="{{url_for('index')}}">Home</a>
+        <!-- SECTION 3 -->
+        <!-- <h4></h4>
+        <section class="section-3">
+          <div class="inner" style="margin-top: 50px"> 
+             degree 
+             <div class="form-row">
+              <div class="form-holder">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Degree"
+                  id="degree"
+                  name="degree"
+                />
+              </div>
+            </div>
+           </div>
+        </section> -->
+        <!-- Submit button -->
+        <div id="outside" class="outside">
+          <h1 style="text-align: center; margin-top: 50px; color: #fff">
+            Would you like to submit this information?
+          </h1>
+          <input type="submit" class="button" />
+          <button class="button" onclick="go()" style="margin-top: 20px">
+            Not yet
+          </button>
+          <script>
+            function go() {
+              var a = document.getElementById("outside");
+              a.style.display = "none";
+            }
+          </script>
         </div>
       </form>
     </div>
+
+    <script>
+      function clicked1() {
+        var a = document.getElementById("choose1");
+        var b = document.getElementById("choose2");
+        b.style.backgroundColor = "";
+        b.style.color = "";
+        a.style.backgroundColor += "#0e9";
+        a.style.color += "#fff";
+      }
+      function clicked2() {
+        var a = document.getElementById("choose1");
+        var b = document.getElementById("choose2");
+        a.style.backgroundColor = "";
+        a.style.color = "";
+        b.style.backgroundColor += "#0e9";
+        b.style.color += "#fff";
+      }
+    </script>
+
+    <script src="/static/adddoctor/js/jquery-3.3.1.min.js"></script>
+
+    <!-- JQUERY STEP -->
+    <script src="/static/adddoctor/js/jquery.steps.js"></script>
+
+    <!-- DATE-PICKER -->
+    <script src="/static/adddoctor/vendor/date-picker/js/datepicker.js"></script>
+    <script src="/static/adddoctor/vendor/date-picker/js/datepicker.en.js"></script>
+
+    <script src="/static/adddoctor/js/main.js"></script>
+
+    <!-- Template created and distributed by Colorlib -->
   </body>
 </html>

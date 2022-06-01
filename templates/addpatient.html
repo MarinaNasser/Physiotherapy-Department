@@ -11,7 +11,7 @@
     <!-- MATERIAL DESIGN ICONIC FONT -->
     <link
       rel="stylesheet"
-      href="/static/addpatient/fonts/material-design-iconic-font/css/material-design-iconic-font.css"
+      href="static/addpatient/fonts/material-design-iconic-font/css/material-design-iconic-font.css"
     />
 
     <!-- DATE-PICKER -->
@@ -26,42 +26,50 @@
 
   <body>
     <div class="wrapper" id="inside">
-      <form action="http://127.0.0.1:5000/addpatient" method="POST" id="wizard">
+      <form
+        action="http://127.0.0.1:5000/addpatient"
+        method="POST"
+        id="wizard"
+        enctype="multipart/form-data"
+      >
         <!-- SECTION 1 -->
         <h3 style="color: white; font-size: 40px">SignUp</h3>
         <h4></h4>
         <section>
-          <!-- Photo-->
           <div class="inner">
-            <input
-              type="file"
-              accept="image/*"
-              name="image"
-              id="file"
-              onchange="loadFile(event)"
-              style="display: none"
-            />
-            <label for="file" style="cursor: pointer"
-              ><img
+            <!-- Photo -->
+            <p>
+              <input
+                type="file"
+                accept="image/*"
+                name="photo"
                 id="photo"
-                style="
-                  margin-left: 200px;
-                  margin-bottom: 30px;
-                  object-fit: cover;
-                  border-radius: 100%;
-                  width: 150px;
-                  height: 150px;
-                "
-                src="/static/addpatient/images/user.png"
-            /></label>
+                onchange="loadFile(event)"
+                style="display: none"
+              />
+            </p>
+            <p>
+              <label for="photo" style="cursor: pointer"
+                ><img
+                  id="photouploaded"
+                  style="
+                    margin-left: 200px;
+                    margin-bottom: 30px;
+                    object-fit: cover;
+                    border-radius: 100%;
+                    width: 150px;
+                    height: 150px;
+                  "
+                  src="/static/addpatient/images/user.png"
+              /></label>
+            </p>
 
             <script>
-              var loadFile = function (photo) {
-                var image = document.getElementById("photo");
+              var loadFile = function (event) {
+                var image = document.getElementById("photouploaded");
                 image.src = URL.createObjectURL(event.target.files[0]);
               };
             </script>
-
             <!-- name -->
             <div class="form-row">
               <div class="form-holder">
@@ -70,6 +78,7 @@
                   class="form-control"
                   placeholder="Full Name"
                   id="name"
+                  name="name"
                   minlength="2"
                   maxlength="255"
                   required
@@ -79,6 +88,7 @@
                 </script>
               </div>
             </div>
+
             <!-- SSN -->
             <div class="form-row">
               <div class="form-holder">
@@ -89,6 +99,7 @@
                   inputmode="numeric"
                   maxlength="14"
                   id="ssn"
+                  name="ssn"
                   required
                 />
                 <i class="zmdi zmdi-account-box-o small"></i>
@@ -97,6 +108,7 @@
                 </script>
               </div>
             </div>
+
             <!-- phone -->
             <div class="form-row">
               <div class="form-holder">
@@ -105,10 +117,12 @@
                   class="form-control"
                   placeholder="Phone"
                   id="phone"
+                  name="phone"
                 />
                 <i class="zmdi zmdi-smartphone-android"></i>
               </div>
             </div>
+
             <!-- Address -->
             <div class="form-row">
               <div class="form-holder">
@@ -117,6 +131,7 @@
                   class="form-control"
                   placeholder="Address"
                   id="address"
+                  name="address"
                   required
                 />
                 <i class="zmdi zmdi-map small"></i>
@@ -129,6 +144,7 @@
         <h4></h4>
         <section>
           <div class="inner">
+
             <!-- Email -->
             <div class="form-row" style="margin-top: 50px">
               <div class="form-holder">
@@ -137,6 +153,7 @@
                   class="form-control"
                   placeholder="Email"
                   id="email"
+                  name="email"
                   required
                 />
                 <i class="zmdi zmdi-email small"></i>
@@ -145,6 +162,7 @@
                 </script>
               </div>
             </div>
+
             <!-- Password -->
             <div class="form-row">
               <div class="form-holder">
@@ -153,24 +171,13 @@
                   class="form-control"
                   placeholder="Password"
                   id="password"
+                  name="password"
                   required
                 />
                 <i class="zmdi zmdi-lock-open small"></i>
               </div>
             </div>
-            <!-- Gender -->
-            <div class="form-row">
-              <div class="select">
-                <div class="form-holder">
-                  <div class="select-control" id="sex">Gender</div>
-                  <i class="zmdi zmdi-caret-down small"></i>
-                </div>
-                <ul class="dropdown">
-                  <li rel="Male">Male</li>
-                  <li rel="Female">Female</li>
-                </ul>
-              </div>
-            </div>
+
             <!-- Birth Date -->
             <div class="form-row">
               <div class="form-holder">
@@ -179,26 +186,48 @@
                   class="form-control datepicker-here"
                   data-language="en"
                   data-date-format="dd - mm - yyyy"
-                  id="birthDate"
-                  placeholder="Date of Birth"
+                  id="birth_date"
+                  name="birth_date"
+                  placeholder="Birth Date"
                 />
               </div>
             </div>
-            <!-- Marital Status -->
+            <!-- Gender -->
             <div class="form-row">
-              <div class="select">
-                <div class="form-holder">
-                  <div class="select-control" id="maritalStatus">
-                    Marital Status
-                  </div>
-                  <i class="zmdi zmdi-caret-down small"></i>
-                </div>
-                <ul class="dropdown">
-                  <li rel="Married">Married</li>
-                  <li rel="Single">Single</li>
-                  <li rel="Divorced">Divorced</li>
-                  <li rel="Widowed">Widowed</li>
-                </ul>
+              <div class="select-control" style="font-size: 25px">
+                <fieldset
+                  id="group1"
+                  style="
+                    padding-top: 20px;
+                    padding-bottom: 20px;
+                    text-align: center;
+                    border-radius: 20px;
+                    background-color: #bbbbbb22;
+                  "
+                >
+                  <label
+                    class="choose"
+                    id="choose1"
+                    style="padding-left: 30px; padding-right: 30px"
+                    onclick="clicked1()"
+                    ><input
+                      style="display: none"
+                      type="radio"
+                      value="Male"
+                      id="sex"
+                      name="sex"
+                    />Male</label
+                  >
+                  <label class="choose" id="choose2" onclick="clicked2()">
+                    <input
+                      style="display: none"
+                      type="radio"
+                      value="Female"
+                      id="sex"
+                      name="sex"
+                    />Female</label
+                  >
+                </fieldset>
               </div>
             </div>
           </div>
@@ -207,6 +236,7 @@
         <!-- SECTION 3 -->
         <h4></h4>
         <section class="section-3">
+
           <!-- Job -->
           <div class="inner" style="margin-top: 50px">
             <div class="form-row">
@@ -216,9 +246,11 @@
                   class="form-control"
                   placeholder="Job (OPTIONAL)"
                   id="job"
+                  name="job"
                 />
               </div>
             </div>
+
             <!-- Insurance number -->
             <div class="form-row">
               <div class="form-holder">
@@ -226,10 +258,12 @@
                   type="text"
                   class="form-control"
                   placeholder="Insurance Number (OPTIONAL)"
-                  id="insuranceNumber"
+                  id="insurance_num"
+                  name="insurance_num"
                 />
               </div>
             </div>
+
             <!-- Credit Card -->
             <div class="form-row">
               <div class="form-holder">
@@ -237,34 +271,104 @@
                   type="text"
                   class="form-control"
                   placeholder="Credit Card (OPTIONAL)"
-                  id="creditCard"
+                  id="credit_card"
+                  name="credit_card"
                 />
+              </div>
+            </div>
+            <!-- Marital Status -->
+            <div class="form-row">
+              <div class="select-control" style="font-size: 25px">
+                <fieldset
+                  id="group2"
+                  style="
+                    padding-top: 20px;
+                    padding-bottom: 20px;
+                    text-align: center;
+                    border-radius: 20px;
+                    background-color: #bbbbbb22;
+                  "
+                >
+                  <label
+                    class="choose"
+                    id="choose3"
+                    style="padding-left: 30px; padding-right: 30px"
+                    onclick="clicked3()"
+                    ><input
+                      style="display: none"
+                      type="radio"
+                      value="Single"
+                      id="marital_status"
+                      name="marital_status"
+                    />Single</label
+                  >
+                  <label class="choose" id="choose4" onclick="clicked4()">
+                    <input
+                      style="display: none"
+                      type="radio"
+                      value="Married"
+                      id="marital_status"
+                      name="marital_status"
+                    />Married</label
+                  >
+                </fieldset>
               </div>
             </div>
           </div>
         </section>
+        <!-- Submit button -->
+        <div id="outside" class="outside">
+          <h1 style="text-align: center; margin-top: 50px; color: #fff">
+            Would you like to submit this information?
+          </h1>
+          <input type="submit" class="button" />
+          <button class="button" onclick="go()" style="margin-top: 20px">
+            Not yet
+          </button>
+          <script>
+            function go() {
+              var a = document.getElementById("outside");
+              a.style.display = "none";
+            }
+          </script>
+        </div>
       </form>
     </div>
 
-    <!-- Submit button -->
-    <div id="outside" class="outside">
-      <h1 style="text-align: center; margin-top: 50px; color: #fff">
-        Would you like to submit this information?
-      </h1>
-      <form action="home">
-        <button class="button" onclick="">Submit</button>
-      </form>
-      <button class="button" onclick="go()" style="margin-top: 20px">
-        Not yet
-      </button>
-      <script>
-        function go() {
-          var a = document.getElementById("outside");
-          a.style.display = "none";
-        }
-      </script>
-    </div>
-    <!-- <div style="background-color: white; z-index: 10000; position: absolute;width: 600px;height: 500px;"></div> -->
+    <script>
+      function clicked1() {
+        var a = document.getElementById("choose1");
+        var b = document.getElementById("choose2");
+        b.style.backgroundColor = "";
+        b.style.color = "";
+        a.style.backgroundColor += "#0e9";
+        a.style.color += "#fff";
+      }
+      function clicked2() {
+        var a = document.getElementById("choose1");
+        var b = document.getElementById("choose2");
+        a.style.backgroundColor = "";
+        a.style.color = "";
+        b.style.backgroundColor += "#0e9";
+        b.style.color += "#fff";
+      }
+      function clicked3() {
+        var c = document.getElementById("choose3");
+        var d = document.getElementById("choose4");
+        d.style.backgroundColor = "";
+        d.style.color = "";
+        c.style.backgroundColor += "#0e9";
+        c.style.color += "#fff";
+      }
+      function clicked4() {
+        var c = document.getElementById("choose3");
+        var d = document.getElementById("choose4");
+        c.style.backgroundColor = "";
+        c.style.color = "";
+        d.style.backgroundColor += "#0e9";
+        d.style.color += "#fff";
+      }
+    </script>
 
     <script src="/static/addpatient/js/jquery-3.3.1.min.js"></script>
 

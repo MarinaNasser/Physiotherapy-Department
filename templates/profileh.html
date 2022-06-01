@@ -1,88 +1,73 @@
-{%extends'index.html'%}
-  {%block main%}
-  <head>
-    <title>Profile</title>
-    <link
-      rel="stylesheet"
-      href="{{url_for('static',filename='css/profile.css')}}"
-    />
-    <link rel="icon" href="static\assets\img\favicon.png" />
+{%extends'index.html'%} {%block main%}
+<head>
+  <title>Profile</title>
+  <link
+    rel="stylesheet"
+    href="{{url_for('static',filename='css/profile.css')}}"
+  />
+  <link rel="icon" href="static\assets\img\favicon.png" />
 
-    <meta charset="UTF-8" />
-  </head>
-  <body>
+  <meta charset="UTF-8" />
+</head>
+<body>
   <header>
-      <div class="card mb-3 content">
-        <div>
-          <img src= "record.14"  alt="Jordans Avatar" class="profile-image">
-          <div class="row">
-            <h5>Full Name</h5>
-            <div class="col-md9 text-secondary">Magdy</div>
-          </div>
-          <hr />
-          <div class="row">
-            <div class="col-md-3">
-              <h5>Email</h5>
-            </div>
-            <div class="col-m-9 text-secondary">abc@gmail.com</div>
-          </div>
-          <hr />
-          <div class="row">
-            <div class="col-md-3">
-              <h5>Phone</h5>
-            </div>
-            <div class="col-md-9 text-secondary">0092346745</div>
-          </div>
-          <hr />
-          <div class="row">
-            <div class="col-md-3">
-              <h5>Address</h5>
-            </div>
-            <div class="col-md9 text-secondary">42 tal3at 7arb st.</div>
-          </div>
-          <hr />
-        </div>
+    <div class="card mb-3 content" style="margin-top: 50px; width: 800px">
+      <img
+        src="static/imgs/uploads/b0c2141f2ecfb2c7f70cbfbfff2b4905.png"
+        class="profile-image"
+      />
+      <div class="row" style="margin-top: 50px">
+        <h5>Full Name</h5>
+        <div class="col-md9 text-secondary">Magdy</div>
       </div>
+      <hr />
+      <div class="row">
+        <h5>Email</h5>
+        <div class="col-md9 text-secondary">abc@gmail.com</div>
+      </div>
+      <hr />
+      <div class="row">
+        <h5>Phone</h5>
+        <div class="col-md9 text-secondary">0123456789</div>
+      </div>
+      <hr />
+      <div class="row">
+        <h5>Address</h5>
+        <div class="col-md9 text-secondary">42 talaat harb St.</div>
+      </div>
+      <hr />
 
-      <div style="width: 200px; display: inline-block"></div>
-      <div class="card mb-3 content">
-        <div class="row">
-          <div class="col-md-3">
-            <h5>Gender</h5>
-          </div>
-          <div class="col-m-9 text-secondary">Male</div>
-        </div>
-        <hr />
-        <div class="row">
-          <div class="col-md-3">
-            <h5>Date of Birth</h5>
-          </div>
-          <div class="col-md-9 text-secondary">14/6/2001</div>
-        </div>
-        <hr />
-        <div class="row">
-          <div class="col-md-3">
-            <h5>Marital Status</h5>
-          </div>
-          <div class="col-md9 text-secondary">Married</div>
-        </div>
-        <hr />
-        <div class="row">
-          <h5>Job</h5>
-          <div class="col-md9 text-secondary">engineer</div>
-        </div>
-        <hr />
-        <div class="row">
-          <h5>Insurance Number</h5>
-          <div class="col-md9 text-secondary">123456789</div>
-        </div>
-        <hr />
-        <div class="row">
-          <h5>Credit Card</h5>
-          <div class="col-md9 text-secondary">XXXX</div>
-        </div>
-        <hr />
+      <div class="row">
+        <h5>Gender</h5>
+        <div class="col-md9 text-secondary">Male</div>
       </div>
-    </header>
-  </body>
-  {%endblock%}
+      <hr />
+      <div class="row">
+        <h5>Date of birth</h5>
+        <div class="col-md9 text-secondary">14/6/2001</div>
+      </div>
+      <hr />
+      <div class="row">
+        <h5>Marital Status</h5>
+        <div class="col-md9 text-secondary">Single</div>
+      </div>
+      <hr />
+      <div class="row">
+        <h5>Job</h5>
+        <div class="col-md9 text-secondary">Engineer</div>
+      </div>
+      <hr />
+      <div class="row">
+        <h5>Insurance Number</h5>
+        <div class="col-md9 text-secondary">123456789</div>
+      </div>
+      <hr />
+      <div class="row">
+        <h5>Credit Card</h5>
+        <div class="col-md9 text-secondary">XXXX</div>
+      </div>
+      <hr />
+    </div>
+  </header>
+</body>
+{%endblock%}
