@@ -91,7 +91,7 @@
             </li>
             <li class="nav-item">
               {% if session['user_doctor']%}
-              <a class="nav-link" href="/addApointment">Add Appointment</a>
+              <a class="nav-link" href="{{url_for('addAppointment')}}">Add Appointment</a>
               {%endif%}
             </li>
             <li class="nav-item">
@@ -129,12 +129,11 @@
               <a class="nav-link" href="/messages">Messages</a>
               {% endif %}
             </li>
-
+            {% if not (session['user_admin'] or session['user_doctor'] or session['user_patient'] ) %}
             <li class="nav-item">
-              {% if not (session['user_admin'] or session['user_doctor']) %}
               <a class="nav-link" href="/home#contact">Contact</a>
-              {% endif %}
             </li>
+            {% endif %}
             <li class="nav-item">
               {% if session['loggedIn']%}
               <a class="nav-link" href="/logout">Log Out</a>
@@ -149,7 +148,7 @@
                   aria-expanded="false"
                   href="#">LogIn | SignUp</a>
               <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                <li><div class="dropdown-divider"></div></li>
+                
                 <li>
                   <a class="dropdown-item" href="{{url_for('preSignUp')}}"
                     >Sign Up</a
@@ -527,6 +526,7 @@
     </div>
     <!-- end of testimonials -->
 
+    {% if not (session['user_admin'] or session['user_doctor'] or session['user_patient'] ) %}
     <!-- Contact -->
     <section class="contact d-flex align-items-center py-5" id="contact">
       <div class="container-fluid text-light">
@@ -596,7 +596,7 @@
       <!-- end of container -->
     </section>
     <!-- end of contact -->
-
+    {% endif %}
     <!-- Location -->
     <section class="location text-light py-5">
       <div class="container" data-aos="zoom-in">
