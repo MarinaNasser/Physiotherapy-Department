@@ -91,7 +91,7 @@
             </li>
             <li class="nav-item">
               {% if session['user_doctor']%}
-              <a class="nav-link" href="{{url_for('addAppointment')}}">Add Appointment</a>
+              <a class="nav-link" href="/addApointment">Add Appointment</a>
               {%endif%}
             </li>
             <li class="nav-item">
@@ -379,7 +379,7 @@
     <!-- end of plans -->
 
     <!-- Work -->
-    <section class="work d-flex align-items-center py-5">
+    <section class="work d-flex align-items-center py-5" id="ourWork">
       <div class="container-fluid text-light">
         <div class="row">
           <div class="col-lg-6 d-flex align-items-center" data-aos="fade-right">
@@ -592,7 +592,7 @@
           <div class="col-lg-6 d-flex align-items-center" data-aos="fade-down">
             <img
               class="img-fluid d-none d-lg-block"
-              src="https://th.bing.com/th/id/R.a9b4543de90135151f15b4d604c574ff?rik=cMyhVe1RRUBqTw&riu=http%3a%2f%2fnewcanadiandrain.com%2fwp-content%2fuploads%2f2011%2f11%2fContact-Us-2000x1039.jpg&ehk=zmtaSlD9kWZh1RW5SQtgisoqbALASsuHA6vLmFkJ6oo%3d&risl=&pid=ImgRaw&r=0"
+              src="static\assets\img\contactUss.jpg"
               alt="contact"
             />
           </div>
@@ -626,7 +626,7 @@
             <div class="p-2"><i class="far fa-envelope fa-3x"></i></div>
             <div class="ms-2">
               <h6>SEND US MESSAGE</h6>
-              <p>infodemofile@example.com</p>
+              <p>MuscleCare@gmail.com</p>
             </div>
           </div>
           <div class="col-lg-3 d-flex align-items-center">
@@ -679,19 +679,19 @@
               <h4 class="py-2">Quick Links</h4>
               <div class="d-flex align-items-center py-2">
                 <i class="fas fa-caret-right"></i>
+                <a href="/home"><p class="ms-3">Home</p></a>
+              </div>
+              <div class="d-flex align-items-center py-2">
+                <i class="fas fa-caret-right"></i>
                 <a href="/home#about"><p class="ms-3">About</p></a>
               </div>
               <div class="d-flex align-items-center py-2">
                 <i class="fas fa-caret-right"></i>
-                <a href="/home#services"><p class="ms-3">Services</p></a>
+                <a href="/home#ourWork"><p class="ms-3">Our Work</p></a>
               </div>
               <div class="d-flex align-items-center py-2">
                 <i class="fas fa-caret-right"></i>
-                <a href="/home#plans"><p class="ms-3">Plans</p></a>
-              </div>
-              <div class="d-flex align-items-center py-2">
-                <i class="fas fa-caret-right"></i>
-                <a href="/home#contact"><p class="ms-3">Contact</p></a>
+                <a href="/home#plans"><p class="ms-3">Services</p></a>
               </div>
             </div>
           </div>
@@ -702,19 +702,19 @@
               <h4 class="py-2">Useful Links</h4>
               <div class="d-flex align-items-center py-2">
                 <i class="fas fa-caret-right"></i>
-                <a href="#"><p class="ms-3">Privacy</p></a>
+                <a href="{{url_for('preSignUp')}}"><p class="ms-3">SignUp</p></a>
               </div>
               <div class="d-flex align-items-center py-2">
                 <i class="fas fa-caret-right"></i>
-                <a href="#"><p class="ms-3">Terms</p></a>
+                <a href="{{url_for('login')}}"><p class="ms-3">login</p></a>
               </div>
               <div class="d-flex align-items-center py-2">
                 <i class="fas fa-caret-right"></i>
-                <a href="#your-link"><p class="ms-3">Disclaimer</p></a>
+                <a href="/home#contact"><p class="ms-3">Contact</p></a>
               </div>
               <div class="d-flex align-items-center py-2">
                 <i class="fas fa-caret-right"></i>
-                <a href="#your-link"><p class="ms-3">FAQ</p></a>
+                <a href="{{url_for('login')}}"><p class="ms-3">Tips</p></a>
               </div>
             </div>
           </div>
@@ -753,7 +753,7 @@
     <div class="bottom py-2 text-light">
       <div class="container d-flex justify-content-between">
         <div>
-          <p>Copyright © Fala7een el code</p>
+          <p>Copyright ©Fala7eenElCode</p>
           <br />
         </div>
         <div>

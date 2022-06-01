@@ -5,7 +5,7 @@ mydb = mysql.connector.connect(
   host="localhost",
   user="root",
   passwd="A_0l1a2a3",
-  database="hosiptal"
+  database="felcode"
 )
 
 mycursor = mydb.cursor()
