@@ -43,7 +43,7 @@ def preSignUp():
 def myTips():
     return render_template('myTips.html')
 
-# ------------------------------------------------------------------------Profile and more info---------------------------------------------------------------------
+# ------------------------------------------------------------------------Profile---------------------------------------------------------------------
 @app.route('/profileh')
 def profileh():
     if 'loggedIn' in session and 'user_patient' in session :
@@ -59,9 +59,21 @@ def profileh():
 
     return render_template('profileh.html',data = result)
 
-@app.route('/moreInfo')
-def moreInfo():
-    return render_template('moreInfo.html')
+# ---------------------------------------------------------------------editProfile---------------------------------------------------------------------
+@app.route('/editProfile')
+def editProfile():
+    if 'loggedIn' in session and 'user_patient' in session :
+        cursor = mydb.cursor(buffered=True)
+        cursor.execute('SELECT * FROM patient WHERE email = %s', (session['user_patient'],))
+        result = cursor.fetchall()
+    elif 'loggedIn' in session and 'user_doctor' in session :
+        cursor = mydb.cursor(buffered=True)
+        cursor.execute('SELECT * FROM doctor WHERE email = %s', (session['user_doctor'],))
+        result = cursor.fetchall()
+    else:
+        return render_template('editProfile.html')
+
+    return render_template('editProfile.html',data = result)
 
 # ------------------------------------------------------------------------Login---------------------------------------------------------------------
 
@@ -91,22 +103,6 @@ def login():
     else:
         return render_template('login.html',msg = False)
 
-@app.route('/signUp')
-def signUp():
-    if request.method == 'GET':
-        return render_template('signUp.html')
-    else:
-        name = request.form['name']
-        password = request.form['password']
-        email = request.form['email']
-        
-        mycursor.execute("INSET INTO USERS (email,password) VALUES (%s,%s)",(email,password))
-        mydb.commit()
-        
-        session['name'] = name
-        session['email'] = email
-        return redirect(url_for('index'))
-
 # ------------------------------------------------------------------------Log Out-------------------------------------------------------------------
 
 @app.route("/logout")
@@ -114,7 +110,6 @@ def logout():
     session.pop('loggedin',None)
     session.pop('user',None)
     session.clear()
-    # return render_template('Base.html')
     return redirect(url_for('index'))
 
 # ------------------------------------------------------------------------Add Doctor----------------------------------------------------------------
@@ -125,7 +120,6 @@ def adddoctor():
     if request.method == 'POST':
 
         #requesting data form
-
         name = request.form['name']
         ssn=request.form['ssn']
         sex = request.form['sex']
@@ -133,7 +127,6 @@ def adddoctor():
         password = request.form['password']
         address = request.form['address']
         birth_date = request.form['birth_date']
-        # degree = request.form["degree"]
         specialization= request.form['specialization']
         phone = request.form['phone']
         photo = request.files['photo']
@@ -251,7 +244,7 @@ def addpatient():
         mycursor.execute(sql, val)
         mydb.commit()
 
-        sql1 = """INSERT INTO users (email, password, kind) VALUES (%s, %s, %s)"""
+        sql1 = """INSERT INTO users (email, password, type) VALUES (%s, %s, %s)"""
         val1 = (email,password,'patient')
         mycursor.execute(sql1, val1)
         mydb.commit()
@@ -302,22 +295,19 @@ def adminViewDoctor():
         password = request.form['password']
         address = request.form['address']
         birth_date = request.form['birth_date']
-        degree = request.form['degree']
         Specialization= request.form['specialization']
         phone = request.form['phone']
         photo = request.form['photo']
 
-        sql = """INSERT INTO doctor (name,ssn,sex,email,password,address,birth_date,degree,specialization,phone,photo) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
-        val = (name,ssn,sex,email,password,address,birth_date,degree,Specialization,phone,photo)
+        sql = """INSERT INTO doctor (name,ssn,sex,email,password,address,birth_date,specialization,phone,photo) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+        val = (name,ssn,sex,email,password,address,birth_date,Specialization,phone,photo)
         mycursor.execute(sql,val)
         mydb.commit()
         
-        sql = """INSERT INTO users (email,password,kind) VALUES (%s,%s,%s)"""
+        sql = """INSERT INTO users (email,password,type) VALUES (%s,%s,%s)"""
         val = (email,password,'doctor')
         mycursor.execute(sql,val)
         mydb.commit()
-
-
 
         cursor = mydb.cursor(buffered=True)
         cursor.execute("""DELETE FROM doctorPreRequest WHERE ssn = %s """,(ssn,))
@@ -445,7 +435,7 @@ def bookNow():
 # def confirmBooking():
 
 
-# ------------------------------------------------------------------------test----------------------------------------------------------------
+# ------------------------------------------------------------------------messages----------------------------------------------------------------
 
 @app.route('/messages', methods = ['GET','POST'])
 def messages():
@@ -462,7 +452,7 @@ def messages():
 
     return render_template('messages.html')
 
-# ------------------------------------------------------------------------test----------------------------------------------------------------
+# ------------------------------------------------------------------------inbox----------------------------------------------------------------
 @app.route('/inbox', methods = ['POST','GET'])
 def inbox():
     if request.method == 'POST'and "deleteMessage" in request.form:
@@ -473,10 +463,17 @@ def inbox():
         mydb.commit()
         return redirect(url_for('inbox'))
 
-    sql = """Select * from messages where emailTo = %s"""
-    val = (session['user_patient'],)
-    mycursor.execute(sql,val)
-    result = mycursor.fetchall()
+    if session['user_doctor']:
+        sql = """Select * from messages where emailTo = %s"""
+        val = (session['user_doctor'],)
+        mycursor.execute(sql,val)
+        result = mycursor.fetchall()
+    else:
+        sql = """Select * from messages where emailTo = %s"""
+        val = (session['user_patient'],)
+        mycursor.execute(sql,val)
+        result = mycursor.fetchall()
+
     return render_template('inbox.html',result=result)
 
 # ------------------------------------------------------------------------test----------------------------------------------------------------
