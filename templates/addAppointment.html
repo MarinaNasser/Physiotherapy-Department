@@ -10,12 +10,7 @@
   <!-- Custom stlylesheet -->
       <link type="text/css" rel="stylesheet" href="{{url_for('static',filename='css/addAppointment.css')}}" />
 
-      <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-      <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-      <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
+  
   </head>
   <body>
     <div id="booking" class="section">
@@ -81,37 +76,7 @@
         </div>
       </div>
     </div>
-    <!-- <form action="{{url_for('addAppointment')}}" method="POST"> -->
-            <!-- start time -->
-            <!-- <div class="form-group">
-                <label for="startT" class="form-label">Start time</label>
-                <input type="text" class="form-control" id="startT" name="startT" minlength="2" maxlength="255" placeholder="05:30" required>
-            </div> -->
-
-            <!-- end time -->
-            <!-- <div class="form-group">
-                <label for="endT" class="form-label">End time</label>
-                <input type="text" class="form-control" id="endT" name="endT" minlength="2" maxlength="255" placeholder="05:50" required>
-            </div>
-             -->
-            <!-- date -->
-            <!-- <div class="form-group">
-                <label for="date" class="form-label">Date</label>
-                <input type="text" class="form-control" id="date" name="date" minlength="2" maxlength="255" placeholder="25-10-2022" required>
-            </div>
-
-          
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form> -->
-<!--         
-        {% if added %}
-            you entered an appointment successfully
-        {% endif %} -->
-
-        
-        <!-- <form action="{{url_for('viewAppointments')}}">
-            <button type="submit" class="btn btn-primary">view</button>
-        </form> -->
+   
 
         {%block body%}
         {% endblock %}

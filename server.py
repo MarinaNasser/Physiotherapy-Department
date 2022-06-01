@@ -16,6 +16,8 @@ import re
 import os
 import secrets
 
+from pymysql import NULL
+
 app = Flask(__name__)
 app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
@@ -58,7 +60,12 @@ def profileh():
         cursor = mydb.cursor(buffered=True)
         cursor.execute('SELECT * FROM patient WHERE email = %s', (session['user_patient'],))
         result = cursor.fetchall()
-        return render_template('profileh.html',data = result)
+        sql = """SELECT appNo,doctor.name,startT,endT,dt FROM appointment join patient on patientEmail = patient.email join doctor on doctorEmail= doctor.email
+           where patientEmail =  %s """
+        val =(session["user_patient"],)
+        cursor.execute(sql , val)
+        appointment = cursor.fetchall()
+        return render_template('profileh.html',data = result , appointment=appointment)
         
     elif 'loggedIn' in session and 'user_doctor' in session :
         cursor = mydb.cursor(buffered=True)
@@ -510,7 +517,8 @@ def bookNow():
     mycursor.execute(sql)
     result = mycursor.fetchall()
     print(result)
-    if result:
+    result = pd.DataFrame(result)
+    if not result.empty:
         print('notEmpty')
         result = pd.DataFrame(result)
         result[4] = pd.to_datetime(result[4],format="%Y-%m-%d")
@@ -541,7 +549,8 @@ def bookNow():
         sql = "SELECT appNo,name,startT,endT,dt,booked FROM appointment join doctor on doctorEmail = email"
         mycursor.execute(sql)
         result = mycursor.fetchall()
-        if result:    
+        result = pd.DataFrame(result)
+        if not result.empty :    
             result = pd.DataFrame(result)
             result[4] = pd.to_datetime(result[4],format="%Y-%m-%d")
             # Method 1 - Filter dataframe
@@ -566,6 +575,19 @@ def deleteAppointment():
         mycursor.execute(sql,val)
         mydb.commit()
         return redirect(url_for('viewAppointments'))
+
+# ------------------------------------------------------------------------unbook appointment ----------------------------------------------------------------
+@app.route('/profileh/unBookAppointment', methods=['GET','POST'])
+def unBookAppointment():
+    if request.method == 'POST':    
+        print('delete')
+        print('delete')
+        print('delete')
+        sql = "UPDATE appointment SET booked = %s,patientEmail=%s WHERE appNo = %s"
+        val = (0,NULL,int(request.form['appNo']))
+        mycursor.execute(sql,val)
+        mydb.commit()
+        return redirect(url_for('profileh'))
 
 # ------------------------------------------------------------------------messages----------------------------------------------------------------
 
