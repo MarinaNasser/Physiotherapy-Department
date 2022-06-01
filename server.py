@@ -1,4 +1,4 @@
-from crypt import methods
+# from crypt import methods
 from distutils.log import debug
 import email
 from email import message
