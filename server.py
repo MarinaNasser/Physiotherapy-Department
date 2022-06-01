@@ -133,7 +133,7 @@ def adddoctor():
         password = request.form['password']
         address = request.form['address']
         birth_date = request.form['birth_date']
-        degree = request.form['degree']
+        # degree = request.form["degree"]
         specialization= request.form['specialization']
         phone = request.form['phone']
         photo = request.files['photo']
@@ -149,11 +149,11 @@ def adddoctor():
         ssnExist = ssnCursor.fetchone()
 
         reqemailCursor =mydb.cursor(buffered=True)
-        reqemailCursor.execute(""" SELECT * FROM doctorprerequest WHERE emailref = %s """ , (email,))
+        reqemailCursor.execute(""" SELECT * FROM doctorprerequest WHERE email = %s """ , (email,))
         reqemailExist = reqemailCursor.fetchone()
 
         reqssnCursor =mydb.cursor(buffered=True)
-        reqssnCursor.execute(""" SELECT * FROM doctorprerequest WHERE ssnref = %s """ , (ssn,))
+        reqssnCursor.execute(""" SELECT * FROM doctorprerequest WHERE ssn = %s """ , (ssn,))
         reqssnExist = reqssnCursor.fetchone()
 
         if emailExist and ssnExist and reqssnExist and reqemailExist  :
@@ -171,8 +171,8 @@ def adddoctor():
         elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
             return render_template('adddoctor.html', emailExisits = False , emailInvalid=True ,reqemailExist=True , reqssnExist=True)        
         else:    
-            sql = """INSERT INTO doctorPreRequest (name,ssn,sex,email,password,address,birth_date,degree,specialization,phone,photo) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
-            val = (name,ssn,sex,email,password,address,birth_date,degree,specialization,phone,pic_path)
+            sql = """INSERT INTO doctorPreRequest (name, ssn, sex, email, password, address, birth_date,  specialization, phone, photo) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+            val = (name, ssn, sex, email, password, address, birth_date,  specialization, phone, pic_path)
             mycursor.execute(sql,val)
             mydb.commit()
             return redirect(url_for('index'))
@@ -206,17 +206,16 @@ def save_picture(form_picture):
 def adddevice():
     if request.method == 'POST':
         if request.form:
-            device_number = request.form['device_num']
             device_name = request.form['device_name']
             device_model = request.form['device_model']
             technician_id = request.form['technician_id']
+            technician_name = request.form['technician_name']
             count = request.form['count']
             description = request.form['description']
             photo = request.files['photo']
             pic_path = save_picture(photo)
-            
-            sql = """INSERT INTO device (device_num,device_name,device_model,technician_id,photo,count,description) VALUES (%s,%s,%s,%s,%s,%s,%s)"""
-            val = (device_number,device_name,device_model,technician_id,pic_path,count,description)
+            sql = """INSERT INTO device (device_name,device_model,technician_id,technician_name,photo,count,description) VALUES (%s,%s,%s,%s,%s,%s,%s)"""
+            val = (device_name,device_model,technician_id,technician_name,pic_path,count,description)
             mycursor.execute(sql,val)
             mydb.commit()
             return redirect(url_for('index'))
