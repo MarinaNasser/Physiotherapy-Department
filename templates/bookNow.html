@@ -2,6 +2,8 @@
 {%block main%}
 <br><br><br><br><br><br>
   <body style="background-color: #333b48;" class='container'>
+    
+    {% if not data.empty %}
     <table class="table table-hover table-dark">
       <thead>
         <tr>
@@ -27,7 +29,7 @@
       </form>
         
           {% for i in range(0, data.shape[0] ) %}
-          {% if (now - data[4][i].date()).days < 0 and not data[5][i]%}
+          {% if (now - data[4][i].date()).days <= 0 and not data[5][i]%}
           {% include 'includes/items_modals_appointment.html' %}
             {% if toFind == "" or data[1][i] == toFind %}
             <tr>
@@ -46,6 +48,11 @@
         
       </tbody>
     </table>
+    {% else %}
+    <div class="alert alert-light" role="alert">
+      there is not any appointment
+    </div>
+    {%endif%}
     
     
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
