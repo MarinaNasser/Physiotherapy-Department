@@ -23,23 +23,29 @@ app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-<<<<<<< HEAD
-    passwd="N#@98wrft45",
-=======
     passwd="sherif2001",
->>>>>>> ca0a8c339f440cc60f9d5a6d4a52fa15eed7f9a9
     database="felcode"
 )
 mycursor = mydb.cursor(buffered=True)
 
 @app.route('/')
-@app.route('/home')
+@app.route('/home',methods=["GET","POST"])
 
 def index():
+    if request.method == "POST":
+        email = request.form['email']
+        message = request.form['message']
+        sql = """INSERT INTO contact_us (email, message) VALUES (%s,%s)"""
+        val = (email, message)
+        mycursor.execute(sql,val)
+        mydb.commit()
+        return redirect(url_for('index'))
+
     sql = "SELECT name,id FROM DOCTOR"
     mycursor.execute(sql)
     result = mycursor.fetchall()
     return render_template("index.html",data = result)
+
 
 # ------------------------------------------------------------------------Pre Sign Up---------------------------------------------------------------------
 @app.route('/preSignUp')
