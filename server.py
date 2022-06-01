@@ -44,9 +44,12 @@ def index():
         mydb.commit()
         return redirect(url_for('index'))
 
-    sql1 = "SELECT name,email,id,photo,specialization, COUNT(name) FROM doctor"
+    sql1 = "SELECT name,email,id,photo,specialization FROM doctor"
     mycursor.execute(sql1)
     resultDoctor = mycursor.fetchall()
+    sqlCountDoctor = "SELECT COUNT(name) FROM doctor"
+    mycursor.execute(sqlCountDoctor)
+    sqlCountDoctor = mycursor.fetchall()
     sql2 = "SELECT COUNT(id) FROM patient"
     mycursor.execute(sql2)
     resultPatient = mycursor.fetchall()
@@ -57,7 +60,8 @@ def index():
     mycursor.execute(sql4)
     result4 = mycursor.fetchall()
     
-    return render_template("index.html",dataDoctor = resultDoctor, dataPatient = resultPatient, dataDevice = resultDevice, data4 = result4)
+    return render_template("index.html",dataDoctor = resultDoctor, dataPatient = resultPatient, dataDevice = resultDevice, data4 = result4,
+    sqlCountDoctor = sqlCountDoctor)
 
 # ------------------------------------------------------------------------Pre Sign Up---------------------------------------------------------------------
 @app.route('/preSignUp')

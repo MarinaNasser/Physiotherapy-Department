@@ -406,13 +406,13 @@
                     <p>DEVICES</p>
                   </div>
                   {% endfor %}
-                  {% for item in dataDoctor %}
+                  {% for item in sqlCountDoctor %}
                   <div class="col-6">
                     <i class="fas fa-award fa-2x"></i>
                     <h2
                       class="purecounter"
                       data-purecounter-start="0"
-                      data-purecounter-end="{{item[5]}}"
+                      data-purecounter-end="{{item[0]}}"
                       data-purecounter-duration="1000000"
                     >
                       1
@@ -538,6 +538,7 @@
             class="col-lg-6 d-flex justify-content-center justify-content-lg-end align-items-center px-lg-5"
             data-aos="fade-right"
           >
+          <form action="http://127.0.0.1:5000/home" method="POST">
             <div style="width: 90%">
               <div class="text-center text-lg-start py-4 pt-lg-0">
                 <p>CONTACT</p>
@@ -551,7 +552,8 @@
                   <input
                     type="email"
                     class="form-control form-control-input"
-                    id="exampleFormControlInput3"
+                    id="email"
+                    name="email"
                     placeholder="Enter email"
                   />
                 </div>
@@ -570,19 +572,18 @@
                 <div class="form-group py-2">
                   <textarea
                     class="form-control form-control-input"
-                    id="exampleFormControlTextarea1"
+                    id="message"
+                    name="message"
                     rows="6"
                     placeholder="Message"
                   ></textarea>
                 </div>
               </div>
               <div class="my-3">
-                <a class="btn form-control-submit-button" href="#your-link"
-                  >Submit</a
-                >
+                <input type="submit" class="btn form-control-submit-button">
               </div>
             </div>
-            <!-- end of div -->
+          </form>
           </div>
           <!-- end of col -->
           <div class="col-lg-6 d-flex align-items-center" data-aos="fade-down">
