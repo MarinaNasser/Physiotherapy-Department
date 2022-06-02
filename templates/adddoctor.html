@@ -281,6 +281,14 @@
       <script>
         window.alert("You have already sent a request. Please stay tuned");
       </script>
+      {%endif%}{% if emailExistAsPatient %}
+      <script>
+        window.alert("The used email already exists");
+      </script>
+      {%endif%}{% if ssnExistAsPatient %}
+      <script>
+        window.alert("The entered ssn already exists");
+      </script>
       {%endif%}
     </div>
 
