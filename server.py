@@ -8,7 +8,7 @@ from datetime import timedelta
 from genericpath import exists
 from unittest import result
 from flask import Flask, redirect, render_template,request,session,url_for
-# from pymysql import NULL
+from pymysql import NULL
 # from sqlalchemy import false
 # from flask_mysqldb import MySQL
 import mysql.connector
@@ -16,21 +16,20 @@ import re
 import os
 import secrets
 
-from pymysql import NULL
+# from pymysql import NULL
 
 app = Flask(__name__)
 app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="sherif2001",
+    passwd="85426Mm854267890",
     database="felcode"
 )
 mycursor = mydb.cursor(buffered=True)
 
 @app.route('/')
 @app.route('/home')
-
 def index():
     sql = "SELECT name,id FROM DOCTOR"
     mycursor.execute(sql)
@@ -188,7 +187,7 @@ def adddoctor():
 
 @app.route('/viewdoctor')
 def viewdoctor():
-    sql = "SELECT * FROM DOCTOR"
+    sql = "SELECT name, email, phone,specialization FROM DOCTOR"
     mycursor.execute(sql)
     result = mycursor.fetchall()
     return render_template('viewdoctor.html',data = result)
@@ -401,21 +400,19 @@ def addAppointment():
 @app.route('/viewAppointments')   
 def viewAppointments():
     # to get name
-    sql = """SELECT name FROM appointment join doctor on doctorEmail = email 
-    where doctorEmail = %s"""
+    sql = """SELECT name FROM doctor where email = %s"""
     val = (session['user_doctor'],)
     mycursor.execute(sql,val)
     name = mycursor.fetchone()
-    if name :
-        name = name[0]
-    else:
-        name = ""
+    name = name[0]
     
-    
-    sql = "SELECT appNo,name,startT,endT,dt,booked FROM appointment join doctor on doctorEmail = email"
-    mycursor.execute(sql)
+    sql = "SELECT appNo,name,startT,endT,dt,booked FROM appointment join doctor on doctorEmail = email where doctorEmail = %s"
+    mycursor.execute(sql,val)
     result = mycursor.fetchall()
-    return render_template('viewAppointments.html', data = result,name = name)
+    empty = True
+    if result:
+        empty = False
+    return render_template('viewAppointments.html', data = result,name = name,empty = empty)
 
 # ------------------------------------------------------------------------book now----------------------------------------------------------------
 
@@ -428,7 +425,6 @@ def bookNow():
     result = pd.DataFrame(result)
     if not result.empty:
         print('notEmpty')
-        result = pd.DataFrame(result)
         result[4] = pd.to_datetime(result[4],format="%Y-%m-%d")
         result = result[result[5] == 0]
 
@@ -440,6 +436,7 @@ def bookNow():
         toFind = request.form['toFind']
         print(toFind)
         print(toFind)
+        print(type(result))
         return render_template('bookNow.html',data = result,now = datetime.now().date(),booked = True,toFind = toFind)
     elif request.method == 'POST':
         print("JUSt POST")
@@ -459,14 +456,19 @@ def bookNow():
         result = mycursor.fetchall()
         result = pd.DataFrame(result)
         if not result.empty :    
-            result = pd.DataFrame(result)
+            # result = pd.DataFrame(result)
             result[4] = pd.to_datetime(result[4],format="%Y-%m-%d")
-            # Method 1 - Filter dataframe
+            # erase booked appointments
             result = result[result[5] == 0]
+            print(type(result))
+
         return render_template('bookNow.html',data = result,now = datetime.now().date(),booked = True,toFind = "")
     else:
         print("GET")
         print("GET")
+        print(type(result))
+        print(result)
+                   
         return render_template('bookNow.html',data = result,now = datetime.now().date(),booked = False,toFind = "")
 
 # ------------------------------------------------------------------------ delete appointment ----------------------------------------------------------------
