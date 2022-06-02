@@ -346,6 +346,7 @@ def profile():
 
 @app.route('/adminViewDoctor', methods = ['POST','GET'])
 def adminViewDoctor():
+  if 'user_admin' in session :
     if request.method == 'POST'and "ssn" in request.form:
 
         name = request.form['name']
@@ -405,7 +406,9 @@ def adminViewDoctor():
     sql = "SELECT * FROM doctorprerequest"
     mycursor.execute(sql)
     result = mycursor.fetchall()
-    return render_template('adminViewDoctor.html',result=result)        
+    return render_template('adminViewDoctor.html',result=result)
+  else:
+        redirect(url_for('index'))        
 
 # ------------------------------------------------------------------------add appointment----------------------------------------------------------------
 @app.route('/addAppointment',methods=['GET','POST'])
