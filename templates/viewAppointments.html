@@ -8,6 +8,7 @@
     <div class="table-responsive">
         {% if not empty %}
         <table class="table table-bordered text-center">
+           <h3 style="color: whitesmoke ;">My Upcoming Appointments</h3>
             <thead>
                 <tr class="bg-light-gray" style="color:white">
                     <th class="text-uppercase"># </th>
@@ -32,7 +33,7 @@
                             <td><span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{{c}}</span></td>
                         {% endfor %}
                     <td>
-                        <button data-toggle="modal" data-target="#Modal-deleteApp-{{r.0}}"  type="submit" class="btn-close " aria-label="Close"></button>                
+                        <button style="background-color :whitesmoke ;" data-toggle="modal" data-target="#Modal-deleteApp-{{r.0}}"  type="submit" class="btn-close " aria-label="Close"></button>                
                     </td>
                     </tr>
                     {% endfor %}

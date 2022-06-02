@@ -1,4 +1,12 @@
 
+<style>
+  .modal-content {
+    background-color: #1c262f
+  }
+  .form-group{
+    color: whitesmoke;
+  }
+</style>
 
 
 <div class="modal fade" id="Modal-deleteApp-{{r.0}}"
@@ -7,24 +15,24 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog">
 <div class="modal-content">
  <div class="modal-header">
-   <h5 class="modal-title" id="ModalLabel">
+   <h5 style="color: whitesmoke;" class="modal-title" id="ModalLabel">
 
-     delete appointment
+     Delete Appointment
 
    </h5>
-   <button type="button" class="close"
+   <button style="background-color: whitesmoke" type="button" class="close"
            data-dismiss="modal" aria-label="Close">
      <span aria-hidden="true">&times;</span>
    </button>
  </div>
- <div class="modal-body">
-   are you sure you want to delete that appointment?
+ <div style="color: whitesmoke;" class="modal-body">
+   Are you sure you want to delete that appointment?
  </div>
  
- 
+ <div class="container" style="padding:20px;">
  <form action="{{url_for('deleteAppointment')}}" method="post">
    <div class="form-group">
-     <label for="appNo" class="form-label">app no</label>
+     <label for="appNo" class="form-label">App No</label>
      <input type="text" class="form-control" id="appNo" name="appNo" value="{{r.0}}" readonly>
    </div>
    
@@ -41,7 +49,7 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
    </div>
    
    <!-- sex -->
-   <div>
+   <div  class="form-group">
      <label for="endTime">end time</label>
      <input type="text" class="form-control" id="endTime" name="endTime" value="{{r.3}}" readonly>
  </div>
@@ -53,13 +61,11 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
    
    <button type="submit" class="btn btn-primary">delete</button>
  </form>      
- 
- <button type="button" class="btn btn-secondary"
- data-dismiss="modal">Close        
-   </button>
- </div>
-</div>
-</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 
