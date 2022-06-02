@@ -103,7 +103,11 @@
 
       <!-- image -->
       <div class="card mb-3 content" style="margin-top: 50px; width: 800px">
-        <img src="{{item.10}}" class="profile-image" />
+        <img
+          src="{{item.10}}"
+          class="profile-image"
+          onerror="this.src = '/static/adddevice/images/user.png';"
+        />
 
         <!-- name -->
         <div class="row" style="margin-top: 50px">
