@@ -338,6 +338,7 @@ def addpatient():
 
 @app.route('/viewpatient')
 def viewpatient():
+    
     mycursor.execute("SELECT * FROM Patient")
     myresult = mycursor.fetchall()
     return render_template('viewpatient.html', data = myresult)
