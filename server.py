@@ -25,7 +25,7 @@ app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="Ahmed9112",
+    passwd="magdynasr",
     database="felcode"
 )
 mycursor = mydb.cursor(buffered=True)
@@ -60,9 +60,11 @@ def index():
     sql4 = "SELECT COUNT(appNo) FROM appointment"
     mycursor.execute(sql4)
     result4 = mycursor.fetchall()
-    sqlfeedback = ""
+    sql5 = "SELECT COUNT(feedback) FROM feedback"
+    mycursor.execute(sql5)
+    result5 = mycursor.fetchall()
     return render_template("index.html",dataDoctor = resultDoctor, dataPatient = resultPatient, dataDevice = resultDevice, data4 = result4,
-    sqlCountDoctor = sqlCountDoctor)
+    sqlCountDoctor = sqlCountDoctor, data5 = result5)
 
 @app.route('/home/feedback',methods=["GET","POST"])
 def feedback():
