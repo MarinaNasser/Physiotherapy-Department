@@ -247,22 +247,27 @@ def save_picture(form_picture):
 @app.route('/adddevice', methods = ['GET','POST'])
 
 def adddevice():
-    if request.method == 'POST':
-        if request.form:
-            device_name = request.form['device_name']
-            device_model = request.form['device_model']
-            technician_id = request.form['technician_id']
-            technician_name = request.form['technician_name']
-            count = request.form['count']
-            description = request.form['description']
-            photo = request.files['photo']
-            pic_path = save_picture(photo)
-            sql = """INSERT INTO device (device_name,device_model,technician_id,technician_name,photo,count,description) VALUES (%s,%s,%s,%s,%s,%s,%s)"""
-            val = (device_name,device_model,technician_id,technician_name,pic_path,count,description)
-            mycursor.execute(sql,val)
-            mydb.commit()
-            return redirect(url_for('index'))
-    return render_template('adddevice.html')
+    if 'user_admin' in session :
+        if request.method == 'POST':
+            if request.form:
+                device_name = request.form['device_name']
+                device_model = request.form['device_model']
+                technician_id = request.form['technician_id']
+                technician_name = request.form['technician_name']
+                count = request.form['count']
+                description = request.form['description']
+                photo = request.files['photo']
+                pic_path = save_picture(photo)
+
+                sql = """INSERT INTO device (device_name,device_model,technician_id,technician_name,photo,count,description) VALUES (%s,%s,%s,%s,%s,%s,%s)"""
+                val = (device_name,device_model,technician_id,technician_name,pic_path,count,description)
+                mycursor.execute(sql,val)
+                mydb.commit()
+                return redirect(url_for('index'))
+        return render_template('adddevice.html')
+    else:
+        return redirect(url_for('index'))
+    
         
 # ------------------------------------------------------------------------Doctors-------------------------------------------------------------------        
 
