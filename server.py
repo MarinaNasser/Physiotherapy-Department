@@ -26,7 +26,7 @@ app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="A_0l1a2a3",
+    passwd="Ahmed9112",
     database="felcode"
 )
 mycursor = mydb.cursor(buffered=True)
@@ -89,7 +89,7 @@ def myTips():
 # ------------------------------------------------------------------------Profile---------------------------------------------------------------------
 @app.route('/profileh')
 def profileh():
-    if 'user_patient' in session or 'user_doctor' in session :  
+    if 'user_patient' in session or 'user_doctor' in session and 'loggedIn' in session :  
 
         if 'loggedIn' in session and 'user_patient' in session :
             cursor = mydb.cursor(buffered=True)
@@ -110,7 +110,7 @@ def profileh():
         else:
             return render_template('profileh.html')
     else:
-        redirect(url_for('index'))          
+        return redirect(url_for('index'))          
 
 # ------------------------------------------------------------------------Login---------------------------------------------------------------------
 
@@ -363,69 +363,69 @@ def profile():
 
 @app.route('/adminViewDoctor', methods = ['POST','GET'])
 def adminViewDoctor():
-  if 'user_admin' in session :
-    if request.method == 'POST'and "ssn" in request.form:
+    if 'user_admin' in session and 'loggedIn' in session:
+        if request.method == 'POST'and "ssn" in request.form:
 
-        name = request.form['name']
-        ssn=request.form['ssn']
-        sex = request.form['sex']
-        email = request.form['email']
-        password = request.form['password']
-        address = request.form['address']
-        birth_date = request.form['birth_date']
-        Specialization= request.form['specialization']
-        phone = request.form['phone']
-        photo = request.form['photo']
+            name = request.form['name']
+            ssn=request.form['ssn']
+            sex = request.form['sex']
+            email = request.form['email']
+            password = request.form['password']
+            address = request.form['address']
+            birth_date = request.form['birth_date']
+            Specialization= request.form['specialization']
+            phone = request.form['phone']
+            photo = request.form['photo']
 
-        sql = """INSERT INTO doctor (name,ssn,sex,email,password,address,birth_date,specialization,phone,photo) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
-        val = (name,ssn,sex,email,password,address,birth_date,Specialization,phone,photo)
-        mycursor.execute(sql,val)
-        mydb.commit()
-        
-        sql = """INSERT INTO users (email,password,type) VALUES (%s,%s,%s)"""
-        val = (email,password,'doctor')
-        mycursor.execute(sql,val)
-        mydb.commit()
+            sql = """INSERT INTO doctor (name,ssn,sex,email,password,address,birth_date,specialization,phone,photo) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+            val = (name,ssn,sex,email,password,address,birth_date,Specialization,phone,photo)
+            mycursor.execute(sql,val)
+            mydb.commit()
+            
+            sql = """INSERT INTO users (email,password,type) VALUES (%s,%s,%s)"""
+            val = (email,password,'doctor')
+            mycursor.execute(sql,val)
+            mydb.commit()
 
-        cursor = mydb.cursor(buffered=True)
-        cursor.execute("""DELETE FROM doctorPreRequest WHERE ssn = %s """,(ssn,))
-        mydb.commit()  
-        return redirect(url_for('adminViewDoctor'))
+            cursor = mydb.cursor(buffered=True)
+            cursor.execute("""DELETE FROM doctorPreRequest WHERE ssn = %s """,(ssn,))
+            mydb.commit()  
+            return redirect(url_for('adminViewDoctor'))
 
-    if request.method == 'POST' and "ssnref" in request.form:
+        if request.method == 'POST' and "ssnref" in request.form:
 
-        nameref = request.form['nameref']
-        ssnref=request.form['ssnref']
-        
-        # sql = """INSERT INTO test (name,ssn) values (%s,%s)"""
-        # val = (nameref,ssnref)
-        # cursor = mydb.cursor(buffered=True)
-        # cursor.execute(sql,val)
-        # mydb.commit()
+            # nameref = request.form['nameref']
+            ssnref=request.form['ssnref']
+            
+            # sql = """INSERT INTO test (name,ssn) values (%s,%s)"""
+            # val = (nameref,ssnref)
+            # cursor = mydb.cursor(buffered=True)
+            # cursor.execute(sql,val)
+            # mydb.commit()
 
 
-        # sex = request.form['sex']
-        # email = request.form['email']
-        # password = request.form['password']
-        # address = request.form['address']
-        # birth_date = request.form['birth_date']
-        # degree = request.form['degree']
-        # Specialization= request.form['specialization']
-        # salary = request.form['salary']
+            # sex = request.form['sex']
+            # email = request.form['email']
+            # password = request.form['password']
+            # address = request.form['address']
+            # birth_date = request.form['birth_date']
+            # degree = request.form['degree']
+            # Specialization= request.form['specialization']
+            # salary = request.form['salary']
 
-        cursor = mydb.cursor(buffered=True)
-        cursor.execute(""" DELETE FROM doctorPreRequest WHERE ssn = %s """,(ssnref,))
-        mydb.commit()
-        return redirect(url_for('adminViewDoctor'))
+            cursor = mydb.cursor(buffered=True)
+            cursor.execute(""" DELETE FROM doctorPreRequest WHERE ssn = %s """,(ssnref,))
+            mydb.commit()
+            return redirect(url_for('adminViewDoctor'))
+        else:
+            print('get')    
+            
+        sql = "SELECT * FROM doctorprerequest"
+        mycursor.execute(sql)
+        result = mycursor.fetchall()
+        return render_template('adminViewDoctor.html',result=result)
     else:
-        print('get')    
-        
-    sql = "SELECT * FROM doctorprerequest"
-    mycursor.execute(sql)
-    result = mycursor.fetchall()
-    return render_template('adminViewDoctor.html',result=result)
-  else:
-        redirect(url_for('index'))        
+        return redirect(url_for('index'))        
 
 # ------------------------------------------------------------------------add appointment----------------------------------------------------------------
 @app.route('/addAppointment',methods=['GET','POST'])
