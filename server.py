@@ -19,14 +19,12 @@ import re
 import os
 import secrets
 
-# from pymysql import NULL
-
 app = Flask(__name__)
 app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="85426Mm854267890",
+    passwd="sherif2001",
     database="felcode"
 )
 mycursor = mydb.cursor(buffered=True)
@@ -228,10 +226,13 @@ def adddoctor():
 
 @app.route('/viewdoctor')
 def viewdoctor():
-    sql = "SELECT name, email, phone,specialization FROM DOCTOR"
-    mycursor.execute(sql)
-    result = mycursor.fetchall()
-    return render_template('viewdoctor.html',data = result)
+    if 'user_admin' in session :  
+        sql = "SELECT name, email, phone,specialization FROM DOCTOR"
+        mycursor.execute(sql)
+        result = mycursor.fetchall()
+        return render_template('viewdoctor.html',data = result)
+    else:
+        return redirect(url_for('index'))    
 
 # ------------------------------------------------------------------------Add Device----------------------------------------------------------------
 
@@ -247,22 +248,27 @@ def save_picture(form_picture):
 @app.route('/adddevice', methods = ['GET','POST'])
 
 def adddevice():
-    if request.method == 'POST':
-        if request.form:
-            device_name = request.form['device_name']
-            device_model = request.form['device_model']
-            technician_id = request.form['technician_id']
-            technician_name = request.form['technician_name']
-            count = request.form['count']
-            description = request.form['description']
-            photo = request.files['photo']
-            pic_path = save_picture(photo)
-            sql = """INSERT INTO device (device_name,device_model,technician_id,technician_name,photo,count,description) VALUES (%s,%s,%s,%s,%s,%s,%s)"""
-            val = (device_name,device_model,technician_id,technician_name,pic_path,count,description)
-            mycursor.execute(sql,val)
-            mydb.commit()
-            return redirect(url_for('index'))
-    return render_template('adddevice.html')
+    if 'user_admin' in session :
+        if request.method == 'POST':
+            if request.form:
+                device_name = request.form['device_name']
+                device_model = request.form['device_model']
+                technician_id = request.form['technician_id']
+                technician_name = request.form['technician_name']
+                count = request.form['count']
+                description = request.form['description']
+                photo = request.files['photo']
+                pic_path = save_picture(photo)
+
+                sql = """INSERT INTO device (device_name,device_model,technician_id,technician_name,photo,count,description) VALUES (%s,%s,%s,%s,%s,%s,%s)"""
+                val = (device_name,device_model,technician_id,technician_name,pic_path,count,description)
+                mycursor.execute(sql,val)
+                mydb.commit()
+                return redirect(url_for('index'))
+        return render_template('adddevice.html')
+    else:
+        return redirect(url_for('index'))
+    
         
 # ------------------------------------------------------------------------Doctors-------------------------------------------------------------------        
 
@@ -499,6 +505,7 @@ def bookNow():
     mycursor.execute(sql)
     result = mycursor.fetchall()
     result = pd.DataFrame(result)
+    result.reset_index()
     if not result.empty:
         print('notEmpty')
         print(result)
@@ -530,8 +537,7 @@ def bookNow():
         print("GET")
         print("GET")
         print(type(result))
-        print(result)
-                   
+        print(result)             
         return render_template('bookNow.html',data = result,now = datetime.now().date(),booked = False,toFind = "")
 
 # ------------------------------------------------------------------------ delete appointment ----------------------------------------------------------------
@@ -612,8 +618,10 @@ def count():
     cursor = mydb.cursor(buffered=True)
     if 'user_patient' in session:
         cursor.execute('SELECT COUNT(*) FROM messages WHERE emailTo = %s', (session['user_patient'],))
-    else:
+    elif 'user_doctor' in session:
         cursor.execute('SELECT COUNT(*) FROM messages WHERE emailTo = %s', (session['user_doctor'],))
+    else:
+        cursor.execute('SELECT COUNT(id) FROM doctorprerequest')   
     result = cursor.fetchone()[0]
     return (result)
 

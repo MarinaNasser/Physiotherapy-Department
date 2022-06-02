@@ -118,6 +118,7 @@
                   placeholder="Phone"
                   id="phone"
                   name="phone"
+                  required
                 />
                 <i class="zmdi zmdi-smartphone-android"></i>
               </div>
@@ -144,7 +145,6 @@
         <h4></h4>
         <section>
           <div class="inner">
-
             <!-- Email -->
             <div class="form-row" style="margin-top: 50px">
               <div class="form-holder">
@@ -189,6 +189,7 @@
                   id="birth_date"
                   name="birth_date"
                   placeholder="Birth Date"
+                  required
                 />
               </div>
             </div>
@@ -216,6 +217,7 @@
                       value="Male"
                       id="sex"
                       name="sex"
+                      required
                     />Male</label
                   >
                   <label class="choose" id="choose2" onclick="clicked2()">
@@ -236,7 +238,6 @@
         <!-- SECTION 3 -->
         <h4></h4>
         <section class="section-3">
-
           <!-- Job -->
           <div class="inner" style="margin-top: 50px">
             <div class="form-row">
@@ -322,7 +323,12 @@
             Would you like to submit this information?
           </h1>
           <input type="submit" class="button" />
-          <button class="button" onclick="go()" style="margin-top: 20px">
+          <button
+            class="button"
+            type="button"
+            onclick="go()"
+            style="margin-top: 20px"
+          >
             Not yet
           </button>
           <script>

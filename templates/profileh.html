@@ -18,11 +18,15 @@
       <div class="card mb-3 content" style="margin-top: 50px; width: 800px">
         <!-- image -->
 
-        <img src="{{item.13}}" class="profile-image" />
+        <img
+          src="{{item.13}}"
+          class="profile-image"
+          onerror="this.src = '/static/adddevice/images/user.png';"
+        />
         <!-- Name -->
         <div class="row" style="margin-top: 50px">
           <h5>Full Name</h5>
-            <div class="col-md9 text-secondary">{{item.1}}</div>
+          <div class="col-md9 text-secondary">{{item.1}}</div>
         </div>
         <hr />
 
@@ -99,7 +103,11 @@
 
       <!-- image -->
       <div class="card mb-3 content" style="margin-top: 50px; width: 800px">
-        <img src="{{item.10}}" class="profile-image" />
+        <img
+          src="{{item.10}}"
+          class="profile-image"
+          onerror="this.src = '/static/adddevice/images/user.png';"
+        />
 
         <!-- name -->
         <div class="row" style="margin-top: 50px">
@@ -163,9 +171,12 @@
 
 
   </header>
-    <div class="table-responsive">
-      {% if not empty %}
+
+  {% if session['user_patient'] %}
+  <div class="table-responsive">
+      {% if name != "" %}
       <table class="table table-bordered text-center">
+        <h3 style="color: whitesmoke ;">My Booked Appointments</h3>
           <thead>
               <tr class="bg-light-gray" style="color:white">
                   <th class="text-uppercase"># </th>
@@ -178,7 +189,7 @@
           </thead>
           <tbody>
               
-
+                       
                   <form action="{{url_for('unBookAppointment')}}" method='POST'>
                   {% for r in appointment %}
                   {% include 'includes/items_modals_unbook.html' %}

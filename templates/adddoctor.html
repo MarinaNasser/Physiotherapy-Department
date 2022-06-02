@@ -120,6 +120,7 @@
                   placeholder="Phone"
                   id="phone"
                   name="phone"
+                  required
                 />
                 <i class="zmdi zmdi-smartphone-android"></i>
               </div>
@@ -188,6 +189,7 @@
                   id="birth_date"
                   name="birth_date"
                   placeholder="Birth Date"
+                  required
                 />
               </div>
             </div>
@@ -200,6 +202,7 @@
                   placeholder="Specialization"
                   id="specialization"
                   name="specialization"
+                  required
                 />
               </div>
             </div>
@@ -228,6 +231,7 @@
                       value="Male"
                       id="sex"
                       name="sex"
+                      required
                     />Male</label
                   >
                   <label class="choose" id="choose2" onclick="clicked2()">
@@ -250,7 +254,12 @@
             Would you like to submit this information?
           </h1>
           <input type="submit" class="button" />
-          <button class="button" onclick="go()" style="margin-top: 20px">
+          <button
+            class="button"
+            onclick="go()"
+            type="button"
+            style="margin-top: 20px"
+          >
             Not yet
           </button>
           <script>
