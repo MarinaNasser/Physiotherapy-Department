@@ -26,7 +26,7 @@ app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="sherif2001",
+    passwd="Ahmed9112",
     database="felcode"
 )
 mycursor = mydb.cursor(buffered=True)
@@ -630,8 +630,10 @@ def count():
     cursor = mydb.cursor(buffered=True)
     if 'user_patient' in session:
         cursor.execute('SELECT COUNT(*) FROM messages WHERE emailTo = %s', (session['user_patient'],))
-    else:
+    elif 'user_doctor' in session:
         cursor.execute('SELECT COUNT(*) FROM messages WHERE emailTo = %s', (session['user_doctor'],))
+    else:
+        cursor.execute('SELECT COUNT(id) FROM doctorprerequest')   
     result = cursor.fetchone()[0]
     return (result)
 
