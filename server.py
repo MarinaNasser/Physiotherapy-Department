@@ -25,7 +25,7 @@ app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="magdynasr",
+    passwd="Ahmed9112",
     database="felcode"
 )
 mycursor = mydb.cursor(buffered=True)
@@ -202,7 +202,6 @@ def adddoctor():
     else:
         print('get')
         return render_template('adddoctor.html')
-        mycursor.close()
 
 # ------------------------------------------------------------------------View Doctor---------------------------------------------------------------------
 
@@ -269,18 +268,49 @@ def addpatient():
         phone = request.form['phone']
         pic_path = save_picture(photo)
 
-        sql = """INSERT INTO patient (name, ssn, address, email, password, sex, birth_date,marital_status,job,insurance_num, credit_card, phone, photo) VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
-        val = (name,ssn,address,email,password, sex,birth_date,marital_status,job, insurance_num,credit_card, phone, pic_path)
-        mycursor.execute(sql, val)
-        mydb.commit()
+        emailCursor =mydb.cursor(buffered=True)
+        emailCursor.execute(""" SELECT * FROM patient WHERE email = %s """ , (email,))
+        emailExist = emailCursor.fetchone()
 
-        sql1 = """INSERT INTO users (email, password, type) VALUES (%s, %s, %s)"""
-        val1 = (email,password,'patient')
-        mycursor.execute(sql1, val1)
-        mydb.commit()
+        ssnCursor =mydb.cursor(buffered=True)
+        ssnCursor.execute(""" SELECT * FROM patient WHERE ssn = %s """ , (ssn,))
+        ssnExist = ssnCursor.fetchone()
 
+        doctoremailCursor =mydb.cursor(buffered=True)
+        doctoremailCursor.execute(""" SELECT * FROM doctor WHERE email = %s """ , (email,))
+        emailExistAsDoctor = doctoremailCursor.fetchone()
 
-        return redirect(url_for('index'))
+        doctorssnCursor =mydb.cursor(buffered=True)
+        doctorssnCursor.execute(""" SELECT * FROM doctorprerequest WHERE ssn = %s """ , (ssn,))
+        ssnExistAsDoctor = doctorssnCursor.fetchone()
+
+        if emailExist and ssnExist and emailExistAsDoctor and ssnExistAsDoctor  :
+            return render_template('adddoctor.html', emailExisits = True , ssnExisits=True , emailExistAsDoctor=True , ssnExistAsDoctor=True)
+        elif emailExist or ssnExist or emailExistAsDoctor or ssnExistAsDoctor :
+            if emailExist :
+                return render_template('adddoctor.html', emailExisits = True , ssnExisits=False , emailExistAsDoctor=False , ssnExistAsDoctor=False)
+            elif ssnExist :
+                return render_template('adddoctor.html', emailExisits = False , ssnExisits=True, emailExistAsDoctor=False , ssnExistAsDoctor=False)
+            elif ssnExistAsDoctor:
+                return render_template('adddoctor.html', emailExisits = False , ssnExisits=False, emailExistAsDoctor=True , ssnExistAsDoctor=False)
+            else:    
+                return render_template('adddoctor.html', emailExisits = False , ssnExisits=False, emailExistAsDoctor=False , ssnExistAsDoctor=True)
+
+        elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
+            return render_template('adddoctor.html', emailExisits = False , emailInvalid=True ,emailExistAsDoctor=False , ssnExistAsDoctor=False)        
+        else:    
+        
+            sql = """INSERT INTO patient (name, ssn, address, email, password, sex, birth_date,marital_status,job,insurance_num, credit_card, phone, photo) VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+            val = (name,ssn,address,email,password, sex,birth_date,marital_status,job, insurance_num,credit_card, phone, pic_path)
+            mycursor.execute(sql, val)
+            mydb.commit()
+
+            sql1 = """INSERT INTO users (email, password, type) VALUES (%s, %s, %s)"""
+            val1 = (email,password,'patient')
+            mycursor.execute(sql1, val1)
+            mydb.commit()
+
+            return redirect(url_for('index'))
     else:
         print('get')
         return render_template('addpatient.html')
