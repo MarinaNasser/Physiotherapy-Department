@@ -26,7 +26,7 @@ app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="Ahmed9112",
+    passwd="sherif2001",
     database="felcode"
 )
 mycursor = mydb.cursor(buffered=True)
@@ -39,7 +39,6 @@ def index():
     if request.method == "POST":
         email = request.form['email']
         message = request.form['message']
-        
         sql = """INSERT INTO contact_us (email, message) VALUES (%s,%s)"""
         val = (email, message)
         mycursor.execute(sql,val)
