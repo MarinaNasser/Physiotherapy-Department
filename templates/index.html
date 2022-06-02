@@ -716,28 +716,30 @@
             </div>
           </div>
           <!-- end of col -->
-
+          <form action="http://127.0.0.1:5000/home/feedback" method="POST">
           <div class="col-lg-3 py-4 py-md-5">
             <div class="d-flex align-items-center">
-              <h4>Send Feed-Back</h4>
+              <h4>Send Feedback</h4>
             </div>
             <p class="py-3 para-light">
             Feel Free To Right Your Experience With Us.   
             </p>
             <div class="d-flex align-items-center">
               <div class="input-group mb-3">
-                <input
-                  type="text"
-                  class="form-control p-2"
-                  placeholder="Enter Email"
-                  aria-label="Recipient's email"
-                />
-                <button class="btn-secondary text-light">
+                <textarea
+                    class="form-control form-control-input"
+                    id="feedback"
+                    name="feedback"
+                    rows="4"
+                    placeholder="Enter Your Feedback"
+                  ></textarea>
+                <input type="submit" class="btn-secondary text-light">
                   <i class="fas fa-envelope fa-lg"></i>
-                </button>
+                
               </div>
             </div>
           </div>
+        </form>
           <!-- end of col -->
         </div>
         <!-- end of row -->
