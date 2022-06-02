@@ -38,6 +38,7 @@ def index():
     if request.method == "POST":
         email = request.form['email']
         message = request.form['message']
+        
         sql = """INSERT INTO contact_us (email, message) VALUES (%s,%s)"""
         val = (email, message)
         mycursor.execute(sql,val)
@@ -59,9 +60,20 @@ def index():
     sql4 = "SELECT COUNT(appNo) FROM appointment"
     mycursor.execute(sql4)
     result4 = mycursor.fetchall()
-    
+    sqlfeedback = ""
     return render_template("index.html",dataDoctor = resultDoctor, dataPatient = resultPatient, dataDevice = resultDevice, data4 = result4,
     sqlCountDoctor = sqlCountDoctor)
+
+@app.route('/home/feedback',methods=["GET","POST"])
+def feedback():
+    if request.method == "POST":
+        feedbackMessage = request.form['feedback']
+
+        sql5 = """INSERT INTO feedback (feedback) VALUES (%s)"""
+        val5= (feedbackMessage,)
+        mycursor.execute(sql5,val5)
+        mydb.commit()
+        return redirect(url_for('index'))
 
 # ------------------------------------------------------------------------Pre Sign Up---------------------------------------------------------------------
 @app.route('/preSignUp')
@@ -398,7 +410,7 @@ def adminViewDoctor():
   else:
         redirect(url_for('index'))        
 
-# ------------------------------------------------------------------------add/view appointment----------------------------------------------------------------
+# ------------------------------------------------------------------------add appointment----------------------------------------------------------------
 @app.route('/addAppointment',methods=['GET','POST'])
 def addAppointment():
     if 'user_patient' in session or 'user_doctor' in session :  
@@ -439,6 +451,7 @@ def addAppointment():
     else:
         return redirect(url_for('index'))       
 
+# ------------------------------------------------------------------------view appointment----------------------------------------------------------------
 @app.route('/viewAppointments')   
 def viewAppointments():
     # to get name
