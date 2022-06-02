@@ -221,7 +221,7 @@
           <p>Lorem ipsum dolor sit amet.</p>
         </div> -->
         <div class="my-3">
-          {% if not (session['user_admin'] or session['user_doctor']) %}
+          {% if session['user_patient'] %}
           <a class="btn" href="{{url_for('bookNow')}}">Book Now</a>
           {% endif %}
         </div>
@@ -277,7 +277,7 @@
             </p>
 
             <div class="my-3">
-              {% if not (session['user_admin'] or session['user_doctor']) %}
+              {% if session['user_patient'] %}
               <a class="btn" href="{{url_for('bookNow')}}">Book Now</a>
               {% endif %}
             </div>
@@ -528,7 +528,7 @@
                           />
                         </div>
                         <div class="ms-3 pt-2">
-                          <h6><a href="{{url_for('bookNow')}}">{{item[0]}}</a></h6>
+                          <h6><a href="#">{{item[0]}}</a></h6>
                           <p>{{item[4]}}</p>
                         </div>
                       </div>
@@ -555,7 +555,7 @@
         <!-- end of row -->
         
     <div class="my-3">
-      {% if not (session['user_admin'] or session['user_doctor']) %}
+      {% if session['user_patient'] %}
       <a class="btn" href="{{url_for('bookNow')}}">Book Now</a>
       {% endif %}
     </div>
