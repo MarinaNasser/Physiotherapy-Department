@@ -31,6 +31,8 @@
     <title>Muscle Care | Physiotherapy Department</title>
 
     <!-- Styles -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
       rel="stylesheet"
@@ -40,6 +42,16 @@
     <link href="static\css\aos.min.css" rel="stylesheet" />
     <link href="static\css\swiper.css" rel="stylesheet" />
     <link href="static\css\styleIndex.css" rel="stylesheet" />
+
+    <script src=
+    "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+        </script>
+        <script src=
+    "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
+        </script>
+        <script src=
+    "https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+        </script>
 
     <!-- Favicon -->
     <link rel="icon" href="static\assets\img\favicon.png" />
@@ -75,7 +87,7 @@
         >
           <ul class="navbar-nav ms-auto navbar-nav-scroll">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/home"
+              <a class="nav-link active" aria-current="page" href="{{ url_for('index') }}"
                 >Home</a
               >
             </li>
@@ -103,7 +115,7 @@
             </li>
             <li class="nav-item">
               {% if session['user_patient'] %}
-              <a class="nav-link" href="/addAppointments">Book Now</a>
+              <a class="nav-link" href="{{url_for('bookNow')}}">Book Now</a>
               {%endif%}
             </li>
             <li class="nav-item">
@@ -121,6 +133,7 @@
             </li>
             <li class="nav-item">
               {% if session['user_doctor'] or session['user_patient'] %}
+              <span class="badge badge-pill badge-info" style="float:right;margin-bottom:-12px;margin-right:-8px;font-size:10px">{{count()}}</span>
               <a class="nav-link" href="/inbox">Inbox</a>
               {% endif %}
             </li>
@@ -209,7 +222,7 @@
         </div> -->
         <div class="my-3">
           {% if not (session['user_admin'] or session['user_doctor']) %}
-          <a class="btn" href="/home#bookNow">Book Now</a>
+          <a class="btn" href="{{url_for('bookNow')}}">Book Now</a>
           {% endif %}
         </div>
       </div>
@@ -392,54 +405,62 @@
               </div>
               <div class="container" data-aos="fade-up">
                 <div class="row g-5">
+                  {% for item in dataDevice %}
                   <div class="col-6 text-start">
                     <i class="fas fa-briefcase fa-2x text-start"></i>
                     <h2
                       class="purecounter"
                       data-purecounter-start="0"
-                      data-purecounter-end="1258"
-                      data-purecounter-duration="3"
+                      data-purecounter-end="{{item[0]}}"
+                      data-purecounter-duration="1000000"
                     >
                       1
                     </h2>
                     <p>DEVICES</p>
                   </div>
+                  {% endfor %}
+                  {% for item in sqlCountDoctor %}
                   <div class="col-6">
                     <i class="fas fa-award fa-2x"></i>
                     <h2
                       class="purecounter"
                       data-purecounter-start="0"
-                      data-purecounter-end="150"
-                      data-purecounter-duration="3"
+                      data-purecounter-end="{{item[0]}}"
+                      data-purecounter-duration="1000000"
                     >
                       1
                     </h2>
                     <p>DOCTORS</p>
                   </div>
+                  {% endfor %}
+                  {% for item in dataPatient %}
                   <div class="col-6">
                     <i class="fas fa-users fa-2x"></i>
                     <h2
                       class="purecounter"
                       data-purecounter-start="0"
-                      data-purecounter-end="1255"
-                      data-purecounter-duration="3"
+                      data-purecounter-end="{{item[0]}}"
+                      data-purecounter-duration="1000000"
                     >
-                      1
+                      
                     </h2>
                     <p>PATIENTS</p>
                   </div>
+                  {% endfor %}
+                  {% for item in data4 %}
                   <div class="col-6">
                     <i class="fas fa-clock fa-2x"></i>
                     <h2
                       class="purecounter"
                       data-purecounter-start="0"
-                      data-purecounter-end="1157"
-                      data-purecounter-duration="3"
+                      data-purecounter-end="{{item[0]}}"
+                      data-purecounter-duration="1000000"
                     >
                       1
                     </h2>
-                    <p>GOOD REVIEWS</p>
+                    <p>APPOINTMENTS</p>
                   </div>
+                  {% endfor %}
                 </div>
               </div>
               <!-- end of container -->
@@ -472,7 +493,7 @@
               <div class="swiper-container card-slider">
                 <div class="swiper-wrapper">
                   <!-- Slide -->
-                  {%for r in data%}
+                  {%for item in dataDoctor%}
                     <div class="swiper-slide">
                     <div class="testimonial-card p-4">
                       <p></p>
@@ -480,16 +501,14 @@
                         <div>
                           <img
                             class="avatar"
-                            src="static\assets\img\testimonial-1.jpg"
+                            src="{{item[3]}}"
                             alt="testimonial"
+                            style="object-fit: cover;"
                           />
                         </div>
                         <div class="ms-3 pt-2">
-                          <h6><a href="{{url_for('bookNow')}}">{{r[0]}}</a></h6>
-                          <p>ashtar dr f masr</p>
-                          {% if not (session['user_admin'] or session['user_doctor']) %}
-                          <td>  <button type="submit" class="btn btn-primary" > <a href="#" >Book Appointment</a></button></a></td>
-                          {% endif %}
+                          <h6><a href="{{url_for('bookNow')}}">{{item[0]}}</a></h6>
+                          <p>{{item[4]}}</p>
                         </div>
                       </div>
                     </div>
@@ -516,7 +535,7 @@
         
     <div class="my-3">
       {% if not (session['user_admin'] or session['user_doctor']) %}
-      <a class="btn" href="/home#bookNow">Book Now</a>
+      <a class="btn" href="{{url_for('bookNow')}}">Book Now</a>
       {% endif %}
     </div>
       </div>
@@ -532,6 +551,7 @@
             class="col-lg-6 d-flex justify-content-center justify-content-lg-end align-items-center px-lg-5"
             data-aos="fade-right"
           >
+          <form action="http://127.0.0.1:5000/home" method="POST">
             <div style="width: 90%">
               <div class="text-center text-lg-start py-4 pt-lg-0">
                 <p>CONTACT</p>
@@ -545,7 +565,8 @@
                   <input
                     type="email"
                     class="form-control form-control-input"
-                    id="exampleFormControlInput3"
+                    id="email"
+                    name="email"
                     placeholder="Enter email"
                   />
                 </div>
@@ -564,19 +585,18 @@
                 <div class="form-group py-2">
                   <textarea
                     class="form-control form-control-input"
-                    id="exampleFormControlTextarea1"
+                    id="message"
+                    name="message"
                     rows="6"
                     placeholder="Message"
                   ></textarea>
                 </div>
               </div>
               <div class="my-3">
-                <a class="btn form-control-submit-button" href="#your-link"
-                  >Submit</a
-                >
+                <input type="submit" class="btn form-control-submit-button">
               </div>
             </div>
-            <!-- end of div -->
+          </form>
           </div>
           <!-- end of col -->
           <div class="col-lg-6 d-flex align-items-center" data-aos="fade-down">
@@ -602,14 +622,14 @@
             <div class="p-2"><i class="far fa-map fa-3x"></i></div>
             <div class="ms-2">
               <h6>ADDRESS</h6>
-              <p>Teuku Umar ST. 1919</p>
+              <p>9 Ahmed Maher ST. El Giza</p>
             </div>
           </div>
           <div class="col-lg-3 d-flex align-items-center">
             <div class="p-2"><i class="fas fa-mobile-alt fa-3x"></i></div>
             <div class="ms-2">
               <h6>CALL FOR QUERY</h6>
-              <p>(800) 265 216 2020</p>
+              <p>011239667066</p>
             </div>
           </div>
           <div class="col-lg-3 d-flex align-items-center">
@@ -640,7 +660,7 @@
         <div class="row" data-aos="fade-right">
           <div class="col-lg-3 py-4 py-md-5">
             <div class="d-flex align-items-center">
-              <h4 class="">Muscle Carers</h4>
+              <h4 class="">Muscle Care</h4>
             </div>
             <p class="py-3 para-light">
               With a team of qualified and experienced professionals that has been helping patients regain their health and wellness since 2000.</p>
@@ -669,7 +689,7 @@
               <h4 class="py-2">Quick Links</h4>
               <div class="d-flex align-items-center py-2">
                 <i class="fas fa-caret-right"></i>
-                <a href="/home"><p class="ms-3">Home</p></a>
+                <a href="{{ url_for('index') }}"><p class="ms-3">Home</p></a>
               </div>
               <div class="d-flex align-items-center py-2">
                 <i class="fas fa-caret-right"></i>
@@ -709,28 +729,30 @@
             </div>
           </div>
           <!-- end of col -->
-
+          <form action="http://127.0.0.1:5000/home/feedback" method="POST">
           <div class="col-lg-3 py-4 py-md-5">
             <div class="d-flex align-items-center">
-              <h4>Join Us</h4>
+              <h4>Send Feedback</h4>
             </div>
             <p class="py-3 para-light">
-            To join us, send your email and we will contact you..   
+            Feel Free To Right Your Experience With Us.   
             </p>
             <div class="d-flex align-items-center">
               <div class="input-group mb-3">
-                <input
-                  type="text"
-                  class="form-control p-2"
-                  placeholder="Enter Email"
-                  aria-label="Recipient's email"
-                />
-                <button class="btn-secondary text-light">
+                <textarea
+                    class="form-control form-control-input"
+                    id="feedback"
+                    name="feedback"
+                    rows="4"
+                    placeholder="Enter Your Feedback"
+                  ></textarea>
+                <input type="submit" class="btn-secondary text-light">
                   <i class="fas fa-envelope fa-lg"></i>
-                </button>
+                
               </div>
             </div>
           </div>
+        </form>
           <!-- end of col -->
         </div>
         <!-- end of row -->
@@ -743,7 +765,7 @@
     <div class="bottom py-2 text-light">
       <div class="container d-flex justify-content-between">
         <div>
-          <p>Copyright ©Fala7eenElCode</p>
+          <p>Copyright ©FelCode</p>
           <br />
         </div>
         <div>

@@ -333,6 +333,27 @@
           </script>
         </div>
       </form>
+      {% if emailExisits %}
+      <script>
+        window.alert("The used email already exists");
+      </script>
+      {%endif%} {% if emailInvalid %}
+      <script>
+        window.alert("The entered email is invalid");
+      </script>
+      {%endif%} {% if ssnExisits %}
+      <script>
+        window.alert("The entered ssn already exists");
+      </script>
+      {%endif%}{% if emailExistAsDoctor %}
+      <script>
+        window.alert("The used email already exists");
+      </script>
+      {%endif%}{% if ssnExistAsDoctor %}
+      <script>
+        window.alert("The entered ssn already exists");
+      </script>
+      {%endif%}
     </div>
 
     <script>

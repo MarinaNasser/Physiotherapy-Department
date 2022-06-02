@@ -1,5 +1,7 @@
+#from crypt import methods
 from distutils.log import debug
 import email
+from email import message
 from time import strptime
 from time import mktime
 import pandas as pd
@@ -28,14 +30,50 @@ mydb = mysql.connector.connect(
 )
 mycursor = mydb.cursor(buffered=True)
 
+# -----------------------------------------------------------------------------index-----------------------------------------------------------
 @app.route('/')
-@app.route('/home')
+@app.route('/home',methods=["GET","POST"])
 
 def index():
-    sql = "SELECT name,id FROM DOCTOR"
-    mycursor.execute(sql)
-    result = mycursor.fetchall()
-    return render_template("index.html",data = result)
+    if request.method == "POST":
+        email = request.form['email']
+        message = request.form['message']
+        
+        sql = """INSERT INTO contact_us (email, message) VALUES (%s,%s)"""
+        val = (email, message)
+        mycursor.execute(sql,val)
+        mydb.commit()
+        return redirect(url_for('index'))
+
+    sql1 = "SELECT name,email,id,photo,specialization FROM doctor"
+    mycursor.execute(sql1)
+    resultDoctor = mycursor.fetchall()
+    sqlCountDoctor = "SELECT COUNT(name) FROM doctor"
+    mycursor.execute(sqlCountDoctor)
+    sqlCountDoctor = mycursor.fetchall()
+    sql2 = "SELECT COUNT(id) FROM patient"
+    mycursor.execute(sql2)
+    resultPatient = mycursor.fetchall()
+    sql3 = "SELECT SUM(count) FROM device"
+    mycursor.execute(sql3)
+    resultDevice = mycursor.fetchall()
+    sql4 = "SELECT COUNT(appNo) FROM appointment"
+    mycursor.execute(sql4)
+    result4 = mycursor.fetchall()
+    sqlfeedback = ""
+    return render_template("index.html",dataDoctor = resultDoctor, dataPatient = resultPatient, dataDevice = resultDevice, data4 = result4,
+    sqlCountDoctor = sqlCountDoctor)
+
+@app.route('/home/feedback',methods=["GET","POST"])
+def feedback():
+    if request.method == "POST":
+        feedbackMessage = request.form['feedback']
+
+        sql5 = """INSERT INTO feedback (feedback) VALUES (%s)"""
+        val5= (feedbackMessage,)
+        mycursor.execute(sql5,val5)
+        mydb.commit()
+        return redirect(url_for('index'))
 
 # ------------------------------------------------------------------------Pre Sign Up---------------------------------------------------------------------
 @app.route('/preSignUp')
@@ -55,7 +93,7 @@ def profileh():
         cursor.execute('SELECT * FROM patient WHERE email = %s', (session['user_patient'],))
         result = cursor.fetchall()
         sql = """SELECT appNo,doctor.name,startT,endT,dt FROM appointment join patient on patientEmail = patient.email join doctor on doctorEmail= doctor.email
-           where patientEmail =  %s """
+            where patientEmail =  %s """
         val =(session["user_patient"],)
         cursor.execute(sql , val)
         appointment = cursor.fetchall()
@@ -68,22 +106,6 @@ def profileh():
         return render_template('profileh.html',data = result)
     else:
         return render_template('profileh.html')
-
-# ---------------------------------------------------------------------editProfile---------------------------------------------------------------------
-@app.route('/editProfile')
-def editProfile():
-    if 'loggedIn' in session and 'user_patient' in session :
-        cursor = mydb.cursor(buffered=True)
-        cursor.execute('SELECT * FROM patient WHERE email = %s', (session['user_patient'],))
-        result = cursor.fetchall()
-    elif 'loggedIn' in session and 'user_doctor' in session :
-        cursor = mydb.cursor(buffered=True)
-        cursor.execute('SELECT * FROM doctor WHERE email = %s', (session['user_doctor'],))
-        result = cursor.fetchall()
-    else:
-        return render_template('editProfile.html')
-
-    return render_template('editProfile.html',data = result)
 
 # ------------------------------------------------------------------------Login---------------------------------------------------------------------
 
@@ -126,9 +148,7 @@ def logout():
 
 @app.route('/adddoctor',methods = ['POST','GET'])
 def adddoctor():
-
     if request.method == 'POST':
-
         #requesting data form
         name = request.form['name']
         ssn=request.form['ssn']
@@ -182,7 +202,6 @@ def adddoctor():
     else:
         print('get')
         return render_template('adddoctor.html')
-        mycursor.close()
 
 # ------------------------------------------------------------------------View Doctor---------------------------------------------------------------------
 
@@ -249,18 +268,49 @@ def addpatient():
         phone = request.form['phone']
         pic_path = save_picture(photo)
 
-        sql = """INSERT INTO patient (name, ssn, address, email, password, sex, birth_date,marital_status,job,insurance_num, credit_card, phone, photo) VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
-        val = (name,ssn,address,email,password, sex,birth_date,marital_status,job, insurance_num,credit_card, phone, pic_path)
-        mycursor.execute(sql, val)
-        mydb.commit()
+        emailCursor =mydb.cursor(buffered=True)
+        emailCursor.execute(""" SELECT * FROM patient WHERE email = %s """ , (email,))
+        emailExist = emailCursor.fetchone()
 
-        sql1 = """INSERT INTO users (email, password, type) VALUES (%s, %s, %s)"""
-        val1 = (email,password,'patient')
-        mycursor.execute(sql1, val1)
-        mydb.commit()
+        ssnCursor =mydb.cursor(buffered=True)
+        ssnCursor.execute(""" SELECT * FROM patient WHERE ssn = %s """ , (ssn,))
+        ssnExist = ssnCursor.fetchone()
 
+        doctoremailCursor =mydb.cursor(buffered=True)
+        doctoremailCursor.execute(""" SELECT * FROM doctor WHERE email = %s """ , (email,))
+        emailExistAsDoctor = doctoremailCursor.fetchone()
 
-        return redirect(url_for('index'))
+        doctorssnCursor =mydb.cursor(buffered=True)
+        doctorssnCursor.execute(""" SELECT * FROM doctorprerequest WHERE ssn = %s """ , (ssn,))
+        ssnExistAsDoctor = doctorssnCursor.fetchone()
+
+        if emailExist and ssnExist and emailExistAsDoctor and ssnExistAsDoctor  :
+            return render_template('adddoctor.html', emailExisits = True , ssnExisits=True , emailExistAsDoctor=True , ssnExistAsDoctor=True)
+        elif emailExist or ssnExist or emailExistAsDoctor or ssnExistAsDoctor :
+            if emailExist :
+                return render_template('adddoctor.html', emailExisits = True , ssnExisits=False , emailExistAsDoctor=False , ssnExistAsDoctor=False)
+            elif ssnExist :
+                return render_template('adddoctor.html', emailExisits = False , ssnExisits=True, emailExistAsDoctor=False , ssnExistAsDoctor=False)
+            elif ssnExistAsDoctor:
+                return render_template('adddoctor.html', emailExisits = False , ssnExisits=False, emailExistAsDoctor=True , ssnExistAsDoctor=False)
+            else:    
+                return render_template('adddoctor.html', emailExisits = False , ssnExisits=False, emailExistAsDoctor=False , ssnExistAsDoctor=True)
+
+        elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
+            return render_template('adddoctor.html', emailExisits = False , emailInvalid=True ,emailExistAsDoctor=False , ssnExistAsDoctor=False)        
+        else:    
+        
+            sql = """INSERT INTO patient (name, ssn, address, email, password, sex, birth_date,marital_status,job,insurance_num, credit_card, phone, photo) VALUES ( %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+            val = (name,ssn,address,email,password, sex,birth_date,marital_status,job, insurance_num,credit_card, phone, pic_path)
+            mycursor.execute(sql, val)
+            mydb.commit()
+
+            sql1 = """INSERT INTO users (email, password, type) VALUES (%s, %s, %s)"""
+            val1 = (email,password,'patient')
+            mycursor.execute(sql1, val1)
+            mydb.commit()
+
+            return redirect(url_for('index'))
     else:
         print('get')
         return render_template('addpatient.html')
@@ -357,47 +407,48 @@ def adminViewDoctor():
     result = mycursor.fetchall()
     return render_template('adminViewDoctor.html',result=result)        
 
-# ------------------------------------------------------------------------add/view appointment----------------------------------------------------------------
+# ------------------------------------------------------------------------add appointment----------------------------------------------------------------
 @app.route('/addAppointment',methods=['GET','POST'])
 def addAppointment():
-   if 'user_patient' in session or 'user_doctor' in session :  
-    # to get name
-    sql = """SELECT name from doctor 
-    where email = %s"""
-    val = (session['user_doctor'],)
-    mycursor.execute(sql,val)
-    
-    name = mycursor.fetchone()
-    name = name[0]
-    
-    if request.method == 'POST':
-        #requesting data form
-        startT = request.form['startT']
-        date = request.form['date']
+    if 'user_patient' in session or 'user_doctor' in session :  
+        # to get name
+        sql = """SELECT name from doctor 
+        where email = %s"""
+        val = (session['user_doctor'],)
+        mycursor.execute(sql,val)
+        
+        name = mycursor.fetchone()
+        name = name[0]
+        
+        if request.method == 'POST':
+            #requesting data form
+            startT = request.form['startT']
+            date = request.form['date']
 
-        td = timedelta(hours=1)
-        startTime = datetime.strptime(startT,"%H")
-        # startTime = datetime.fromtimestamp(mktime(startTime))
-        print(type(startTime))
-        print(type(td))
+            td = timedelta(hours=1)
+            startTime = datetime.strptime(startT,"%H")
+            # startTime = datetime.fromtimestamp(mktime(startTime))
+            print(type(startTime))
+            print(type(td))
+            
+            
+            endT = (startTime + td).hour
+            
+            
+            sql = """INSERT INTO appointment (startT, endT, dt,doctorEmail,booked) VALUES (%s, %s, %s,%s,%s)"""
+            val = (startT,endT,date,session['user_doctor'],0)
+            mycursor.execute(sql, val)
+            mydb.commit()
+            
         
-        
-        endT = (startTime + td).hour
-        
-        
-        sql = """INSERT INTO appointment (startT, endT, dt,doctorEmail,booked) VALUES (%s, %s, %s,%s,%s)"""
-        val = (startT,endT,date,session['user_doctor'],0)
-        mycursor.execute(sql, val)
-        mydb.commit()
-        
-    
-        
-        return render_template('addAppointment.html', added =True,name = name)
+            
+            return render_template('addAppointment.html', added =True,name = name)
+        else:
+            return render_template('addAppointment.html',added = False,name = name)
     else:
-        return render_template('addAppointment.html',added = False,name = name)
-   else:
-       return redirect(url_for('index'))       
+        return redirect(url_for('index'))       
 
+# ------------------------------------------------------------------------view appointment----------------------------------------------------------------
 @app.route('/viewAppointments')   
 def viewAppointments():
     # to get name
@@ -501,46 +552,46 @@ def unBookAppointment():
 
 @app.route('/messages', methods = ['GET','POST'])
 def messages():
- if 'user_patient' in session or 'user_doctor' in session : 
-    if request.method == 'POST':
-        emailTo = request.form['emailTo']
-        emailFrom=request.form['emailFrom']
-        title = request.form['title']
-        message = request.form['message']
+    if 'user_patient' in session or 'user_doctor' in session : 
+        if request.method == 'POST':
+            emailTo = request.form['emailTo']
+            emailFrom=request.form['emailFrom']
+            title = request.form['title']
+            message = request.form['message']
 
-        sql = """INSERT INTO messages (emailTo,emailFrom,title,message) VALUES (%s,%s,%s,%s)"""
-        val = (emailTo,emailFrom,title,message)
-        mycursor.execute(sql,val)
-        mydb.commit()
+            sql = """INSERT INTO messages (emailTo,emailFrom,title,message) VALUES (%s,%s,%s,%s)"""
+            val = (emailTo,emailFrom,title,message)
+            mycursor.execute(sql,val)
+            mydb.commit()
 
-    return render_template('messages.html')
- else:
-    return redirect(url_for('index'))  
+        return render_template('messages.html')
+    else:
+        return redirect(url_for('index'))  
 
 # ------------------------------------------------------------------------inbox----------------------------------------------------------------
 @app.route('/inbox', methods = ['POST','GET'])
 def inbox():
- if 'user_patient' in session or 'user_doctor' in session :
+    if 'user_patient' in session or 'user_doctor' in session :
 
-    if request.method == 'POST'and "deleteMessage" in request.form:
-        deleteMessage = request.form['deleteMessage']
+        if request.method == 'POST'and "deleteMessage" in request.form:
+            deleteMessage = request.form['deleteMessage']
 
-        cursor = mydb.cursor(buffered=True)
-        cursor.execute(""" DELETE FROM messages WHERE id = %s """,(deleteMessage,))
-        mydb.commit()
-        return redirect(url_for('inbox'))
+            cursor = mydb.cursor(buffered=True)
+            cursor.execute(""" DELETE FROM messages WHERE id = %s """,(deleteMessage,))
+            mydb.commit()
+            return redirect(url_for('inbox'))
 
-    sql = """Select * from messages where emailTo = %s"""
-    if 'user_patient' in session:
-        val = (session['user_patient'],)
+        sql = """Select * from messages where emailTo = %s"""
+        if 'user_patient' in session:
+            val = (session['user_patient'],)
+        else:
+            val = (session['user_doctor'],) 
+        mycursor.execute(sql,val)
+        result = mycursor.fetchall()
+
+        return render_template('inbox.html',result=result)
     else:
-        val = (session['user_doctor'],) 
-    mycursor.execute(sql,val)
-    result = mycursor.fetchall()
-
-    return render_template('inbox.html',result=result)
- else:
-    return redirect(url_for('index'))   
+        return redirect(url_for('index'))   
 
 # ------------------------------------------------------------------------test----------------------------------------------------------------
 def count():
