@@ -283,6 +283,7 @@ function finishStep(wizard, state)
     {
         currentStep.addClass("done").removeClass("error");
         document.getElementById("outside").style.display = "block";
+        document.getElementById("nobutton").style.display = "block";
         wizard.triggerHandler("finished", [state.currentIndex]);
     }
     else

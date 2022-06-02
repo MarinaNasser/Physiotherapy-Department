@@ -178,13 +178,13 @@
             {% endif %}
           <span class="nav-item social-icons">
             <span class="fa-stack">
-              <a href="#your-link">
+              <a href="https://www.facebook.com/Magdy.Nasr.41">
                 <i class="fas fa-circle fa-stack-2x"></i>
                 <i class="fab fa-facebook-f fa-stack-1x"></i>
               </a>
             </span>
             <span class="fa-stack">
-              <a href="#your-link">
+              <a href="https://www.facebook.com/Magdy.Nasr.41">
                 <i class="fas fa-circle fa-stack-2x"></i>
                 <i class="fab fa-twitter fa-stack-1x"></i>
               </a>
@@ -222,7 +222,7 @@
           <p>Lorem ipsum dolor sit amet.</p>
         </div> -->
         <div class="my-3">
-          {% if not (session['user_admin'] or session['user_doctor']) %}
+          {% if session['user_patient'] %}
           <a class="btn" href="{{url_for('bookNow')}}">Book Now</a>
           {% endif %}
         </div>
@@ -278,7 +278,7 @@
             </p>
 
             <div class="my-3">
-              {% if not (session['user_admin'] or session['user_doctor']) %}
+              {% if session['user_patient'] %}
               <a class="btn" href="{{url_for('bookNow')}}">Book Now</a>
               {% endif %}
             </div>
@@ -353,12 +353,12 @@
             </div>
           </div>
 
-         
+        
 
           <div class="col-lg-4">
             <div class="card bg-transparent px-4">
               <h4 class="py-2">TREATMENT PLAN</h4>
-              <p class="py-3">Here’s the process that will guide your road to recovery:</p>
+              <p class="py-3">Here's the process that will guide your road to recovery:</p>
               <div class="block d-flex align-items-center">
                 <p class="pe-2"><i class="far fa-check-circle fa-1x"></i></p>
                 <p>An Informed Examination</p>
@@ -524,12 +524,12 @@
                           <img
                             class="avatar"
                             src="{{item[3]}}"
-                            alt="testimonial"
+                            onerror="this.src = '/static/adddevice/images/user.png';"
                             style="object-fit: cover;"
                           />
                         </div>
                         <div class="ms-3 pt-2">
-                          <h6><a href="{{url_for('bookNow')}}">{{item[0]}}</a></h6>
+                          <h6><a href="#">{{item[0]}}</a></h6>
                           <p>{{item[4]}}</p>
                         </div>
                       </div>
@@ -556,7 +556,7 @@
         <!-- end of row -->
         
     <div class="my-3">
-      {% if not (session['user_admin'] or session['user_doctor']) %}
+      {% if session['user_patient'] %}
       <a class="btn" href="{{url_for('bookNow')}}">Book Now</a>
       {% endif %}
     </div>
@@ -590,6 +590,7 @@
                     id="email"
                     name="email"
                     placeholder="Enter email"
+                    required
                   />
                 </div>
                 <div class="row">
@@ -611,6 +612,7 @@
                     name="message"
                     rows="6"
                     placeholder="Message"
+                    required
                   ></textarea>
                 </div>
               </div>
@@ -688,17 +690,17 @@
               With a team of qualified and experienced professionals that has been helping patients regain their health and wellness since 2000.</p>
             <div class="d-flex">
               <div class="me-3">
-                <a href="#your-link">
+                <a href="https://www.facebook.com/Magdy.Nasr.41">
                   <i class="fab fa-facebook-f fa-2x py-2"></i>
                 </a>
               </div>
               <div class="me-3">
-                <a href="#your-link">
+                <a href="https://www.facebook.com/Magdy.Nasr.41">
                   <i class="fab fa-twitter fa-2x py-2"></i>
                 </a>
               </div>
               <div class="me-3">
-                <a href="#your-link">
+                <a href="https://www.facebook.com/Magdy.Nasr.41">
                   <i class="fab fa-instagram fa-2x py-2"></i>
                 </a>
               </div>
@@ -766,6 +768,7 @@
                     name="feedback"
                     rows="4"
                     placeholder="Enter Your Feedback"
+                    required
                   ></textarea>
                 <input type="submit" class="btn-secondary text-light">
               </div>
