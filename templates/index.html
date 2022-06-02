@@ -398,7 +398,7 @@
           <div class="col-lg-5 d-flex align-items-center px-4 py-3" data-aos="">
             <div class="row">
               <div class="text-center text-lg-start py-4 pt-lg-0">
-                <p>OUR WORK</p>
+                <p>DEPARTMENT ANALYSIS</p>
                 <h2 class="py-2"></h2>
                 <p class="para-light">
                 </p>
@@ -465,6 +465,23 @@
               </div>
               <!-- end of container -->
             </div>
+            {% for item in data5 %}
+                  <div class="col-6" style="margin-bottom: 110px;">
+                    <i class="fas fa-clock fa-2x"></i>
+                    <h2
+                      class="purecounter"
+                      data-purecounter-start="0"
+                      data-purecounter-end="{{item[0]}}"
+                      data-purecounter-duration="1000000"
+                    >
+                      1
+                    </h2>
+                    <p>FEEDBACKS</p>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+              <!-- end of container -->
             <!-- end of row -->
           </div>
           <!-- end of col-lg-5 -->

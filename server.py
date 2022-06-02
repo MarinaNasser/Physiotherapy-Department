@@ -4,12 +4,13 @@ import email
 from email import message
 from time import strptime
 from time import mktime
+from webbrowser import Elinks
 import pandas as pd
 from datetime import datetime
 from datetime import timedelta
 from genericpath import exists
 from unittest import result
-from flask import Flask, redirect, render_template,request,session,url_for
+from flask import Flask, flash, redirect, render_template,request,session,url_for
 # from pymysql import NULL
 # from sqlalchemy import false
 # from flask_mysqldb import MySQL
@@ -59,9 +60,11 @@ def index():
     sql4 = "SELECT COUNT(appNo) FROM appointment"
     mycursor.execute(sql4)
     result4 = mycursor.fetchall()
-    sqlfeedback = ""
+    sql5 = "SELECT COUNT(feedback) FROM feedback"
+    mycursor.execute(sql5)
+    result5 = mycursor.fetchall()
     return render_template("index.html",dataDoctor = resultDoctor, dataPatient = resultPatient, dataDevice = resultDevice, data4 = result4,
-    sqlCountDoctor = sqlCountDoctor)
+    sqlCountDoctor = sqlCountDoctor, data5 = result5)
 
 @app.route('/home/feedback',methods=["GET","POST"])
 def feedback():
@@ -87,24 +90,28 @@ def myTips():
 # ------------------------------------------------------------------------Profile---------------------------------------------------------------------
 @app.route('/profileh')
 def profileh():
-    if 'loggedIn' in session and 'user_patient' in session :
-        cursor = mydb.cursor(buffered=True)
-        cursor.execute('SELECT * FROM patient WHERE email = %s', (session['user_patient'],))
-        result = cursor.fetchall()
-        sql = """SELECT appNo,doctor.name,startT,endT,dt FROM appointment join patient on patientEmail = patient.email join doctor on doctorEmail= doctor.email
-            where patientEmail =  %s """
-        val =(session["user_patient"],)
-        cursor.execute(sql , val)
-        appointment = cursor.fetchall()
-        return render_template('profileh.html',data = result , appointment=appointment)
-        
-    elif 'loggedIn' in session and 'user_doctor' in session :
-        cursor = mydb.cursor(buffered=True)
-        cursor.execute('SELECT * FROM doctor WHERE email = %s', (session['user_doctor'],))
-        result = cursor.fetchall()
-        return render_template('profileh.html',data = result)
+    if 'user_patient' in session or 'user_doctor' in session :  
+
+        if 'loggedIn' in session and 'user_patient' in session :
+            cursor = mydb.cursor(buffered=True)
+            cursor.execute('SELECT * FROM patient WHERE email = %s', (session['user_patient'],))
+            result = cursor.fetchall()
+            sql = """SELECT appNo,doctor.name,startT,endT,dt FROM appointment join patient on patientEmail = patient.email join doctor on doctorEmail= doctor.email
+                where patientEmail =  %s """
+            val =(session["user_patient"],)
+            cursor.execute(sql , val)
+            appointment = cursor.fetchall()
+            return render_template('profileh.html',data = result , appointment=appointment)
+            
+        elif 'loggedIn' in session and 'user_doctor' in session :
+            cursor = mydb.cursor(buffered=True)
+            cursor.execute('SELECT * FROM doctor WHERE email = %s', (session['user_doctor'],))
+            result = cursor.fetchall()
+            return render_template('profileh.html',data = result)
+        else:
+            return render_template('profileh.html')
     else:
-        return render_template('profileh.html')
+        redirect(url_for('index'))          
 
 # ------------------------------------------------------------------------Login---------------------------------------------------------------------
 
@@ -178,17 +185,29 @@ def adddoctor():
         reqssnCursor.execute(""" SELECT * FROM doctorprerequest WHERE ssn = %s """ , (ssn,))
         reqssnExist = reqssnCursor.fetchone()
 
+        patientemailCursor =mydb.cursor(buffered=True)
+        patientemailCursor.execute(""" SELECT * FROM patient WHERE email = %s """ , (email,))
+        emailExistAsPatient = patientemailCursor.fetchone()
+
+        patientssnCursor =mydb.cursor(buffered=True)
+        patientssnCursor.execute(""" SELECT * FROM patient WHERE ssn = %s """ , (ssn,))
+        ssnExistAsPatient = patientssnCursor.fetchone()
+
         if emailExist and ssnExist and reqssnExist and reqemailExist  :
             return render_template('adddoctor.html', emailExisits = True , ssnExisits=True , reqemailExist=True , reqssnExist=True)
-        elif emailExist or ssnExist or reqemailExist or reqssnExist :
+        elif emailExist or ssnExist or reqemailExist or reqssnExist or emailExistAsPatient or ssnExistAsPatient :
             if emailExist :
-                return render_template('adddoctor.html', emailExisits = True , ssnExisits=False , reqemailExist=False , reqssnExist=False)
+                return render_template('adddoctor.html', emailExisits = True , ssnExisits=False , reqemailExist=False , reqssnExist=False , emailExistAsPatient=False , ssnExistAsPatient=False )
             elif ssnExist :
-                return render_template('adddoctor.html', emailExisits = False , ssnExisits=True, reqemailExist=False , reqssnExist=False)
+                return render_template('adddoctor.html', emailExisits = False , ssnExisits=True, reqemailExist=False , reqssnExist=False , emailExistAsPatient=False , ssnExistAsPatient=False )
             elif reqssnExist:
-                return render_template('adddoctor.html', emailExisits = False , ssnExisits=False, reqemailExist=True , reqssnExist=False)
-            else:    
-                return render_template('adddoctor.html', emailExisits = False , ssnExisits=False, reqemailExist=False , reqssnExist=True)
+                return render_template('adddoctor.html', emailExisits = False , ssnExisits=False, reqemailExist=True , reqssnExist=False , emailExistAsPatient=False , ssnExistAsPatient=False )
+            elif reqssnExist:
+                return render_template('adddoctor.html', emailExisits = False , ssnExisits=False, reqemailExist=False , reqssnExist=True ,emailExistAsPatient=False , ssnExistAsPatient=False  )
+            elif emailExistAsPatient:
+                return render_template('adddoctor.html', emailExisits = False , ssnExisits=False, reqemailExist=False , reqssnExist=False ,emailExistAsPatient=True , ssnExistAsPatient=False )
+            else:
+                return render_template('adddoctor.html', emailExisits = False , ssnExisits=False, reqemailExist=False , reqssnExist=False ,emailExistAsPatient=False , ssnExistAsPatient=True )     
 
         elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
             return render_template('adddoctor.html', emailExisits = False , emailInvalid=True ,reqemailExist=False , reqssnExist=False)        
@@ -280,7 +299,7 @@ def addpatient():
         emailExistAsDoctor = doctoremailCursor.fetchone()
 
         doctorssnCursor =mydb.cursor(buffered=True)
-        doctorssnCursor.execute(""" SELECT * FROM doctorprerequest WHERE ssn = %s """ , (ssn,))
+        doctorssnCursor.execute(""" SELECT * FROM doctor WHERE ssn = %s """ , (ssn,))
         ssnExistAsDoctor = doctorssnCursor.fetchone()
 
         if emailExist and ssnExist and emailExistAsDoctor and ssnExistAsDoctor  :
@@ -345,6 +364,7 @@ def profile():
 
 @app.route('/adminViewDoctor', methods = ['POST','GET'])
 def adminViewDoctor():
+  if 'user_admin' in session :
     if request.method == 'POST'and "ssn" in request.form:
 
         name = request.form['name']
@@ -404,7 +424,9 @@ def adminViewDoctor():
     sql = "SELECT * FROM doctorprerequest"
     mycursor.execute(sql)
     result = mycursor.fetchall()
-    return render_template('adminViewDoctor.html',result=result)        
+    return render_template('adminViewDoctor.html',result=result)
+  else:
+        redirect(url_for('index'))        
 
 # ------------------------------------------------------------------------add appointment----------------------------------------------------------------
 @app.route('/addAppointment',methods=['GET','POST'])
