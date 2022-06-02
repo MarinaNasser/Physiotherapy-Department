@@ -26,9 +26,8 @@
             </span>
           </button>
         </div>
-      </form>
-        
-          {% for i in range(0, data.shape[0] ) %}
+      </form> 
+          {% for i in range(1, data.shape[0]+1 ) %}
           {% if (now - data[4][i].date()).days <= 0 and not data[5][i]%}
           {% include 'includes/items_modals_appointment.html' %}
             {% if toFind == "" or data[1][i] == toFind %}

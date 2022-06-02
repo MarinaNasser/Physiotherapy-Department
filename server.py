@@ -19,8 +19,6 @@ import re
 import os
 import secrets
 
-# from pymysql import NULL
-
 app = Flask(__name__)
 app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
@@ -505,6 +503,7 @@ def bookNow():
     result = mycursor.fetchall()
     print(result)
     result = pd.DataFrame(result)
+    result.reset_index()
     if not result.empty:
         print('notEmpty')
         result[4] = pd.to_datetime(result[4],format="%Y-%m-%d")
