@@ -18,11 +18,15 @@
       <div class="card mb-3 content" style="margin-top: 50px; width: 800px">
         <!-- image -->
 
-        <img src="{{item.13}}" class="profile-image" />
+        <img
+          src="{{item.13}}"
+          class="profile-image"
+          onerror="this.src = '/static/adddevice/images/user.png';"
+        />
         <!-- Name -->
         <div class="row" style="margin-top: 50px">
           <h5>Full Name</h5>
-            <div class="col-md9 text-secondary">{{item.1}}</div>
+          <div class="col-md9 text-secondary">{{item.1}}</div>
         </div>
         <hr />
 
@@ -161,45 +165,55 @@
     </form>
     {% endif %}
   </header>
-    <div class="table-responsive">
-      {% if name != "" %}
-      <table class="table table-bordered text-center">
-          <thead>
-              <tr class="bg-light-gray" style="color:white">
-                  <th class="text-uppercase"># </th>
-                  <th class="text-uppercase">Doctor Name</th>
-                  <th class="text-uppercase">Start Time</th>
-                  <th class="text-uppercase">End Time</th>
-                  <th class="text-uppercase">Date</th>
-                  <th class="text-uppercase">Delete</th>                
-              </tr>
-          </thead>
-          <tbody>
-              
-
-                  <form action="{{url_for('unBookAppointment')}}" method='POST'>
-                  {% for r in appointment %}
-                  <tr>
-                      {% for c in r %}
-                          <td><span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{{c}}</span></td>
-                      {% endfor %}
-                  <td>
-                      
-                          <input type="hidden" name="appNo" id="app-{{r.0}}" value="{{r.0}}" readonly>
-                          <button  type="submit" class="btn-close " aria-label="Close"></button>
-                                      
-                  </td>
-                  </tr>
-                  {% endfor %}
-              
-          </form>  
-          </tbody>
-      </table>
-      {% else %}
-          <div class="alert alert-light" role="alert">
-              there is not any appointment
-            </div>
-      {% endif %}
+  <div class="table-responsive">
+    {% if name != "" %}
+    <table class="table table-bordered text-center">
+      <thead>
+        <tr class="bg-light-gray" style="color: white">
+          <th class="text-uppercase">#</th>
+          <th class="text-uppercase">Doctor Name</th>
+          <th class="text-uppercase">Start Time</th>
+          <th class="text-uppercase">End Time</th>
+          <th class="text-uppercase">Date</th>
+          <th class="text-uppercase">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <form action="{{url_for('unBookAppointment')}}" method="POST">
+          {% for r in appointment %}
+          <tr>
+            {% for c in r %}
+            <td>
+              <span
+                class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13"
+                >{{c}}</span
+              >
+            </td>
+            {% endfor %}
+            <td>
+              <input
+                type="hidden"
+                name="appNo"
+                id="app-{{r.0}}"
+                value="{{r.0}}"
+                readonly
+              />
+              <button
+                type="submit"
+                class="btn-close"
+                aria-label="Close"
+              ></button>
+            </td>
+          </tr>
+          {% endfor %}
+        </form>
+      </tbody>
+    </table>
+    {% else %}
+    <div class="alert alert-light" role="alert">
+      there is not any appointment
+    </div>
+    {% endif %}
   </div>
 </body>
 {%endblock%}
