@@ -629,8 +629,10 @@ def count():
     cursor = mydb.cursor(buffered=True)
     if 'user_patient' in session:
         cursor.execute('SELECT COUNT(*) FROM messages WHERE emailTo = %s', (session['user_patient'],))
-    else:
+    elif 'user_doctor' in session:
         cursor.execute('SELECT COUNT(*) FROM messages WHERE emailTo = %s', (session['user_doctor'],))
+    else:
+        cursor.execute('SELECT COUNT(id) FROM doctorprerequest')   
     result = cursor.fetchone()[0]
     return (result)
 
