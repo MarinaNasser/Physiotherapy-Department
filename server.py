@@ -11,7 +11,7 @@ from datetime import timedelta
 from genericpath import exists
 from unittest import result
 from flask import Flask, flash, redirect, render_template,request,session,url_for
-# from pymysql import NULL
+from pymysql import NULL
 # from sqlalchemy import false
 # from flask_mysqldb import MySQL
 import mysql.connector
@@ -19,14 +19,12 @@ import re
 import os
 import secrets
 
-# from pymysql import NULL
-
 app = Flask(__name__)
 app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="85426Mm854267890",
+    passwd="A_0l1a2a3",
     database="felcode"
 )
 mycursor = mydb.cursor(buffered=True)
@@ -497,6 +495,7 @@ def bookNow():
     result = mycursor.fetchall()
     print(result)
     result = pd.DataFrame(result)
+    result.reset_index()
     if not result.empty:
         print('notEmpty')
         result[4] = pd.to_datetime(result[4],format="%Y-%m-%d")

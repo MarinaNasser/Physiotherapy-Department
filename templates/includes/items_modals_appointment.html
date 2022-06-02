@@ -2,11 +2,11 @@
      tabindex="-1"
      aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content">
+    <div style="background-color: #1c262f;" class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="ModalLabel">
+        <h5  style="color: #fff;" class="modal-title" id="ModalLabel">
 
-          booking appointment
+          Booking Appointment
 
         </h5>
         <button type="button" class="close"
@@ -14,48 +14,45 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        are you sure you want to reserve that appointment?
+      <div  style="color: #fff;" class="modal-body">
+        Are you sure you want to reserve that appointment?
       </div>
       
-      
+      <div class="container" style="padding:20px;">
       <form action="{{url_for('bookNow')}}" method="post">
         <div class="form-group">
-          <label for="appNo" class="form-label">app no</label>
+          <label  style="color: #fff;" for="appNo" class="form-label">App no</label>
           <input type="text" class="form-control" id="appNo" name="appNo" value="{{data[0][i]}}" readonly>
         </div>
         
         <!-- name -->
         <div class="form-group">
-          <label for="doctorName" class="form-label">doctor name</label>
+          <label  style="color: #fff;" for="doctorName" class="form-label">Doctor name</label>
           <input type="text" class="form-control" id="doctorName" name="doctorName" value="{{data[1][i]}}" readonly>
         </div>
         
         <!-- ssn -->
         <div class="form-group">
-            <label for="startTime">start time</label>
+            <label  style="color: #fff;" for="startTime">Start time</label>
             <input type="int" class="form-control" id="startTime" name="startTime" value="{{ data[2][i] }}" readonly>
         </div>
         
         <!-- sex -->
         <div>
-          <label for="endTime">end time</label>
+          <label style="color: #fff;" for="endTime">End time</label>
           <input type="text" class="form-control" id="endTime" name="endTime" value="{{data[3][i]}}" readonly>
       </div>
       <!-- email -->
         <div class="form-group">
-            <label for="date">date</label>
+            <label  style="color: #fff;" for="date">Date</label>
             <input type="text" class="form-control" id="date" name="date" value="{{data[4][i].date()}}" readonly>
         </div>
-        
-        <button type="submit" class="btn btn-primary">book</button>
+
+        <button type="submit" class="btn btn-primary" style="margin:5px;">Book</button>
       </form>      
-      
-      <button type="button" class="btn btn-secondary"
-      data-dismiss="modal">Close        
-        </button>
       </div>
     </div>
   </div>
+</div>
 </div>
 

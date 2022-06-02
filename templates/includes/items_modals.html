@@ -1,8 +1,8 @@
 <style>
     .modal-content {
-      background-color: #212121
+      background-color: #1c262f
     }
-  </style>
+</style>
 
 
 <div class="modal fade" id="Modal-accept-{{item.0}}"
@@ -25,6 +25,7 @@
         Are you sure you want to add ?
       </div>
 
+      <div class="container" style="padding:20px;">
       <form action="/adminViewDoctor" method="post" enctype="multipart/form-data">
         <!-- name -->
         <div class="form-group">
@@ -89,10 +90,7 @@
         <button type="submit" class="btn btn-primary">accept</button>
         
       </form>      
-      
-      <button type="button" class="btn btn-secondary"
-      data-dismiss="modal">Close        
-        </button>
+      </div>
       </div>
     </div>
   </div>
@@ -136,13 +134,7 @@
 
         </form>      
       </div>
-      <div class="modal-footer">
  
-</button>
-        <button type="button" class="btn btn-secondary"
-                data-dismiss="modal">Close
-        </button>
-      </div>
     </div>
   </div>
 </div>
