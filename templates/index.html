@@ -31,6 +31,8 @@
     <title>Muscle Care | Physiotherapy Department</title>
 
     <!-- Styles -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
       rel="stylesheet"
@@ -40,6 +42,16 @@
     <link href="static\css\aos.min.css" rel="stylesheet" />
     <link href="static\css\swiper.css" rel="stylesheet" />
     <link href="static\css\styleIndex.css" rel="stylesheet" />
+
+    <script src=
+    "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+        </script>
+        <script src=
+    "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
+        </script>
+        <script src=
+    "https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+        </script>
 
     <!-- Favicon -->
     <link rel="icon" href="static\assets\img\favicon.png" />
@@ -121,6 +133,7 @@
             </li>
             <li class="nav-item">
               {% if session['user_doctor'] or session['user_patient'] %}
+              <span class="badge badge-pill badge-info" style="float:right;margin-bottom:-12px;margin-right:-8px;font-size:10px">{{count()}}</span>
               <a class="nav-link" href="/inbox">Inbox</a>
               {% endif %}
             </li>
