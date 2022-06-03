@@ -12,398 +12,463 @@
 <body>
   <header>
     {% if session['user_patient'] %}
-    <form action="/profileh" method="get" enctype="multipart/form-data">
-      {% for item in data %}
+    <form
+      action="/editprofile"
+      id="postform"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      <form action="/editprofile" method="get" enctype="multipart/form-data">
+        {% for item in data %}
 
-      <div class="card mb-3 content" style="margin-top: 50px; width: 800px">
-        <!-- image -->
+        <div class="card mb-3 content" style="margin-top: 50px; width: 800px">
+          <!-- image -->
 
-        <p>
-          <input
-            type="file"
-            accept="image/*"
-            name="photo"
-            id="photo"
-            onchange="loadPatientFile(event)"
-            style="display: none"
-          />
-        </p>
-        <p>
-          <label for="photo" style="cursor: pointer"
-            ><img
-              id="patient-profile-image"
-              class="profile-image"
-              src="{{item.13}}"
-              onerror="this.src = '/static/adddevice/images/user.png';"
-          /></label>
-        </p>
-
-        <script>
-          var loadPatientFile = function (event) {
-            var image = document.getElementById("patient-profile-image");
-            image.src = URL.createObjectURL(event.target.files[0]);
-          };
-        </script>
-
-        <!-- id -->
-        <div class="row" style="display: none">
-          <h5>ID</h5>
-          <div class="col-md9 text-secondary">
+          <p>
             <input
-              type="text"
-              class="editinfo"
-              style="text-align: center"
-              value="{{item.0}}"
-              id="id"
-              name="id"
+              type="file"
+              accept="image/*"
+              name="photo"
+              id="photo"
+              onchange="loadPatientFile(event)"
+              style="display: none"
             />
+          </p>
+          <p>
+            <label for="photo" style="cursor: pointer"
+              ><img
+                id="patient-profile-image"
+                class="profile-image"
+                src="{{item.13}}"
+                onerror="this.src = '/static/adddevice/images/user.png';"
+            /></label>
+          </p>
+
+          <script>
+            var loadPatientFile = function (event) {
+              var image = document.getElementById("patient-profile-image");
+              image.src = URL.createObjectURL(event.target.files[0]);
+            };
+          </script>
+          <!-- ID not shown -->
+          <div class="row" style="display: none">
+            <div class="col-md9 text-secondary">
+              <input
+                type="numeric"
+                class="editinfo"
+                id="id"
+                name="id"
+                style="text-align: center"
+                value="{{item.0}}"
+              />
+            </div>
+          </div>
+
+          <!-- Name -->
+          <div class="row" style="margin-top: 50px">
+            <h5>Full Name</h5>
+            <div class="col-md9 text-secondary">
+              <input
+                id="name"
+                name="name"
+                type="text"
+                class="editinfo"
+                style="text-align: center"
+                value="{{item.1}}"
+              />
+            </div>
+          </div>
+          <hr />
+
+          <!-- ssn -->
+          <div class="row">
+            <h5>SSN</h5>
+            <div class="col-md9 text-secondary">
+              <input
+                id="ssn"
+                name="ssn"
+                type="text"
+                class="editinfo"
+                style="text-align: center"
+                value="{{item.2}}"
+              />
+            </div>
+          </div>
+          <hr />
+          <!-- Email -->
+          <div class="row">
+            <h5>Email</h5>
+            <div class="col-md9 text-secondary">
+              <input
+                id="email"
+                name="email"
+                type="text"
+                class="editinfo"
+                style="text-align: center"
+                value="{{item.5}}"
+                readonly
+              />
+            </div>
+          </div>
+          <hr />
+
+          <!-- Password -->
+          <div class="row">
+            <h5>Password</h5>
+            <div class="col-md9 text-secondary">
+              <input
+                id="password"
+                name="password"
+                type="text"
+                class="editinfo"
+                style="text-align: center"
+                value="{{item.6}}"
+              />
+            </div>
+          </div>
+          <hr />
+
+          <!-- phone -->
+          <div class="row">
+            <h5>Phone</h5>
+            <div class="col-md9 text-secondary">
+              <input
+                id="phone"
+                name="phone"
+                type="text"
+                class="editinfo"
+                style="text-align: center"
+                value="{{item.3}}"
+              />
+            </div>
+          </div>
+          <hr />
+          <!-- address -->
+          <div class="row">
+            <h5>Address</h5>
+            <div class="col-md9 text-secondary">
+              <input
+                id="address"
+                name="address"
+                type="text"
+                class="editinfo"
+                style="text-align: center"
+                value="{{item.4}}"
+              />
+            </div>
+          </div>
+          <hr />
+          <!-- sex -->
+          <div class="row">
+            <h5>Gender</h5>
+            <div class="col-md9 text-secondary">
+              <input
+                id="sex"
+                name="sex"
+                type="text"
+                class="editinfo"
+                style="text-align: center"
+                value="{{item.7}}"
+              />
+            </div>
+          </div>
+          <hr />
+          <!-- birthdate -->
+          <div class="row">
+            <h5>Date of birth</h5>
+            <div class="col-md9 text-secondary">
+              <input
+                id="birth_date"
+                name="birth_date"
+                type="text"
+                class="editinfo"
+                style="text-align: center"
+                value="{{item.8}}"
+              />
+            </div>
+          </div>
+          <hr />
+          <!-- marital status -->
+          <div class="row">
+            <h5>Marital Status</h5>
+            <div class="col-md9 text-secondary">
+              <input
+                id="marital_status"
+                name="marital_status"
+                type="text"
+                class="editinfo"
+                style="text-align: center"
+                value="{{item.9}}"
+              />
+            </div>
+          </div>
+          <hr />
+          <!-- Job -->
+          <div class="row">
+            <h5>Job</h5>
+            <div class="col-md9 text-secondary">
+              <input
+                id="job"
+                name="job"
+                type="text"
+                class="editinfo"
+                style="text-align: center"
+                value="{{item.10}}"
+              />
+            </div>
+          </div>
+          <hr />
+          <!-- insurance number -->
+          <div class="row">
+            <h5>Insurance Number</h5>
+            <div class="col-md9 text-secondary">
+              <input
+                id="insurance_num"
+                name="insurance_num"
+                type="text"
+                class="editinfo"
+                style="text-align: center"
+                value="{{item.11}}"
+              />
+            </div>
+          </div>
+          <hr />
+          <!-- credit card -->
+          <div class="row">
+            <h5>Credit Card</h5>
+            <div class="col-md9 text-secondary">
+              <input
+                id="credit_card"
+                name="credit_card"
+                type="text"
+                class="editinfo"
+                style="text-align: center"
+                value="{{item.12}}"
+              />
+            </div>
+          </div>
+          <hr />
+          <!-- Done Button -->
+          <div class="row">
+            <button form="postform" class="button">Done</button>
           </div>
         </div>
-        <hr />
-
-        <!-- Name -->
-        <div class="row" style="margin-top: 50px">
-          <h5>Full Name</h5>
-          <div class="col-md9 text-secondary">
-            <input
-              type="text"
-              class="editinfo"
-              style="text-align: center"
-              value="{{item.1}}"
-            />
-          </div>
-        </div>
-        <hr />
-
-        <!-- ssn -->
-        <div class="row">
-          <h5>SSN</h5>
-          <div class="col-md9 text-secondary">
-            <input
-              type="text"
-              class="editinfo"
-              style="text-align: center"
-              value="{{item.2}}"
-            />
-          </div>
-        </div>
-        <hr />
-
-        <!-- Email -->
-        <div class="row">
-          <h5>Email</h5>
-          <div class="col-md9 text-secondary">
-            <input
-              type="text"
-              class="editinfo"
-              style="text-align: center"
-              value="{{item.5}}"
-            />
-          </div>
-        </div>
-        <hr />
-
-        <!-- Password -->
-        <div class="row">
-          <h5>Password</h5>
-          <div class="col-md9 text-secondary">
-            <input
-              type="text"
-              class="editinfo"
-              style="text-align: center"
-              value="{{item.6}}"
-            />
-          </div>
-        </div>
-        <hr />
-
-        <!-- phone -->
-        <div class="row">
-          <h5>Phone</h5>
-          <div class="col-md9 text-secondary">
-            <input
-              type="text"
-              class="editinfo"
-              style="text-align: center"
-              value="{{item.3}}"
-            />
-          </div>
-        </div>
-        <hr />
-
-        <!-- address -->
-        <div class="row">
-          <h5>Address</h5>
-          <div class="col-md9 text-secondary">
-            <input
-              type="text"
-              class="editinfo"
-              style="text-align: center"
-              value="{{item.4}}"
-            />
-          </div>
-        </div>
-        <hr />
-
-        <!-- sex -->
-        <div class="row">
-          <h5>Gender</h5>
-          <div class="col-md9 text-secondary">
-            <input
-              type="text"
-              class="editinfo"
-              style="text-align: center"
-              value="{{item.7}}"
-            />
-          </div>
-        </div>
-        <hr />
-
-        <!-- birthdate -->
-        <div class="row">
-          <h5>Date of birth</h5>
-          <div class="col-md9 text-secondary">
-            <input
-              type="text"
-              class="editinfo"
-              style="text-align: center"
-              value="{{item.8}}"
-            />
-          </div>
-        </div>
-        <hr />
-
-        <!-- marital status -->
-        <div class="row">
-          <h5>Marital Status</h5>
-          <div class="col-md9 text-secondary">
-            <input
-              type="text"
-              class="editinfo"
-              style="text-align: center"
-              value="{{item.9}}"
-            />
-          </div>
-        </div>
-        <hr />
-
-        <!-- Job -->
-        <div class="row">
-          <h5>Job</h5>
-          <div class="col-md9 text-secondary">
-            <input
-              type="text"
-              class="editinfo"
-              style="text-align: center"
-              value="{{item.10}}"
-            />
-          </div>
-        </div>
-        <hr />
-
-        <!-- insurance number -->
-        <div class="row">
-          <h5>Insurance Number</h5>
-          <div class="col-md9 text-secondary">
-            <input
-              type="text"
-              class="editinfo"
-              style="text-align: center"
-              value="{{item.11}}"
-            />
-          </div>
-        </div>
-        <hr />
-
-        <!-- credit card -->
-        <div class="row">
-          <h5>Credit Card</h5>
-          <div class="col-md9 text-secondary">
-            <input
-              type="text"
-              class="editinfo"
-              style="text-align: center"
-              value="{{item.12}}"
-            />
-          </div>
-        </div>
-        <hr />
-
-        <!-- Done Button -->
-        <div class="row">
-          <button type="button" class="button">Done</button>
-        </div>
-      </div>
-      {% endfor %}
+        {% endfor %}
+      </form>
     </form>
     {% endif %}
 
     <!-- ------------------------------------------------------------------------------------------------------------------------------------- -->
 
     {% if session['user_doctor'] %}
-    <form action="/profileh" method="get" enctype="multipart/form-data">
-      {% for item in data %}
+    <form
+      action="/editprofile"
+      id="doctorpostform"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      <form
+        action="/editprofile"
+        id="doctorgetform"
+        method="get"
+        enctype="multipart/form-data"
+      >
+        {% for item in data %}
 
-      <!-- image -->
-      <div class="card mb-3 content" style="margin-top: 50px; width: 800px">
-        <p>
-          <input
-            type="file"
-            accept="image/*"
-            name="photo"
-            id="photo"
-            onchange="loadDoctorFile(event)"
-            style="display: none"
-          />
-        </p>
-        <p>
-          <label for="photo" style="cursor: pointer"
-            ><img
-              id="doctor-profile-image"
-              class="profile-image"
-              src="{{item.10}}"
-              onerror="this.src = '/static/adddevice/images/user.png';"
-          /></label>
-        </p>
-
-        <script>
-          var loadDoctorFile = function (event) {
-            var image = document.getElementById("doctor-profile-image");
-            image.src = URL.createObjectURL(event.target.files[0]);
-          };
-        </script>
-
-        <!-- name -->
-        <div class="row" style="margin-top: 50px">
-          <h5>Full Name</h5>
-          <div class="col-md9 text-secondary">
+        <!-- image -->
+        <div class="card mb-3 content" style="margin-top: 50px; width: 800px">
+          <p>
             <input
-              type="text"
-              class="editinfo"
-              style="text-align: center"
-              value="{{item.1}}"
+              type="file"
+              accept="image/*"
+              name="photo"
+              id="photo"
+              onchange="loadDoctorFile(event)"
+              style="display: none"
             />
+          </p>
+          <p>
+            <label for="photo" style="cursor: pointer"
+              ><img
+                id="doctor-profile-image"
+                class="profile-image"
+                src="{{item.10}}"
+                onerror="this.src = '/static/adddevice/images/user.png';"
+            /></label>
+          </p>
+
+          <script>
+            var loadDoctorFile = function (event) {
+              var image = document.getElementById("doctor-profile-image");
+              image.src = URL.createObjectURL(event.target.files[0]);
+            };
+          </script>
+
+          <!-- ID not shown -->
+          <div class="row" style="display: none">
+            <div class="col-md9 text-secondary">
+              <input
+                type="number"
+                id="id"
+                name="id"
+                class="editinfo"
+                style="text-align: center"
+                value="{{item.0}}"
+              />
+            </div>
+          </div>
+
+          <!-- name -->
+          <div class="row" style="margin-top: 50px">
+            <h5>Full Name</h5>
+            <div class="col-md9 text-secondary">
+              <input
+                id="name"
+                name="name"
+                type="text"
+                class="editinfo"
+                style="text-align: center"
+                value="{{item.1}}"
+              />
+            </div>
+          </div>
+          <hr />
+
+          <!-- ssn -->
+          <div class="row">
+            <h5>SSN</h5>
+            <div class="col-md9 text-secondary">
+              <input
+                id="ssn"
+                name="ssn"
+                type="text"
+                class="editinfo"
+                style="text-align: center"
+                value="{{item.2}}"
+              />
+            </div>
+          </div>
+          <hr />
+
+          <!-- email -->
+          <div class="row">
+            <h5>Email</h5>
+            <div class="col-md9 text-secondary">
+              <input
+                id="email"
+                name="email"
+                type="text"
+                class="editinfo"
+                style="text-align: center"
+                value="{{item.4}}"
+                readonly
+              />
+            </div>
+          </div>
+          <hr />
+
+          <!-- Password -->
+          <div class="row">
+            <h5>Password</h5>
+            <div class="col-md9 text-secondary">
+              <input
+                id="password"
+                name="password"
+                type="text"
+                class="editinfo"
+                style="text-align: center"
+                value="{{item.6}}"
+              />
+            </div>
+          </div>
+          <hr />
+
+          <!-- phone -->
+          <div class="row">
+            <h5>Phone</h5>
+            <div class="col-md9 text-secondary">
+              <input
+                id="phone"
+                name="phone"
+                type="text"
+                class="editinfo"
+                style="text-align: center"
+                value="{{item.5}}"
+              />
+            </div>
+          </div>
+          <hr />
+
+          <!-- address -->
+          <div class="row">
+            <h5>Address</h5>
+            <div class="col-md9 text-secondary">
+              <input
+                id="address"
+                name="address"
+                type="text"
+                class="editinfo"
+                style="text-align: center"
+                value="{{item.7}}"
+              />
+            </div>
+          </div>
+          <hr />
+
+          <!-- sex -->
+          <div class="row">
+            <h5>Gender</h5>
+            <div class="col-md9 text-secondary">
+              <input
+                id="sex"
+                name="sex"
+                type="text"
+                class="editinfo"
+                style="text-align: center"
+                value="{{item.3}}"
+              />
+            </div>
+          </div>
+          <hr />
+
+          <!-- birthdate -->
+          <div class="row">
+            <h5>Date of birth</h5>
+            <div class="col-md9 text-secondary">
+              <input
+                id="birth_date"
+                name="birth_date"
+                type="text"
+                class="editinfo"
+                style="text-align: center"
+                value="{{item.8}}"
+              />
+            </div>
+          </div>
+          <hr />
+
+          <!-- specialization -->
+          <div class="row">
+            <h5>Specialization</h5>
+            <div class="col-md9 text-secondary">
+              <input
+                id="specialization"
+                name="specialization"
+                type="text"
+                class="editinfo"
+                style="text-align: center"
+                value="{{item.9}}"
+              />
+            </div>
+          </div>
+          <hr />
+          <!-- Done Button -->
+          <div class="row">
+            <button form="doctorpostform" class="button">Done</button>
           </div>
         </div>
-        <hr />
-
-        <!-- ssn -->
-        <div class="row">
-          <h5>SSN</h5>
-          <div class="col-md9 text-secondary">
-            <input
-              type="text"
-              class="editinfo"
-              style="text-align: center"
-              value="{{item.2}}"
-            />
-          </div>
-        </div>
-        <hr />
-
-        <!-- email -->
-        <div class="row">
-          <h5>Email</h5>
-          <div class="col-md9 text-secondary">
-            <input
-              type="text"
-              class="editinfo"
-              style="text-align: center"
-              value="{{item.4}}"
-            />
-          </div>
-        </div>
-        <hr />
-
-        <!-- Password -->
-        <div class="row">
-          <h5>Password</h5>
-          <div class="col-md9 text-secondary">
-            <input
-              type="text"
-              class="editinfo"
-              style="text-align: center"
-              value="{{item.6}}"
-            />
-          </div>
-        </div>
-        <hr />
-
-        <!-- phone -->
-        <div class="row">
-          <h5>Phone</h5>
-          <div class="col-md9 text-secondary">
-            <input
-              type="text"
-              class="editinfo"
-              style="text-align: center"
-              value="{{item.5}}"
-            />
-          </div>
-        </div>
-        <hr />
-
-        <!-- address -->
-        <div class="row">
-          <h5>Address</h5>
-          <div class="col-md9 text-secondary">
-            <input
-              type="text"
-              class="editinfo"
-              style="text-align: center"
-              value="{{item.7}}"
-            />
-          </div>
-        </div>
-        <hr />
-
-        <!-- sex -->
-        <div class="row">
-          <h5>Gender</h5>
-          <div class="col-md9 text-secondary">
-            <input
-              type="text"
-              class="editinfo"
-              style="text-align: center"
-              value="{{item.3}}"
-            />
-          </div>
-        </div>
-        <hr />
-
-        <!-- birthdate -->
-        <div class="row">
-          <h5>Date of birth</h5>
-          <div class="col-md9 text-secondary">
-            <input
-              type="text"
-              class="editinfo"
-              style="text-align: center"
-              value="{{item.8}}"
-            />
-          </div>
-        </div>
-        <hr />
-
-        <!-- specialization -->
-        <div class="row">
-          <h5>Specialization</h5>
-          <div class="col-md9 text-secondary">
-            <input
-              type="text"
-              class="editinfo"
-              style="text-align: center"
-              value="{{item.9}}"
-            />
-          </div>
-        </div>
-        <hr />
-        <!-- Done Button -->
-        <div class="row">
-          <button type="button" class="button">Done</button>
-        </div>
-      </div>
-      {% endfor %}
+        {% endfor %}
+      </form>
     </form>
     {% endif %}
   </header>
