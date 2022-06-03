@@ -92,7 +92,7 @@
               >
             </li>
             <li class="nav-item">
-              {% if session['user_doctor'] or session['user_admin'] %}
+              {% if session['user_admin'] %}
               <a class="nav-link" href="/viewdoctor">View Doctors</a>
               {% endif %}
             </li>
