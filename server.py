@@ -29,7 +29,7 @@ mydb = mysql.connector.connect(
 )
 mycursor = mydb.cursor(buffered=True)
 
-#-----------------------------------------------------------------------------save picture-----------------------------------------------------
+# ----------------------------------------------------------------------------save picture-----------------------------------------------------
 def save_picture(form_picture):
     fname = secrets.token_hex(16) #new name
     _, f_ext = os.path.splitext(form_picture.filename) #get rid of old name
@@ -347,11 +347,9 @@ def viewpatient():
     return render_template('viewpatient.html', data = myresult)
 
 # ------------------------------------------------------------------------Contact Us-----------------------------------------------------------------
-
 @app.route('/contact_us')
 def contact():
     return render_template('contact_us.html')
-
 
 # ------------------------------------------------------------------------Home Page/ Profile---------------------------------------------------------
 @app.route('/index/profile')
