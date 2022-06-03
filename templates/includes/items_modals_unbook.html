@@ -1,38 +1,30 @@
 
-<style>
-  .modal-content {
-    background-color: #1c262f
-  }
-  .form-group{
-    color: whitesmoke;
-  }
-</style>
 
 
-<div class="modal fade" id="Modal-deleteApp-{{r.0}}"
+<div class="modal fade" id="Modal-unbook-{{r.0}}"
 tabindex="-1"
-aria-labelledby="exampleModalLabel" aria-hidden="true">
+ aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog">
 <div class="modal-content">
  <div class="modal-header">
-   <h5 style="color: whitesmoke;" class="modal-title" id="ModalLabel">
+   <h5 class="modal-title" id="ModalLabel">
 
-     Delete Appointment
+     unbook appointment
 
    </h5>
-   <button style="background-color: whitesmoke" type="button" class="close"
+   <button type="button" class="close"
            data-dismiss="modal" aria-label="Close">
      <span aria-hidden="true">&times;</span>
    </button>
  </div>
- <div style="color: whitesmoke;" class="modal-body">
-   Are you sure you want to delete that appointment?
+ <div class="modal-body">
+   are you sure you want to unbook that appointment?
  </div>
  
- <div class="container" style="padding:20px;">
- <form action="{{url_for('deleteAppointment')}}" method="post">
+ 
+ <form action="{{url_for('unBookAppointment')}}" method="post">
    <div class="form-group">
-     <label for="appNo" class="form-label">App No</label>
+     <label for="appNo" class="form-label">app no</label>
      <input type="text" class="form-control" id="appNo" name="appNo" value="{{r.0}}" readonly>
    </div>
    
@@ -49,7 +41,7 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
    </div>
    
    <!-- sex -->
-   <div  class="form-group">
+   <div>
      <label for="endTime">end time</label>
      <input type="text" class="form-control" id="endTime" name="endTime" value="{{r.3}}" readonly>
  </div>
@@ -59,13 +51,15 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
        <input type="text" class="form-control" id="date" name="date" value="{{r.4}}" readonly>
    </div>
    
-   <button type="submit" class="btn btn-primary">delete</button>
+   <button type="submit" class="btn btn-primary">unbook</button>
  </form>      
-
-        </div>
-      </div>
-    </div>
-  </div>
+ 
+ <button type="button" class="btn btn-secondary"
+ data-dismiss="modal">Close        
+   </button>
+ </div>
+</div>
+</div>
 </div>
 
 

@@ -110,13 +110,16 @@ def profileh():
             val =(session["user_patient"],)
             cursor.execute(sql , val)
             appointment = cursor.fetchall()
-            return render_template('profileh.html',data = result , appointment=appointment)
+            empty = True
+            if appointment:
+                empty = False
+            return render_template('profileh.html',data = result , appointment=appointment,empty = empty)
             
         elif 'loggedIn' in session and 'user_doctor' in session :
             cursor = mydb.cursor(buffered=True)
             cursor.execute('SELECT * FROM doctor WHERE email = %s', (session['user_doctor'],))
             result = cursor.fetchall()
-            return render_template('profileh.html',data = result)
+            return render_template('profileh.html',data = result,empty = True)
         else:
             return render_template('profileh.html')
     else:
@@ -475,22 +478,20 @@ def bookNow():
     sql = "SELECT appNo,name,startT,endT,dt,booked FROM appointment join doctor on doctorEmail = email"
     mycursor.execute(sql)
     result = mycursor.fetchall()
-    print(result)
     result = pd.DataFrame(result)
+    result.reset_index()
     if not result.empty:
         print('notEmpty')
+        print(result)
         result[4] = pd.to_datetime(result[4],format="%Y-%m-%d")
         result = result[result[5] == 0]
-
-    
-    # print((datetime.now() - list_of_tuples[4][0]).days)
-    # print(list_of_tuples)
-    
+        now = datetime.now().strftime ("%Y-%m-%d")
+        result = result[result[4] >= now]
+        result.index = range(len(result.index))
+        print(result)
+        
     if request.method == 'POST' and "toFind" in request.form:
         toFind = request.form['toFind']
-        print(toFind)
-        print(toFind)
-        print(type(result))
         return render_template('bookNow.html',data = result,now = datetime.now().date(),booked = True,toFind = toFind)
     elif request.method == 'POST':
         print("JUSt POST")
@@ -504,19 +505,8 @@ def bookNow():
         value = (session['user_patient'],1,appNo)
         mycursor.execute(sql,value)
         mydb.commit()
+        return redirect(url_for('bookNow'))
         
-        sql = "SELECT appNo,name,startT,endT,dt,booked FROM appointment join doctor on doctorEmail = email"
-        mycursor.execute(sql)
-        result = mycursor.fetchall()
-        result = pd.DataFrame(result)
-        if not result.empty :    
-            # result = pd.DataFrame(result)
-            result[4] = pd.to_datetime(result[4],format="%Y-%m-%d")
-            # erase booked appointments
-            result = result[result[5] == 0]
-            print(type(result))
-
-        return render_template('bookNow.html',data = result,now = datetime.now().date(),booked = True,toFind = "")
     else:
         print("GET")
         print("GET")
@@ -601,8 +591,10 @@ def count():
     cursor = mydb.cursor(buffered=True)
     if 'user_patient' in session:
         cursor.execute('SELECT COUNT(*) FROM messages WHERE emailTo = %s', (session['user_patient'],))
-    else:
+    elif 'user_doctor' in session:
         cursor.execute('SELECT COUNT(*) FROM messages WHERE emailTo = %s', (session['user_doctor'],))
+    else:
+        cursor.execute('SELECT COUNT(id) FROM doctorprerequest')   
     result = cursor.fetchone()[0]
     return (result)
 

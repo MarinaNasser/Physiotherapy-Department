@@ -376,6 +376,7 @@ img {
 @media (max-width: 767px) {
   body {
     background: none;
+    background-color: #1c262f;
   }
 
   .wrapper {
