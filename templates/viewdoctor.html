@@ -1,32 +1,30 @@
-{%extends'index.html'%}
-{%block main%}
+{%extends'index.html'%} {%block main%}
 
-<body style="background-color: #212121;">
-    <br><br><br><br>
-    <div class="container">
-    <h1 style="color: whitesmoke;">Our Doctors</h1>
+<body style="background-color: #212121">
+  <br /><br /><br /><br />
+  <div class="container">
+    <h1 style="color: whitesmoke">Our Doctors</h1>
     <table class="table table-hover table-dark">
-        <thead>
-          <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Phone</th>
-            <th scope="col">Specialization</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for r in data %}
-            <tr>
-              {% for c in r %}
-                <td>{{c}}</td>
-              {% endfor %}
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>      
-      <br><br><br><br><br>
-    </body>
-    {%endblock%}
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Phone</th>
+          <th scope="col">Specialization</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in data %}
 
-     
+        <tr>
+          {% for c in r %}
+          <td>{{c}}</td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <br /><br /><br /><br /><br />
+</body>
+{%endblock%}

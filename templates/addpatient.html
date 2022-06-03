@@ -25,6 +25,10 @@
   </head>
 
   <body>
+    <nav>
+      <div class="container">
+        <a href="{{ url_for('index') }}" style="color: white;">Muscle Care</a>
+    </nav>
     <div class="wrapper" id="inside">
       <form
         action="http://127.0.0.1:5000/addpatient"
@@ -257,6 +261,7 @@
               <div class="form-holder">
                 <input
                   type="text"
+                  maxlength="9"
                   class="form-control"
                   placeholder="Insurance Number (OPTIONAL)"
                   id="insurance_num"
@@ -270,6 +275,7 @@
               <div class="form-holder">
                 <input
                   type="text"
+                  maxlength="16"
                   class="form-control"
                   placeholder="Credit Card (OPTIONAL)"
                   id="credit_card"
