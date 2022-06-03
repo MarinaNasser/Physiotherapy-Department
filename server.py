@@ -12,8 +12,8 @@ from genericpath import exists
 from unittest import result
 from flask import Flask, flash, redirect, render_template,request,session,url_for
 from pymysql import NULL
-# from sqlalchemy import false
-# from flask_mysqldb import MySQL
+from sqlalchemy import false
+from flask_mysqldb import MySQL
 import mysql.connector
 import re
 import os
@@ -24,7 +24,7 @@ app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="sherif2001",
+    passwd="magdynasr",
     database="felcode"
 )
 mycursor = mydb.cursor(buffered=True)
@@ -73,7 +73,7 @@ def index():
     return render_template("index.html",dataDoctor = resultDoctor, dataPatient = resultPatient, dataDevice = resultDevice, data4 = result4,
     sqlCountDoctor = sqlCountDoctor, data5 = result5)
 
-# -----------------------------------------------------------------------------feedback-----------------------------------------------------------
+# ------------------------------------------------------------------------feedback--------------------------------------------------------------
 @app.route('/')
 @app.route('/home/feedback',methods=["GET","POST"])
 def feedback():
@@ -91,12 +91,12 @@ def feedback():
 def preSignUp():
     return render_template('preSignUp.html')
 
-# ------------------------------------------------------------------------My Tips---------------------------------------------------------------------
+# -------------------------------------------------------------------------My Tips---------------------------------------------------------------------
 @app.route('/myTips')
 def myTips():
     return render_template('myTips.html')
 
-# ------------------------------------------------------------------------Profile---------------------------------------------------------------------
+# -------------------------------------------------------------------------Profile---------------------------------------------------------------------
 @app.route('/profileh')
 def profileh():
     if 'user_patient' in session or 'user_doctor' in session and 'loggedIn' in session :  
@@ -613,7 +613,7 @@ def inbox():
     else:
         return redirect(url_for('index'))   
 
-# ------------------------------------------------------------------------test----------------------------------------------------------------
+# ------------------------------------------------------------------------count----------------------------------------------------------------
 def count():
     cursor = mydb.cursor(buffered=True)
     if 'user_patient' in session:
