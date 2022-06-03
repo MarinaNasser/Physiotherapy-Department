@@ -126,33 +126,73 @@ def profileh():
         return redirect(url_for('index'))          
 
 # ------------------------------------------------------------------------EditProfile---------------------------------------------------------------------
-@app.route('/editprofile')
+@app.route('/editprofile', methods=["GET" , "POST"])
 def editprofile():
     if 'user_patient' in session or 'user_doctor' in session and 'loggedIn' in session :  
+        if request.method == 'POST': 
+            id = request.form['id']
+            name = request.form['name']
+            ssn = request.form['ssn']
+            sex = request.form['sex']
+            email = request.form['email']
+            password = request.form['password']
+            address = request.form['address']
+            birth_date = request.form['birth_date']
+            credit_card = request.form['credit_card']
+            insurance_num = request.form['insurance_num']
+            marital_status = request.form['marital_status']
+            job = request.form['job']
+            photo = request.files['photo']
+            phone = request.form['phone']
+            pic_path = save_picture(photo)
 
-        if 'loggedIn' in session and 'user_patient' in session :
-            cursor = mydb.cursor(buffered=True)
-            cursor.execute('SELECT * FROM patient WHERE email = %s', (session['user_patient'],))
-            result = cursor.fetchall()
-            sql = """SELECT appNo,doctor.name,startT,endT,dt FROM appointment join patient on patientEmail = patient.email join doctor on doctorEmail= doctor.email
-                where patientEmail =  %s """
-            val =(session["user_patient"],)
-            cursor.execute(sql , val)
-            appointment = cursor.fetchall()
-            empty = True
-            if appointment:
-                empty = False
-            return render_template('editprofile.html',data = result , appointment=appointment,empty = empty)
-            
-        elif 'loggedIn' in session and 'user_doctor' in session :
-            cursor = mydb.cursor(buffered=True)
-            cursor.execute('SELECT * FROM doctor WHERE email = %s', (session['user_doctor'],))
-            result = cursor.fetchall()
-            return render_template('editprofile.html',data = result,empty = True)
+            emailCursor =mydb.cursor(buffered=True)
+            emailCursor.execute(""" SELECT * FROM patient WHERE email = %s """ , (email,))
+            emailExist = emailCursor.fetchone()
+
+            ssnCursor =mydb.cursor(buffered=True)
+            ssnCursor.execute(""" SELECT * FROM patient WHERE ssn = %s """ , (ssn,))
+            ssnExist = ssnCursor.fetchone()
+
+            doctoremailCursor =mydb.cursor(buffered=True)
+            doctoremailCursor.execute(""" SELECT * FROM doctor WHERE email = %s """ , (email,))
+            emailExistAsDoctor = doctoremailCursor.fetchone()
+
+            doctorssnCursor =mydb.cursor(buffered=True)
+            doctorssnCursor.execute(""" SELECT * FROM doctor WHERE ssn = %s """ , (ssn,))
+            ssnExistAsDoctor = doctorssnCursor.fetchone()
+
+            if emailExist and ssnExist and emailExistAsDoctor and ssnExistAsDoctor  :
+                return render_template('adddoctor.html', emailExisits = True , ssnExisits=True , emailExistAsDoctor=True , ssnExistAsDoctor=True)
+            elif emailExist or ssnExist or emailExistAsDoctor or ssnExistAsDoctor :
+                if emailExist :
+                    return render_template('adddoctor.html', emailExisits = True , ssnExisits=False , emailExistAsDoctor=False , ssnExistAsDoctor=False)
+                elif ssnExist :
+                    return render_template('adddoctor.html', emailExisits = False , ssnExisits=True, emailExistAsDoctor=False , ssnExistAsDoctor=False)
+                elif ssnExistAsDoctor:
+                    return render_template('adddoctor.html', emailExisits = False , ssnExisits=False, emailExistAsDoctor=True , ssnExistAsDoctor=False)
+                else:    
+                    return render_template('adddoctor.html', emailExisits = False , ssnExisits=False, emailExistAsDoctor=False , ssnExistAsDoctor=True)
+
+            elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
+                return render_template('adddoctor.html', emailExisits = False , emailInvalid=True ,emailExistAsDoctor=False , ssnExistAsDoctor=False)        
+            else:    
+                # UPDATE patient SET name = "magdy", ssn = 421314, phone = 213231 WHERE ssn = 421314;
+                # add id
+                sql = """UPDATE patient SET name = %s, ssn = %s,  address = %s, email = %s, password = %s, sex = %s, birth_date = %s,
+                marital_status = %s,job = %s,insurance_num = %s, credit_card = %s, phone = %s, photo = %s) WHERE id = %s"""
+                val = (name,ssn,address,email,password, sex,birth_date,marital_status,job, insurance_num,credit_card, phone, pic_path, id)
+                mycursor.execute(sql, val)
+                mydb.commit()
+
+                sql1 = """INSERT INTO users (email, password, type) VALUES (%s, %s, %s)"""
+                val1 = (email,password,'patient')
+                mycursor.execute(sql1, val1)
+                mydb.commit()
+
+                return redirect(url_for('index'))
         else:
-            return render_template('editprofile.html')
-    else:
-        return redirect(url_for('index'))          
+            return render_template('editprofile.html')  
 
 # ------------------------------------------------------------------------Login---------------------------------------------------------------------
 @app.route('/login',methods=["GET","POST"])
@@ -296,10 +336,7 @@ def adddevice():
         return redirect(url_for('index'))
     
         
-# ------------------------------------------------------------------------Doctors-------------------------------------------------------------------        
-@app.route('/doctors')
-def doctors():
-    return render_template('doctor.html')
+
 
 # ------------------------------------------------------------------------Add Patient---------------------------------------------------------------
 @app.route('/addpatient', methods = ['POST', 'GET'])

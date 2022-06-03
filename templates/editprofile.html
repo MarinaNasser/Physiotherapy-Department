@@ -12,7 +12,7 @@
 <body>
   <header>
     {% if session['user_patient'] %}
-    <form action="/editprofile" method="get" enctype="multipart/form-data">
+    <form action="/profileh" method="get" enctype="multipart/form-data">
       {% for item in data %}
 
       <div class="card mb-3 content" style="margin-top: 50px; width: 800px">
@@ -44,6 +44,23 @@
             image.src = URL.createObjectURL(event.target.files[0]);
           };
         </script>
+
+        <!-- id -->
+        <div class="row" style="display: none">
+          <h5>ID</h5>
+          <div class="col-md9 text-secondary">
+            <input
+              type="text"
+              class="editinfo"
+              style="text-align: center"
+              value="{{item.0}}"
+              id="id"
+              name="id"
+            />
+          </div>
+        </div>
+        <hr />
+
         <!-- Name -->
         <div class="row" style="margin-top: 50px">
           <h5>Full Name</h5>
@@ -71,6 +88,7 @@
           </div>
         </div>
         <hr />
+
         <!-- Email -->
         <div class="row">
           <h5>Email</h5>
@@ -112,6 +130,7 @@
           </div>
         </div>
         <hr />
+
         <!-- address -->
         <div class="row">
           <h5>Address</h5>
@@ -125,6 +144,7 @@
           </div>
         </div>
         <hr />
+
         <!-- sex -->
         <div class="row">
           <h5>Gender</h5>
@@ -138,6 +158,7 @@
           </div>
         </div>
         <hr />
+
         <!-- birthdate -->
         <div class="row">
           <h5>Date of birth</h5>
@@ -151,6 +172,7 @@
           </div>
         </div>
         <hr />
+
         <!-- marital status -->
         <div class="row">
           <h5>Marital Status</h5>
@@ -164,6 +186,7 @@
           </div>
         </div>
         <hr />
+
         <!-- Job -->
         <div class="row">
           <h5>Job</h5>
@@ -177,6 +200,7 @@
           </div>
         </div>
         <hr />
+
         <!-- insurance number -->
         <div class="row">
           <h5>Insurance Number</h5>
@@ -190,6 +214,7 @@
           </div>
         </div>
         <hr />
+
         <!-- credit card -->
         <div class="row">
           <h5>Credit Card</h5>
@@ -203,6 +228,7 @@
           </div>
         </div>
         <hr />
+
         <!-- Done Button -->
         <div class="row">
           <button type="button" class="button">Done</button>
