@@ -19,22 +19,29 @@ import re
 import os
 import secrets
 
-# from pymysql import NULL
-
 app = Flask(__name__)
 app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="sherif2001",
+    passwd="magdynasr",
     database="felcode"
 )
 mycursor = mydb.cursor(buffered=True)
 
+#-----------------------------------------------------------------------------save picture-----------------------------------------------------
+def save_picture(form_picture):
+    fname = secrets.token_hex(16) #new name
+    _, f_ext = os.path.splitext(form_picture.filename) #get rid of old name
+    picture_fn = fname + f_ext #combine extention "png for example" with new name
+    picture_path = os.path.join( 'static/imgs/uploads', picture_fn) #combine path with name
+    picture_path = picture_path.replace('\\','/')
+    form_picture.save(picture_path)
+    return picture_path
+
 # -----------------------------------------------------------------------------index-----------------------------------------------------------
 @app.route('/')
 @app.route('/home',methods=["GET","POST"])
-
 def index():
     if request.method == "POST":
         email = request.form['email']
@@ -66,6 +73,8 @@ def index():
     return render_template("index.html",dataDoctor = resultDoctor, dataPatient = resultPatient, dataDevice = resultDevice, data4 = result4,
     sqlCountDoctor = sqlCountDoctor, data5 = result5)
 
+# -----------------------------------------------------------------------------feedback-----------------------------------------------------------
+@app.route('/')
 @app.route('/home/feedback',methods=["GET","POST"])
 def feedback():
     if request.method == "POST":
@@ -114,7 +123,6 @@ def profileh():
         return redirect(url_for('index'))          
 
 # ------------------------------------------------------------------------Login---------------------------------------------------------------------
-
 @app.route('/login',methods=["GET","POST"])
 def login():
     if request.method == 'POST':
@@ -142,7 +150,6 @@ def login():
         return render_template('login.html',msg = False)
 
 # ------------------------------------------------------------------------Log Out-------------------------------------------------------------------
-
 @app.route("/logout")
 def logout():
     session.pop('loggedin',None)
@@ -151,7 +158,6 @@ def logout():
     return redirect(url_for('index'))
 
 # ------------------------------------------------------------------------Add Doctor----------------------------------------------------------------
-
 @app.route('/adddoctor',methods = ['POST','GET'])
 def adddoctor():
     if request.method == 'POST':
@@ -222,7 +228,6 @@ def adddoctor():
         return render_template('adddoctor.html')
 
 # ------------------------------------------------------------------------View Doctor---------------------------------------------------------------------
-
 @app.route('/viewdoctor')
 def viewdoctor():
     if 'user_admin' in session :  
@@ -234,16 +239,6 @@ def viewdoctor():
         return redirect(url_for('index'))    
 
 # ------------------------------------------------------------------------Add Device----------------------------------------------------------------
-
-def save_picture(form_picture):
-    fname = secrets.token_hex(16) #new name
-    _, f_ext = os.path.splitext(form_picture.filename) #get rid of old name
-    picture_fn = fname + f_ext #combine extention "png for example" with new name
-    picture_path = os.path.join( 'static/imgs/uploads', picture_fn) #combine path with name
-    picture_path = picture_path.replace('\\','/')
-    form_picture.save(picture_path)
-    return picture_path
-
 @app.route('/adddevice', methods = ['GET','POST'])
 
 def adddevice():
@@ -270,7 +265,6 @@ def adddevice():
     
         
 # ------------------------------------------------------------------------Doctors-------------------------------------------------------------------        
-
 @app.route('/doctors')
 def doctors():
     return render_template('doctor.html')
@@ -342,7 +336,6 @@ def addpatient():
         return render_template('addpatient.html')
 
 # ------------------------------------------------------------------------View Patient---------------------------------------------------------------
-
 @app.route('/viewpatient')
 def viewpatient():
     
@@ -358,7 +351,6 @@ def contact():
 
 
 # ------------------------------------------------------------------------Home Page/ Profile---------------------------------------------------------
-
 @app.route('/index/profile')
 def profile():
     if 'loggedIn' in session:
@@ -370,7 +362,6 @@ def profile():
     return redirect(url_for('index'))
 
 # ------------------------------------------------------------------------Admin Veiw Doctor---------------------------------------------------------
-
 @app.route('/adminViewDoctor', methods = ['POST','GET'])
 def adminViewDoctor():
     if 'user_admin' in session and 'loggedIn' in session:
@@ -403,25 +394,7 @@ def adminViewDoctor():
             return redirect(url_for('adminViewDoctor'))
 
         if request.method == 'POST' and "ssnref" in request.form:
-
-            # nameref = request.form['nameref']
             ssnref=request.form['ssnref']
-            
-            # sql = """INSERT INTO test (name,ssn) values (%s,%s)"""
-            # val = (nameref,ssnref)
-            # cursor = mydb.cursor(buffered=True)
-            # cursor.execute(sql,val)
-            # mydb.commit()
-
-
-            # sex = request.form['sex']
-            # email = request.form['email']
-            # password = request.form['password']
-            # address = request.form['address']
-            # birth_date = request.form['birth_date']
-            # degree = request.form['degree']
-            # Specialization= request.form['specialization']
-            # salary = request.form['salary']
 
             cursor = mydb.cursor(buffered=True)
             cursor.execute(""" DELETE FROM doctorPreRequest WHERE ssn = %s """,(ssnref,))
@@ -497,7 +470,6 @@ def viewAppointments():
     return render_template('viewAppointments.html', data = result,name = name,empty = empty)
 
 # ------------------------------------------------------------------------book now----------------------------------------------------------------
-
 @app.route('/bookNow',methods = ['GET','POST'])
 def bookNow():
     sql = "SELECT appNo,name,startT,endT,dt,booked FROM appointment join doctor on doctorEmail = email"
@@ -581,7 +553,6 @@ def unBookAppointment():
         return redirect(url_for('profileh'))
 
 # ------------------------------------------------------------------------messages----------------------------------------------------------------
-
 @app.route('/messages', methods = ['GET','POST'])
 def messages():
     if 'user_patient' in session or 'user_doctor' in session : 
