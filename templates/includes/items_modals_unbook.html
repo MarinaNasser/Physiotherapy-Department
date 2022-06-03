@@ -1,0 +1,65 @@
+
+
+
+<div class="modal fade" id="Modal-unbook-{{r.0}}"
+tabindex="-1"
+ aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+ <div class="modal-header">
+   <h5 class="modal-title" id="ModalLabel">
+
+     unbook appointment
+
+   </h5>
+   <button type="button" class="close"
+           data-dismiss="modal" aria-label="Close">
+     <span aria-hidden="true">&times;</span>
+   </button>
+ </div>
+ <div class="modal-body">
+   are you sure you want to unbook that appointment?
+ </div>
+ 
+ 
+ <form action="{{url_for('unBookAppointment')}}" method="post">
+   <div class="form-group">
+     <label for="appNo" class="form-label">app no</label>
+     <input type="text" class="form-control" id="appNo" name="appNo" value="{{r.0}}" readonly>
+   </div>
+   
+   <!-- name -->
+   <div class="form-group">
+     <label for="doctorName" class="form-label">doctor name</label>
+     <input type="text" class="form-control" id="doctorName" name="doctorName" value="{{r.1}}" readonly>
+   </div>
+   
+   <!-- ssn -->
+   <div class="form-group">
+       <label for="startTime">start time</label>
+       <input type="int" class="form-control" id="startTime" name="startTime" value="{{ r.2 }}" readonly>
+   </div>
+   
+   <!-- sex -->
+   <div>
+     <label for="endTime">end time</label>
+     <input type="text" class="form-control" id="endTime" name="endTime" value="{{r.3}}" readonly>
+ </div>
+ <!-- email -->
+   <div class="form-group">
+       <label for="date">date</label>
+       <input type="text" class="form-control" id="date" name="date" value="{{r.4}}" readonly>
+   </div>
+   
+   <button type="submit" class="btn btn-primary">unbook</button>
+ </form>      
+ 
+ <button type="button" class="btn btn-secondary"
+ data-dismiss="modal">Close        
+   </button>
+ </div>
+</div>
+</div>
+</div>
+
+
