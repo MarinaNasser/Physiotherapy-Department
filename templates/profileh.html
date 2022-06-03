@@ -208,8 +208,9 @@
   {% if session['user_patient'] %}
   <div class="table-responsive">
     {% if name != "" %}
-    <table class="table table-bordered text-center">
-      <h3 style="color: whitesmoke">My Booked Appointments</h3>
+    <div class="container">
+    <table style="background-color: #252c38;" class="table table-bordered text-center">
+      <h3 style="color: whitesmoke; margin-top: 35px ; margin-bottom: 35px ;">My Booked Appointments</h3>
       <thead>
         <tr class="bg-light-gray" style="color: white">
           <th class="text-uppercase">#</th>
@@ -241,6 +242,7 @@
                 type="submit"
                 class="btn-close"
                 aria-label="Close"
+                style="background-color: whitesmoke ;"
               ></button>
             </td>
           </tr>
@@ -248,6 +250,7 @@
         </form>
       </tbody>
     </table>
+  </div>
     {% else %}
     <div class="alert alert-light" role="alert">There are no appointments</div>
     {% endif %}
