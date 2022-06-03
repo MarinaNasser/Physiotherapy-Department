@@ -18,11 +18,32 @@
       <div class="card mb-3 content" style="margin-top: 50px; width: 800px">
         <!-- image -->
 
-        <img
-          src="{{item.13}}"
-          class="profile-image"
-          onerror="this.src = '/static/adddevice/images/user.png';"
-        />
+        <p>
+          <input
+            type="file"
+            accept="image/*"
+            name="photo"
+            id="photo"
+            onchange="loadPatientFile(event)"
+            style="display: none"
+          />
+        </p>
+        <p>
+          <label for="photo" style="cursor: pointer"
+            ><img
+              id="patient-profile-image"
+              class="profile-image"
+              src="{{item.13}}"
+              onerror="this.src = '/static/adddevice/images/user.png';"
+          /></label>
+        </p>
+
+        <script>
+          var loadPatientFile = function (event) {
+            var image = document.getElementById("patient-profile-image");
+            image.src = URL.createObjectURL(event.target.files[0]);
+          };
+        </script>
         <!-- Name -->
         <div class="row" style="margin-top: 50px">
           <h5>Full Name</h5>
@@ -63,6 +84,21 @@
           </div>
         </div>
         <hr />
+
+        <!-- Password -->
+        <div class="row">
+          <h5>Password</h5>
+          <div class="col-md9 text-secondary">
+            <input
+              type="text"
+              class="editinfo"
+              style="text-align: center"
+              value="{{item.6}}"
+            />
+          </div>
+        </div>
+        <hr />
+
         <!-- phone -->
         <div class="row">
           <h5>Phone</h5>
@@ -184,11 +220,32 @@
 
       <!-- image -->
       <div class="card mb-3 content" style="margin-top: 50px; width: 800px">
-        <img
-          src="{{item.10}}"
-          class="profile-image"
-          onerror="this.src = '/static/adddevice/images/user.png';"
-        />
+        <p>
+          <input
+            type="file"
+            accept="image/*"
+            name="photo"
+            id="photo"
+            onchange="loadDoctorFile(event)"
+            style="display: none"
+          />
+        </p>
+        <p>
+          <label for="photo" style="cursor: pointer"
+            ><img
+              id="doctor-profile-image"
+              class="profile-image"
+              src="{{item.10}}"
+              onerror="this.src = '/static/adddevice/images/user.png';"
+          /></label>
+        </p>
+
+        <script>
+          var loadDoctorFile = function (event) {
+            var image = document.getElementById("doctor-profile-image");
+            image.src = URL.createObjectURL(event.target.files[0]);
+          };
+        </script>
 
         <!-- name -->
         <div class="row" style="margin-top: 50px">
@@ -227,6 +284,20 @@
               class="editinfo"
               style="text-align: center"
               value="{{item.4}}"
+            />
+          </div>
+        </div>
+        <hr />
+
+        <!-- Password -->
+        <div class="row">
+          <h5>Password</h5>
+          <div class="col-md9 text-secondary">
+            <input
+              type="text"
+              class="editinfo"
+              style="text-align: center"
+              value="{{item.6}}"
             />
           </div>
         </div>
