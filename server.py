@@ -125,6 +125,35 @@ def profileh():
     else:
         return redirect(url_for('index'))          
 
+# ------------------------------------------------------------------------EditProfile---------------------------------------------------------------------
+@app.route('/editprofile')
+def editprofile():
+    if 'user_patient' in session or 'user_doctor' in session and 'loggedIn' in session :  
+
+        if 'loggedIn' in session and 'user_patient' in session :
+            cursor = mydb.cursor(buffered=True)
+            cursor.execute('SELECT * FROM patient WHERE email = %s', (session['user_patient'],))
+            result = cursor.fetchall()
+            sql = """SELECT appNo,doctor.name,startT,endT,dt FROM appointment join patient on patientEmail = patient.email join doctor on doctorEmail= doctor.email
+                where patientEmail =  %s """
+            val =(session["user_patient"],)
+            cursor.execute(sql , val)
+            appointment = cursor.fetchall()
+            empty = True
+            if appointment:
+                empty = False
+            return render_template('editprofile.html',data = result , appointment=appointment,empty = empty)
+            
+        elif 'loggedIn' in session and 'user_doctor' in session :
+            cursor = mydb.cursor(buffered=True)
+            cursor.execute('SELECT * FROM doctor WHERE email = %s', (session['user_doctor'],))
+            result = cursor.fetchall()
+            return render_template('editprofile.html',data = result,empty = True)
+        else:
+            return render_template('editprofile.html')
+    else:
+        return redirect(url_for('index'))          
+
 # ------------------------------------------------------------------------Login---------------------------------------------------------------------
 @app.route('/login',methods=["GET","POST"])
 def login():
