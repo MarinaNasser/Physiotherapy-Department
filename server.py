@@ -24,7 +24,7 @@ app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="A_0l1a2a3",
+    passwd="sherif2001",
     database="felcode"
 )
 mycursor = mydb.cursor(buffered=True)
@@ -209,6 +209,19 @@ def editprofile():
             return render_template('editprofile.html')
     else:
         return redirect(url_for('index'))          
+
+# ------------------------------------------------------------------------ViewDevice---------------------------------------------------------------------
+
+@app.route('/viewdevice')
+def viewdevice():
+
+    if 'user_admin' in session :  
+        sql = "SELECT device_num,device_name,device_model,technician_id,technician_name,count,description FROM device"
+        mycursor.execute(sql)
+        result = mycursor.fetchall()
+        return render_template('viewdevice.html',data = result)
+    else:
+        return render_template('index.html')
 
 # ------------------------------------------------------------------------Login---------------------------------------------------------------------
 @app.route('/login',methods=["GET","POST"])
@@ -444,7 +457,7 @@ def profile():
         cursor.execute('SELECT * FROM USERS WHERE email = %s', (session['user_patient'],))
         result = cursor.fetchall()
         
-        return render_template('profile.html', data = result)
+        return render_template('profileh.html', data = result)
     return redirect(url_for('index'))
 
 # ------------------------------------------------------------------------Admin Veiw Doctor---------------------------------------------------------

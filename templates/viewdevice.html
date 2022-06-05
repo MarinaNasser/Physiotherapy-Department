@@ -1,0 +1,87 @@
+{%extends'index.html'%} {%block main%}
+<link
+  rel="stylesheet"
+  href="{{url_for('static',filename='css/viewdevicestyle.css')}}"
+/>
+
+<body style="background-color: #212121">
+  <br /><br /><br /><br />
+  <div class="container">
+    <h1 style="color: whitesmoke">Devices</h1>
+    <div class="my-3">
+      <input
+        type="button"
+        onclick="go()"
+        class="btn form-control-submit-button"
+        value="Edit"
+      />
+    </div>
+
+    <table class="table table-hover table-dark">
+      <thead>
+        <tr>
+          <th scope="col">Device Number</th>
+          <th scope="col">Device Name</th>
+          <th scope="col">Device Model</th>
+          <th scope="col">Technician ID</th>
+          <th scope="col">Technician Name</th>
+          <th scope="col">Number of Devices</th>
+          <th scope="col">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in data %}
+
+        <tr>
+          {% for c in r %}
+          <td>{{c}}</td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <!-- Submit button -->
+  <div id="outside" class="outside">
+    <h1 style="text-align: center; margin-top: 50px; color: #fff">
+      Edit Device with
+    </h1>
+    <input
+      type="text"
+      style="margin-left: 130px; width: 60%; margin-top: 50px"
+      placeholder="Device Number"
+    />
+    <button
+      class="button"
+      onclick="move()"
+      type="button"
+      style="margin-top: 20px"
+    >
+      Edit
+    </button>
+    <button
+      class="button"
+      type="button"
+      onclick="cancel()"
+      style="margin-top: 20px"
+    >
+      Cancel
+    </button>
+
+    <script>
+      function go() {
+        var a = document.getElementById("outside");
+        a.style.display = "block";
+      }
+      function cancel() {
+        var a = document.getElementById("outside");
+        a.style.display = "none";
+      }
+      function move() {
+        location.href = "/editdevice";
+      }
+    </script>
+  </div>
+  <br /><br /><br /><br /><br />
+</body>
+{%endblock%}

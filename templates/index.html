@@ -98,6 +98,11 @@
             </li>
             <li class="nav-item">
               {% if session['user_admin'] %}
+              <a class="nav-link" href="/viewdevice">View Devices</a>
+              {% endif %}
+            </li>
+            <li class="nav-item">
+              {% if session['user_admin'] %}
               <span class="badge badge-pill badge-info" style="float:right;margin-bottom:-12px;margin-right:-8px;font-size:10px">{{count()}}</span>
               <a class="nav-link" href="/adminViewDoctor">Accept Doctors</a>
               {% endif %}
