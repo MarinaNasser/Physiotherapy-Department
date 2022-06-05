@@ -73,7 +73,7 @@ def index():
     return render_template("index.html",dataDoctor = resultDoctor, dataPatient = resultPatient, dataDevice = resultDevice, data4 = result4,
     sqlCountDoctor = sqlCountDoctor, data5 = result5)
 
-# -----------------------------------------------------------------------------feedback-----------------------------------------------------------
+# ------------------------------------------------------------------------feedback--------------------------------------------------------------
 @app.route('/')
 @app.route('/home/feedback',methods=["GET","POST"])
 def feedback():
@@ -91,12 +91,12 @@ def feedback():
 def preSignUp():
     return render_template('preSignUp.html')
 
-# ------------------------------------------------------------------------My Tips---------------------------------------------------------------------
+# -------------------------------------------------------------------------My Tips---------------------------------------------------------------------
 @app.route('/myTips')
 def myTips():
     return render_template('myTips.html')
 
-# ------------------------------------------------------------------------Profile---------------------------------------------------------------------
+# -------------------------------------------------------------------------Profile---------------------------------------------------------------------
 @app.route('/profileh')
 def profileh():
     if 'user_patient' in session or 'user_doctor' in session and 'loggedIn' in session :  
@@ -172,7 +172,7 @@ def editprofile():
             mydb.commit()
 
             return redirect(url_for('profileh'))
- 
+
         elif 'loggedIn' in session and 'user_doctor' in session and request.method == "GET":
             cursor = mydb.cursor(buffered=True)
             cursor.execute('SELECT * FROM doctor WHERE email = %s', (session['user_doctor'],))
@@ -208,7 +208,7 @@ def editprofile():
         else:
             return render_template('editprofile.html')
     else:
-        return redirect(url_for('index'))          
+        return redirect(url_for('index'))
 
 # ------------------------------------------------------------------------ViewDevice---------------------------------------------------------------------
 
@@ -365,10 +365,7 @@ def adddevice():
         return redirect(url_for('index'))
     
         
-# ------------------------------------------------------------------------Doctors-------------------------------------------------------------------        
-@app.route('/doctors')
-def doctors():
-    return render_template('doctor.html')
+
 
 # ------------------------------------------------------------------------Add Patient---------------------------------------------------------------
 @app.route('/addpatient', methods = ['POST', 'GET'])
@@ -689,7 +686,7 @@ def inbox():
     else:
         return redirect(url_for('index'))   
 
-# ------------------------------------------------------------------------test----------------------------------------------------------------
+# ------------------------------------------------------------------------count----------------------------------------------------------------
 def count():
     cursor = mydb.cursor(buffered=True)
     if 'user_patient' in session:
