@@ -74,6 +74,20 @@ img {
   vertical-align: middle;
 }
 
+.container {
+  color: #fff;
+  font-weight: 500;
+  line-height: 1rem;
+  font-size: 2rem;
+  text-decoration: none;
+  z-index: 99999;
+  width: 100%;
+  background-color: #00000033;
+  position: absolute;
+  padding: 20px;
+  padding-left: 150px;
+}
+
 .wrapper {
   max-width: 1400px;
   display: flex;
@@ -196,6 +210,14 @@ img {
   height: 656px;
 }
 
+.photouploaded {
+  margin-left: 35%;
+  margin-bottom: 30px;
+  object-fit: cover;
+  border-radius: 100%;
+  width: 150px;
+  height: 150px;
+}
 .form-row {
   margin-bottom: 26px;
 }
@@ -372,6 +394,13 @@ img {
   .wizard {
     margin-bottom: 0;
   }
+
+  .photouploaded {
+    left: 0;
+    right: 0;
+    margin-left: 40%;
+    margin-bottom: 20px;
+  }
 }
 @media (max-width: 767px) {
   body {
@@ -381,18 +410,26 @@ img {
 
   .wrapper {
     height: auto;
+    width: auto;
     display: block;
+    padding: 10px;
+    display: inline;
   }
-
   .wizard {
     width: auto;
     height: auto;
     margin-left: 0;
     margin-bottom: 100px;
   }
+  .photouploaded {
+    left: 0;
+    right: 0;
+    margin-left: 35%;
+    margin-bottom: 20px;
+  }
 
   .inner {
-    padding: 30px 20px;
+    padding: 20px;
     height: auto;
   }
 
@@ -414,5 +451,39 @@ img {
     right: 20px;
     width: auto;
     transform: translateX(0);
+  }
+  .choose {
+    margin: 20px;
+  }
+  .button {
+    font-size: 20px;
+    margin-left: 20%;
+  }
+}
+
+@media (max-width: 425px) {
+  .choose {
+    font-size: 20px;
+    padding: 10px;
+    margin: 0;
+  }
+  .outside {
+    font-size: 10px;
+    height: auto;
+    padding-bottom: 20px;
+  }
+
+  .photouploaded {
+    margin-left: 25%;
+  }
+
+  .button {
+    font-size: 20px;
+    margin-left: 30px;
+  }
+  .container {
+    position: relative;
+    padding-left: 0;
+    width: 115%;
   }
 }

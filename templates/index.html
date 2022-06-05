@@ -92,8 +92,13 @@
               >
             </li>
             <li class="nav-item">
-              {% if session['user_doctor'] or session['user_admin'] %}
+              {% if session['user_admin'] %}
               <a class="nav-link" href="/viewdoctor">View Doctors</a>
+              {% endif %}
+            </li>
+            <li class="nav-item">
+              {% if session['user_admin'] %}
+              <a class="nav-link" href="/viewdevice">View Devices</a>
               {% endif %}
             </li>
             <li class="nav-item">
@@ -161,7 +166,7 @@
                   id="dropdown01"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
-                  href="#">LogIn | SignUp</a>
+                  href="#">Login | SignUp</a>
               <ul class="dropdown-menu" aria-labelledby="dropdown01">
                 <li>
                   <a class="dropdown-item" href="{{url_for('preSignUp')}}"
@@ -245,9 +250,9 @@
             <h4 class="py-3">Exceptional care. Every patient. Every day.</h4>
             <!-- <p class="para-light">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam odit consequatur doloribus natus in suscipit!</p> -->
           </div>
-          <div class="col-lg-4 text-center p-5 text-dark" data-aos="zoom-in">
+          <div class="col-lg-4 text-center p-5 text-dark" data-aos="zoom-in" style="background-color: #36454F;">
             <i class="fas fa-headset fa-3x p-2"></i>
-            <h4 class="py-3">24/7 Support</h4>
+            <h4 class="py-3" style=" color: white;">24/7 Support</h4>
             <!-- <p class="para-light">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam odit consequatur doloribus natus in suscipit!</p> -->
           </div>
         </div>
@@ -303,7 +308,6 @@
           <h2 class="py-2">Physiotherapy</h2>
           <p class="para-light">
             Physiotherapy plays a very important role in enabling you to recover from injury, illness or disability, by restoring the movement and function of your body. Our expert team at Saudi German Hospital will help to evaluate musculoskeletal diseases and injuries, joint diseases, neuromuscular diseases, and traumatic injuries. Patients will undergo treatment by our physiatrists using world-leading management techniques such as specific therapy prescriptions, medications, and injections. Physiotherapy is also an important part of the treatment for brain or nervous system-related conditions, such as stroke, Parkinson’s disease, or multiple sclerosis.</p>
-          </p>
         </div>
         <div class="row gy-4" data-aos="zoom-in">
           
@@ -528,7 +532,7 @@
                           />
                         </div>
                         <div class="ms-3 pt-2">
-                          <h6><a href="#">{{item[0]}}</a></h6>
+                          <h6><a>{{item[0]}}</a></h6>
                           <p>{{item[4]}}</p>
                         </div>
                       </div>

@@ -25,6 +25,11 @@
   </head>
 
   <body>
+    <nav>
+      <div class="container">
+        <a href="{{ url_for('index') }}" style="color: white;">Muscle Care</a>
+    </nav>
+
     <div class="wrapper" id="inside">
       <form
         action="http://127.0.0.1:5000/adddoctor"
@@ -33,8 +38,11 @@
         enctype="multipart/form-data"
       >
         <!-- SECTION 1 -->
-        <h3 style="color: white; font-size: 40px">SignUp - Doctor</h3>
+        <h3 style="color: white; font-size: 40px" class="title_name">
+          SignUp - Doctor
+        </h3>
         <h4></h4>
+
         <section>
           <!-- Photo-->
           <div class="inner">
@@ -52,14 +60,7 @@
               <label for="photo" style="cursor: pointer"
                 ><img
                   id="photouploaded"
-                  style="
-                    margin-left: 200px;
-                    margin-bottom: 30px;
-                    object-fit: cover;
-                    border-radius: 100%;
-                    width: 150px;
-                    height: 150px;
-                  "
+                  class="photouploaded"
                   src="/static/adddevice/images/user.png"
               /></label>
             </p>

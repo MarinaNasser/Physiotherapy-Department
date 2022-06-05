@@ -17,8 +17,18 @@
       {% for item in data %}
 
       <div class="card mb-3 content" style="margin-top: 50px; width: 800px">
-        <!-- image -->
+        <!-- Edit button -->
+        <div class="row">
+          <button
+            type="button"
+            class="button"
+            onclick="location.href = '/editprofile';"
+          >
+            Edit Profile
+          </button>
+        </div>
 
+        <!-- image -->
         <img
           src="{{item.13}}"
           class="profile-image"
@@ -43,6 +53,13 @@
           <div class="col-md9 text-secondary">{{item.5}}</div>
         </div>
         <hr />
+        <!-- password -->
+        <div class="row">
+          <h5>Password</h5>
+          <div class="col-md9 text-secondary">{{item.6}}</div>
+        </div>
+        <hr />
+
         <!-- phone -->
         <div class="row">
           <h5>Phone</h5>
@@ -102,8 +119,19 @@
     <form action="/profileh" method="get" enctype="multipart/form-data">
       {% for item in data %}
 
-      <!-- image -->
       <div class="card mb-3 content" style="margin-top: 50px; width: 800px">
+        <!-- Edit button -->
+        <div class="row">
+          <button
+            type="button"
+            class="button"
+            onclick="location.href = '/editprofile';"
+          >
+            Edit Profile
+          </button>
+        </div>
+        <!-- image -->
+
         <img
           src="{{item.10}}"
           class="profile-image"
@@ -128,6 +156,13 @@
         <div class="row">
           <h5>Email</h5>
           <div class="col-md9 text-secondary">{{item.4}}</div>
+        </div>
+        <hr />
+
+        <!-- password -->
+        <div class="row">
+          <h5>Password</h5>
+          <div class="col-md9 text-secondary">{{item.6}}</div>
         </div>
         <hr />
 
@@ -169,60 +204,73 @@
       {% endfor %}
     </form>
     {% endif %}
-
-
   </header>
 
   {% if session['user_patient'] %}
   <div class="table-responsive">
-      {% if not empty %}
-      <table class="table table-bordered text-center">
-        <h3 style="color: whitesmoke ;">My Booked Appointments</h3>
-          <thead>
-              <tr class="bg-light-gray" style="color:white">
-                  <th class="text-uppercase"># </th>
-                  <th class="text-uppercase">Doctor Name</th>
-                  <th class="text-uppercase">Start Time</th>
-                  <th class="text-uppercase">End Time</th>
-                  <th class="text-uppercase">Date</th>
-                  <th class="text-uppercase">Delete</th>                
-              </tr>
-          </thead>
-          <tbody>
-              
-                       
-                  <form action="{{url_for('unBookAppointment')}}" method='POST'>
-                  {% for r in appointment %}
-                  {% include 'includes/items_modals_unbook.html' %}
+    {% if name != "" %}
+    <div class="container">
+    <table style="background-color: #252c38;" class="table table-bordered text-center">
+      <h3 style="color: whitesmoke; margin-top: 35px ; margin-bottom: 35px ;">My Booked Appointments</h3>
+      <thead>
+        <tr class="bg-light-gray" style="color: white">
+          <th class="text-uppercase">#</th>
+          <th class="text-uppercase">Doctor Name</th>
+          <th class="text-uppercase">Start Time</th>
+          <th class="text-uppercase">End Time</th>
+          <th class="text-uppercase">Date</th>
+          <th class="text-uppercase">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <form action="{{url_for('unBookAppointment')}}" method="POST">
+          {% for r in appointment %} {% include
+          'includes/items_modals_unbook.html' %}
 
-                  <tr>
-                      {% for c in r %}
-                          <td><span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{{c}}</span></td>
-                      {% endfor %}
-                    <td>
-                        <button data-toggle="modal" data-target="#Modal-unbook-{{r.0}}" type="submit" class="btn-close " aria-label="Close"></button>
-                    </td>
-                  </tr>
-                  {% endfor %}
-              
-          </form>  
-          </tbody>
-      </table>
-      {% else %}
-          <div class="alert alert-light" role="alert">
-              There are no appointments
-            </div>
-      {% endif %}
+          <tr>
+            {% for c in r %}
+            <td>
+              <span
+                class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13"
+                >{{c}}</span
+              >
+            </td>
+            {% endfor %}
+            <td>
+              <button
+                data-toggle="modal"
+                data-target="#Modal-unbook-{{r.0}}"
+                type="submit"
+                class="btn-close"
+                aria-label="Close"
+                style="background-color: whitesmoke ;"
+              ></button>
+            </td>
+          </tr>
+          {% endfor %}
+        </form>
+      </tbody>
+    </table>
   </div>
+    {% else %}
+    <div class="alert alert-light" role="alert">There are no appointments</div>
+    {% endif %}
+  </div>
+  {%endif%}
+  <script
+    src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+    crossorigin="anonymous"
+  ></script>
 
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-   
-<script src="static/js/jquery.min.js"></script>
-<script src="static/js/popper.js"></script>
-<script src="statics/js/bootstrap.min.js"></script>
-<script src="static/js/main.js"></script>
-{%endif%}
-
+  <script src="static/js/jquery.min.js"></script>
+  <script src="static/js/popper.js"></script>
+  <script src="statics/js/bootstrap.min.js"></script>
+  <script src="static/js/main.js"></script>
 </body>
 {%endblock%}

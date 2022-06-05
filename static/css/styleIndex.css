@@ -710,7 +710,13 @@ li {
   }
 }
 
-#bookNowIcon{
+@media (max-width: 450px) {
+  .img-fluid {
+    display: none;
+  }
+}
+
+#bookNowIcon {
   background-image: url("/static/assets/img/PhysiotherapyClinicHome.jpg");
   background-blend-mode: darken;
   background-color: #323137bb;

@@ -1,85 +1,127 @@
 {%extends'index.html'%}
 {%block main%}
-    <head>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <!-- The above 3 meta tags must come first in the head; any other head content must come after these tags -->
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- The above 3 meta tags must come first in the head; any other head content must come after these tags -->
 
-      <!-- <title>Booking Form HTML Template</title> -->
+  <!-- <title>Booking Form HTML Template</title> -->
   <!-- Custom stlylesheet -->
-      <link type="text/css" rel="stylesheet" href="{{url_for('static',filename='css/addAppointment.css')}}" />
-
-  
-  </head>
-  <body>
-    <div id="booking" class="section">
-      <div class="section-center">
-        <div class="container">
-          <div class="row no-margin">
-            <div class="booking-form">
-              
-              <form action = "{{url_for('addAppointment')}}" method="POST" >
-                <div class="row">
-                  <div class="col-md-5">
-                    <div class="form-group">
-                      <span class="form-label">Name</span>
-                      <input class="form-control" type="text" value=" {{name}}" readonly>
-                    </div>
-                  </div>
-                  <div class="col-md-7">
-                    <div class="row no-margin">
-                      <div class="col-md-">
-                        <div class="form-group">
-                          <span class="form-label">Day</span>
-                          <input name="date" class="form-control" type="date" required >
-                        </div>
-                      </div> 
-                      <!-- <div class="col-md-0"> -->
-                        <!-- <div class="form-group"> -->
-                          <!-- <span class="form-label">Check out</span>
-                          <input class="form-control" type="date" required> -->
-                        <!-- </div> -->
-                      <!-- </div>  -->
-                      <div class="col-md-3">
-                        <div class="form-group">
-                          <span class="form-label">Time</span>
-                          <select class="form-control" name="startT">
-                            <option value = "6" >6 pm</option>
-                            <option value = "7" >7 pm</option>
-                            <option value = "8" >8 pm</option>
-                            <option value = "9" >9 pm</option>
-                          </select>
-                          <span class="select-arrow"></span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-btn">
-                      <button type='submit' class="submit-btn">Add</button>
-
-                      <br> 
-                    
-
-                    </div>
+  <link
+    type="text/css"
+    rel="stylesheet"
+    href="{{url_for('static',filename='css/addAppointment.css')}}"
+  />
+</head>
+<body>
+  <div id="booking" class="section">
+    <div class="section-center">
+      <div class="container">
+       <div class="row no-margin">
+          {%block body%} {% endblock %}
+          <div class="booking-form">
+            <form
+              id="submitform"
+              action="{{url_for('addAppointment')}}"
+              method="POST"
+            >
+              <div class="row" style="float: right">
+                <div class="col-md-">
+                  <div class="form-group">
+                    <span class="form-label">Name</span>
+                    <input
+                      class="form-control"
+                      type="text"
+                      value=" {{name}}"
+                      style="
+                        border: #0e9 solid;
+                        padding-left: 20px;
+                        border-radius: 10px;
+                      "
+                      readonly
+                    />
                   </div>
                 </div>
-              </form>
+                <!-- <div class="col-md-7">
+                  <div class="row no-margin"> -->
+                <div class="col-md-">
+                  <div class="form-group">
+                    <span class="form-label">Day</span>
+                    <input
+                      data-date-inline-picker="true"
+                      name="date"
+                      class="form-control"
+                      type="date"
+                      style="
+                        padding-left: 20px;
+                        padding-right: 20px;
+                        color: white;
+                        border: #0e9 solid;
+                        border-radius: 10px;
+                        color-scheme: dark;
+                      "
+                      required
+                    />
+                  </div>
+                </div>
+                <!-- <div class="col-md-0"> -->
+                <!-- <div class="form-group"> -->
+                <!-- <span class="form-label">Check out</span>
+                          <input class="form-control" type="date" required> -->
+                <!-- </div> -->
+                <!-- </div>  -->
+                <div class="col-md-">
+                  <div class="form-group">
+                    <span class="form-label">Time</span>
+                    <select
+                      style="
+                        border: #0e9 solid;
+                        padding-left: 20px;
+                        border-radius: 10px;
+                      "
+                      class="form-control"
+                      name="startT"
+                    >
+                      <option value="6">6 pm</option>
+                      <option value="7">7 pm</option>
+                      <option value="8">8 pm</option>
+                      <option value="9">9 pm</option>
+                    </select>
+                    <span class="select-arrow"></span>
+                  </div>
+                </div>
+                <!-- </div>
+                </div> -->
+              </div>
+            </form>
+            <div style="margin-top: 100px">
+              <div class="col-md-6">
+                <div class="form-btn">
+                  <button type="submit" form="submitform" class="submit-btn">
+                    Add
+                  </button>
+                </div>
+              </div>
               {%block viewbutton%}
               <div class="container">
-                      <button class="submit-btn" id="viewbutton"> <a id="viewbuttonlink" href="{{url_for('viewAppointments')}}" >View Appointments</a></button>
-              </div><br><br>
+                <button
+                  type="button"
+                  style="margin-left: 10px;"
+                  class="submit-btn"
+                  id="viewbutton"
+                >
+                  <a style="text-decoration: none;" id="viewbuttonlink" href="{{url_for('viewAppointments')}}"
+                    >View Appointments</a>
+                </button>
+              </div>
               {%endblock%}
             </div>
           </div>
         </div>
       </div>
     </div>
-   
+  </div>
 
-        {%block body%}
-        {% endblock %}
-
-   </body>
-   {% endblock %}
+</body>
+{% endblock %}

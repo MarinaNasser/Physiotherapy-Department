@@ -1,0 +1,27 @@
+.button {
+  margin-left: 130px;
+  margin-top: 40px;
+  background-color: #fff;
+  font-size: 30px;
+  padding: 20px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.button:hover {
+  background-color: #0e9;
+  color: white;
+  transform: translateY(20px);
+}
+
+.outside {
+  display: none;
+  position: absolute;
+  top: 50%;
+  z-index: 99999;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 45%;
+  height: 60%;
+  background-color: #109177;
+  border-radius: 20px;
+}
