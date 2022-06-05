@@ -208,7 +208,7 @@
 
   {% if session['user_patient'] %}
   <div class="table-responsive">
-    {% if name != "" %}
+    {% if not empty %}
     <div class="container">
     <table style="background-color: #252c38;" class="table table-bordered text-center">
       <h3 style="color: whitesmoke; margin-top: 35px ; margin-bottom: 35px ;">My Booked Appointments</h3>

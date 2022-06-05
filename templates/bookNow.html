@@ -31,9 +31,9 @@
         </div>
       </form>
 
-      {% for i in range(0, data.shape[0] ) %} {% include
-      'includes/items_modals_appointment.html' %} {% if toFind == "" or
-      data[1][i] == toFind %}
+      {% for i in range(0, data.shape[0] ) %} 
+      {% include 'includes/items_modals_appointment.html' %} 
+      {% if toFind == "" or data[1][i] == toFind %}
       <tr>
         <td>{{data[0][i]}}</td>
         <td>{{data[1][i]}}</td>

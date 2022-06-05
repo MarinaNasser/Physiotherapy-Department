@@ -533,6 +533,12 @@ def addAppointment():
             print(type(startTime))
             print(type(td))
             
+            dt_datetime = datetime.strptime(date,"%Y-%m-%d")
+            now = datetime.now()
+            difference = now - dt_datetime
+            diffHours = int((difference.total_seconds()) /3600)
+            if(difference.days > 0 or (difference.days == 0 and diffHours > 0)):
+                return render_template('addAppointment.html', added =True,name = name,msg=True)
             
             endT = (startTime + td).hour
             
@@ -544,9 +550,9 @@ def addAppointment():
             
         
             
-            return render_template('addAppointment.html', added =True,name = name)
+            return render_template('addAppointment.html', added =True,name = name,msg=False)
         else:
-            return render_template('addAppointment.html',added = False,name = name)
+            return render_template('addAppointment.html',added = False,name = name,msg=False)
     else:
         return redirect(url_for('index'))       
 
@@ -583,6 +589,7 @@ def bookNow():
         result = result[result[5] == 0]
         now = datetime.now().strftime ("%Y-%m-%d")
         result = result[result[4] >= now]
+        result = result.sort_values(by=4)
         result.index = range(len(result.index))
         print(result)
         
