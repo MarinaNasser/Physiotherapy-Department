@@ -129,22 +129,6 @@ def profileh():
 @app.route('/editprofile', methods=["GET","POST"])
 def editprofile():
     if 'user_patient' in session or 'user_doctor' in session and 'loggedIn' in session :  
-        if request.method == 'POST': 
-            id = request.form['id']
-            name = request.form['name']
-            ssn = request.form['ssn']
-            sex = request.form['sex']
-            email = request.form['email']
-            password = request.form['password']
-            address = request.form['address']
-            birth_date = request.form['birth_date']
-            credit_card = request.form['credit_card']
-            insurance_num = request.form['insurance_num']
-            marital_status = request.form['marital_status']
-            job = request.form['job']
-            photo = request.files['photo']
-            phone = request.form['phone']
-            pic_path = save_picture(photo)
 
         if 'loggedIn' in session and 'user_patient' in session and request.method == "GET" :
             cursor = mydb.cursor(buffered=True)
@@ -188,7 +172,7 @@ def editprofile():
             mydb.commit()
 
             return redirect(url_for('profileh'))
- 
+
         elif 'loggedIn' in session and 'user_doctor' in session and request.method == "GET":
             cursor = mydb.cursor(buffered=True)
             cursor.execute('SELECT * FROM doctor WHERE email = %s', (session['user_doctor'],))
@@ -222,7 +206,9 @@ def editprofile():
             return redirect(url_for('profileh'))
 
         else:
-            return render_template('editprofile.html')  
+            return render_template('editprofile.html')
+    else:
+        return redirect(url_for('index'))
 
 # ------------------------------------------------------------------------ViewDevice---------------------------------------------------------------------
 
