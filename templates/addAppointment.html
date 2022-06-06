@@ -23,6 +23,11 @@
               You cannot add an appointment in an old date
             </div>
             {% endif %}
+            {% if booked %}
+            <div class="alert alert-danger" role="alert" style=" background-color:#252c38;color:whitesmoke;border-color:#252c38;" >
+              this appointment has been added before
+            </div>
+            {% endif %}
             <div class="booking-form">
               <form action = "{{url_for('addAppointment')}}" method="POST" >
                 <div class="row">

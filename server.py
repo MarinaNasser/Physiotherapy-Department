@@ -24,7 +24,7 @@ app.secret_key = "very secret key"
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="sherif2001",
+    passwd="85426Mm854267890",
     database="felcode"
 )
 mycursor = mydb.cursor(buffered=True)
@@ -524,9 +524,17 @@ def addAppointment():
             difference = now - dt_datetime
             diffHours = int((difference.total_seconds()) /3600)
             if(difference.days > 0 or (difference.days == 0 and diffHours > 0)):
-                return render_template('addAppointment.html', added =True,name = name,msg=True)
+                return render_template('addAppointment.html', added =True,name = name,msg=True,booked = False)
             
             endT = (startTime + td).hour
+            
+            sql = "SELECT startT,dt FROM appointment where startT = %s and dt = %s"
+            val = (startT,date)
+            mycursor.execute(sql,val)
+            result = mycursor.fetchall()
+            if result:
+                return render_template('addAppointment.html', added =True,name = name,msg=False,booked = True)
+            
             
             
             sql = """INSERT INTO appointment (startT, endT, dt,doctorEmail,booked) VALUES (%s, %s, %s,%s,%s)"""
@@ -536,9 +544,9 @@ def addAppointment():
             
         
             
-            return render_template('addAppointment.html', added =True,name = name,msg=False)
+            return render_template('addAppointment.html', added =True,name = name,msg=False,booked = False)
         else:
-            return render_template('addAppointment.html',added = False,name = name,msg=False)
+            return render_template('addAppointment.html',added = False,name = name,msg=False,booked = False)
     else:
         return redirect(url_for('index'))       
 
