@@ -30,7 +30,7 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
  </div>
  
  <div class="container" style="padding:20px;">
- <form action="{{url_for('deleteAppointment')}}" method="post">
+ <form action="{{url_for('deleteAppointment')}}" method="POST">
    <div class="form-group">
      <label for="appNo" class="form-label">App No</label>
      <input type="text" class="form-control" id="appNo" name="appNo" value="{{r.0}}" readonly>
@@ -55,8 +55,8 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
  </div>
  <!-- email -->
    <div class="form-group">
-       <label for="date">date</label>
-       <input type="text" class="form-control" id="date" name="date" value="{{r.4}}" readonly>
+      <label for="date">date</label>
+      <input type="text" class="form-control" id="date" name="date" value="{{r.4}}" readonly>
    </div>
    
    <button type="submit" class="btn btn-primary">delete</button>
