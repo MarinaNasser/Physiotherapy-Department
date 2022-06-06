@@ -446,7 +446,6 @@ def viewpatient():
 def contact():
     return render_template('contact_us.html')
 
-
 # ------------------------------------------------------------------------Admin Veiw Doctor---------------------------------------------------------
 @app.route('/adminViewDoctor', methods = ['POST','GET'])
 def adminViewDoctor():
