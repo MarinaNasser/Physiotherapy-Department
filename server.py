@@ -446,16 +446,6 @@ def viewpatient():
 def contact():
     return render_template('contact_us.html')
 
-# ------------------------------------------------------------------------Home Page/ Profile---------------------------------------------------------
-@app.route('/index/profile')
-def profile():
-    if 'loggedIn' in session:
-        cursor = mydb.cursor(buffered=True)
-        cursor.execute('SELECT * FROM USERS WHERE email = %s', (session['user_patient'],))
-        result = cursor.fetchall()
-        
-        return render_template('profileh.html', data = result)
-    return redirect(url_for('index'))
 
 # ------------------------------------------------------------------------Admin Veiw Doctor---------------------------------------------------------
 @app.route('/adminViewDoctor', methods = ['POST','GET'])
