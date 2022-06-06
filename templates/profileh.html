@@ -1,5 +1,4 @@
-{%extends'index.html'%} 
-{%block main%}
+{%extends'index.html'%} {%block main%}
 <head>
   <title>Profile</title>
   <link
@@ -210,48 +209,53 @@
   <div class="table-responsive">
     {% if not empty %}
     <div class="container">
-    <table style="background-color: #252c38;" class="table table-bordered text-center">
-      <h3 style="color: whitesmoke; margin-top: 35px ; margin-bottom: 35px ;">My Booked Appointments</h3>
-      <thead>
-        <tr class="bg-light-gray" style="color: white">
-          <th class="text-uppercase">#</th>
-          <th class="text-uppercase">Doctor Name</th>
-          <th class="text-uppercase">Start Time</th>
-          <th class="text-uppercase">End Time</th>
-          <th class="text-uppercase">Date</th>
-          <th class="text-uppercase">Delete</th>
-        </tr>
-      </thead>
-      <tbody>
-        <form action="{{url_for('unBookAppointment')}}" method="POST">
-          {% for r in appointment %} {% include
-          'includes/items_modals_unbook.html' %}
-
-          <tr>
-            {% for c in r %}
-            <td>
-              <span
-                class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13"
-                >{{c}}</span
-              >
-            </td>
-            {% endfor %}
-            <td>
-              <button
-                data-toggle="modal"
-                data-target="#Modal-unbook-{{r.0}}"
-                type="submit"
-                class="btn-close"
-                aria-label="Close"
-                style="background-color: whitesmoke ;"
-              ></button>
-            </td>
+      <table
+        style="background-color: #252c38"
+        class="table table-bordered text-center"
+      >
+        <h3 style="color: whitesmoke; margin-top: 35px; margin-bottom: 35px">
+          My Booked Appointments
+        </h3>
+        <thead>
+          <tr class="bg-light-gray" style="color: white">
+            <th class="text-uppercase">#</th>
+            <th class="text-uppercase">Doctor Name</th>
+            <th class="text-uppercase">Start Time</th>
+            <th class="text-uppercase">End Time</th>
+            <th class="text-uppercase">Date</th>
+            <th class="text-uppercase">Delete</th>
           </tr>
-          {% endfor %}
-        </form>
-      </tbody>
-    </table>
-  </div>
+        </thead>
+        <tbody>
+          <form action="{{url_for('unBookAppointment')}}" method="POST">
+            {% for r in appointment %} {% include
+            'includes/items_modals_unbook.html' %}
+
+            <tr>
+              {% for c in r %}
+              <td>
+                <span
+                  class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13"
+                  >{{c}}</span
+                >
+              </td>
+              {% endfor %}
+              <td>
+                <button
+                  data-toggle="modal"
+                  data-target="#Modal-unbook-{{r.0}}"
+                  type="submit"
+                  class="btn-close"
+                  aria-label="Close"
+                  style="background-color: whitesmoke"
+                ></button>
+              </td>
+            </tr>
+            {% endfor %}
+          </form>
+        </tbody>
+      </table>
+    </div>
     {% else %}
     <div class="alert alert-light" role="alert">There are no appointments</div>
     {% endif %}
