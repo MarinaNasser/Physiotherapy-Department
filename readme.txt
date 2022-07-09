@@ -1,3 +1,4 @@
+in this project we used python, flask and MYSQL.
 to open the project:
 run the server.py file and it will generate a link to the server that hosts our website.
 
