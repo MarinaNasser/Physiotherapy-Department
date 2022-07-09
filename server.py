@@ -528,8 +528,8 @@ def addAppointment():
             
             endT = (startTime + td).hour
             
-            sql = "SELECT startT,dt FROM appointment where startT = %s and dt = %s"
-            val = (startT,date)
+            sql = "SELECT doctorEmail,startT,dt FROM appointment where startT = %s and dt = %s and doctorEmail = %s"
+            val = (startT,date,session['user_doctor'])
             mycursor.execute(sql,val)
             result = mycursor.fetchall()
             if result:
