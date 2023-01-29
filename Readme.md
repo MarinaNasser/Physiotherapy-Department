@@ -32,9 +32,9 @@ The Web Application is built using:
   - MySQL
 
 ## Project Demo
-[ProjectVideo](https://drive.google.com/file/d/1ufymm9OYNY8kJBdFSs8TBRGgd0NWmTzN/view?usp=sharing)
+![ProjectVideo](https://drive.google.com/file/d/1ufymm9OYNY8kJBdFSs8TBRGgd0NWmTzN/view?usp=sharing)
 ## Screenshots
-![Alt text](../Photos/1.png)
+[![Alt text](../Photos/1.png)](https://drive.google.com/drive/u/0/folders/1219CXKylOHBE8dK9vge2M_ITsgvg3385)
 ![Alt text](../Photos/5.png)
 ![Alt text](../Photos/2.png)
 ![Alt text](../Photos/3.png)
