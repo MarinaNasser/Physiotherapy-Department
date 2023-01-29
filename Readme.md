@@ -32,7 +32,7 @@ The Web Application is built using:
   - MySQL
 
 ## Project Demo
-[label](../Photos/Muscle%20Care%20_%20Physiotherapy%20Department%20-%20Google%20Chrome%202023-01-28%2011-56-03.mp4)
+[label](https://drive.google.com/file/d/1ufymm9OYNY8kJBdFSs8TBRGgd0NWmTzN/view?usp=sharing)
 ## Screenshots
 ![Alt text](../Photos/1.png)
 ![Alt text](../Photos/5.png)
@@ -54,10 +54,10 @@ The Web Application is built using:
 | [Marina Nasser](https://github.com/MarinaNasser)    | 2       | 13  |
 | [Magdy Nasr](https://github.com/MyProjectsProgress)  | 2       | 15  |
 
-- Course Name : Digital Signal Processing .
+- Course Name : Database .
 
 ## Submitted to:
 
-- Dr. Tamer Basha & Eng. Abdullah Darwish
+- Dr. Ahmed Hisham & Eng. Eman Ayman
 
 All rights reserved © 2022 to Team 8 - Systems & Biomedical Engineering, Cairo University (Class 2024)
