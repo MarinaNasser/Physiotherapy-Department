@@ -30,6 +30,7 @@ The Web Application is built using:
   - Flask (Python)
 - Database:
   - MySQL
+![1](https://user-images.githubusercontent.com/90320433/215306947-903be1f1-3930-4d62-b244-f2656f87c45c.png)
 
 ## Project Demo
 [](https://drive.google.com/file/d/1ufymm9OYNY8kJBdFSs8TBRGgd0NWmTzN/view?usp=sharing)
