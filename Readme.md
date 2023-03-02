@@ -54,10 +54,8 @@ The Web Application is built using:
 | [Marina Nasser](https://github.com/MarinaNasser)    | 2       | 13  |
 | [Magdy Nasr](https://github.com/MyProjectsProgress)  | 2       | 15  |
 
-- Course Name : Digital Signal Processing .
-
+- Course Name : Database .
 ## Submitted to:
-
-- Dr. Tamer Basha & Eng. Abdullah Darwish
+- Dr. Ahmed Hisham
 
 All rights reserved © 2022 to Team 8 - Systems & Biomedical Engineering, Cairo University (Class 2024)
