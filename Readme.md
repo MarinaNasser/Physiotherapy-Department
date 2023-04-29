@@ -11,14 +11,24 @@
 It is a website for a physiotherapy hospital or department.
 
 ## Features 
-- Both Patient and Dcotor can sign up and have an account on the Website which can be edited later on.
+It is a website for a physiotherapy hospital or department.
+The website includes these features:
+- A relational database that includes (patients, doctors, devices, admins information - feedbacks - messages sent from patients to doctors and vice versa - the contact us messages - doctors' available appointments and booked appointments) 
+
+- Both patient and Doctor can sign up and have an account on the Website which can be edited later on. The profile includes their information like name, email, password, address, SSN, available appointments for doctors and more...
+
 - Patient can book any appointment with doctors and appointments appear in their profile.
-- Doctors can offer appointments on the website to be available for patients to book, both booked and unbooked appointments appear in the Doctor profile.
+Doctors can offer appointments on the website to be available for patients to book, both booked and not booked appointments appear in the Doctor profile.
+
 - A chat between Doctors and Patients is available through the website using E-mail.
+
 - Patients are allowed to send feedback to the hospital without writing any personal data.
-- The website provides tips through theraputic training videos for patients with accounts only.
-- The opening page provides a lot of information to the customer like the Doctors' names and specialties and teh hospital numbers of patients, doctors, appointments, feedbacks, etc.. .
-- The application can be resized easily without messing up your UI.
+
+- The website provides tips through therapeutic training videos for patients with accounts only. If a visitor hasn't sign up yet, this page doesn't appear to him/her.
+
+- The opening page provides a lot of information to the customer like the Doctors' names and specialties and the hospital numbers of patients, doctors, appointments, feedbacks, etc...
+
+- The application can be resized easily without messing up your UI. "Responsive Application".
 
 ## Technology Used:
 The Web Application is built using:

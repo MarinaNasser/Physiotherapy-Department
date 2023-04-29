@@ -6,6 +6,7 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
+
 .section {
   position: relative;
   height: 100vh;
@@ -41,12 +42,12 @@ body {
   border-radius: 5px;
 }
 
-.booking-form > form .row.no-margin {
+.booking-form>form .row.no-margin {
   margin-right: 0px;
   margin-left: 0px;
 }
 
-.booking-form > form .row.no-margin > [class*="col-"] {
+.booking-form>form .row.no-margin>[class*="col-"] {
   padding-right: 0px;
   padding-left: 0px;
 }
@@ -69,6 +70,7 @@ body {
   height: 75px;
 }
 
+/* Magdy Nasr */
 .booking-form .form-control {
   background-color: transparent;
   border-radius: 0px;
@@ -77,36 +79,47 @@ body {
   -webkit-box-shadow: none;
   box-shadow: none;
   font-size: 20px;
-  color: #ffffff;
+  color: #000000;
   font-weight: 400;
   padding: 0;
+  background: -webkit-gradient(linear, left top, left bottom, from(#0ee951), to(#00dabf));
 }
 
 .booking-form .form-control::-webkit-input-placeholder {
-  color: rgba(255, 255, 255);
+  color: rgb(0, 0, 0);
 }
 
 .booking-form .form-control:-ms-input-placeholder {
-  color: rgba(255, 255, 255);
+  color: rgb(0, 0, 0);
 }
 
 .booking-form .form-control::placeholder {
-  color: rgba(255, 255, 255);
+  color: rgb(0, 0, 0);
 }
 
 .booking-form input[type="date"].form-control:invalid {
-  color: rgba(255, 255, 255);
+  color: rgb(0, 0, 0);
+  background: -webkit-gradient(linear, left top, left bottom, from(#0ee951), to(#00dabf));
+  border-radius: 5px;
+  text-align: left;
+  border: 1px solid #ccc;
+  padding: 4px;
 }
 
 .booking-form select.form-control {
-  background-color: #252c38;
+  background-color: aquamarine;
+  background: -webkit-gradient(linear, left top, left bottom, from(#0ee951), to(#00dabf));
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  border-radius: 5px;
+  text-orientation: sideways-right;
+  border: 1px solid #ccc;
+  padding: 4px;
 }
 
-.booking-form select.form-control + .select-arrow {
+.booking-form select.form-control+.select-arrow {
   position: absolute;
   right: 0px;
   bottom: 30px;
@@ -115,11 +128,11 @@ body {
   height: 32px;
   text-align: center;
   pointer-events: none;
-  color: rgba(255, 255, 255);
+  color: rgb(0, 0, 0);
   font-size: 14px;
 }
 
-.booking-form select.form-control + .select-arrow:after {
+.booking-form select.form-control+.select-arrow:after {
   content: "\279C";
   display: block;
   -webkit-transform: rotate(90deg);
@@ -134,20 +147,20 @@ body {
   height: 25px;
   line-height: 25px;
   font-size: 14px;
+
 }
 
 .booking-form .form-btn {
   padding: 25px;
+
 }
 
 .booking-form .submit-btn {
-  background: -webkit-gradient(
-    linear,
-    left top,
-    left bottom,
-    from(#0ee951),
-    to(#00dabf)
-  );
+  background: -webkit-gradient(linear,
+      left top,
+      left bottom,
+      from(#0ee951),
+      to(#00dabf));
   border: none;
   text-transform: capitalize;
   display: block;
@@ -156,26 +169,25 @@ body {
   height: 50px;
   font-size: 25px;
   font-weight: 400;
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   border-radius: 5px;
 }
 
 .booking-form input[type="text"].form-control {
-  color: rgba(255, 255, 255);
+  color: rgb(0, 0, 0);
   border-style: inset;
   border-width: 1px;
   border-color: white;
   border-radius: 5px;
+
 }
 
 #viewbutton {
-  background: -webkit-gradient(
-    linear,
-    left top,
-    left bottom,
-    from(#0ee951),
-    to(#00dabf)
-  );
+  background: -webkit-gradient(linear,
+      left top,
+      left bottom,
+      from(#0ee951),
+      to(#00dabf));
   border: none;
   text-transform: capitalize;
   display: block;
@@ -184,9 +196,12 @@ body {
   height: 51px;
   font-size: 25px;
   font-weight: 400;
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   border-radius: 5px;
+
 }
+
 #viewbuttonlink {
-  color: rgba(255, 255, 255);
+  color: rgb(0, 0, 0);
+
 }
